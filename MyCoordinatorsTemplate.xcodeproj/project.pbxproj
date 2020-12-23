@@ -30,6 +30,8 @@
 		790516D52592BEF700B9E3DA /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 790516D42592BEF700B9E3DA /* Home.storyboard */; };
 		790516D92592BF4B00B9E3DA /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 790516D82592BF4B00B9E3DA /* Profile.storyboard */; };
 		790516DC2592C38000B9E3DA /* ApplicationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516DB2592C38000B9E3DA /* ApplicationCoordinator.swift */; };
+		790516DE2592C9BD00B9E3DA /* Root.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 790516DD2592C9BD00B9E3DA /* Root.storyboard */; };
+		790516E02592CA5D00B9E3DA /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516DF2592CA5D00B9E3DA /* RootViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +60,8 @@
 		790516D42592BEF700B9E3DA /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		790516D82592BF4B00B9E3DA /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		790516DB2592C38000B9E3DA /* ApplicationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationCoordinator.swift; sourceTree = "<group>"; };
+		790516DD2592C9BD00B9E3DA /* Root.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Root.storyboard; sourceTree = "<group>"; };
+		790516DF2592CA5D00B9E3DA /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,7 +126,7 @@
 		790516A42590C79A00B9E3DA /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				790516AB2590D69300B9E3DA /* MainTabBarController.swift */,
+				790516E12592CA6A00B9E3DA /* Root */,
 				790516CC2592BD1700B9E3DA /* Home */,
 				790516AA2590D65000B9E3DA /* Auth */,
 				790516CD2592BDD800B9E3DA /* Feed */,
@@ -197,6 +201,7 @@
 		790516CF2592BE2B00B9E3DA /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				790516DD2592C9BD00B9E3DA /* Root.storyboard */,
 				790516D02592BED800B9E3DA /* Auth.storyboard */,
 				790516D22592BEEC00B9E3DA /* Content.storyboard */,
 				790516D42592BEF700B9E3DA /* Home.storyboard */,
@@ -204,6 +209,15 @@
 				790516D82592BF4B00B9E3DA /* Profile.storyboard */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		790516E12592CA6A00B9E3DA /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				790516DF2592CA5D00B9E3DA /* RootViewController.swift */,
+				790516AB2590D69300B9E3DA /* MainTabBarController.swift */,
+			);
+			path = Root;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -266,6 +280,7 @@
 			files = (
 				790516D32592BEEC00B9E3DA /* Content.storyboard in Resources */,
 				790516D12592BED800B9E3DA /* Auth.storyboard in Resources */,
+				790516DE2592C9BD00B9E3DA /* Root.storyboard in Resources */,
 				790516A92590D58000B9E3DA /* Feed.storyboard in Resources */,
 				790516D52592BEF700B9E3DA /* Home.storyboard in Resources */,
 				7905169B2590C4C300B9E3DA /* LaunchScreen.storyboard in Resources */,
@@ -282,6 +297,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				790516AE2590D97300B9E3DA /* HomeViewController.swift in Sources */,
+				790516E02592CA5D00B9E3DA /* RootViewController.swift in Sources */,
 				790516C325925A2D00B9E3DA /* AuthCoordinator.swift in Sources */,
 				790516A72590D4BF00B9E3DA /* Coordinatable.swift in Sources */,
 				790516AC2590D69300B9E3DA /* MainTabBarController.swift in Sources */,

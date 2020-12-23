@@ -16,14 +16,15 @@ class AuthCoordinator: Coordinatable {
     
     private let title: String
     
-    init(navigation: UINavigationController,
-         title: String
-    ) {
-        navigationController = navigation
+    init(title: String) {
         self.title = title
     }
     
     func start() {
+        let storyboard = UIStoryboard(name: Storyboard.auth.rawValue, bundle: nil)
+        let navigation = storyboard.instantiateInitialViewController() as! UINavigationController
+        navigationController = navigation
+        let controller = navigation.viewControllers.first as! AuthViewController
         
     }
     

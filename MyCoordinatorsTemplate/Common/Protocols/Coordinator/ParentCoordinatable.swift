@@ -9,5 +9,5 @@
 import UIKit
 
 protocol ParentCoordinatable where Self: CoordinatorProtocol {
-    var parentCoordinator: CoordinatorProtocol! { get set }
+    var parentCoordinator: (ChildCoordinatable & NavigationControllable)! { get set }
 }

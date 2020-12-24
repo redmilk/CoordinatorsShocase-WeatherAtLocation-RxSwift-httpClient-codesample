@@ -8,10 +8,10 @@
 
 import UIKit
 
-class ProfileCoordinator: NSObject, CoordinatorProtocol {
+class ProfileCoordinator: NSObject, CoordinatorProtocol, ParentCoordinatable, NavigationControllable, ChildCoordinatable {
         
-    weak var parentCoordinator: HomeCoordinator!
-    var navigationController: UINavigationController?
+    weak var parentCoordinator: (ChildCoordinatable & NavigationControllable)!
+    var navigationController: UINavigationController!
     var childCoordinators: [CoordinatorProtocol] = []
     
     private let title: String

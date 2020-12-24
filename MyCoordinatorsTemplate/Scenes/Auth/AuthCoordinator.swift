@@ -20,15 +20,15 @@ class AuthCoordinator:
     Dismissable {
     
     weak var delegate: AuthCoordinatorDelegate!
-    weak var parentCoordinator: CoordinatorProtocol!
-    var navigationController: UINavigationController!
+    weak var parentCoordinator: (ChildCoordinatable & NavigationControllable)!
+    weak var navigationController: UINavigationController!
     var window: UIWindow
     
     private let title: String
     
     init(title: String,
          window: UIWindow,
-         parent: CoordinatorProtocol,
+         parent: (ChildCoordinatable & NavigationControllable),
          delegate: AuthCoordinatorDelegate) {
         self.title = title
         self.window = window
@@ -53,6 +53,7 @@ class AuthCoordinator:
     }
     
     func end() {
+        parentCoordinator.removeChild(self)
         delegate.didAuthenticate(self)
     }
     

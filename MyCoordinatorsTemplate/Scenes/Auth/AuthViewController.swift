@@ -19,6 +19,7 @@ class AuthViewController: UIViewController {
     }
     
     @IBAction func loggedInPressed(_ sender: Any) {
+        isLoggedIn = true
         coordinator.end()
     }
     

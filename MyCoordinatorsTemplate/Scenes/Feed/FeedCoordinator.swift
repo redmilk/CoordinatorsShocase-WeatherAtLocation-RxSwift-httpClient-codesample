@@ -8,10 +8,14 @@
 
 import UIKit
 
+/// TabBarContentCoordinator on start fills array of child with both Home and Feed coordinators
+/// We don't have to implement ParentCoordinatable here and inside HomeCoordinator
+/// due to removing all children with removeAll on LogOut inside TabBarContentCoordinator
+
 class FeedCoordinator: CoordinatorProtocol, NavigationControllable, TabBarControllable {
     
-    var tabBar: UITabBarController!
-    var navigationController: UINavigationController!
+    weak var tabBar: UITabBarController!
+    weak var navigationController: UINavigationController!
     
     private let title: String
     

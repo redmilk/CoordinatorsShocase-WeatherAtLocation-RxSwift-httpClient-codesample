@@ -14,7 +14,7 @@ protocol ProfileCoordinating {
 }
 
 protocol HomeCoordinatorDelegate: class {
-    func didLogOut()
+    func didLogOut(_ coordinator: CoordinatorProtocol)
 }
 
 class HomeCoordinator:
@@ -26,8 +26,8 @@ class HomeCoordinator:
     
     weak var delegate: HomeCoordinatorDelegate?
     
-    var tabBar: UITabBarController! /// test with weak
-    var navigationController: UINavigationController!
+    weak var tabBar: UITabBarController!
+    weak var navigationController: UINavigationController!
     var childCoordinators: [CoordinatorProtocol] = []
     
     private let title: String
@@ -75,7 +75,7 @@ class HomeCoordinator:
     }
     
     func displayAuthAsRoot() {
-        delegate?.didLogOut()
+        delegate?.didLogOut(self)
     }
     
 }

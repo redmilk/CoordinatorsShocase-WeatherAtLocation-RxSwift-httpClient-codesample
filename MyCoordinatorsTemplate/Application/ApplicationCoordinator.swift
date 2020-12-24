@@ -11,8 +11,9 @@ import UIKit
 /// Change it to see auth or content
 var isLoggedIn: Bool = false
 
-class ApplicationCoordinator: CoordinatorProtocol, Rootable, ChildCoordinatable {
+class ApplicationCoordinator: CoordinatorProtocol, Rootable, ChildCoordinatable, NavigationControllable {
     
+    var navigationController: UINavigationController! /// unused
     var window: UIWindow
     var childCoordinators: [CoordinatorProtocol] = []
     
@@ -30,12 +31,18 @@ class ApplicationCoordinator: CoordinatorProtocol, Rootable, ChildCoordinatable 
     }
     
     private func showContent() {
+        childCoordinators.forEach { (coordinator) in
+            print(coordinator)
+        }
         let child = TabBarContentCoordinator(window: window, parentCoordinator: self, delegate: self)
         childCoordinators.append(child)
         child.start()
     }
     
     private func showAuth() {
+        childCoordinators.forEach { (coordinator) in
+            print(coordinator)
+        }
         let child = AuthCoordinator(title: "Auth",
                                     window: window,
                                     parent: self,
@@ -48,16 +55,16 @@ class ApplicationCoordinator: CoordinatorProtocol, Rootable, ChildCoordinatable 
 // MARK: - Authenticate flow delegate for log in
 extension ApplicationCoordinator: AuthCoordinatorDelegate {
     func didAuthenticate(_ coordinator: AuthCoordinator) {
-        showContent()
-        removeChild(coordinator)
+        //showContent()
+        start()
     }
 }
 
 // MARK: - TabBarContent delegate for log out
 extension ApplicationCoordinator: TabBarContentCoordinatorDelegate {
-    func displayAuth(_ coordinator: CoordinatorProtocol) {
-        removeChild(coordinator)
+    func displayAuth(_ coordinator: TabBarContentCoordinator) {
         //showAuth()
+        childCoordinators.removeAll()
         start()
     }
 }

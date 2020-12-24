@@ -9,19 +9,20 @@
 import UIKit
 
 protocol TabBarContentCoordinatorDelegate: class {
-    func displayAuth(_ coordinator: CoordinatorProtocol)
+    func displayAuth(_ coordinator: TabBarContentCoordinator)
 }
 
 /// Coordinator for tab bar content
-class TabBarContentCoordinator: CoordinatorProtocol, ParentCoordinatable, ChildCoordinatable, Rootable {
+class TabBarContentCoordinator: CoordinatorProtocol, ParentCoordinatable, ChildCoordinatable, NavigationControllable, Rootable {
     
     weak var delegate: TabBarContentCoordinatorDelegate!
     var window: UIWindow
-    var parentCoordinator: CoordinatorProtocol!
+    var navigationController: UINavigationController!
+    weak var parentCoordinator: (ChildCoordinatable & NavigationControllable)!
     var childCoordinators: [CoordinatorProtocol] = []
     
     init(window: UIWindow,
-         parentCoordinator: CoordinatorProtocol,
+         parentCoordinator: (ChildCoordinatable & NavigationControllable),
          delegate: TabBarContentCoordinatorDelegate
     ) {
         self.window = window
@@ -55,7 +56,11 @@ class TabBarContentCoordinator: CoordinatorProtocol, ParentCoordinatable, ChildC
 }
 
 extension TabBarContentCoordinator: HomeCoordinatorDelegate {
-    func didLogOut() {
+    func didLogOut(_ coordinator: CoordinatorProtocol) {
+        /// remove both HomeCoordinator and FeedCoordinator
+        /// this classes don't need to implement ParentCoordinatable
+        /// we remove them manually by this method call
+        childCoordinators.removeAll()
         delegate?.displayAuth(self)
     }
 }

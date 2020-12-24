@@ -40,6 +40,7 @@
 		790516F225942D3B00B9E3DA /* TabBarContentCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516F125942D3B00B9E3DA /* TabBarContentCoordinator.swift */; };
 		790516F42594329F00B9E3DA /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516F32594329F00B9E3DA /* Storyboard.swift */; };
 		790516F72595182400B9E3DA /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516F62595182400B9E3DA /* Logger.swift */; };
+		790516F9259538C500B9E3DA /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516F8259538C500B9E3DA /* String+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +79,7 @@
 		790516F125942D3B00B9E3DA /* TabBarContentCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarContentCoordinator.swift; sourceTree = "<group>"; };
 		790516F32594329F00B9E3DA /* Storyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
 		790516F62595182400B9E3DA /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		790516F8259538C500B9E3DA /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -256,6 +258,7 @@
 			isa = PBXGroup;
 			children = (
 				790516F62595182400B9E3DA /* Logger.swift */,
+				790516F8259538C500B9E3DA /* String+Extensions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -348,6 +351,7 @@
 				790516C125925A1500B9E3DA /* ProfileCoordinator.swift in Sources */,
 				790516F225942D3B00B9E3DA /* TabBarContentCoordinator.swift in Sources */,
 				790516F42594329F00B9E3DA /* Storyboard.swift in Sources */,
+				790516F9259538C500B9E3DA /* String+Extensions.swift in Sources */,
 				790516E7259393C900B9E3DA /* ChildCoordinatable.swift in Sources */,
 				790516C52592859600B9E3DA /* DraggableViewController.swift in Sources */,
 				790516B02590D99C00B9E3DA /* FeedViewController.swift in Sources */,

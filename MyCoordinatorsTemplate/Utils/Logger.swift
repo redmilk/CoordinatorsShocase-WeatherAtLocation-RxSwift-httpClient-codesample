@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 struct Logger {
 
     static func log(_ text: String = "", entity: AnyObject?, symbol: String = "🌀") {
@@ -15,11 +16,19 @@ struct Logger {
     }
     
     static func initialization(entity: AnyObject) {
-        print("⚠️ init: \(String(describing: entity))")
+        if let pureEntityName = String(describing: entity).slice(from: ".", to: ":") {
+            print("⚠️ init: \(pureEntityName)")
+        } else if let pureEntityName = String(describing: entity).textAfter(str: ".") {
+            print("⚠️ init: \(pureEntityName)")
+        }
     }
     
     static func deinitialization(entity: AnyObject)  {
-        print("❌ deinit: \(String(describing: entity))")
+        if let pureEntityName = String(describing: entity).slice(from: ".", to: ":") {
+            print("❌ deinit: \(pureEntityName)")
+        } else if let pureEntityName = String(describing: entity).textAfter(str: ".") {
+            print("❌ deinit: \(pureEntityName)")
+        }
     }
     
 }

@@ -34,6 +34,12 @@ class AuthCoordinator:
         self.window = window
         self.delegate = delegate
         parentCoordinator = parent
+        
+        Logger.initialization(entity: self)
+    }
+    
+    deinit {
+        Logger.deinitialization(entity: self)
     }
     
     func start() {

@@ -18,6 +18,11 @@ class ApplicationCoordinator: CoordinatorProtocol, Rootable, ChildCoordinatable 
     
     init(window: UIWindow) {
         self.window = window
+        Logger.initialization(entity: self)
+    }
+    
+    deinit {
+        Logger.deinitialization(entity: self)
     }
     
     func start() {

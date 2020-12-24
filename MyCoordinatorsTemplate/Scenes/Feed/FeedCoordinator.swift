@@ -20,6 +20,11 @@ class FeedCoordinator: CoordinatorProtocol, NavigationControllable, TabBarContro
     ) {
         self.tabBar = tabBar
         self.title = title
+        Logger.initialization(entity: self)
+    }
+    
+    deinit {
+        Logger.deinitialization(entity: self)
     }
     
     func start() {

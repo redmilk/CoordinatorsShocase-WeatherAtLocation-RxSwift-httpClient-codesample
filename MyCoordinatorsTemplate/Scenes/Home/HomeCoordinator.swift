@@ -8,56 +8,52 @@
 
 import UIKit
 
-protocol ProfileCoordinatable {
+protocol ProfileCoordinating {
     func pushProfile()
     func presentProfile()
 }
 
-protocol AuthCoordinatable {
-    func presentAuth()
+protocol HomeCoordinatorDelegate: class {
+    func didLogOut()
 }
 
-class HomeCoordinator: Coordinatable, ProfileCoordinatable, AuthCoordinatable {
+class HomeCoordinator:
+    CoordinatorProtocol,
+    ProfileCoordinating,
+    ChildCoordinatable,
+    NavigationControllable,
+    TabBarControllable {
     
-    var navigationController: UINavigationController?
-    var childCoordinators: [Coordinatable] = []
+    weak var delegate: HomeCoordinatorDelegate?
+    
+    var tabBar: UITabBarController! /// test with weak
+    var navigationController: UINavigationController!
+    var childCoordinators: [CoordinatorProtocol] = []
     
     private let title: String
     
-    init(navigation: UINavigationController,
+    init(tabBar: UITabBarController,
+         delegate: HomeCoordinatorDelegate,
          title: String
     ) {
-        navigationController = navigation
+        self.tabBar = tabBar
         self.title = title
-        print("⭕️ init HomeCoordinator")
+        self.delegate = delegate
+        Logger.initialization(entity: self)
     }
     
     deinit {
-        print("🚫 deinit HomeCoordinator")
-    }
-    
-    func removeChild(_ child: Coordinatable?) {
-        for (index, coordinator) in childCoordinators.enumerated() {
-            if coordinator === child {
-                childCoordinators.remove(at: index)
-                break
-            }
-        }
-        
-        print("-after-")
-        print("amount of coordinators in stack: " + childCoordinators.count.description)
+        Logger.deinitialization(entity: self)
     }
     
     func start() {
-        let controller = HomeViewController.instantiate(.home)
+        let storyboard = UIStoryboard(name: Storyboard.home.rawValue, bundle: nil)
+        navigationController = storyboard.instantiateInitialViewController() as? UINavigationController
+        navigationController.tabBarItem = UITabBarItem(title: "Home", image: nil, selectedImage: nil)
+        let controller = navigationController.viewControllers.first as! HomeViewController
         controller.title = title
         controller.coordinator = self
-        navigationController?.pushViewController(controller, animated: false)
-        navigationController?.tabBarItem = UITabBarItem(title: title, image: nil, selectedImage: nil)
-    }
-    
-    func end() {
-        
+        tabBar.viewControllers = [navigationController]
     }
     
     // MARK: - ProfileCoordinatable
@@ -68,9 +64,6 @@ class HomeCoordinator: Coordinatable, ProfileCoordinatable, AuthCoordinatable {
                                        presentationType: .push(navigation))
         childCoordinators.append(child)
         child.start()
-        
-        print("-before-")
-        print("amount of coordinators in stack: " + childCoordinators.count.description)
     }
     
     func presentProfile() {
@@ -78,15 +71,11 @@ class HomeCoordinator: Coordinatable, ProfileCoordinatable, AuthCoordinatable {
                                        title: "Profile",
                                        presentationType: .modal)
         childCoordinators.append(child)
-        child.start()
-        
-        print("-before-")
-        print("amount of coordinators in stack: " + childCoordinators.count.description)
+        child.start()        
     }
-
-    // MARK: - AuthCoordinatable
-    func presentAuth() {
-        
+    
+    func displayAuthAsRoot() {
+        delegate?.didLogOut()
     }
     
 }

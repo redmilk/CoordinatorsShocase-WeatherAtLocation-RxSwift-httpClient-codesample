@@ -10,26 +10,12 @@ import UIKit
 
 class MainTabBarController: UITabBarController {
     
+    var coordinator: TabBarContentCoordinator!
+    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let homeNav = UINavigationController()
-        homeNav.navigationBar.barTintColor = .cyan
-        
-        let feedNav = UINavigationController()
-        feedNav.navigationBar.barTintColor = .green
-        
-        let home = HomeCoordinator(navigation: homeNav, title: "Home")
-        let feed = FeedCoordinator(navigation: feedNav, title: "Feed")
-        
-        home.start()
-        feed.start()
-        
-        guard
-            let homeNavigation = home.navigationController,
-            let feedNavigation = feed.navigationController else { return }
-        
-        viewControllers = [homeNavigation, feedNavigation]
+                
     }
 
 }

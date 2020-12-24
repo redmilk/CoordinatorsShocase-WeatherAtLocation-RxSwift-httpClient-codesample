@@ -10,14 +10,19 @@ import UIKit
 
 class HomeViewController: UIViewController, Storyboarded {
 
-    var coordinator: (ProfileCoordinatable & AuthCoordinatable)?
+    var coordinator: HomeCoordinator!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
-
+    
+    @IBAction func logOutPressed(_ sender: Any) {
+        isLoggedIn = false
+        coordinator.displayAuthAsRoot()
+    }
+    
     @IBAction func pushProfilePressed(_ sender: Any) {
         coordinator?.pushProfile()
     }

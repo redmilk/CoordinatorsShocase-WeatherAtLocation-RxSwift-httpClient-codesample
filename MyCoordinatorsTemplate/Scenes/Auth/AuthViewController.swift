@@ -9,12 +9,17 @@
 import UIKit
 
 class AuthViewController: UIViewController {
-
+    
+    var coordinator: AuthCoordinator!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
- 
-
+    
+    @IBAction func loggedInPressed(_ sender: Any) {
+        coordinator.end()
+    }
+    
 }

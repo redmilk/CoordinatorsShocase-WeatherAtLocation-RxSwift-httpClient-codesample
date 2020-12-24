@@ -21,9 +21,18 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nh7-UJ-L1d">
+                                <rect key="frame" x="113.5" y="309" width="187" height="30"/>
+                                <state key="normal" title="Press to become Logged In"/>
+                                <connections>
+                                    <action selector="loggedInPressed:" destination="Xiz-N0-yos" eventType="touchUpInside" id="QBa-Ka-gYk"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="nh7-UJ-L1d" firstAttribute="top" secondItem="ykX-4C-Wad" secondAttribute="bottom" constant="100" id="6iC-LH-Vxu"/>
+                            <constraint firstItem="nh7-UJ-L1d" firstAttribute="centerX" secondItem="ykX-4C-Wad" secondAttribute="centerX" id="G8h-2f-lI4"/>
                             <constraint firstItem="ykX-4C-Wad" firstAttribute="top" secondItem="GZF-ls-d1p" secondAttribute="top" constant="100" id="cVx-fP-HR6"/>
                             <constraint firstItem="ykX-4C-Wad" firstAttribute="centerX" secondItem="GZF-ls-d1p" secondAttribute="centerX" id="nMf-C9-k0d"/>
                         </constraints>
@@ -43,6 +52,8 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="mDD-kR-OTO">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

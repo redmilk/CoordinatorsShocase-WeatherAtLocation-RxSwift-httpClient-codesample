@@ -8,11 +8,11 @@
 
 import UIKit
 
-class ProfileCoordinator: NSObject, Coordinatable {
+class ProfileCoordinator: NSObject, CoordinatorProtocol {
         
     weak var parentCoordinator: HomeCoordinator!
     var navigationController: UINavigationController?
-    var childCoordinators: [Coordinatable] = []
+    var childCoordinators: [CoordinatorProtocol] = []
     
     private let title: String
     private let presentationType: PresentationType
@@ -24,11 +24,12 @@ class ProfileCoordinator: NSObject, Coordinatable {
         self.parentCoordinator = parentCoordinator
         self.title = title
         self.presentationType = presentationType
-        print("⭕️ init ProfileCoordinator")
+        super.init()
+        Logger.initialization(entity: self)
     }
     
     deinit {
-        print("🚫 deinit ProfileCoordinator")
+        Logger.deinitialization(entity: self)
     }
     
     func start() {
@@ -36,15 +37,13 @@ class ProfileCoordinator: NSObject, Coordinatable {
         case .push(let navigation):
             navigationController = navigation
             navigationController?.delegate = self
-            let controller = ProfileViewController.instantiate(.profile)
+            let controller = ProfileViewController.instantiate(storyboardName: .profile)
             controller.coordinator = self
             navigationController?.pushViewController(controller, animated: true)
         case .modal:
-            let storyboard = UIStoryboard(name: "Screens", bundle: nil)
-            /// =========== If our controller is embedded in UINavigationController on storyboard
-            let navigation = storyboard.instantiateViewController(identifier: "ProfileViewControllerNavigation") as! UINavigationController
+            let storyboard = UIStoryboard(name: Storyboard.profile.rawValue, bundle: nil)
+            let navigation = storyboard.instantiateInitialViewController() as! UINavigationController
             navigationController = navigation
-            /// ===========
             guard
                 let parentController = parentCoordinator?.navigationController?.viewControllers.first, //last
                 let profileController = navigation.viewControllers.first as? ProfileViewController

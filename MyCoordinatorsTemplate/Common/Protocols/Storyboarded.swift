@@ -9,26 +9,20 @@
 
 import UIKit
 
-enum Storyboard: String {
-    case root = "Root"
-    case auth = "Auth"
-    case content = "Content"
-    case home = "Home"
-    case feed = "Feed"
-    case profile = "Profile"
-}
 
+/// Protocol for controllers that will be presented modally
+/// and don't require UINavigationController or UITabBarController
 
 protocol Storyboarded {
-    static func instantiate(_ storyboard: Storyboard) -> Self
+    static func instantiate(storyboardName: Storyboard) -> Self
 }
 
 
 extension Storyboarded where Self: UIViewController {
 
-  static func instantiate(_ storyboard: Storyboard) -> Self {
+  static func instantiate(storyboardName: Storyboard) -> Self {
     let id = String(describing: self)
-    let storyboard = UIStoryboard(name: storyboard.rawValue, bundle: Bundle.main)
+    let storyboard = UIStoryboard(name: storyboardName.rawValue, bundle: Bundle.main)
     return storyboard.instantiateViewController(withIdentifier: id) as! Self
   }
   

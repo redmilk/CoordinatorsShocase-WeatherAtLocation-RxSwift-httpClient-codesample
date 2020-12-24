@@ -8,16 +8,32 @@
 
 import UIKit
 
-class AuthCoordinator: Coordinatable {
+protocol AuthCoordinatorDelegate: class {
+    func didAuthenticate(_ coordinator: AuthCoordinator)
+}
+
+class AuthCoordinator:
+    CoordinatorProtocol,
+    NavigationControllable,
+    ParentCoordinatable,
+    Rootable,
+    Dismissable {
     
-    weak var parentCoordinator: Coordinatable?
-    var navigationController: UINavigationController?
-    var childCoordinators: [Coordinatable] = []
+    weak var delegate: AuthCoordinatorDelegate!
+    weak var parentCoordinator: CoordinatorProtocol!
+    var navigationController: UINavigationController!
+    var window: UIWindow
     
     private let title: String
     
-    init(title: String) {
+    init(title: String,
+         window: UIWindow,
+         parent: CoordinatorProtocol,
+         delegate: AuthCoordinatorDelegate) {
         self.title = title
+        self.window = window
+        self.delegate = delegate
+        parentCoordinator = parent
     }
     
     func start() {
@@ -25,11 +41,13 @@ class AuthCoordinator: Coordinatable {
         let navigation = storyboard.instantiateInitialViewController() as! UINavigationController
         navigationController = navigation
         let controller = navigation.viewControllers.first as! AuthViewController
-        
+        controller.coordinator = self
+        controller.title = title
+        window.rootViewController = navigation
     }
     
     func end() {
-        
+        delegate.didAuthenticate(self)
     }
     
 }

@@ -9,35 +9,50 @@
 import UIKit
 
 /// Change it to see auth or content
-let isLoggedIn: Bool = false
+var isLoggedIn: Bool = false
 
-
-class ApplicationCoordinator: Coordinatable {
+class ApplicationCoordinator: CoordinatorProtocol, Rootable, ChildCoordinatable {
     
-    var window: UIWindow!
-    
-    var navigationController: UINavigationController?
-    var childCoordinators: [Coordinatable] = []
+    var window: UIWindow
+    var childCoordinators: [CoordinatorProtocol] = []
     
     init(window: UIWindow) {
         self.window = window
     }
     
     func start() {
-        if isLoggedIn {
-            let storyboard = UIStoryboard(name: Storyboard.content.rawValue, bundle: nil)
-            let tabBarController = storyboard.instantiateInitialViewController() as! MainTabBarController
-            window.rootViewController = tabBarController
-        } else {
-            let storyboard = UIStoryboard(name: Storyboard.auth.rawValue, bundle: nil)
-            let navigation = storyboard.instantiateInitialViewController() as! UINavigationController
-            let auth = navigation.viewControllers.first as! AuthViewController
-            auth.title = "Auth"
-            window.rootViewController = navigation
-        }
+        isLoggedIn ? showContent() : showAuth()
     }
     
-    func end() {
-        
+    private func showContent() {
+        let child = TabBarContentCoordinator(window: window, parentCoordinator: self, delegate: self)
+        childCoordinators.append(child)
+        child.start()
+    }
+    
+    private func showAuth() {
+        let child = AuthCoordinator(title: "Auth",
+                                    window: window,
+                                    parent: self,
+                                    delegate: self)
+        childCoordinators.append(child)
+        child.start()
+    }
+}
+
+// MARK: - Authenticate flow delegate for log in
+extension ApplicationCoordinator: AuthCoordinatorDelegate {
+    func didAuthenticate(_ coordinator: AuthCoordinator) {
+        showContent()
+        removeChild(coordinator)
+    }
+}
+
+// MARK: - TabBarContent delegate for log out
+extension ApplicationCoordinator: TabBarContentCoordinatorDelegate {
+    func displayAuth(_ coordinator: CoordinatorProtocol) {
+        removeChild(coordinator)
+        //showAuth()
+        start()
     }
 }

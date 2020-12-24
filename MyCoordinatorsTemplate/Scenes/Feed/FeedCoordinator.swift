@@ -8,29 +8,27 @@
 
 import UIKit
 
-class FeedCoordinator: Coordinatable {
+class FeedCoordinator: CoordinatorProtocol, NavigationControllable, TabBarControllable {
     
-    var navigationController: UINavigationController?
-    var childCoordinators: [Coordinatable] = []
+    var tabBar: UITabBarController!
+    var navigationController: UINavigationController!
     
     private let title: String
     
-    init(navigation: UINavigationController,
+    init(tabBar: UITabBarController,
          title: String
     ) {
-        navigationController = navigation
+        self.tabBar = tabBar
         self.title = title
     }
     
     func start() {
-        let controller = FeedViewController.instantiate(.feed)
+        let storyboard = UIStoryboard(name: Storyboard.feed.rawValue, bundle: nil)
+        navigationController = storyboard.instantiateInitialViewController() as? UINavigationController
+        navigationController.tabBarItem = UITabBarItem(title: "Feed", image: nil, selectedImage: nil)
+        let controller = navigationController.viewControllers.first as! FeedViewController
         controller.title = title
-        navigationController?.tabBarItem = UITabBarItem(title: title, image: nil, selectedImage: nil)
-        navigationController?.pushViewController(controller, animated: false)
-    }
-    
-    func end() {
-        
+        tabBar.viewControllers?.append(navigationController)
     }
     
 }

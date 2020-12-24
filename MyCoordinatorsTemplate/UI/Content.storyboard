@@ -9,7 +9,7 @@
         <!--Main Tab Bar Controller-->
         <scene sceneID="QgP-cS-y1E">
             <objects>
-                <tabBarController storyboardIdentifier="MainTabBarController" id="Nhf-6h-Fp8" customClass="MainTabBarController" customModule="MyCoordinatorsTemplate" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController id="Nhf-6h-Fp8" customClass="MainTabBarController" customModule="MyCoordinatorsTemplate" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="tLa-rG-gfd">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

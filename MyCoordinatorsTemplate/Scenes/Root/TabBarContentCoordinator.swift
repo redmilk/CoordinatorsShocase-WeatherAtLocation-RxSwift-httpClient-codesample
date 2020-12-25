@@ -17,7 +17,7 @@ class TabBarContentCoordinator: Coordinatable {
     
     var tabBar: UITabBarController!
     weak var delegate: TabBarContentCoordinatorDelegate!
-    var window: UIWindow?
+    var window: UIWindow
     var navigationController: UINavigationController!
     weak var parentCoordinator: Coordinatable!
     var childCoordinators: [Coordinatable] = []
@@ -40,7 +40,7 @@ class TabBarContentCoordinator: Coordinatable {
         let storyboard = UIStoryboard(name: Storyboard.content.rawValue, bundle: nil)
         let tabBar = storyboard.instantiateInitialViewController() as! MainTabBarController
         tabBar.coordinator = self
-        window!.rootViewController = tabBar
+        window.rootViewController = tabBar
         
         /// tab bar's first controller coordinator
         let homeCoordinator = HomeCoordinator(tabBar: tabBar, delegate: self, title: "Home")

@@ -19,7 +19,6 @@ protocol HomeCoordinatorDelegate: class {
 
 class HomeCoordinator: Coordinatable {
     
-    var window: UIWindow?
     var parentCoordinator: Coordinatable!
     weak var delegate: HomeCoordinatorDelegate?
     weak var tabBar: UITabBarController!

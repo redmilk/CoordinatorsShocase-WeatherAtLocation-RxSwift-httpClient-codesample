@@ -13,9 +13,8 @@ var isLoggedIn: Bool = false
 
 class ApplicationCoordinator: Coordinatable {
     
-    var window: UIWindow?
+    var window: UIWindow
     weak var parentCoordinator: Coordinatable!
-    var tabBar: UITabBarController!
     var navigationController: UINavigationController! /// unused
     var childCoordinators: [Coordinatable] = []
     
@@ -40,7 +39,7 @@ class ApplicationCoordinator: Coordinatable {
         childCoordinators.forEach { (coordinator) in
             print(coordinator)
         }
-        let child = TabBarContentCoordinator(window: window!, parentCoordinator: self, delegate: self)
+        let child = TabBarContentCoordinator(window: window, parentCoordinator: self, delegate: self)
         childCoordinators.append(child)
         child.start()
     }
@@ -50,7 +49,7 @@ class ApplicationCoordinator: Coordinatable {
             print(coordinator)
         }
         let child = AuthCoordinator(title: "Auth",
-                                    window: window!,
+                                    window: window,
                                     parent: self,
                                     delegate: self)
         childCoordinators.append(child)
@@ -61,7 +60,6 @@ class ApplicationCoordinator: Coordinatable {
 // MARK: - Authenticate flow delegate for log in
 extension ApplicationCoordinator: AuthCoordinatorDelegate {
     func didAuthenticate(_ coordinator: AuthCoordinator) {
-        //showContent()
         start()
     }
 }
@@ -69,7 +67,6 @@ extension ApplicationCoordinator: AuthCoordinatorDelegate {
 // MARK: - TabBarContent delegate for log out
 extension ApplicationCoordinator: TabBarContentCoordinatorDelegate {
     func displayAuth(_ coordinator: TabBarContentCoordinator) {
-        //showAuth()
         childCoordinators.removeAll()
         start()
     }

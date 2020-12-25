@@ -10,8 +10,6 @@ import UIKit
 
 class ProfileCoordinator: NSObject, Coordinatable {
     
-    var window: UIWindow?
-    var tabBar: UITabBarController!
     weak var parentCoordinator: Coordinatable!
     var navigationController: UINavigationController!
     var childCoordinators: [Coordinatable] = []

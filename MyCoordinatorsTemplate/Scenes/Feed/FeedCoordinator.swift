@@ -15,7 +15,6 @@ import UIKit
 class FeedCoordinator: Coordinatable {
     
     var childCoordinators: [Coordinatable] = []
-    var window: UIWindow?
     var parentCoordinator: Coordinatable!
     weak var tabBar: UITabBarController!
     weak var navigationController: UINavigationController!

@@ -8,11 +8,7 @@
 
 import UIKit
 
-class ProfileCoordinator: NSObject, CoordinatorProtocol, ParentCoordinatable, NavigationControllable, ChildCoordinatable {
-        
-    weak var parentCoordinator: (ChildCoordinatable & NavigationControllable)!
-    var navigationController: UINavigationController!
-    var childCoordinators: [CoordinatorProtocol] = []
+class ProfileCoordinator: Coordinator {
     
     private let title: String
     private let presentationType: PresentationType
@@ -21,18 +17,13 @@ class ProfileCoordinator: NSObject, CoordinatorProtocol, ParentCoordinatable, Na
          title: String,
          presentationType: PresentationType
     ) {
-        self.parentCoordinator = parentCoordinator
         self.title = title
         self.presentationType = presentationType
         super.init()
-        Logger.initialization(entity: self)
+        self.parentCoordinator = parentCoordinator
     }
     
-    deinit {
-        Logger.deinitialization(entity: self)
-    }
-    
-    func start() {
+    override func start() {
         switch presentationType {
         case .push(let navigation):
             navigationController = navigation
@@ -54,7 +45,7 @@ class ProfileCoordinator: NSObject, CoordinatorProtocol, ParentCoordinatable, Na
         }
     }
     
-    func end() {
+    override func end() {
         switch presentationType {
         case .modal:
             navigationController?.dismiss(animated: true, completion: {

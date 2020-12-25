@@ -12,32 +12,25 @@ import UIKit
 /// We don't have to implement ParentCoordinatable here and inside HomeCoordinator
 /// due to removing all children with removeAll on LogOut inside TabBarContentCoordinator
 
-class FeedCoordinator: CoordinatorProtocol, NavigationControllable, TabBarControllable {
-    
-    weak var tabBar: UITabBarController!
-    weak var navigationController: UINavigationController!
+class FeedCoordinator: Coordinator {
     
     private let title: String
     
-    init(tabBar: UITabBarController,
+    init(tabBarController: UITabBarController,
          title: String
     ) {
-        self.tabBar = tabBar
         self.title = title
-        Logger.initialization(entity: self)
+        super.init()
+        self.tabBarController = tabBarController
     }
     
-    deinit {
-        Logger.deinitialization(entity: self)
-    }
-    
-    func start() {
+    override func start() {
         let storyboard = UIStoryboard(name: Storyboard.feed.rawValue, bundle: nil)
         navigationController = storyboard.instantiateInitialViewController() as? UINavigationController
         navigationController.tabBarItem = UITabBarItem(title: "Feed", image: nil, selectedImage: nil)
         let controller = navigationController.viewControllers.first as! FeedViewController
         controller.title = title
-        tabBar.viewControllers?.append(navigationController)
+        tabBarController.viewControllers?.append(navigationController)
     }
     
 }

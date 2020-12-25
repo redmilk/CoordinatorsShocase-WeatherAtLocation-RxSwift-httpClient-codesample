@@ -8,25 +8,17 @@
 
 import UIKit
 
-/// Change it to see auth or content
+/// Pseudo user session
 var isLoggedIn: Bool = false
 
-class ApplicationCoordinator: CoordinatorProtocol, Rootable, ChildCoordinatable, NavigationControllable {
-    
-    var navigationController: UINavigationController! /// unused
-    var window: UIWindow
-    var childCoordinators: [CoordinatorProtocol] = []
-    
+class ApplicationCoordinator: Coordinator {
+        
     init(window: UIWindow) {
+        super.init()
         self.window = window
-        Logger.initialization(entity: self)
     }
     
-    deinit {
-        Logger.deinitialization(entity: self)
-    }
-    
-    func start() {
+   override func start() {
         isLoggedIn ? showContent() : showAuth()
     }
     
@@ -45,7 +37,7 @@ class ApplicationCoordinator: CoordinatorProtocol, Rootable, ChildCoordinatable,
         }
         let child = AuthCoordinator(title: "Auth",
                                     window: window,
-                                    parent: self,
+                                    parentCoordinator: self,
                                     delegate: self)
         childCoordinators.append(child)
         child.start()
@@ -55,7 +47,6 @@ class ApplicationCoordinator: CoordinatorProtocol, Rootable, ChildCoordinatable,
 // MARK: - Authenticate flow delegate for log in
 extension ApplicationCoordinator: AuthCoordinatorDelegate {
     func didAuthenticate(_ coordinator: AuthCoordinator) {
-        //showContent()
         start()
     }
 }
@@ -63,7 +54,6 @@ extension ApplicationCoordinator: AuthCoordinatorDelegate {
 // MARK: - TabBarContent delegate for log out
 extension ApplicationCoordinator: TabBarContentCoordinatorDelegate {
     func displayAuth(_ coordinator: TabBarContentCoordinator) {
-        //showAuth()
         childCoordinators.removeAll()
         start()
     }

@@ -13,38 +13,30 @@ protocol TabBarContentCoordinatorDelegate: class {
 }
 
 /// Coordinator for tab bar content
-class TabBarContentCoordinator: CoordinatorProtocol, ParentCoordinatable, ChildCoordinatable, NavigationControllable, Rootable {
+class TabBarContentCoordinator: Coordinator {
     
     weak var delegate: TabBarContentCoordinatorDelegate!
-    var window: UIWindow
-    var navigationController: UINavigationController!
-    weak var parentCoordinator: (ChildCoordinatable & NavigationControllable)!
-    var childCoordinators: [CoordinatorProtocol] = []
     
     init(window: UIWindow,
-         parentCoordinator: (ChildCoordinatable & NavigationControllable),
+         parentCoordinator: CoordinatorProtocol,
          delegate: TabBarContentCoordinatorDelegate
     ) {
+        self.delegate = delegate
+        super.init()
         self.window = window
         self.parentCoordinator = parentCoordinator
-        self.delegate = delegate
-        Logger.initialization(entity: self)
     }
     
-    deinit {
-        Logger.deinitialization(entity: self)
-    }
-    
-    func start() {
+    override func start() {
         let storyboard = UIStoryboard(name: Storyboard.content.rawValue, bundle: nil)
-        let tabBar = storyboard.instantiateInitialViewController() as! MainTabBarController
-        tabBar.coordinator = self
-        window.rootViewController = tabBar
+        let tabBarController = storyboard.instantiateInitialViewController() as! MainTabBarController
+        tabBarController.coordinator = self
+        window.rootViewController = tabBarController
         
         /// tab bar's first controller coordinator
-        let homeCoordinator = HomeCoordinator(tabBar: tabBar, delegate: self, title: "Home")
+        let homeCoordinator = HomeCoordinator(tabBarController: tabBarController, delegate: self, title: "Home")
         /// tab bar's second controller coordinator
-        let feedCoordinator = FeedCoordinator(tabBar: tabBar, title: "Feed")
+        let feedCoordinator = FeedCoordinator(tabBarController: tabBarController, title: "Feed")
         
         childCoordinators.append(homeCoordinator)
         childCoordinators.append(feedCoordinator)

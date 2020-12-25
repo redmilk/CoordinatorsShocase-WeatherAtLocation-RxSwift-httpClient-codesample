@@ -17,43 +17,30 @@ protocol HomeCoordinatorDelegate: class {
     func didLogOut(_ coordinator: CoordinatorProtocol)
 }
 
-class HomeCoordinator:
-    CoordinatorProtocol,
-    ProfileCoordinating,
-    ChildCoordinatable,
-    NavigationControllable,
-    TabBarControllable {
+class HomeCoordinator: Coordinator {
     
     weak var delegate: HomeCoordinatorDelegate?
     
-    weak var tabBar: UITabBarController!
-    weak var navigationController: UINavigationController!
-    var childCoordinators: [CoordinatorProtocol] = []
-    
     private let title: String
     
-    init(tabBar: UITabBarController,
+    init(tabBarController: UITabBarController,
          delegate: HomeCoordinatorDelegate,
          title: String
     ) {
-        self.tabBar = tabBar
-        self.title = title
         self.delegate = delegate
-        Logger.initialization(entity: self)
+        self.title = title
+        super.init()
+        self.tabBarController = tabBarController
     }
     
-    deinit {
-        Logger.deinitialization(entity: self)
-    }
-    
-    func start() {
+    override func start() {
         let storyboard = UIStoryboard(name: Storyboard.home.rawValue, bundle: nil)
         navigationController = storyboard.instantiateInitialViewController() as? UINavigationController
         navigationController.tabBarItem = UITabBarItem(title: "Home", image: nil, selectedImage: nil)
         let controller = navigationController.viewControllers.first as! HomeViewController
         controller.title = title
         controller.coordinator = self
-        tabBar.viewControllers = [navigationController]
+        tabBarController.viewControllers = [navigationController]
     }
     
     // MARK: - ProfileCoordinatable

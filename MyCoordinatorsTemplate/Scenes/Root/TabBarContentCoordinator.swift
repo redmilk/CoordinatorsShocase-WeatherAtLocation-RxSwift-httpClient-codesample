@@ -13,7 +13,7 @@ protocol TabBarContentCoordinatorDelegate: class {
 }
 
 /// Coordinator for tab bar content
-class TabBarContentCoordinator: Coordinator {
+final class TabBarContentCoordinator: BaseCoordinator {
     
     weak var delegate: TabBarContentCoordinatorDelegate!
     
@@ -49,9 +49,13 @@ class TabBarContentCoordinator: Coordinator {
 
 extension TabBarContentCoordinator: HomeCoordinatorDelegate {
     func didLogOut(_ coordinator: CoordinatorProtocol) {
-        /// remove both HomeCoordinator and FeedCoordinator
-        /// this classes don't need to implement ParentCoordinatable
-        /// we remove them manually by this method call
+        /// removes both HomeCoordinator and FeedCoordinator
+        /// this classes (HomeCoordinator and FeedCoordinator which are TabBar members)
+        /// don't need to call removeChild(_ child:) on their own
+        /// and we can not remove them both one by one
+        /// because only one of them signals for changing the root
+        /// in our case it is done for closing content and displaying auth flow
+        /// we remove them all manually by this method call
         childCoordinators.removeAll()
         delegate?.displayAuth(self)
     }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Coordinator: NSObject, CoordinatorProtocol {
+class BaseCoordinator: NSObject, CoordinatorProtocol {
         
     var window: UIWindow!
     var childCoordinators: [CoordinatorProtocol] = []

@@ -23,7 +23,7 @@ protocol CoordinatorProtocol: AnyObject {
     /// if navigation starts from UITabBarController
     var tabBarController: UITabBarController! { get set }
     
-    /// if coordinator sets root for application
+    /// if coordinator can set root for application
     var window: UIWindow! { get set }
         
     func start()

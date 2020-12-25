@@ -12,7 +12,7 @@ protocol AuthCoordinatorDelegate: class {
     func didAuthenticate(_ coordinator: AuthCoordinator)
 }
 
-class AuthCoordinator: Coordinator {
+final class AuthCoordinator: BaseCoordinator {
     
     weak var delegate: AuthCoordinatorDelegate!
     

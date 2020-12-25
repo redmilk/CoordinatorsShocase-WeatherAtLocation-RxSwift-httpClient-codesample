@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FeedViewController: UIViewController, Storyboarded {
+final class FeedViewController: UIViewController, Storyboarded {
 
     override func viewDidLoad() {
         super.viewDidLoad()

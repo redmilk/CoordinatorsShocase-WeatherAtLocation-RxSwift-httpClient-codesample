@@ -20,18 +20,17 @@ protocol HomeCoordinatorDelegate: class {
 class HomeCoordinator: Coordinator {
     
     weak var delegate: HomeCoordinatorDelegate?
-    weak var tabBar: UITabBarController!
     
     private let title: String
     
-    init(tabBar: UITabBarController,
+    init(tabBarController: UITabBarController,
          delegate: HomeCoordinatorDelegate,
          title: String
     ) {
         self.delegate = delegate
-        self.tabBar = tabBar
         self.title = title
         super.init()
+        self.tabBarController = tabBarController
     }
     
     override func start() {
@@ -41,7 +40,7 @@ class HomeCoordinator: Coordinator {
         let controller = navigationController.viewControllers.first as! HomeViewController
         controller.title = title
         controller.coordinator = self
-        tabBar.viewControllers = [navigationController]
+        tabBarController.viewControllers = [navigationController]
     }
     
     // MARK: - ProfileCoordinatable

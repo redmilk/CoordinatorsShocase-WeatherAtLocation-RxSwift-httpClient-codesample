@@ -10,12 +10,22 @@ import UIKit
 
 protocol CoordinatorProtocol: AnyObject {
 
+    /// if current coordinator is parent for other coordinators
     var childCoordinators: [CoordinatorProtocol] { get set }
-    var parentCoordinator: CoordinatorProtocol! { get set }
-    var navigationController: UINavigationController! { get set }
-    
     func removeChild(_ child: CoordinatorProtocol)
     
+    /// if current coordinator has parent
+    var parentCoordinator: CoordinatorProtocol! { get set }
+    
+    /// if navigation starts from UINavigationController
+    var navigationController: UINavigationController! { get set }
+    
+    /// if navigation starts from UITabBarController
+    var tabBarController: UITabBarController! { get set }
+    
+    /// if coordinator sets root for application
+    var window: UIWindow! { get set }
+        
     func start()
     func end()
 

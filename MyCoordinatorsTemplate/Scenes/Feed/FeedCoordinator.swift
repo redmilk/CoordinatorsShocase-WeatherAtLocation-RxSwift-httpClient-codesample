@@ -14,15 +14,14 @@ import UIKit
 
 class FeedCoordinator: Coordinator {
     
-    weak var tabBar: UITabBarController!
     private let title: String
     
-    init(tabBar: UITabBarController,
+    init(tabBarController: UITabBarController,
          title: String
     ) {
-        self.tabBar = tabBar
         self.title = title
         super.init()
+        self.tabBarController = tabBarController
     }
     
     override func start() {
@@ -31,7 +30,7 @@ class FeedCoordinator: Coordinator {
         navigationController.tabBarItem = UITabBarItem(title: "Feed", image: nil, selectedImage: nil)
         let controller = navigationController.viewControllers.first as! FeedViewController
         controller.title = title
-        tabBar.viewControllers?.append(navigationController)
+        tabBarController.viewControllers?.append(navigationController)
     }
     
 }

@@ -9,10 +9,13 @@
 import UIKit
 
 class Coordinator: NSObject, CoordinatorProtocol {
-    
+        
+    var window: UIWindow!
     var childCoordinators: [CoordinatorProtocol] = []
+    
     weak var parentCoordinator: CoordinatorProtocol!
     weak var navigationController: UINavigationController!
+    weak var tabBarController: UITabBarController!
     
     override init() {
         super.init()

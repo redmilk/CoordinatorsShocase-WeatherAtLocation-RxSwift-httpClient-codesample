@@ -12,12 +12,10 @@ import UIKit
 var isLoggedIn: Bool = false
 
 class ApplicationCoordinator: Coordinator {
-    
-    var window: UIWindow
-    
+        
     init(window: UIWindow) {
-        self.window = window
         super.init()
+        self.window = window
     }
     
    override func start() {
@@ -39,7 +37,7 @@ class ApplicationCoordinator: Coordinator {
         }
         let child = AuthCoordinator(title: "Auth",
                                     window: window,
-                                    parent: self,
+                                    parentCoordinator: self,
                                     delegate: self)
         childCoordinators.append(child)
         child.start()

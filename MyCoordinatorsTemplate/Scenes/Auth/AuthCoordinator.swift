@@ -15,20 +15,19 @@ protocol AuthCoordinatorDelegate: class {
 class AuthCoordinator: Coordinator {
     
     weak var delegate: AuthCoordinatorDelegate!
-    var window: UIWindow
     
     private let title: String
     
     init(title: String,
          window: UIWindow,
-         parent: CoordinatorProtocol,
+         parentCoordinator: CoordinatorProtocol,
          delegate: AuthCoordinatorDelegate
     ) {
         self.title = title
-        self.window = window
         self.delegate = delegate
         super.init()
-        parentCoordinator = parent
+        self.window = window
+        self.parentCoordinator = parentCoordinator
     }
     
     override func start() {

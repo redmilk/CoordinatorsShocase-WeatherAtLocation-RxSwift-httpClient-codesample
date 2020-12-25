@@ -31,8 +31,8 @@ final class TabBarContentCoordinator: BaseCoordinator {
         let storyboard = UIStoryboard(name: Storyboard.content.rawValue, bundle: nil)
         let tabBarController = storyboard.instantiateInitialViewController() as! MainTabBarController
         tabBarController.coordinator = self
-        self.tabBarController = tabBarController
         window.rootViewController = tabBarController
+        self.tabBarController = tabBarController
         
         /// tab bar's first controller coordinator
         let homeCoordinator = HomeCoordinator(tabBarController: tabBarController, delegate: self, title: "Home")

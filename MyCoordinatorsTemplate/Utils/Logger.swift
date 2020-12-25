@@ -12,7 +12,13 @@ import Foundation
 struct Logger {
 
     static func log(_ text: String = "", entity: AnyObject?, symbol: String = "🌀") {
-        print("\(symbol) \(String(describing: entity)): \(text)")
+        if let pureEntityName = String(describing: entity).slice(from: ".", to: ":") {
+            print("\(symbol) \(text): \(pureEntityName)")
+        } else if let pureEntityName = String(describing: entity).textAfter(str: ".") {
+            print("\(symbol) \(text): \(pureEntityName)")
+        } else {
+            print("\(symbol) \(text): \(String(describing: entity))")
+        }
     }
     
     static func initialization(entity: AnyObject) {

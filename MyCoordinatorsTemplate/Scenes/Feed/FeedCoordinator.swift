@@ -31,6 +31,7 @@ final class FeedCoordinator: BaseCoordinator {
         controller.title = title
         guard let tabBarController = tabBarController else { fatalError("internal inconsistency") }
         tabBarController.viewControllers?.append(navigationController)
+        super.start()
     }
     
 }

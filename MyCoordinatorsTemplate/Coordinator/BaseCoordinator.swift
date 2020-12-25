@@ -26,6 +26,7 @@ class BaseCoordinator: NSObject, CoordinatorProtocol {
         Logger.deinitialization(entity: self)
     }
     
+    /// Call this in derivative coordinator's overriden start() by last line
     func start() {
         navigationController?.delegate = self
         tabBarController?.delegate = self
@@ -36,12 +37,18 @@ class BaseCoordinator: NSObject, CoordinatorProtocol {
     func willNavigate(_ navigationController: UINavigationController,
                       to viewController: UIViewController,
                       animated: Bool) {
-        Logger.log("Navigation to: ", entity: viewController)
+        Logger.log("Navigation to", entity: viewController, symbol: "[STACK]")
     }
     
     func didSelect(_ tabBarController: UITabBarController,
                       tab selectedTabController: UIViewController) {
-        Logger.log("Tab selected: ", entity: selectedTabController)
+        guard
+            let navigationController = selectedTabController as? UINavigationController,
+            let topControllerInStack = navigationController.viewControllers.first else {
+                Logger.log("Pure tab selected", entity: selectedTabController, symbol: "[PURE TAB]")
+                return
+        }
+        Logger.log("Selected tab with navigation stack", entity: topControllerInStack, symbol: "[NAV TAB]")
     }
 }
 

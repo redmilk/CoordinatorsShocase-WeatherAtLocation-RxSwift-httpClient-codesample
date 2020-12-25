@@ -23,13 +23,17 @@ final class ProfileCoordinator: BaseCoordinator {
         self.parentCoordinator = parentCoordinator
     }
     
+    /// This is too artificial for real app, every time we know how controller
+    /// is going to be presented, and we won't see switch like this
+    /// here we call super.start() for both presentation cases
     override func start() {
         switch presentationType {
         case .push(let navigation):
             navigationController = navigation
             let controller = ProfileViewController.instantiate(storyboardName: .profile)
             controller.coordinator = self
-            navigationController?.pushViewController(controller, animated: true)
+            navigation.pushViewController(controller, animated: true)
+            super.start()
         case .modal:
             let storyboard = UIStoryboard(name: Storyboard.profile.rawValue, bundle: nil)
             let navigation = storyboard.instantiateInitialViewController() as! UINavigationController
@@ -41,8 +45,8 @@ final class ProfileCoordinator: BaseCoordinator {
             
             profileController.coordinator = self
             parentController.present(navigation, animated: true, completion: nil)
+            super.start()
         }
-        super.start()
     }
     
     override func end() {

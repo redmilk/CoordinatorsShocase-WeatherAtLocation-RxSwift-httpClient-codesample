@@ -18,10 +18,10 @@ protocol CoordinatorProtocol: AnyObject {
     var parentCoordinator: CoordinatorProtocol! { get set }
     
     /// if navigation starts from UINavigationController
-    var navigationController: UINavigationController! { get set }
+    var navigationController: UINavigationController? { get set }
     
     /// if navigation starts from UITabBarController
-    var tabBarController: UITabBarController! { get set }
+    var tabBarController: UITabBarController? { get set }
     
     /// if coordinator can set root for application
     var window: UIWindow! { get set }

@@ -27,7 +27,6 @@ final class ProfileCoordinator: BaseCoordinator {
         switch presentationType {
         case .push(let navigation):
             navigationController = navigation
-            navigationController?.delegate = self
             let controller = ProfileViewController.instantiate(storyboardName: .profile)
             controller.coordinator = self
             navigationController?.pushViewController(controller, animated: true)
@@ -43,6 +42,7 @@ final class ProfileCoordinator: BaseCoordinator {
             profileController.coordinator = self
             parentController.present(navigation, animated: true, completion: nil)
         }
+        super.start()
     }
     
     override func end() {
@@ -57,15 +57,13 @@ final class ProfileCoordinator: BaseCoordinator {
         }
     }
     
-}
-
-extension ProfileCoordinator: UINavigationControllerDelegate {
-    func navigationController(_ navigationController: UINavigationController,
-                              willShow viewController: UIViewController,
-                              animated: Bool
+    override func willNavigate(_ navigationController: UINavigationController,
+                               to viewController: UIViewController,
+                               animated: Bool
     ) {
         if let _ = viewController as? HomeViewController {
             end()
         }
     }
+    
 }

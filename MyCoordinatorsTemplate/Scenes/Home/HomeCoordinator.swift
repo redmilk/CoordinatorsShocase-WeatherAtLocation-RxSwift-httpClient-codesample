@@ -36,11 +36,13 @@ final class HomeCoordinator: BaseCoordinator {
     override func start() {
         let storyboard = UIStoryboard(name: Storyboard.home.rawValue, bundle: nil)
         navigationController = storyboard.instantiateInitialViewController() as? UINavigationController
-        navigationController.tabBarItem = UITabBarItem(title: "Home", image: nil, selectedImage: nil)
-        let controller = navigationController.viewControllers.first as! HomeViewController
+        guard let navigation = navigationController else { return }
+        navigation.tabBarItem = UITabBarItem(title: "Home", image: nil, selectedImage: nil)
+        let controller = navigation.viewControllers.first as! HomeViewController
         controller.title = title
         controller.coordinator = self
-        tabBarController.viewControllers = [navigationController]
+        guard let tabBarController = tabBarController else { fatalError("internal inconsistency") }
+        tabBarController.viewControllers = [navigation]
     }
     
     // MARK: - ProfileCoordinatable

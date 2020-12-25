@@ -31,6 +31,7 @@ final class TabBarContentCoordinator: BaseCoordinator {
         let storyboard = UIStoryboard(name: Storyboard.content.rawValue, bundle: nil)
         let tabBarController = storyboard.instantiateInitialViewController() as! MainTabBarController
         tabBarController.coordinator = self
+        self.tabBarController = tabBarController
         window.rootViewController = tabBarController
         
         /// tab bar's first controller coordinator
@@ -43,6 +44,7 @@ final class TabBarContentCoordinator: BaseCoordinator {
         
         homeCoordinator.start()
         feedCoordinator.start()
+        super.start()
     }
     
 }

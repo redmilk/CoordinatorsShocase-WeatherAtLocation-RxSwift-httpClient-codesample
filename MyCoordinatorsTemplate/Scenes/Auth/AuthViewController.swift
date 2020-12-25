@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AuthViewController: UIViewController {
+final class AuthViewController: UIViewController {
     
     var coordinator: AuthCoordinator!
     

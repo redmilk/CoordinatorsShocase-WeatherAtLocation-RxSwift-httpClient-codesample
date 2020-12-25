@@ -6,9 +6,7 @@
 //  Copyright © 2020 Danyl Timofeyev. All rights reserved.
 //
 
-
 import UIKit
-
 
 /// Protocol for controllers that will be presented modally
 /// and don't require UINavigationController or UITabBarController
@@ -16,7 +14,6 @@ import UIKit
 protocol Storyboarded {
     static func instantiate(storyboardName: Storyboard) -> Self
 }
-
 
 extension Storyboarded where Self: UIViewController {
 

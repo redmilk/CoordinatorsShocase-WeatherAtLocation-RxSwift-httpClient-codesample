@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController, Storyboarded {
+final class ProfileViewController: UIViewController, Storyboarded {
 
     weak var coordinator: ProfileCoordinator?
     

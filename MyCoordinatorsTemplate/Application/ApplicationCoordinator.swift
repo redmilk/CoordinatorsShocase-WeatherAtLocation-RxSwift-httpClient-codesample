@@ -11,7 +11,7 @@ import UIKit
 /// Pseudo user session
 var isLoggedIn: Bool = false
 
-class ApplicationCoordinator: Coordinator {
+final class ApplicationCoordinator: BaseCoordinator {
         
     init(window: UIWindow) {
         super.init()

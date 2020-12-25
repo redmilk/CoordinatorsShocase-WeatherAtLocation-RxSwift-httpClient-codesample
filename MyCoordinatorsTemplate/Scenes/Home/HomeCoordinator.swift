@@ -17,7 +17,7 @@ protocol HomeCoordinatorDelegate: class {
     func didLogOut(_ coordinator: CoordinatorProtocol)
 }
 
-class HomeCoordinator: Coordinator {
+final class HomeCoordinator: BaseCoordinator {
     
     weak var delegate: HomeCoordinatorDelegate?
     

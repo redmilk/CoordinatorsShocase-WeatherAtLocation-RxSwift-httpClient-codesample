@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainTabBarController: UITabBarController {
+final class MainTabBarController: UITabBarController {
     
     var coordinator: TabBarContentCoordinator!
     

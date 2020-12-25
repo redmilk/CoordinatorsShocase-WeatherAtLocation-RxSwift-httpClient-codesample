@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileCoordinator: Coordinator {
+final class ProfileCoordinator: BaseCoordinator {
     
     private let title: String
     private let presentationType: PresentationType

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController, Storyboarded {
+final class HomeViewController: UIViewController, Storyboarded {
 
     var coordinator: HomeCoordinator!
     

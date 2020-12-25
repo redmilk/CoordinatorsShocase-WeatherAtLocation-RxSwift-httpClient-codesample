@@ -11,11 +11,13 @@ import UIKit
 /// Change it to see auth or content
 var isLoggedIn: Bool = false
 
-class ApplicationCoordinator: CoordinatorProtocol, Rootable, ChildCoordinatable, NavigationControllable {
+class ApplicationCoordinator: Coordinatable {
     
+    var window: UIWindow?
+    weak var parentCoordinator: Coordinatable!
+    var tabBar: UITabBarController!
     var navigationController: UINavigationController! /// unused
-    var window: UIWindow
-    var childCoordinators: [CoordinatorProtocol] = []
+    var childCoordinators: [Coordinatable] = []
     
     init(window: UIWindow) {
         self.window = window
@@ -30,11 +32,15 @@ class ApplicationCoordinator: CoordinatorProtocol, Rootable, ChildCoordinatable,
         isLoggedIn ? showContent() : showAuth()
     }
     
+    func end() {
+        
+    }
+    
     private func showContent() {
         childCoordinators.forEach { (coordinator) in
             print(coordinator)
         }
-        let child = TabBarContentCoordinator(window: window, parentCoordinator: self, delegate: self)
+        let child = TabBarContentCoordinator(window: window!, parentCoordinator: self, delegate: self)
         childCoordinators.append(child)
         child.start()
     }
@@ -44,7 +50,7 @@ class ApplicationCoordinator: CoordinatorProtocol, Rootable, ChildCoordinatable,
             print(coordinator)
         }
         let child = AuthCoordinator(title: "Auth",
-                                    window: window,
+                                    window: window!,
                                     parent: self,
                                     delegate: self)
         childCoordinators.append(child)

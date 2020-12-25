@@ -12,23 +12,20 @@ protocol AuthCoordinatorDelegate: class {
     func didAuthenticate(_ coordinator: AuthCoordinator)
 }
 
-class AuthCoordinator:
-    CoordinatorProtocol,
-    NavigationControllable,
-    ParentCoordinatable,
-    Rootable,
-    Dismissable {
+class AuthCoordinator: Coordinatable {
     
+    var childCoordinators: [Coordinatable] = []
+    var tabBar: UITabBarController!
     weak var delegate: AuthCoordinatorDelegate!
-    weak var parentCoordinator: (ChildCoordinatable & NavigationControllable)!
+    weak var parentCoordinator: Coordinatable!
     weak var navigationController: UINavigationController!
-    var window: UIWindow
+    var window: UIWindow?
     
     private let title: String
     
     init(title: String,
          window: UIWindow,
-         parent: (ChildCoordinatable & NavigationControllable),
+         parent: Coordinatable,
          delegate: AuthCoordinatorDelegate) {
         self.title = title
         self.window = window
@@ -49,7 +46,7 @@ class AuthCoordinator:
         let controller = navigation.viewControllers.first as! AuthViewController
         controller.coordinator = self
         controller.title = title
-        window.rootViewController = navigation
+        window!.rootViewController = navigation
     }
     
     func end() {

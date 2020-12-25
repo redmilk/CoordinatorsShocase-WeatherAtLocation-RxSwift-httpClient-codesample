@@ -12,8 +12,11 @@ import UIKit
 /// We don't have to implement ParentCoordinatable here and inside HomeCoordinator
 /// due to removing all children with removeAll on LogOut inside TabBarContentCoordinator
 
-class FeedCoordinator: CoordinatorProtocol, NavigationControllable, TabBarControllable {
+class FeedCoordinator: Coordinatable {
     
+    var childCoordinators: [Coordinatable] = []
+    var window: UIWindow?
+    var parentCoordinator: Coordinatable!
     weak var tabBar: UITabBarController!
     weak var navigationController: UINavigationController!
     
@@ -38,6 +41,10 @@ class FeedCoordinator: CoordinatorProtocol, NavigationControllable, TabBarContro
         let controller = navigationController.viewControllers.first as! FeedViewController
         controller.title = title
         tabBar.viewControllers?.append(navigationController)
+    }
+    
+    func end() {
+        
     }
     
 }

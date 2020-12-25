@@ -14,21 +14,17 @@ protocol ProfileCoordinating {
 }
 
 protocol HomeCoordinatorDelegate: class {
-    func didLogOut(_ coordinator: CoordinatorProtocol)
+    func didLogOut(_ coordinator: Coordinatable)
 }
 
-class HomeCoordinator:
-    CoordinatorProtocol,
-    ProfileCoordinating,
-    ChildCoordinatable,
-    NavigationControllable,
-    TabBarControllable {
+class HomeCoordinator: Coordinatable {
     
+    var window: UIWindow?
+    var parentCoordinator: Coordinatable!
     weak var delegate: HomeCoordinatorDelegate?
-    
     weak var tabBar: UITabBarController!
     weak var navigationController: UINavigationController!
-    var childCoordinators: [CoordinatorProtocol] = []
+    var childCoordinators: [Coordinatable] = []
     
     private let title: String
     
@@ -54,6 +50,10 @@ class HomeCoordinator:
         controller.title = title
         controller.coordinator = self
         tabBar.viewControllers = [navigationController]
+    }
+    
+    func end() {
+        
     }
     
     // MARK: - ProfileCoordinatable

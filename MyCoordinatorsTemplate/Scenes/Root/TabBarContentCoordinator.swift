@@ -13,16 +13,17 @@ protocol TabBarContentCoordinatorDelegate: class {
 }
 
 /// Coordinator for tab bar content
-class TabBarContentCoordinator: CoordinatorProtocol, ParentCoordinatable, ChildCoordinatable, NavigationControllable, Rootable {
+class TabBarContentCoordinator: Coordinatable {
     
+    var tabBar: UITabBarController!
     weak var delegate: TabBarContentCoordinatorDelegate!
-    var window: UIWindow
+    var window: UIWindow?
     var navigationController: UINavigationController!
-    weak var parentCoordinator: (ChildCoordinatable & NavigationControllable)!
-    var childCoordinators: [CoordinatorProtocol] = []
+    weak var parentCoordinator: Coordinatable!
+    var childCoordinators: [Coordinatable] = []
     
     init(window: UIWindow,
-         parentCoordinator: (ChildCoordinatable & NavigationControllable),
+         parentCoordinator: Coordinatable,
          delegate: TabBarContentCoordinatorDelegate
     ) {
         self.window = window
@@ -39,7 +40,7 @@ class TabBarContentCoordinator: CoordinatorProtocol, ParentCoordinatable, ChildC
         let storyboard = UIStoryboard(name: Storyboard.content.rawValue, bundle: nil)
         let tabBar = storyboard.instantiateInitialViewController() as! MainTabBarController
         tabBar.coordinator = self
-        window.rootViewController = tabBar
+        window!.rootViewController = tabBar
         
         /// tab bar's first controller coordinator
         let homeCoordinator = HomeCoordinator(tabBar: tabBar, delegate: self, title: "Home")
@@ -53,10 +54,14 @@ class TabBarContentCoordinator: CoordinatorProtocol, ParentCoordinatable, ChildC
         feedCoordinator.start()
     }
     
+    func end() {
+        
+    }
+    
 }
 
 extension TabBarContentCoordinator: HomeCoordinatorDelegate {
-    func didLogOut(_ coordinator: CoordinatorProtocol) {
+    func didLogOut(_ coordinator: Coordinatable) {
         /// remove both HomeCoordinator and FeedCoordinator
         /// this classes don't need to implement ParentCoordinatable
         /// we remove them manually by this method call

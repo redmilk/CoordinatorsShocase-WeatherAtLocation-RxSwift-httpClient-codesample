@@ -11,7 +11,7 @@
 		790516912590C4C100B9E3DA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516902590C4C100B9E3DA /* SceneDelegate.swift */; };
 		790516982590C4C300B9E3DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 790516972590C4C300B9E3DA /* Assets.xcassets */; };
 		7905169B2590C4C300B9E3DA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 790516992590C4C300B9E3DA /* LaunchScreen.storyboard */; };
-		790516A72590D4BF00B9E3DA /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516A62590D4BF00B9E3DA /* CoordinatorProtocol.swift */; };
+		790516A72590D4BF00B9E3DA /* Coordinatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516A62590D4BF00B9E3DA /* Coordinatable.swift */; };
 		790516A92590D58000B9E3DA /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 790516A82590D58000B9E3DA /* Feed.storyboard */; };
 		790516AC2590D69300B9E3DA /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516AB2590D69300B9E3DA /* MainTabBarController.swift */; };
 		790516AE2590D97300B9E3DA /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516AD2590D97300B9E3DA /* HomeViewController.swift */; };
@@ -30,13 +30,7 @@
 		790516D52592BEF700B9E3DA /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 790516D42592BEF700B9E3DA /* Home.storyboard */; };
 		790516D92592BF4B00B9E3DA /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 790516D82592BF4B00B9E3DA /* Profile.storyboard */; };
 		790516DC2592C38000B9E3DA /* ApplicationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516DB2592C38000B9E3DA /* ApplicationCoordinator.swift */; };
-		790516E32593937F00B9E3DA /* NavigationControllable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516E22593937F00B9E3DA /* NavigationControllable.swift */; };
-		790516E5259393A400B9E3DA /* ParentCoordinatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516E4259393A400B9E3DA /* ParentCoordinatable.swift */; };
-		790516E7259393C900B9E3DA /* ChildCoordinatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516E6259393C900B9E3DA /* ChildCoordinatable.swift */; };
-		790516E9259393F800B9E3DA /* Rootable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516E8259393F800B9E3DA /* Rootable.swift */; };
-		790516EB2593944400B9E3DA /* Dismissable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516EA2593944400B9E3DA /* Dismissable.swift */; };
 		790516ED2593948B00B9E3DA /* PresentationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516EC2593948B00B9E3DA /* PresentationType.swift */; };
-		790516F0259413CE00B9E3DA /* TabBarControllable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516EF259413CE00B9E3DA /* TabBarControllable.swift */; };
 		790516F225942D3B00B9E3DA /* TabBarContentCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516F125942D3B00B9E3DA /* TabBarContentCoordinator.swift */; };
 		790516F42594329F00B9E3DA /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516F32594329F00B9E3DA /* Storyboard.swift */; };
 		790516F72595182400B9E3DA /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516F62595182400B9E3DA /* Logger.swift */; };
@@ -50,7 +44,7 @@
 		790516972590C4C300B9E3DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7905169A2590C4C300B9E3DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7905169C2590C4C300B9E3DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		790516A62590D4BF00B9E3DA /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
+		790516A62590D4BF00B9E3DA /* Coordinatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinatable.swift; sourceTree = "<group>"; };
 		790516A82590D58000B9E3DA /* Feed.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Feed.storyboard; sourceTree = "<group>"; };
 		790516AB2590D69300B9E3DA /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		790516AD2590D97300B9E3DA /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -69,13 +63,7 @@
 		790516D42592BEF700B9E3DA /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		790516D82592BF4B00B9E3DA /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		790516DB2592C38000B9E3DA /* ApplicationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationCoordinator.swift; sourceTree = "<group>"; };
-		790516E22593937F00B9E3DA /* NavigationControllable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllable.swift; sourceTree = "<group>"; };
-		790516E4259393A400B9E3DA /* ParentCoordinatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentCoordinatable.swift; sourceTree = "<group>"; };
-		790516E6259393C900B9E3DA /* ChildCoordinatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildCoordinatable.swift; sourceTree = "<group>"; };
-		790516E8259393F800B9E3DA /* Rootable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rootable.swift; sourceTree = "<group>"; };
-		790516EA2593944400B9E3DA /* Dismissable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dismissable.swift; sourceTree = "<group>"; };
 		790516EC2593948B00B9E3DA /* PresentationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationType.swift; sourceTree = "<group>"; };
-		790516EF259413CE00B9E3DA /* TabBarControllable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarControllable.swift; sourceTree = "<group>"; };
 		790516F125942D3B00B9E3DA /* TabBarContentCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarContentCoordinator.swift; sourceTree = "<group>"; };
 		790516F32594329F00B9E3DA /* Storyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
 		790516F62595182400B9E3DA /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
@@ -243,13 +231,7 @@
 		790516EE25940BBC00B9E3DA /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
-				790516A62590D4BF00B9E3DA /* CoordinatorProtocol.swift */,
-				790516E6259393C900B9E3DA /* ChildCoordinatable.swift */,
-				790516E22593937F00B9E3DA /* NavigationControllable.swift */,
-				790516EF259413CE00B9E3DA /* TabBarControllable.swift */,
-				790516E4259393A400B9E3DA /* ParentCoordinatable.swift */,
-				790516E8259393F800B9E3DA /* Rootable.swift */,
-				790516EA2593944400B9E3DA /* Dismissable.swift */,
+				790516A62590D4BF00B9E3DA /* Coordinatable.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -338,31 +320,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				790516F0259413CE00B9E3DA /* TabBarControllable.swift in Sources */,
-				790516E9259393F800B9E3DA /* Rootable.swift in Sources */,
 				790516AE2590D97300B9E3DA /* HomeViewController.swift in Sources */,
 				790516C325925A2D00B9E3DA /* AuthCoordinator.swift in Sources */,
-				790516A72590D4BF00B9E3DA /* CoordinatorProtocol.swift in Sources */,
+				790516A72590D4BF00B9E3DA /* Coordinatable.swift in Sources */,
 				790516AC2590D69300B9E3DA /* MainTabBarController.swift in Sources */,
 				790516CB2592BCE600B9E3DA /* PersonalInfoViewController.swift in Sources */,
 				7905168F2590C4C100B9E3DA /* AppDelegate.swift in Sources */,
-				790516EB2593944400B9E3DA /* Dismissable.swift in Sources */,
 				790516F72595182400B9E3DA /* Logger.swift in Sources */,
 				790516C125925A1500B9E3DA /* ProfileCoordinator.swift in Sources */,
 				790516F225942D3B00B9E3DA /* TabBarContentCoordinator.swift in Sources */,
 				790516F42594329F00B9E3DA /* Storyboard.swift in Sources */,
 				790516F9259538C500B9E3DA /* String+Extensions.swift in Sources */,
-				790516E7259393C900B9E3DA /* ChildCoordinatable.swift in Sources */,
 				790516C52592859600B9E3DA /* DraggableViewController.swift in Sources */,
 				790516B02590D99C00B9E3DA /* FeedViewController.swift in Sources */,
 				790516912590C4C100B9E3DA /* SceneDelegate.swift in Sources */,
 				790516B62590E31F00B9E3DA /* ProfileViewController.swift in Sources */,
-				790516E32593937F00B9E3DA /* NavigationControllable.swift in Sources */,
 				790516ED2593948B00B9E3DA /* PresentationType.swift in Sources */,
 				790516BF2590ECB400B9E3DA /* FeedCoordinator.swift in Sources */,
 				790516B82590E34700B9E3DA /* AuthViewController.swift in Sources */,
 				790516B42590DAD600B9E3DA /* Storyboarded.swift in Sources */,
-				790516E5259393A400B9E3DA /* ParentCoordinatable.swift in Sources */,
 				790516BD2590E86F00B9E3DA /* HomeCoordinator.swift in Sources */,
 				790516DC2592C38000B9E3DA /* ApplicationCoordinator.swift in Sources */,
 			);

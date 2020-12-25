@@ -8,11 +8,13 @@
 
 import UIKit
 
-class ProfileCoordinator: NSObject, CoordinatorProtocol, ParentCoordinatable, NavigationControllable, ChildCoordinatable {
-        
-    weak var parentCoordinator: (ChildCoordinatable & NavigationControllable)!
+class ProfileCoordinator: NSObject, Coordinatable {
+    
+    var window: UIWindow?
+    var tabBar: UITabBarController!
+    weak var parentCoordinator: Coordinatable!
     var navigationController: UINavigationController!
-    var childCoordinators: [CoordinatorProtocol] = []
+    var childCoordinators: [Coordinatable] = []
     
     private let title: String
     private let presentationType: PresentationType

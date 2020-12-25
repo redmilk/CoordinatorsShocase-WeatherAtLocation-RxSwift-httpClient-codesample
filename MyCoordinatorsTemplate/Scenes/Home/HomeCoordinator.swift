@@ -14,17 +14,13 @@ protocol ProfileCoordinating {
 }
 
 protocol HomeCoordinatorDelegate: class {
-    func didLogOut(_ coordinator: Coordinatable)
+    func didLogOut(_ coordinator: CoordinatorProtocol)
 }
 
-class HomeCoordinator: Coordinatable {
+class HomeCoordinator: Coordinator {
     
     weak var delegate: HomeCoordinatorDelegate?
-    
-    var parentCoordinator: Coordinatable!
     weak var tabBar: UITabBarController!
-    weak var navigationController: UINavigationController!
-    var childCoordinators: [Coordinatable] = []
     
     private let title: String
     
@@ -32,17 +28,13 @@ class HomeCoordinator: Coordinatable {
          delegate: HomeCoordinatorDelegate,
          title: String
     ) {
+        self.delegate = delegate
         self.tabBar = tabBar
         self.title = title
-        self.delegate = delegate
-        Logger.initialization(entity: self)
+        super.init()
     }
     
-    deinit {
-        Logger.deinitialization(entity: self)
-    }
-    
-    func start() {
+    override func start() {
         let storyboard = UIStoryboard(name: Storyboard.home.rawValue, bundle: nil)
         navigationController = storyboard.instantiateInitialViewController() as? UINavigationController
         navigationController.tabBarItem = UITabBarItem(title: "Home", image: nil, selectedImage: nil)
@@ -50,10 +42,6 @@ class HomeCoordinator: Coordinatable {
         controller.title = title
         controller.coordinator = self
         tabBar.viewControllers = [navigationController]
-    }
-    
-    func end() {
-        
     }
     
     // MARK: - ProfileCoordinatable

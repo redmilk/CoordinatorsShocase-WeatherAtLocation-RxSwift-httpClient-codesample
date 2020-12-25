@@ -13,31 +13,24 @@ protocol TabBarContentCoordinatorDelegate: class {
 }
 
 /// Coordinator for tab bar content
-class TabBarContentCoordinator: Coordinatable {
+class TabBarContentCoordinator: Coordinator {
     
     weak var delegate: TabBarContentCoordinatorDelegate!
     
     var tabBar: UITabBarController!
-    var navigationController: UINavigationController!
-    weak var parentCoordinator: Coordinatable!
-    var childCoordinators: [Coordinatable] = []
     var window: UIWindow
 
     init(window: UIWindow,
-         parentCoordinator: Coordinatable,
+         parentCoordinator: CoordinatorProtocol,
          delegate: TabBarContentCoordinatorDelegate
     ) {
         self.window = window
-        self.parentCoordinator = parentCoordinator
         self.delegate = delegate
-        Logger.initialization(entity: self)
+        super.init()
+        self.parentCoordinator = parentCoordinator
     }
     
-    deinit {
-        Logger.deinitialization(entity: self)
-    }
-    
-    func start() {
+    override func start() {
         let storyboard = UIStoryboard(name: Storyboard.content.rawValue, bundle: nil)
         let tabBar = storyboard.instantiateInitialViewController() as! MainTabBarController
         tabBar.coordinator = self
@@ -55,14 +48,10 @@ class TabBarContentCoordinator: Coordinatable {
         feedCoordinator.start()
     }
     
-    func end() {
-        
-    }
-    
 }
 
 extension TabBarContentCoordinator: HomeCoordinatorDelegate {
-    func didLogOut(_ coordinator: Coordinatable) {
+    func didLogOut(_ coordinator: CoordinatorProtocol) {
         /// remove both HomeCoordinator and FeedCoordinator
         /// this classes don't need to implement ParentCoordinatable
         /// we remove them manually by this method call

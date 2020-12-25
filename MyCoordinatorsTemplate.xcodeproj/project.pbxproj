@@ -11,7 +11,7 @@
 		790516912590C4C100B9E3DA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516902590C4C100B9E3DA /* SceneDelegate.swift */; };
 		790516982590C4C300B9E3DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 790516972590C4C300B9E3DA /* Assets.xcassets */; };
 		7905169B2590C4C300B9E3DA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 790516992590C4C300B9E3DA /* LaunchScreen.storyboard */; };
-		790516A72590D4BF00B9E3DA /* Coordinatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516A62590D4BF00B9E3DA /* Coordinatable.swift */; };
+		790516A72590D4BF00B9E3DA /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516A62590D4BF00B9E3DA /* CoordinatorProtocol.swift */; };
 		790516A92590D58000B9E3DA /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 790516A82590D58000B9E3DA /* Feed.storyboard */; };
 		790516AC2590D69300B9E3DA /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516AB2590D69300B9E3DA /* MainTabBarController.swift */; };
 		790516AE2590D97300B9E3DA /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516AD2590D97300B9E3DA /* HomeViewController.swift */; };
@@ -35,6 +35,7 @@
 		790516F42594329F00B9E3DA /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516F32594329F00B9E3DA /* Storyboard.swift */; };
 		790516F72595182400B9E3DA /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516F62595182400B9E3DA /* Logger.swift */; };
 		790516F9259538C500B9E3DA /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516F8259538C500B9E3DA /* String+Extensions.swift */; };
+		790516FB25956F8C00B9E3DA /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516FA25956F8C00B9E3DA /* Coordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,7 +45,7 @@
 		790516972590C4C300B9E3DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7905169A2590C4C300B9E3DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7905169C2590C4C300B9E3DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		790516A62590D4BF00B9E3DA /* Coordinatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinatable.swift; sourceTree = "<group>"; };
+		790516A62590D4BF00B9E3DA /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
 		790516A82590D58000B9E3DA /* Feed.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Feed.storyboard; sourceTree = "<group>"; };
 		790516AB2590D69300B9E3DA /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		790516AD2590D97300B9E3DA /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -68,6 +69,7 @@
 		790516F32594329F00B9E3DA /* Storyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
 		790516F62595182400B9E3DA /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		790516F8259538C500B9E3DA /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		790516FA25956F8C00B9E3DA /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 			children = (
 				790516F52595181700B9E3DA /* Utils */,
 				790516CF2592BE2B00B9E3DA /* UI */,
+				790516EE25940BBC00B9E3DA /* Coordinator */,
 				790516B12590DAB000B9E3DA /* Common */,
 				790516A32590C53F00B9E3DA /* Application */,
 				790516A42590C79A00B9E3DA /* Scenes */,
@@ -165,7 +168,6 @@
 			isa = PBXGroup;
 			children = (
 				790516B32590DAD600B9E3DA /* Storyboarded.swift */,
-				790516EE25940BBC00B9E3DA /* Coordinator */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -231,7 +233,8 @@
 		790516EE25940BBC00B9E3DA /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
-				790516A62590D4BF00B9E3DA /* Coordinatable.swift */,
+				790516A62590D4BF00B9E3DA /* CoordinatorProtocol.swift */,
+				790516FA25956F8C00B9E3DA /* Coordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -322,10 +325,11 @@
 			files = (
 				790516AE2590D97300B9E3DA /* HomeViewController.swift in Sources */,
 				790516C325925A2D00B9E3DA /* AuthCoordinator.swift in Sources */,
-				790516A72590D4BF00B9E3DA /* Coordinatable.swift in Sources */,
+				790516A72590D4BF00B9E3DA /* CoordinatorProtocol.swift in Sources */,
 				790516AC2590D69300B9E3DA /* MainTabBarController.swift in Sources */,
 				790516CB2592BCE600B9E3DA /* PersonalInfoViewController.swift in Sources */,
 				7905168F2590C4C100B9E3DA /* AppDelegate.swift in Sources */,
+				790516FB25956F8C00B9E3DA /* Coordinator.swift in Sources */,
 				790516F72595182400B9E3DA /* Logger.swift in Sources */,
 				790516C125925A1500B9E3DA /* ProfileCoordinator.swift in Sources */,
 				790516F225942D3B00B9E3DA /* TabBarContentCoordinator.swift in Sources */,

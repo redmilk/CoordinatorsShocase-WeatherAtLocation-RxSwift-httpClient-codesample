@@ -11,28 +11,17 @@ import UIKit
 /// Pseudo user session
 var isLoggedIn: Bool = false
 
-class ApplicationCoordinator: Coordinatable {
+class ApplicationCoordinator: Coordinator {
     
     var window: UIWindow
-    weak var parentCoordinator: Coordinatable!
-    var navigationController: UINavigationController! /// unused
-    var childCoordinators: [Coordinatable] = []
     
     init(window: UIWindow) {
         self.window = window
-        Logger.initialization(entity: self)
+        super.init()
     }
     
-    deinit {
-        Logger.deinitialization(entity: self)
-    }
-    
-    func start() {
+   override func start() {
         isLoggedIn ? showContent() : showAuth()
-    }
-    
-    func end() {
-        
     }
     
     private func showContent() {

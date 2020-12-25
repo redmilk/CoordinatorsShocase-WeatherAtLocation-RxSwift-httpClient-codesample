@@ -8,21 +8,21 @@
 
 import UIKit
 
-protocol Coordinatable: AnyObject {
+protocol CoordinatorProtocol: AnyObject {
 
-    var childCoordinators: [Coordinatable] { get set }
-    var parentCoordinator: Coordinatable! { get set }
+    var childCoordinators: [CoordinatorProtocol] { get set }
+    var parentCoordinator: CoordinatorProtocol! { get set }
     var navigationController: UINavigationController! { get set }
-
-    func removeChild(_ child: Coordinatable)
+    
+    func removeChild(_ child: CoordinatorProtocol)
     
     func start()
     func end()
 
 }
 
-extension Coordinatable {
-    func removeChild(_ child: Coordinatable) {
+extension CoordinatorProtocol {
+    func removeChild(_ child: CoordinatorProtocol) {
         for (index, coordinator) in childCoordinators.enumerated() {
             if coordinator === child {
                 childCoordinators.remove(at: index)

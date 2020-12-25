@@ -19,8 +19,9 @@ protocol HomeCoordinatorDelegate: class {
 
 class HomeCoordinator: Coordinatable {
     
-    var parentCoordinator: Coordinatable!
     weak var delegate: HomeCoordinatorDelegate?
+    
+    var parentCoordinator: Coordinatable!
     weak var tabBar: UITabBarController!
     weak var navigationController: UINavigationController!
     var childCoordinators: [Coordinatable] = []

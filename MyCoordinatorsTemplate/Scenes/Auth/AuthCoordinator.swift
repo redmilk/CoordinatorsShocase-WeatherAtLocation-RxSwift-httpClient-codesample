@@ -14,10 +14,11 @@ protocol AuthCoordinatorDelegate: class {
 
 class AuthCoordinator: Coordinatable {
     
-    var childCoordinators: [Coordinatable] = []
     weak var delegate: AuthCoordinatorDelegate!
+    
     weak var parentCoordinator: Coordinatable!
     weak var navigationController: UINavigationController!
+    var childCoordinators: [Coordinatable] = []
     var window: UIWindow
     
     private let title: String

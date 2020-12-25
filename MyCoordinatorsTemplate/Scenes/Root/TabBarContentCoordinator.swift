@@ -15,13 +15,14 @@ protocol TabBarContentCoordinatorDelegate: class {
 /// Coordinator for tab bar content
 class TabBarContentCoordinator: Coordinatable {
     
-    var tabBar: UITabBarController!
     weak var delegate: TabBarContentCoordinatorDelegate!
-    var window: UIWindow
+    
+    var tabBar: UITabBarController!
     var navigationController: UINavigationController!
     weak var parentCoordinator: Coordinatable!
     var childCoordinators: [Coordinatable] = []
-    
+    var window: UIWindow
+
     init(window: UIWindow,
          parentCoordinator: Coordinatable,
          delegate: TabBarContentCoordinatorDelegate

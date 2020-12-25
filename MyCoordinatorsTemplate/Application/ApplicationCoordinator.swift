@@ -8,7 +8,7 @@
 
 import UIKit
 
-/// Change it to see auth or content
+/// Pseudo user session
 var isLoggedIn: Bool = false
 
 class ApplicationCoordinator: Coordinatable {

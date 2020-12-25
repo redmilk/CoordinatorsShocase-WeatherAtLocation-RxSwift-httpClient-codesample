@@ -45,7 +45,7 @@ class ProfileCoordinator: NSObject, CoordinatorProtocol, ParentCoordinatable, Na
             let navigation = storyboard.instantiateInitialViewController() as! UINavigationController
             navigationController = navigation
             guard
-                let parentController = parentCoordinator?.navigationController?.viewControllers.first, //last
+                let parentController = parentCoordinator?.navigationController?.viewControllers.last,
                 let profileController = navigation.viewControllers.first as? ProfileViewController
                 else { fatalError("Internal inconsistency") }
             

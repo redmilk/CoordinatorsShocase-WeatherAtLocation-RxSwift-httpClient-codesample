@@ -8,13 +8,28 @@
 
 import UIKit
 
-final class FeedViewController: UIViewController, Storyboarded {
+final class FeedViewController: ViewController, Storyboarded {
 
+    var coordinator: FeedCoordinator!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if coordinator?.navigationController?.delegate != nil  {
+            //Logger.log(entity: coordinator?.navigationController?.delegate)
+        } else {
+            print("FeedViewController Navigation delegate NIL")
+        }
+    }
 
-
+    @IBAction func pushDetailPressed(_ sender: Any) {
+        coordinator?.displayDetail()
+    }
+    
 }

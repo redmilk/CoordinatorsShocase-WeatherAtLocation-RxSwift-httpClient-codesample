@@ -8,18 +8,9 @@
 
 import UIKit
 
-final class ProfileViewController: UIViewController, Storyboarded {
+final class ProfileViewController: ViewController, Storyboarded {
 
     weak var coordinator: ProfileCoordinator?
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        Logger.initialization(entity: self)
-    }
-
-    deinit {
-        Logger.deinitialization(entity: self)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -8,18 +8,9 @@
 
 import UIKit
 
-final class AuthViewController: UIViewController {
+final class AuthViewController: ViewController {
     
     weak var coordinator: AuthCoordinator!
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        Logger.initialization(entity: self)
-    }
-    
-    deinit {
-        Logger.deinitialization(entity: self)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -38,6 +38,7 @@
 		790516FB25956F8C00B9E3DA /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516FA25956F8C00B9E3DA /* BaseCoordinator.swift */; };
 		7905170B2597E06300B9E3DA /* UITabBarController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7905170A2597E06300B9E3DA /* UITabBarController+Extensions.swift */; };
 		7905170D2597E35900B9E3DA /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7905170C2597E35900B9E3DA /* DetailViewController.swift */; };
+		79051712259980A600B9E3DA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79051711259980A600B9E3DA /* ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		790516FA25956F8C00B9E3DA /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 		7905170A2597E06300B9E3DA /* UITabBarController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBarController+Extensions.swift"; sourceTree = "<group>"; };
 		7905170C2597E35900B9E3DA /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		79051711259980A600B9E3DA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				790516C42592859600B9E3DA /* DraggableViewController.swift */,
+				79051711259980A600B9E3DA /* ViewController.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79051712259980A600B9E3DA /* ViewController.swift in Sources */,
 				790516AE2590D97300B9E3DA /* HomeViewController.swift in Sources */,
 				790516C325925A2D00B9E3DA /* AuthCoordinator.swift in Sources */,
 				790516A72590D4BF00B9E3DA /* CoordinatorProtocol.swift in Sources */,

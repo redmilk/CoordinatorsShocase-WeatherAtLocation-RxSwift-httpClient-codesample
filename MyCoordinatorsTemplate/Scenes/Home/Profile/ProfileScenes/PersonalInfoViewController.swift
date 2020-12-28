@@ -8,16 +8,7 @@
 
 import UIKit
 
-class PersonalInfoViewController: UIViewController {
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        Logger.initialization(entity: self)
-    }
-    
-    deinit {
-        Logger.deinitialization(entity: self)
-    }
+class PersonalInfoViewController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()

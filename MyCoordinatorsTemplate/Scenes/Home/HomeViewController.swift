@@ -8,19 +8,9 @@
 
 import UIKit
 
-final class HomeViewController: UIViewController, Storyboarded {
+final class HomeViewController: ViewController, Storyboarded {
 
     var coordinator: HomeCoordinator!
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        Logger.initialization(entity: self)
-    }
-
-    
-    deinit {
-        Logger.deinitialization(entity: self)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -1,5 +1,5 @@
 //
-//  HomeViewController.swift
+//  ProfileViewController.swift
 //  MyCoordinatorsTemplate
 //
 //  Created by Danyl Timofeyev on 21.12.2020.
@@ -8,16 +8,15 @@
 
 import UIKit
 
-final class HomeViewController: UIViewController, Storyboarded {
+final class ProfileViewController: UIViewController, Storyboarded {
 
-    var coordinator: HomeCoordinator!
+    weak var coordinator: ProfileCoordinator?
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         Logger.initialization(entity: self)
     }
 
-    
     deinit {
         Logger.deinitialization(entity: self)
     }
@@ -34,29 +33,27 @@ final class HomeViewController: UIViewController, Storyboarded {
         if coordinator?.navigationController?.delegate != nil  {
             //Logger.log(entity: coordinator?.navigationController?.delegate)
         } else {
-            print("HomeViewController Navigation delegate NIL")
+            print("ProfileViewController Navigation delegate NIL")
         }
     }
     
-    @IBAction func logOutPressed(_ sender: Any) {
-        isLoggedIn = false
-        coordinator.displayAuthAsRoot()
-    }
-    
-    @IBAction func pushProfilePressed(_ sender: Any) {
-        coordinator?.pushProfile()
-    }
-    
-    @IBAction func presentProfilePressed(_ sender: Any) {
-        coordinator?.presentProfile()
-    }
-    
-    @IBAction func presentAuthPressed(_ sender: Any) {
+    @IBAction func personalInformationPressed(_ sender: Any) {
         
     }
     
-    @IBAction func presentFormsPressed(_ sender: Any) {
+    @IBAction func creditCardsPressed(_ sender: Any) {
         
     }
     
+    @IBAction func orderHistoryPressed(_ sender: Any) {
+        
+    }
+    
+    @IBAction func settingsPressed(_ sender: Any) {
+        
+    }
+
+    @IBAction func closePressed(_ sender: Any) {
+        coordinator?.end()
+    }
 }

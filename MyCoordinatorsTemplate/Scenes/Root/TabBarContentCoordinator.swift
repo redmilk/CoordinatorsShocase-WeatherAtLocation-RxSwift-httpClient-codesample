@@ -44,7 +44,8 @@ final class TabBarContentCoordinator: BaseCoordinator {
         
         homeCoordinator.start()
         feedCoordinator.start()
-        super.start()
+        
+        assignNavigationDelegates()
     }
     
 }

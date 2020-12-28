@@ -37,7 +37,7 @@ final class AuthCoordinator: BaseCoordinator {
         controller.coordinator = self
         controller.title = title
         window.rootViewController = navigationController
-        super.start()
+        assignNavigationDelegates()
     }
     
     override func end() {

@@ -30,14 +30,3 @@ protocol CoordinatorProtocol: AnyObject {
     func end()
 
 }
-
-extension CoordinatorProtocol {
-    func removeChild(_ child: CoordinatorProtocol) {
-        for (index, coordinator) in childCoordinators.enumerated() {
-            if coordinator === child {
-                childCoordinators.remove(at: index)
-                break
-            }
-        }
-    }
-}

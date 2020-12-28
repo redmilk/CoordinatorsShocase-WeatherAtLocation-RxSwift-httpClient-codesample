@@ -21,19 +21,19 @@ struct Logger {
         }
     }
     
-    static func initialization(entity: AnyObject) {
+    static func initialization(entity: AnyObject, symbol: String = "⚠️") {
         if let pureEntityName = String(describing: entity).slice(from: ".", to: ":") {
-            print("⚠️ init: \(pureEntityName)")
+            print("\(symbol) init: \(pureEntityName)")
         } else if let pureEntityName = String(describing: entity).textAfter(str: ".") {
-            print("⚠️ init: \(pureEntityName)")
+            print("\(symbol) init: \(pureEntityName)")
         }
     }
     
-    static func deinitialization(entity: AnyObject)  {
+    static func deinitialization(entity: AnyObject, symbol: String = "❌")  {
         if let pureEntityName = String(describing: entity).slice(from: ".", to: ":") {
-            print("❌ deinit: \(pureEntityName)")
+            print("\(symbol) deinit: \(pureEntityName)")
         } else if let pureEntityName = String(describing: entity).textAfter(str: ".") {
-            print("❌ deinit: \(pureEntityName)")
+            print("\(symbol) deinit: \(pureEntityName)")
         }
     }
     

@@ -19,32 +19,48 @@ class BaseCoordinator: NSObject, CoordinatorProtocol {
     
     override init() {
         super.init()
-        Logger.initialization(entity: self)
+        //Logger.initialization(entity: self)
     }
     
     deinit {
         Logger.deinitialization(entity: self)
     }
     
-    /// Call this in derivative coordinator's overriden start() by last line
-    func start() {
+    func start() { }
+    func end() { }
+    
+    /// We call this at the end of 'start()'
+    /// for enabling navigation and tabbar delegate events
+    func assignNavigationDelegates() {
         navigationController?.delegate = self
         tabBarController?.delegate = self
     }
     
-    func end() { }
+    func removeChild(_ child: CoordinatorProtocol) {
+         for (index, coordinator) in childCoordinators.enumerated() {
+             if coordinator === child {
+                 childCoordinators.remove(at: index)
+                 break
+             }
+         }
+        /// Reassign navigation delegates to self when removing child coordinator
+        /// otherwise current parent coordinator won't handle navigation events
+        assignNavigationDelegates()
+     }
     
-    func willNavigate(_ navigationController: UINavigationController,
+    /// Navigation events for UINavigationController
+    func didNavigate(_ navigationController: UINavigationController,
                       to viewController: UIViewController,
                       animated: Bool) {
         Logger.log("Navigation to", entity: viewController, symbol: "[STACK]")
     }
     
+    /// Navigation events for UITabBarController
     func didSelect(_ tabBarController: UITabBarController,
                       tab selectedTabController: UIViewController) {
         guard
             let navigationController = selectedTabController as? UINavigationController,
-            let topControllerInStack = navigationController.viewControllers.first else {
+            let topControllerInStack = navigationController.viewControllers.last else {
                 Logger.log("Pure tab selected", entity: selectedTabController, symbol: "[PURE TAB]")
                 return
         }
@@ -56,10 +72,10 @@ class BaseCoordinator: NSObject, CoordinatorProtocol {
 extension BaseCoordinator: UINavigationControllerDelegate {
     
     func navigationController(_ navigationController: UINavigationController,
-                              willShow viewController: UIViewController,
+                              didShow viewController: UIViewController,
                               animated: Bool
     ) {
-        willNavigate(navigationController,
+        didNavigate(navigationController,
                      to: viewController,
                      animated: animated)
     }

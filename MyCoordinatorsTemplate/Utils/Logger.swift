@@ -8,6 +8,18 @@
 
 import Foundation
 
+/**
+ TODO: - Fix when presenting modally and have this kind of msg
+ [STACK] Navigation to: ProfileViewController
+ 
+ 
+ TODO: - Investigate why we have this duplicates while switching to
+ feed tab, by first time after starting the app
+ 
+ [NAV TAB] Selected tab with navigation stack: FeedViewController
+ [STACK] Navigation to: FeedViewController
+ [STACK] Navigation to: FeedViewController
+ */
 
 struct Logger {
 

@@ -25,10 +25,28 @@ final class FeedCoordinator: BaseCoordinator {
     override func start() {
         let storyboard = UIStoryboard(name: Storyboard.feed.rawValue, bundle: nil)
         navigationController = storyboard.instantiateInitialViewController() as? UINavigationController
+        
+        guard
+            let navigationController = navigationController
+            else { fatalError("internal inconsistency") }
+        
         navigationController.tabBarItem = UITabBarItem(title: "Feed", image: nil, selectedImage: nil)
         let controller = navigationController.viewControllers.first as! FeedViewController
         controller.title = title
-        tabBarController.viewControllers?.append(navigationController)
+        controller.coordinator = self
+        
+        guard
+            let tabBarController = tabBarController
+            else { fatalError("internal inconsistency") }
+        
+        tabBarController.addControllerForTab(navigationController)
+        assignNavigationDelegates()
+    }
+    
+    func displayDetail() {
+        let controller = DetailViewController.instantiate(storyboardName: .feed) as! DetailViewController
+        controller.coordinator = self
+        navigationController?.pushViewController(controller, animated: true)
     }
     
 }

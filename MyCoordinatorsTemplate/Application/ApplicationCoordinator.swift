@@ -20,6 +20,7 @@ final class ApplicationCoordinator: BaseCoordinator {
     
    override func start() {
         isLoggedIn ? showContent() : showAuth()
+        assignNavigationDelegates()
     }
     
     private func showContent() {

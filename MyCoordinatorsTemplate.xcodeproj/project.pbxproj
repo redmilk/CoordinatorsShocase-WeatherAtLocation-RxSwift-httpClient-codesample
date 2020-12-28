@@ -36,6 +36,8 @@
 		790516F72595182400B9E3DA /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516F62595182400B9E3DA /* Logger.swift */; };
 		790516F9259538C500B9E3DA /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516F8259538C500B9E3DA /* String+Extensions.swift */; };
 		790516FB25956F8C00B9E3DA /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516FA25956F8C00B9E3DA /* BaseCoordinator.swift */; };
+		7905170B2597E06300B9E3DA /* UITabBarController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7905170A2597E06300B9E3DA /* UITabBarController+Extensions.swift */; };
+		7905170D2597E35900B9E3DA /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7905170C2597E35900B9E3DA /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +72,8 @@
 		790516F62595182400B9E3DA /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		790516F8259538C500B9E3DA /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		790516FA25956F8C00B9E3DA /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
+		7905170A2597E06300B9E3DA /* UITabBarController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBarController+Extensions.swift"; sourceTree = "<group>"; };
+		7905170C2597E35900B9E3DA /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,7 +144,6 @@
 				790516AA2590D65000B9E3DA /* Auth */,
 				790516CC2592BD1700B9E3DA /* Home */,
 				790516CD2592BDD800B9E3DA /* Feed */,
-				790516C62592B83400B9E3DA /* Profile */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -185,6 +188,7 @@
 			children = (
 				790516AD2590D97300B9E3DA /* HomeViewController.swift */,
 				790516BC2590E86F00B9E3DA /* HomeCoordinator.swift */,
+				790516C62592B83400B9E3DA /* Profile */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -194,6 +198,7 @@
 			children = (
 				790516AF2590D99C00B9E3DA /* FeedViewController.swift */,
 				790516BE2590ECB400B9E3DA /* FeedCoordinator.swift */,
+				7905170E2599560F00B9E3DA /* Detail */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -236,8 +241,17 @@
 				790516F62595182400B9E3DA /* Logger.swift */,
 				790516B32590DAD600B9E3DA /* Storyboarded.swift */,
 				790516F8259538C500B9E3DA /* String+Extensions.swift */,
+				7905170A2597E06300B9E3DA /* UITabBarController+Extensions.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		7905170E2599560F00B9E3DA /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				7905170C2597E35900B9E3DA /* DetailViewController.swift */,
+			);
+			path = Detail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -329,6 +343,8 @@
 				790516F9259538C500B9E3DA /* String+Extensions.swift in Sources */,
 				790516C52592859600B9E3DA /* DraggableViewController.swift in Sources */,
 				790516B02590D99C00B9E3DA /* FeedViewController.swift in Sources */,
+				7905170B2597E06300B9E3DA /* UITabBarController+Extensions.swift in Sources */,
+				7905170D2597E35900B9E3DA /* DetailViewController.swift in Sources */,
 				790516912590C4C100B9E3DA /* SceneDelegate.swift in Sources */,
 				790516B62590E31F00B9E3DA /* ProfileViewController.swift in Sources */,
 				790516ED2593948B00B9E3DA /* PresentationType.swift in Sources */,

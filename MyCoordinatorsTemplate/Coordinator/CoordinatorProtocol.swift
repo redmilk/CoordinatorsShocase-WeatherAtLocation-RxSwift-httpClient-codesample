@@ -18,10 +18,10 @@ protocol CoordinatorProtocol: AnyObject {
     var parentCoordinator: CoordinatorProtocol! { get set }
     
     /// if navigation starts from UINavigationController
-    var navigationController: UINavigationController! { get set }
+    var navigationController: UINavigationController? { get set }
     
     /// if navigation starts from UITabBarController
-    var tabBarController: UITabBarController! { get set }
+    var tabBarController: UITabBarController? { get set }
     
     /// if coordinator can set root for application
     var window: UIWindow! { get set }
@@ -29,15 +29,4 @@ protocol CoordinatorProtocol: AnyObject {
     func start()
     func end()
 
-}
-
-extension CoordinatorProtocol {
-    func removeChild(_ child: CoordinatorProtocol) {
-        for (index, coordinator) in childCoordinators.enumerated() {
-            if coordinator === child {
-                childCoordinators.remove(at: index)
-                break
-            }
-        }
-    }
 }

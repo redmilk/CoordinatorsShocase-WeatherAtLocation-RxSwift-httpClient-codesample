@@ -50,8 +50,8 @@ final class FeedCoordinator: BaseCoordinator {
     }
     
     func displayDraggable() {
-        let controller = FeedCustomViewController.instantiate(storyboardName: .feed)
-        navigationController?.present(controller, animated: true)
+        let vc = FeedCustomViewController()
+        navigationController?.present(vc, animated: true)
     }
     
 }

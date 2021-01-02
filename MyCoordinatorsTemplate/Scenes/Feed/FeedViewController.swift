@@ -35,4 +35,8 @@ final class FeedViewController: ViewController, Storyboarded {
     @IBAction func customControllerPressed(_ sender: Any) {
         coordinator.displayDraggable()
     }
+    
+    @IBAction func presentDraggableProtocolController(_ sender: Any) {
+        
+    }
 }

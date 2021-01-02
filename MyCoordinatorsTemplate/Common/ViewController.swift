@@ -13,6 +13,11 @@ fileprivate var scrollViewKey: UInt8 = 0
 open class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
     
     public var textFieldsArrayForFreeSpaceTapKeyboardHiding: [UITextField] = []
+    public var textViewArrayForFreeSpaceTapKeyboardHiding: [UITextView] = []
+    
+    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
     
     required public init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -31,8 +36,17 @@ open class ViewController: UIViewController, UITextFieldDelegate, UITextViewDele
     
     @objc func handleTap() {
         textFieldsArrayForFreeSpaceTapKeyboardHiding.forEach { $0.resignFirstResponder() }
+        textViewArrayForFreeSpaceTapKeyboardHiding.forEach { $0.resignFirstResponder() }
     }
     
+    public func addTextSourceFieldToConvenienceKeyboardHidingList(textFields: [UITextField] = [],
+                                                                  textViews: [UITextView] = []
+    ) {
+        textFieldsArrayForFreeSpaceTapKeyboardHiding.append(contentsOf: textFields)
+        textViewArrayForFreeSpaceTapKeyboardHiding.append(contentsOf: textViews)
+    }
+    
+    // MARK: - Keyboard events
     public func setupKeyboardNotifcationListenerForScrollView(_ scrollView: UIScrollView) {
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -78,13 +92,18 @@ open class ViewController: UIViewController, UITextFieldDelegate, UITextViewDele
         }
     }
     
+    // MARK: - UITextFieldDelegate
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
-
-    public func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
+    
+    // MARK: - UITextViewDelegate
+    public func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if(text == "\n") {
+            textView.resignFirstResponder()
+            return false
+        }
         return true
     }
     

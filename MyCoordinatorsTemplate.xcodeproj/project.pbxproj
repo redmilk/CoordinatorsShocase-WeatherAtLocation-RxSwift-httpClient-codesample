@@ -38,7 +38,7 @@
 		7905170B2597E06300B9E3DA /* UITabBarController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7905170A2597E06300B9E3DA /* UITabBarController+Extensions.swift */; };
 		7905170D2597E35900B9E3DA /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7905170C2597E35900B9E3DA /* DetailViewController.swift */; };
 		79051712259980A600B9E3DA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79051711259980A600B9E3DA /* ViewController.swift */; };
-		79051714259BBCEC00B9E3DA /* StackViewWithScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79051713259BBCEC00B9E3DA /* StackViewWithScrollViewController.swift */; };
+		79051714259BBCEC00B9E3DA /* NoStoryDraggableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79051713259BBCEC00B9E3DA /* NoStoryDraggableViewController.swift */; };
 		7905171625A0C3CA00B9E3DA /* FeedCustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7905171525A0C3CA00B9E3DA /* FeedCustomViewController.swift */; };
 		7905171825A0C63C00B9E3DA /* CreditCardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7905171725A0C63C00B9E3DA /* CreditCardsViewController.swift */; };
 /* End PBXBuildFile section */
@@ -77,7 +77,7 @@
 		7905170A2597E06300B9E3DA /* UITabBarController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBarController+Extensions.swift"; sourceTree = "<group>"; };
 		7905170C2597E35900B9E3DA /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		79051711259980A600B9E3DA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		79051713259BBCEC00B9E3DA /* StackViewWithScrollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackViewWithScrollViewController.swift; sourceTree = "<group>"; };
+		79051713259BBCEC00B9E3DA /* NoStoryDraggableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoStoryDraggableViewController.swift; sourceTree = "<group>"; };
 		7905171525A0C3CA00B9E3DA /* FeedCustomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCustomViewController.swift; sourceTree = "<group>"; };
 		7905171725A0C63C00B9E3DA /* CreditCardsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -167,7 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				79051711259980A600B9E3DA /* ViewController.swift */,
-				79051713259BBCEC00B9E3DA /* StackViewWithScrollViewController.swift */,
+				79051713259BBCEC00B9E3DA /* NoStoryDraggableViewController.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -348,7 +348,7 @@
 				7905168F2590C4C100B9E3DA /* AppDelegate.swift in Sources */,
 				790516FB25956F8C00B9E3DA /* BaseCoordinator.swift in Sources */,
 				790516F72595182400B9E3DA /* Logger.swift in Sources */,
-				79051714259BBCEC00B9E3DA /* StackViewWithScrollViewController.swift in Sources */,
+				79051714259BBCEC00B9E3DA /* NoStoryDraggableViewController.swift in Sources */,
 				790516C125925A1500B9E3DA /* ProfileCoordinator.swift in Sources */,
 				790516F225942D3B00B9E3DA /* TabBarContentCoordinator.swift in Sources */,
 				790516F42594329F00B9E3DA /* Storyboard.swift in Sources */,

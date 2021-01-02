@@ -8,28 +8,36 @@
 
 import UIKit
 
-final class FeedCustomViewController: StackViewWithScrollViewController, Storyboarded {
+final class FeedCustomViewController: NoStoryDraggableViewController, Storyboarded {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let red = UILabel()
-        red.backgroundColor = .red
+        red.backgroundColor = .lightGray
         let black = UILabel()
-        black.backgroundColor = .black
+        black.backgroundColor = .gray
         black.textColor = .white
         let purple = UILabel()
-        purple.backgroundColor = .magenta
+        purple.backgroundColor = .darkGray
         
         let textfield = UITextField()
-        textfield.text = "Text input..."
+        textfield.text = "Try textFIELD input keyboard hiding..."
         textfield.backgroundColor = .blue
         textfield.font = UIFont.systemFont(ofSize: 22.0)
         textfield.textColor = .white
         textfield.delegate = self
-        addStackedViews(views: [red, black, purple, textfield])
         
-        textFieldsArrayForFreeSpaceTapKeyboardHiding.append(textfield)
+        let textfield2 = UITextField()
+        textfield2.text = "Try textFIELD input keyboard hiding..."
+        textfield2.backgroundColor = .systemBlue
+        textfield2.font = UIFont.systemFont(ofSize: 22.0)
+        textfield2.textColor = .white
+        textfield2.delegate = self
+        
+        addStackedViews(views: [red, black, purple, textfield, textfield2])
+        
+        addTextSourceFieldToConvenienceKeyboardHidingList(textFields: [textfield, textfield2])
     }
     
 }

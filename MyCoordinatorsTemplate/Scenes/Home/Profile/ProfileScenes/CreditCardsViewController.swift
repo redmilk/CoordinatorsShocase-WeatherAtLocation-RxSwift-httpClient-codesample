@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class CreditCardsViewController: StackViewWithScrollViewController, Storyboarded {
+final class CreditCardsViewController: NoStoryDraggableViewController, Storyboarded {
     
     override func viewDidLoad() {
         super.viewDidLoad()

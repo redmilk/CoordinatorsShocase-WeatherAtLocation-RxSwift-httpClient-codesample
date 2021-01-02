@@ -35,6 +35,7 @@ class NoStoryDraggableViewController: ViewController {
         return view
     }()
 
+    // MARK: - Lifecycle
     override func loadView() {
         let view = UIView()
         view.addSubview(scrollView)
@@ -80,6 +81,7 @@ class NoStoryDraggableViewController: ViewController {
         removeKeyboardNotificationListeners()
     }
     
+    // MARK: - Inner stack view helpers
     public func addStackedView(view: UIView) {
         stackView.addArrangedSubview(view)
     }
@@ -99,6 +101,7 @@ class NoStoryDraggableViewController: ViewController {
         stackView.insertArrangedSubview(view, at: index)
     }
     
+    // MARK: - Main drag handling func
     @objc fileprivate func onDrag(_ sender: UIPanGestureRecognizer) {
         let translation = sender.translation(in: view)
         let movementOnAxis: CGFloat

@@ -71,4 +71,10 @@ final class ProfileCoordinator: BaseCoordinator {
         }
     }
     
+    func displayCreditCardsModally() {
+        let controller = CreditCardsViewController.instantiate(storyboardName: .profile)
+        controller.title = "Credit Cards"
+        navigationController?.present(controller, animated: true, completion: nil)
+    }
+    
 }

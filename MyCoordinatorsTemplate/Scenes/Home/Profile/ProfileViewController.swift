@@ -33,7 +33,7 @@ final class ProfileViewController: ViewController, Storyboarded {
     }
     
     @IBAction func creditCardsPressed(_ sender: Any) {
-        
+        coordinator?.displayCreditCardsModally()
     }
     
     @IBAction func orderHistoryPressed(_ sender: Any) {

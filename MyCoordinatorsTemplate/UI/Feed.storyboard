@@ -28,13 +28,27 @@
                                     <action selector="pushDetailPressed:" destination="w3T-wk-ZTE" eventType="touchUpInside" id="xtp-ZV-IJX"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RqU-IB-Qov">
+                                <rect key="frame" x="32" y="359" width="350" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Draggable with Scroll and Stack">
+                                    <color key="titleColor" systemColor="systemIndigoColor" red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="customControllerPressed:" destination="w3T-wk-ZTE" eventType="touchUpInside" id="mco-ex-4f1"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="9mm-C6-In2" firstAttribute="top" secondItem="dmQ-NK-3WC" secondAttribute="top" constant="100" id="654-4H-ylk"/>
+                            <constraint firstItem="RqU-IB-Qov" firstAttribute="centerX" secondItem="1fJ-4y-MIC" secondAttribute="centerX" id="BkH-QR-rgm"/>
+                            <constraint firstItem="RqU-IB-Qov" firstAttribute="leading" secondItem="dmQ-NK-3WC" secondAttribute="leading" constant="32" id="FPJ-54-fua"/>
                             <constraint firstItem="1fJ-4y-MIC" firstAttribute="top" secondItem="9mm-C6-In2" secondAttribute="bottom" constant="100" id="Rtp-DE-yJB"/>
+                            <constraint firstItem="RqU-IB-Qov" firstAttribute="top" secondItem="1fJ-4y-MIC" secondAttribute="bottom" constant="20" id="ctw-62-iUY"/>
                             <constraint firstItem="1fJ-4y-MIC" firstAttribute="centerX" secondItem="9mm-C6-In2" secondAttribute="centerX" id="dEg-D9-JyN"/>
                             <constraint firstItem="9mm-C6-In2" firstAttribute="centerX" secondItem="dmQ-NK-3WC" secondAttribute="centerX" id="t6i-5I-WER"/>
+                            <constraint firstItem="dmQ-NK-3WC" firstAttribute="trailing" secondItem="RqU-IB-Qov" secondAttribute="trailing" constant="32" id="vgg-Lx-IAk"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="dmQ-NK-3WC"/>
                     </view>
@@ -70,6 +84,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6La-nd-iDL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1487" y="844"/>
+        </scene>
+        <!--Feed Custom View Controller-->
+        <scene sceneID="wUU-VR-5P0">
+            <objects>
+                <viewController storyboardIdentifier="FeedCustomViewController" id="YMd-Q1-AzY" customClass="FeedCustomViewController" customModule="MyCoordinatorsTemplate" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ldg-OU-Q9O">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="Cpd-cT-ce0"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="npj-eG-vw1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2332" y="844"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="aMA-7p-Pih">

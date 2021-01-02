@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PersonalInfoViewController: ViewController {
+final class PersonalInfoViewController: ViewController, Storyboarded {
     
     override func viewDidLoad() {
         super.viewDidLoad()

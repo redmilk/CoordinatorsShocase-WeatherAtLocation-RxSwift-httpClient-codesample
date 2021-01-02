@@ -44,9 +44,15 @@ final class FeedCoordinator: BaseCoordinator {
     }
     
     func displayDetail() {
-        let controller = DetailViewController.instantiate(storyboardName: .feed) as! DetailViewController
+        let controller = DetailViewController.instantiate(storyboardName: .feed)
         controller.coordinator = self
         navigationController?.pushViewController(controller, animated: true)
     }
     
+    func displayDraggable() {
+        let controller = FeedCustomViewController.instantiate(storyboardName: .feed)
+        navigationController?.present(controller, animated: true)
+    }
+    
 }
+

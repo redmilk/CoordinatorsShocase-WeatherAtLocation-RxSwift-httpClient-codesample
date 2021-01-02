@@ -76,6 +76,60 @@
             </objects>
             <point key="canvasLocation" x="2752.1739130434785" y="55.580357142857139"/>
         </scene>
+        <!--Personal Info View Controller-->
+        <scene sceneID="pBM-nk-kCq">
+            <objects>
+                <viewController storyboardIdentifier="PersonalInfoViewController" id="PDd-03-avc" customClass="PersonalInfoViewController" customModule="MyCoordinatorsTemplate" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="uLA-J0-Sa6">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Personal Info" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i7L-bc-eor">
+                                <rect key="frame" x="157.5" y="144" width="99.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="i7L-bc-eor" firstAttribute="top" secondItem="hn3-d8-hYE" secondAttribute="top" constant="100" id="cnj-UW-Ykv"/>
+                            <constraint firstItem="i7L-bc-eor" firstAttribute="centerX" secondItem="hn3-d8-hYE" secondAttribute="centerX" id="dPm-7q-K02"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="hn3-d8-hYE"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ssZ-BS-vXW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3601" y="58"/>
+        </scene>
+        <!--Credit Cards View Controller-->
+        <scene sceneID="6CG-6u-Kbr">
+            <objects>
+                <viewController storyboardIdentifier="CreditCardsViewController" id="swt-ok-MFL" customClass="CreditCardsViewController" customModule="MyCoordinatorsTemplate" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="x7w-S3-Ivy">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Draggable Credit Cards modally presented" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EWb-tl-P3A">
+                                <rect key="frame" x="44" y="144" width="326" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="EWb-tl-P3A" firstAttribute="top" secondItem="ZWO-dS-rLj" secondAttribute="top" constant="100" id="73R-UR-0sy"/>
+                            <constraint firstItem="EWb-tl-P3A" firstAttribute="centerX" secondItem="ZWO-dS-rLj" secondAttribute="centerX" id="Bvx-0e-xMM"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ZWO-dS-rLj"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="15o-FN-rxN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4402" y="58"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="Une-5O-T7y">
             <objects>

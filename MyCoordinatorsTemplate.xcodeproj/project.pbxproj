@@ -23,7 +23,6 @@
 		790516BF2590ECB400B9E3DA /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516BE2590ECB400B9E3DA /* FeedCoordinator.swift */; };
 		790516C125925A1500B9E3DA /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516C025925A1500B9E3DA /* ProfileCoordinator.swift */; };
 		790516C325925A2D00B9E3DA /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516C225925A2D00B9E3DA /* AuthCoordinator.swift */; };
-		790516C52592859600B9E3DA /* DraggableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516C42592859600B9E3DA /* DraggableViewController.swift */; };
 		790516CB2592BCE600B9E3DA /* PersonalInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516CA2592BCE600B9E3DA /* PersonalInfoViewController.swift */; };
 		790516D12592BED800B9E3DA /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 790516D02592BED800B9E3DA /* Auth.storyboard */; };
 		790516D32592BEEC00B9E3DA /* Content.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 790516D22592BEEC00B9E3DA /* Content.storyboard */; };
@@ -39,6 +38,9 @@
 		7905170B2597E06300B9E3DA /* UITabBarController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7905170A2597E06300B9E3DA /* UITabBarController+Extensions.swift */; };
 		7905170D2597E35900B9E3DA /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7905170C2597E35900B9E3DA /* DetailViewController.swift */; };
 		79051712259980A600B9E3DA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79051711259980A600B9E3DA /* ViewController.swift */; };
+		79051714259BBCEC00B9E3DA /* StackViewWithScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79051713259BBCEC00B9E3DA /* StackViewWithScrollViewController.swift */; };
+		7905171625A0C3CA00B9E3DA /* FeedCustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7905171525A0C3CA00B9E3DA /* FeedCustomViewController.swift */; };
+		7905171825A0C63C00B9E3DA /* CreditCardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7905171725A0C63C00B9E3DA /* CreditCardsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,7 +62,6 @@
 		790516BE2590ECB400B9E3DA /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
 		790516C025925A1500B9E3DA /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 		790516C225925A2D00B9E3DA /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
-		790516C42592859600B9E3DA /* DraggableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggableViewController.swift; sourceTree = "<group>"; };
 		790516CA2592BCE600B9E3DA /* PersonalInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInfoViewController.swift; sourceTree = "<group>"; };
 		790516D02592BED800B9E3DA /* Auth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
 		790516D22592BEEC00B9E3DA /* Content.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Content.storyboard; sourceTree = "<group>"; };
@@ -76,6 +77,9 @@
 		7905170A2597E06300B9E3DA /* UITabBarController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBarController+Extensions.swift"; sourceTree = "<group>"; };
 		7905170C2597E35900B9E3DA /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		79051711259980A600B9E3DA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		79051713259BBCEC00B9E3DA /* StackViewWithScrollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackViewWithScrollViewController.swift; sourceTree = "<group>"; };
+		7905171525A0C3CA00B9E3DA /* FeedCustomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCustomViewController.swift; sourceTree = "<group>"; };
+		7905171725A0C63C00B9E3DA /* CreditCardsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,8 +166,8 @@
 		790516B12590DAB000B9E3DA /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				790516C42592859600B9E3DA /* DraggableViewController.swift */,
 				79051711259980A600B9E3DA /* ViewController.swift */,
+				79051713259BBCEC00B9E3DA /* StackViewWithScrollViewController.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -182,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				790516CA2592BCE600B9E3DA /* PersonalInfoViewController.swift */,
+				7905171725A0C63C00B9E3DA /* CreditCardsViewController.swift */,
 			);
 			path = ProfileScenes;
 			sourceTree = "<group>";
@@ -201,7 +206,7 @@
 			children = (
 				790516AF2590D99C00B9E3DA /* FeedViewController.swift */,
 				790516BE2590ECB400B9E3DA /* FeedCoordinator.swift */,
-				7905170E2599560F00B9E3DA /* Detail */,
+				7905170E2599560F00B9E3DA /* FeedScenes */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -249,12 +254,13 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		7905170E2599560F00B9E3DA /* Detail */ = {
+		7905170E2599560F00B9E3DA /* FeedScenes */ = {
 			isa = PBXGroup;
 			children = (
+				7905171525A0C3CA00B9E3DA /* FeedCustomViewController.swift */,
 				7905170C2597E35900B9E3DA /* DetailViewController.swift */,
 			);
-			path = Detail;
+			path = FeedScenes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -337,16 +343,18 @@
 				790516C325925A2D00B9E3DA /* AuthCoordinator.swift in Sources */,
 				790516A72590D4BF00B9E3DA /* CoordinatorProtocol.swift in Sources */,
 				790516AC2590D69300B9E3DA /* MainTabBarController.swift in Sources */,
+				7905171625A0C3CA00B9E3DA /* FeedCustomViewController.swift in Sources */,
 				790516CB2592BCE600B9E3DA /* PersonalInfoViewController.swift in Sources */,
 				7905168F2590C4C100B9E3DA /* AppDelegate.swift in Sources */,
 				790516FB25956F8C00B9E3DA /* BaseCoordinator.swift in Sources */,
 				790516F72595182400B9E3DA /* Logger.swift in Sources */,
+				79051714259BBCEC00B9E3DA /* StackViewWithScrollViewController.swift in Sources */,
 				790516C125925A1500B9E3DA /* ProfileCoordinator.swift in Sources */,
 				790516F225942D3B00B9E3DA /* TabBarContentCoordinator.swift in Sources */,
 				790516F42594329F00B9E3DA /* Storyboard.swift in Sources */,
 				790516F9259538C500B9E3DA /* String+Extensions.swift in Sources */,
-				790516C52592859600B9E3DA /* DraggableViewController.swift in Sources */,
 				790516B02590D99C00B9E3DA /* FeedViewController.swift in Sources */,
+				7905171825A0C63C00B9E3DA /* CreditCardsViewController.swift in Sources */,
 				7905170B2597E06300B9E3DA /* UITabBarController+Extensions.swift in Sources */,
 				7905170D2597E35900B9E3DA /* DetailViewController.swift in Sources */,
 				790516912590C4C100B9E3DA /* SceneDelegate.swift in Sources */,

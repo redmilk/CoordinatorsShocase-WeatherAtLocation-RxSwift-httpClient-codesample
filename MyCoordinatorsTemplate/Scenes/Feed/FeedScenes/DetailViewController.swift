@@ -1,15 +1,15 @@
 //
-//  FeedViewController.swift
+//  DetailViewController.swift
 //  MyCoordinatorsTemplate
 //
-//  Created by Danyl Timofeyev on 21.12.2020.
+//  Created by Danyl Timofeyev on 26.12.2020.
 //  Copyright © 2020 Danyl Timofeyev. All rights reserved.
 //
 
 import UIKit
 
-final class FeedViewController: ViewController, Storyboarded {
-
+class DetailViewController: ViewController, Storyboarded {
+    
     var coordinator: FeedCoordinator!
     
     override func viewDidLoad() {
@@ -24,15 +24,8 @@ final class FeedViewController: ViewController, Storyboarded {
         if coordinator?.navigationController?.delegate != nil  {
             //Logger.log(entity: coordinator?.navigationController?.delegate)
         } else {
-            print("FeedViewController Navigation delegate NIL")
+            print("DetailViewController Navigation delegate NIL")
         }
     }
 
-    @IBAction func pushDetailPressed(_ sender: Any) {
-        coordinator?.displayDetail()
-    }
-    
-    @IBAction func customControllerPressed(_ sender: Any) {
-        coordinator.displayDraggable()
-    }
 }

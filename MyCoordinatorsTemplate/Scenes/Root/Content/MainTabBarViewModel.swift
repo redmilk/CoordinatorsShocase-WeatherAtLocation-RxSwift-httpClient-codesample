@@ -10,9 +10,9 @@ import Foundation
 
 struct MainTabBarViewModel {
     
-    var coordinator: TabBarContentCoordinator
+    var coordinator: MainTabBarCoordinator
     
-    init(coordinator: TabBarContentCoordinator) {
+    init(coordinator: MainTabBarCoordinator) {
         self.coordinator = coordinator
     }
     

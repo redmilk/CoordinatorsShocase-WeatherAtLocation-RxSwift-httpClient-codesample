@@ -8,18 +8,18 @@
 
 import UIKit
 
-protocol TabBarContentCoordinatorDelegate: class {
-    func displayAuth(_ coordinator: TabBarContentCoordinator)
+protocol MainTabBarCoordinatorDelegate: class {
+    func displayAuth(_ coordinator: MainTabBarCoordinator)
 }
 
 /// Coordinator for tab bar content
-final class TabBarContentCoordinator: BaseCoordinator {
+final class MainTabBarCoordinator: BaseCoordinator {
     
-    weak var delegate: TabBarContentCoordinatorDelegate!
+    weak var delegate: MainTabBarCoordinatorDelegate!
     
     init(window: UIWindow,
          parentCoordinator: CoordinatorProtocol,
-         delegate: TabBarContentCoordinatorDelegate
+         delegate: MainTabBarCoordinatorDelegate
     ) {
         self.delegate = delegate
         super.init()
@@ -51,7 +51,7 @@ final class TabBarContentCoordinator: BaseCoordinator {
     
 }
 
-extension TabBarContentCoordinator: HomeCoordinatorDelegate {
+extension MainTabBarCoordinator: HomeCoordinatorDelegate {
     func didLogOut(_ coordinator: CoordinatorProtocol) {
         /// removes both HomeCoordinator and FeedCoordinator
         /// this classes (HomeCoordinator and FeedCoordinator which are TabBar members)

@@ -31,9 +31,8 @@ final class AuthCoordinator: BaseCoordinator {
     }
     
     override func start() {
-        let storyboard = UIStoryboard(name: Storyboard.auth.rawValue, bundle: nil)
-        navigationController = storyboard.instantiateInitialViewController() as? UINavigationController
-        let controller = navigationController!.viewControllers.first as! AuthViewController
+        let controller = AuthViewController.instantiate(storyboardName: .auth)
+        navigationController = UINavigationController.styledNavigation(controller, style: .black)
         controller.coordinator = self
         controller.title = title
         window.rootViewController = navigationController

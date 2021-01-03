@@ -1,51 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6yT-Ss-Zbg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Vp4-Ve-fGF">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Home View Controller-->
         <scene sceneID="rVT-i4-gUL">
             <objects>
-                <viewController id="Vp4-Ve-fGF" customClass="HomeViewController" customModule="MyCoordinatorsTemplate" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeViewController" id="Vp4-Ve-fGF" customClass="HomeViewController" customModule="MyCoordinatorsTemplate" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xbG-X3-wiP">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cod-Su-xvl">
-                                <rect key="frame" x="184" y="188" width="46" height="20.5"/>
+                                <rect key="frame" x="184.5" y="144" width="45.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="aHz-1W-beV">
-                                <rect key="frame" x="156.5" y="288" width="101" height="168"/>
+                                <rect key="frame" x="156.5" y="244" width="101" height="168"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I1C-qj-Dmq">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I1C-qj-Dmq">
                                         <rect key="frame" x="0.0" y="0.0" width="101" height="30"/>
                                         <state key="normal" title="Push Profile"/>
                                         <connections>
                                             <action selector="pushProfilePressed:" destination="Vp4-Ve-fGF" eventType="touchUpInside" id="A7B-f9-6Ew"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Bf-Y0-5mq">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Bf-Y0-5mq">
                                         <rect key="frame" x="0.0" y="46" width="101" height="30"/>
                                         <state key="normal" title="Present Profile"/>
                                         <connections>
                                             <action selector="presentProfilePressed:" destination="Vp4-Ve-fGF" eventType="touchUpInside" id="7z1-3R-Ki1"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XUg-LR-qJf">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XUg-LR-qJf">
                                         <rect key="frame" x="0.0" y="92" width="101" height="30"/>
                                         <state key="normal" title="Present Auth"/>
                                         <connections>
                                             <action selector="presentAuthPressed:" destination="Vp4-Ve-fGF" eventType="touchUpInside" id="yeW-eL-9bc"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q5j-sE-sRz">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q5j-sE-sRz">
                                         <rect key="frame" x="0.0" y="138" width="101" height="30"/>
                                         <state key="normal" title="Present Forms"/>
                                         <connections>
@@ -55,45 +57,35 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="Uya-v5-KGz"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="cod-Su-xvl" firstAttribute="centerX" secondItem="Uya-v5-KGz" secondAttribute="centerX" id="0ul-K5-7Ik"/>
                             <constraint firstItem="cod-Su-xvl" firstAttribute="top" secondItem="Uya-v5-KGz" secondAttribute="top" constant="100" id="Lxv-e5-gsX"/>
                             <constraint firstItem="aHz-1W-beV" firstAttribute="top" secondItem="cod-Su-xvl" secondAttribute="top" constant="100" id="XWh-oz-k8W"/>
                             <constraint firstItem="aHz-1W-beV" firstAttribute="centerX" secondItem="cod-Su-xvl" secondAttribute="centerX" id="xFL-CJ-xd9"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="Uya-v5-KGz"/>
                     </view>
                     <navigationItem key="navigationItem" id="FVi-2i-foy">
                         <barButtonItem key="rightBarButtonItem" title="Log out" id="QjU-fG-USL">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="logOutPressed:" destination="Vp4-Ve-fGF" id="BDl-Ep-bYW"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="navigationItem" destination="FVi-2i-foy" id="0zh-CO-bQR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QMN-QH-Ue1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="621.73913043478262" y="55.580357142857139"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="ZoB-66-ecz">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6yT-Ss-Zbg" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5gM-9P-aTw">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="1" green="0.2527923882" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Vp4-Ve-fGF" kind="relationship" relationship="rootViewController" id="yKc-Zf-IOF"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="TiK-Va-Z2G" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-288.40579710144931" y="55.580357142857139"/>
-        </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

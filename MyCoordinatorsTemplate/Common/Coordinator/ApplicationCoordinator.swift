@@ -27,7 +27,7 @@ final class ApplicationCoordinator: BaseCoordinator {
         childCoordinators.forEach { (coordinator) in
             print(coordinator)
         }
-        let mainTabBarCoordinator = TabBarContentCoordinator(window: window, parentCoordinator: self, delegate: self)
+        let mainTabBarCoordinator = MainTabBarCoordinator(window: window, parentCoordinator: self, delegate: self)
         childCoordinators.append(mainTabBarCoordinator)
         mainTabBarCoordinator.start()
     }
@@ -53,8 +53,8 @@ extension ApplicationCoordinator: AuthCoordinatorDelegate {
 }
 
 // MARK: - TabBarContent delegate for log out
-extension ApplicationCoordinator: TabBarContentCoordinatorDelegate {
-    func displayAuth(_ coordinator: TabBarContentCoordinator) {
+extension ApplicationCoordinator: MainTabBarCoordinatorDelegate {
+    func displayAuth(_ coordinator: MainTabBarCoordinator) {
         childCoordinators.removeAll()
         start()
     }

@@ -16,9 +16,9 @@ protocol HomeViewModelProtocol {
 
 struct HomeViewModel: HomeViewModelProtocol {
     
-    let coordinator: HomeCoordinator
+    let coordinator: HomeCoordinatorProtocol
     
-    init(coordinator: HomeCoordinator) {
+    init(coordinator: HomeCoordinatorProtocol) {
         self.coordinator = coordinator
     }
     

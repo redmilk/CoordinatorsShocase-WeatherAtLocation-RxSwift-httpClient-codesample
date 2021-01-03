@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class FeedCustomViewController: NoStoryDraggableViewController, Storyboarded {
+final class FeedCustomViewController: NoStoryboardController, Storyboarded {
     
     override func viewDidLoad() {
         super.viewDidLoad()

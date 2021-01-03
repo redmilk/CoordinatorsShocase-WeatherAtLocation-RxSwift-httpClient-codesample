@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class AuthViewController: ViewController {
+final class AuthViewController: ViewController, Storyboarded {
     
     weak var coordinator: AuthCoordinator!
     

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="lp9-2p-Kug">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="lp9-2p-Kug">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,26 +18,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9mm-C6-In2">
-                                <rect key="frame" x="188" y="188" width="38.5" height="20.5"/>
+                                <rect key="frame" x="188" y="188" width="38" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="W11-rB-r9o">
-                                <rect key="frame" x="56" y="258.5" width="302" height="76"/>
+                                <rect key="frame" x="57" y="258.5" width="300" height="76"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RqU-IB-Qov">
-                                        <rect key="frame" x="0.0" y="0.0" width="302" height="33"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="33"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal" title="Present no-storyboarded draggable VC">
-                                            <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" systemColor="systemBlueColor"/>
                                         </state>
                                         <connections>
                                             <action selector="customControllerPressed:" destination="w3T-wk-ZTE" eventType="touchUpInside" id="mco-ex-4f1"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1fJ-4y-MIC">
-                                        <rect key="frame" x="107.5" y="43" width="87" height="33"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1fJ-4y-MIC">
+                                        <rect key="frame" x="107" y="43" width="86" height="33"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal" title="Push Detail"/>
                                         <connections>
@@ -45,14 +47,14 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="dmQ-NK-3WC"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="9mm-C6-In2" firstAttribute="top" secondItem="dmQ-NK-3WC" secondAttribute="top" constant="100" id="654-4H-ylk"/>
                             <constraint firstItem="W11-rB-r9o" firstAttribute="centerX" secondItem="9mm-C6-In2" secondAttribute="centerX" id="731-1a-ySj"/>
                             <constraint firstItem="W11-rB-r9o" firstAttribute="top" secondItem="9mm-C6-In2" secondAttribute="bottom" constant="50" id="8Nv-mx-Wh9"/>
                             <constraint firstItem="9mm-C6-In2" firstAttribute="centerX" secondItem="dmQ-NK-3WC" secondAttribute="centerX" id="t6i-5I-WER"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="dmQ-NK-3WC"/>
                     </view>
                     <navigationItem key="navigationItem" id="eRl-eT-sO8"/>
                 </viewController>
@@ -75,12 +77,12 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="C82-44-CJo"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Fl6-XD-21A" firstAttribute="top" secondItem="C82-44-CJo" secondAttribute="top" constant="200" id="dja-QJ-pAs"/>
                             <constraint firstItem="Fl6-XD-21A" firstAttribute="centerX" secondItem="C82-44-CJo" secondAttribute="centerX" id="rBg-9L-A7i"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="C82-44-CJo"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6La-nd-iDL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -107,4 +109,12 @@
             <point key="canvasLocation" x="-288.40579710144931" y="843.75"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>

@@ -12,9 +12,13 @@ final class HomeViewController: ViewController, Storyboarded {
 
     private let viewModel: HomeViewModelProtocol
     
-    init?(viewModel: HomeViewModelProtocol, coder: NSCoder) {
+    @IBOutlet weak var navItem: UINavigationItem!
+    @IBOutlet weak var navigationBar: UINavigationBar!
+    
+    init?(title: String, viewModel: HomeViewModelProtocol, coder: NSCoder) {
         self.viewModel = viewModel
         super.init(coder: coder)
+        self.title = title
     }
     
     @available(*, unavailable, renamed: "init(viewModel:coder:)")

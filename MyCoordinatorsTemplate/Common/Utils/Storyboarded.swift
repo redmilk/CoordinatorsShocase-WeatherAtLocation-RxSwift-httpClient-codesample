@@ -8,9 +8,16 @@
 
 import UIKit
 
-/// Protocol for controllers that will be presented modally
-/// and don't require UINavigationController or UITabBarController
+enum Storyboard: String {
+    case root = "Root"
+    case auth = "Auth"
+    case content = "Content"
+    case home = "Home"
+    case feed = "Feed"
+    case profile = "Profile"
+}
 
+/// Protocol for controllers that have no parameters
 protocol Storyboarded {
     static func instantiate(storyboardName: Storyboard) -> Self
 }

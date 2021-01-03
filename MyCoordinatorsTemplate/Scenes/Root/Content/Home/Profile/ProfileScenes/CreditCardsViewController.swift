@@ -8,11 +8,8 @@
 
 import Foundation
 
-final class CreditCardsViewController: NoStoryDraggableViewController, Storyboarded {
+final class CreditCardsViewController: NoStoryboardController, Storyboarded {
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        axis = .vertical
-    }
+    
     
 }

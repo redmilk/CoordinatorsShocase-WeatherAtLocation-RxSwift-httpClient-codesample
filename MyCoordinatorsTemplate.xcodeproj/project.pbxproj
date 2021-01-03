@@ -42,6 +42,7 @@
 		7905171625A0C3CA00B9E3DA /* FeedCustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7905171525A0C3CA00B9E3DA /* FeedCustomViewController.swift */; };
 		7905171825A0C63C00B9E3DA /* CreditCardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7905171725A0C63C00B9E3DA /* CreditCardsViewController.swift */; };
 		7905171F25A1283C00B9E3DA /* MainTabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7905171E25A1283C00B9E3DA /* MainTabBarViewModel.swift */; };
+		7905172225A15E2100B9E3DA /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7905172125A15E2100B9E3DA /* HomeViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +83,7 @@
 		7905171525A0C3CA00B9E3DA /* FeedCustomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCustomViewController.swift; sourceTree = "<group>"; };
 		7905171725A0C63C00B9E3DA /* CreditCardsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardsViewController.swift; sourceTree = "<group>"; };
 		7905171E25A1283C00B9E3DA /* MainTabBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewModel.swift; sourceTree = "<group>"; };
+		7905172125A15E2100B9E3DA /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +197,7 @@
 			children = (
 				790516AD2590D97300B9E3DA /* HomeViewController.swift */,
 				790516BC2590E86F00B9E3DA /* HomeCoordinator.swift */,
+				7905172125A15E2100B9E3DA /* HomeViewModel.swift */,
 				790516C62592B83400B9E3DA /* Profile */,
 			);
 			path = Home;
@@ -364,6 +367,7 @@
 				790516C125925A1500B9E3DA /* ProfileCoordinator.swift in Sources */,
 				790516F225942D3B00B9E3DA /* TabBarContentCoordinator.swift in Sources */,
 				790516F42594329F00B9E3DA /* Storyboard.swift in Sources */,
+				7905172225A15E2100B9E3DA /* HomeViewModel.swift in Sources */,
 				790516F9259538C500B9E3DA /* String+Extensions.swift in Sources */,
 				790516B02590D99C00B9E3DA /* FeedViewController.swift in Sources */,
 				7905171825A0C63C00B9E3DA /* CreditCardsViewController.swift in Sources */,

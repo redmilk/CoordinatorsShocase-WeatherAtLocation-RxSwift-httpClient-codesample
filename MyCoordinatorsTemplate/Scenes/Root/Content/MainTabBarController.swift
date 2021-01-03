@@ -11,7 +11,7 @@ import UIKit
 
 final class MainTabBarController: UITabBarController {
     
-    var viewModel: MainTabBarViewModel
+    private let viewModel: MainTabBarViewModel
     
     init?(viewModel: MainTabBarViewModel, coder: NSCoder) {
         self.viewModel = viewModel

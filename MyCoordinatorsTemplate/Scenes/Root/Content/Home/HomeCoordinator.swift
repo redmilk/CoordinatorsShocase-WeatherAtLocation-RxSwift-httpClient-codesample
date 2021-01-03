@@ -45,7 +45,7 @@ final class HomeCoordinator: BaseCoordinator {
         let controller = navigationController.viewControllers.first as! HomeViewController
         
         controller.title = title
-        controller.coordinator = self
+        //controller.coordinator = self
         
         guard
             let tabBarController = tabBarController

@@ -15,13 +15,13 @@ open class ViewController: UIViewController, UITextFieldDelegate, UITextViewDele
     public var textFieldsArrayForFreeSpaceTapKeyboardHiding: [UITextField] = []
     public var textViewArrayForFreeSpaceTapKeyboardHiding: [UITextView] = []
     
-    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
-    
     required public init?(coder: NSCoder) {
         super.init(coder: coder)
         Logger.initialization(entity: self)
+    }
+
+    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
     deinit {

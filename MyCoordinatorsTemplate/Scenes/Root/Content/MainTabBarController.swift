@@ -11,11 +11,16 @@ import UIKit
 
 final class MainTabBarController: UITabBarController {
     
-    var coordinator: TabBarContentCoordinator!
+    var viewModel: MainTabBarViewModel
     
-    required init?(coder: NSCoder) {
+    init?(viewModel: MainTabBarViewModel, coder: NSCoder) {
+        self.viewModel = viewModel
         super.init(coder: coder)
-        Logger.initialization(entity: self)
+    }
+
+    @available(*, unavailable, renamed: "init(viewModel:coder:)")
+    required init?(coder: NSCoder) {
+        fatalError("Invalid way of decoding this class")
     }
     
     deinit {

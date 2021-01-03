@@ -27,9 +27,9 @@ final class ApplicationCoordinator: BaseCoordinator {
         childCoordinators.forEach { (coordinator) in
             print(coordinator)
         }
-        let child = TabBarContentCoordinator(window: window, parentCoordinator: self, delegate: self)
-        childCoordinators.append(child)
-        child.start()
+        let mainTabBarCoordinator = TabBarContentCoordinator(window: window, parentCoordinator: self, delegate: self)
+        childCoordinators.append(mainTabBarCoordinator)
+        mainTabBarCoordinator.start()
     }
     
     private func showAuth() {

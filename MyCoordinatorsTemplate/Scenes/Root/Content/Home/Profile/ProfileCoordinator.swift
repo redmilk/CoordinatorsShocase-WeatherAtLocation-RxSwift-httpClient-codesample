@@ -27,6 +27,7 @@ final class ProfileCoordinator: BaseCoordinator, ProfileCoordinatorProtocol {
         self.presentationMode = presentationType
         super.init()
         self.parentCoordinator = parentCoordinator
+        self.navigationController = parentCoordinator.navigationController
     }
     
     override func start() {

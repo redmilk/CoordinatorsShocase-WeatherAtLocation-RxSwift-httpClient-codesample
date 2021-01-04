@@ -41,9 +41,9 @@ final class MainTabBarCoordinator: BaseCoordinator {
         /// tab bar's second controller coordinator
         let feedCoordinator = FeedCoordinator(tabBarController: tabBarController, title: "Feed")
         
-        childCoordinators.append(homeCoordinator)
-        childCoordinators.append(feedCoordinator)
-        
+        addChild(homeCoordinator)
+        addChild(feedCoordinator)
+
         homeCoordinator.start()
         feedCoordinator.start()        
     }
@@ -59,7 +59,7 @@ extension MainTabBarCoordinator: HomeCoordinatorDelegate {
         /// because only one of them signals for changing the root
         /// in our case it is done for closing content and displaying auth flow
         /// we remove them all manually by this method call
-        childCoordinators.removeAll()
+        removeAllChildCoordinators()
         delegate?.displayAuth(self)
     }
 }

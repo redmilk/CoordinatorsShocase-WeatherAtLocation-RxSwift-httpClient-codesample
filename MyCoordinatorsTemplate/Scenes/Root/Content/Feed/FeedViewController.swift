@@ -8,32 +8,36 @@
 
 import UIKit
 
-final class FeedViewController: ViewController, Storyboarded {
-
-    var coordinator: FeedCoordinator!
+final class FeedViewController: ViewController, Instantiatable {
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    let viewModel: FeedViewModel
+    
+    required init?(viewModel: FeedViewModel, coder: NSCoder) {
+        self.viewModel = viewModel
+        super.init(coder: coder)
+    }
+    
+    @available(*, unavailable, renamed: "init(viewModel:coder:)")
+    required public init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if coordinator?.navigationController?.delegate != nil  {
-            //Logger.log(entity: coordinator?.navigationController?.delegate)
-        } else {
-            print("FeedViewController Navigation delegate NIL")
-        }
+//        if coordinator?.navigationController?.delegate != nil  {
+//            //Logger.log(entity: coordinator?.navigationController?.delegate)
+//        } else {
+//            print("FeedViewController Navigation delegate NIL")
+//        }
     }
 
     @IBAction func pushDetailPressed(_ sender: Any) {
-        coordinator?.displayDetail()
+        viewModel.pushDetail()
     }
     
     @IBAction func customControllerPressed(_ sender: Any) {
-        coordinator.displayDraggable()
+        viewModel.presentNoStoryboardVC()
     }
     
     @IBAction func presentDraggableProtocolController(_ sender: Any) {

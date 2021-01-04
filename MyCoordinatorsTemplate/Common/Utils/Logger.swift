@@ -19,6 +19,9 @@ import Foundation
  [NAV TAB] Selected tab with navigation stack: FeedViewController
  [STACK] Navigation to: FeedViewController
  [STACK] Navigation to: FeedViewController
+ 
+ 
+ TODO: - Try didSet with assignDelegates() when setting navigationController or TabbarController
  */
 
 struct Logger {

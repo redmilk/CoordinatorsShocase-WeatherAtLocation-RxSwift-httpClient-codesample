@@ -35,12 +35,11 @@ final class HomeCoordinator: BaseCoordinator, HomeCoordinatorProtocol {
     }
     
     override func start() {
-        let storyboard = UIStoryboard(name: Storyboard.home.rawValue, bundle: nil)
         let homeViewModel = HomeViewModel(coordinator: self)
-        let homeVewController: HomeViewController! = storyboard.instantiateInitialViewController {
-            HomeViewController(title: "Home", viewModel: homeViewModel, coder: $0)
+        let homeVewController = HomeViewController.instantiate(storyboard: .home, instantiation: .initial) {
+            return  HomeViewController(title: "Home", viewModel: homeViewModel, coder: $0)!
         }
-        let navigationController = UINavigationController.styledNavigation(homeVewController, style: .blue)
+        let navigationController = UINavigationController.makeStyled(style: .blue, root: homeVewController)
         
         guard
             let tabBarController = tabBarController

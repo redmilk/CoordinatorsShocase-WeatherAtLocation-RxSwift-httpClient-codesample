@@ -8,24 +8,28 @@
 
 import UIKit
 
-final class ProfileViewController: ViewController, Storyboarded {
-
-    weak var coordinator: ProfileCoordinator?
+final class ProfileViewController: ViewController, Instantiatable {
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    let viewModel: ProfileViewModel
+    
+    init?(viewModel: ProfileViewModel, coder: NSCoder) {
+        self.viewModel = viewModel
+        super.init(coder: coder)
+    }
+    
+    @available(*, unavailable, renamed: "init(viewModel:coder:)")
+    required public init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if coordinator?.navigationController?.delegate != nil  {
-            //Logger.log(entity: coordinator?.navigationController?.delegate)
-        } else {
-            print("ProfileViewController Navigation delegate NIL")
-        }
+//        if coordinator?.navigationController?.delegate != nil  {
+//            //Logger.log(entity: coordinator?.navigationController?.delegate)
+//        } else {
+//            print("ProfileViewController Navigation delegate NIL")
+//        }
     }
     
     @IBAction func personalInformationPressed(_ sender: Any) {
@@ -33,7 +37,7 @@ final class ProfileViewController: ViewController, Storyboarded {
     }
     
     @IBAction func creditCardsPressed(_ sender: Any) {
-        coordinator?.displayCreditCardsModally()
+        viewModel.presentCreditCards()
     }
     
     @IBAction func orderHistoryPressed(_ sender: Any) {
@@ -45,6 +49,6 @@ final class ProfileViewController: ViewController, Storyboarded {
     }
 
     @IBAction func closePressed(_ sender: Any) {
-        coordinator?.end()
+        viewModel.dismiss()
     }
 }

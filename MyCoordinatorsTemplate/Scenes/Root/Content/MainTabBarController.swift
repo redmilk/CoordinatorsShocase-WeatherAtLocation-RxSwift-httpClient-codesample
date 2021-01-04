@@ -9,7 +9,7 @@
 import UIKit
 
 
-final class MainTabBarController: UITabBarController {
+final class MainTabBarController: UITabBarController, Instantiatable {
     
     private let viewModel: MainTabBarViewModel
     

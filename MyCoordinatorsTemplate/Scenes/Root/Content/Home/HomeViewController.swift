@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class HomeViewController: ViewController, Storyboarded {
+final class HomeViewController: ViewController, Instantiatable {
 
     private let viewModel: HomeViewModelProtocol
     
@@ -24,12 +24,6 @@ final class HomeViewController: ViewController, Storyboarded {
     @available(*, unavailable, renamed: "init(viewModel:coder:)")
     required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(_ animated: Bool) {

@@ -51,10 +51,9 @@ final class HomeCoordinator: BaseCoordinator, HomeCoordinatorProtocol {
     
     // MARK: - Display profile scene
     func pushProfile() {
-        guard let navigation = navigationController else { return }
         let child = ProfileCoordinator(parentCoordinator: self,
                                        title: "Profile",
-                                       presentationType: .push(navigation))
+                                       presentationType: .push)
         addChild(child)
         child.start()
     }

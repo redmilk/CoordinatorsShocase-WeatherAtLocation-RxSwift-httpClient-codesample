@@ -9,7 +9,12 @@
 import UIKit
 
 class BaseCoordinator: NSObject, CoordinatorProtocol {
-        
+    
+    enum PresentationMode {
+        case push
+        case modal
+    }
+    
     private var childCoordinators: [String : CoordinatorProtocol] = [:]
     var window: UIWindow!
     weak var parentCoordinator: CoordinatorProtocol!

@@ -47,7 +47,6 @@ final class HomeCoordinator: BaseCoordinator, HomeCoordinatorProtocol {
         
         tabBarController.addControllerForTab(navigationController)
         self.navigationController = navigationController
-        assignNavigationDelegates()
     }
     
     // MARK: - Display profile scene

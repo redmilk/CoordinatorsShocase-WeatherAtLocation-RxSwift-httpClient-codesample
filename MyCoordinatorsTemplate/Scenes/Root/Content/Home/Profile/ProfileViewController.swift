@@ -33,11 +33,11 @@ final class ProfileViewController: ViewController, Instantiatable {
     }
     
     @IBAction func personalInformationPressed(_ sender: Any) {
-        
+        viewModel.presentPersonalInfo()
     }
     
     @IBAction func creditCardsPressed(_ sender: Any) {
-        viewModel.presentCreditCards()
+        viewModel.pushCreditCards()
     }
     
     @IBAction func orderHistoryPressed(_ sender: Any) {

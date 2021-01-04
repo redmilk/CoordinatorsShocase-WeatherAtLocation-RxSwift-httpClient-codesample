@@ -9,7 +9,8 @@
 import UIKit
 
 protocol ProfileCoordinatorProtocol {
-    func displayCreditCardsModally()
+    func presentPersonalInfo()
+    func pushCreditCards()
     func end()
 }
 
@@ -48,16 +49,12 @@ final class ProfileCoordinator: BaseCoordinator, ProfileCoordinatorProtocol {
             }
             let navigation = UINavigationController.makeStyled(style: .profile, root: controller)
             navigationController = navigation
-            assignNavigationDelegates()
-            
             guard
                 let parentController = parentCoordinator?.navigationController?.viewControllers.last
             else { fatalError("Internal inconsistency") }
             
             parentController.present(navigation, animated: true, completion: nil)
         }
-        
-        assignNavigationDelegates()
     }
     
     override func end() {
@@ -81,10 +78,20 @@ final class ProfileCoordinator: BaseCoordinator, ProfileCoordinatorProtocol {
         }
     }
     
-    func displayCreditCardsModally() {
-        //        let controller = CreditCardsViewController.instantiate(storyboardName: .profile)
-        //        controller.title = "Credit Cards"
-        //        navigationController?.present(controller, animated: true, completion: nil)
+    func presentPersonalInfo() {
+        let controller = PersonalInfoViewController.instantiate(storyboard: .profile, instantiation: .withIdentifier) {
+            return PersonalInfoViewController(coder: $0)!
+        }
+        controller.title = "Personal Information"
+        navigationController?.present(controller, animated: true, completion: nil)
+    }
+    
+    func pushCreditCards() {
+        let controller = CreditCardsViewController.instantiate(storyboard: .profile, instantiation: .withIdentifier) {
+            return CreditCardsViewController(coder: $0)!
+        }
+        controller.title = "Credit Cards"
+        navigationController?.pushViewController(controller, animated: true)
     }
     
 }

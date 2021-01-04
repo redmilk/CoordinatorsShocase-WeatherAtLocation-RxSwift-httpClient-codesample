@@ -16,12 +16,12 @@ class BaseCoordinator: NSObject, CoordinatorProtocol {
     weak var parentCoordinator: CoordinatorProtocol!
     weak var navigationController: UINavigationController? {
         didSet {
-            //assignNavigationDelegates()
+            assignNavigationDelegates()
         }
     }
     weak var tabBarController: UITabBarController? {
         didSet {
-            //assignNavigationDelegates()
+            assignNavigationDelegates()
         }
     }
     

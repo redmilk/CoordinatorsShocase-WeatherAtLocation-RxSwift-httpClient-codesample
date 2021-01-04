@@ -45,9 +45,7 @@ final class MainTabBarCoordinator: BaseCoordinator {
         childCoordinators.append(feedCoordinator)
         
         homeCoordinator.start()
-        feedCoordinator.start()
-        
-        assignNavigationDelegates()
+        feedCoordinator.start()        
     }
     
 }

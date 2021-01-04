@@ -8,21 +8,25 @@
 
 import UIKit
 
+/// TODO: Move domain logic from extensions to helpers
 extension UINavigationController {
     
+    /// application nav style
     enum Style {
         case blue
         case black
+        case feed
+        case profile
     }
     
-    static func styledNavigation(_ rootVC: UIViewController? = nil,
-                                 style: Style
+    /// factory func
+    static func makeStyled(style: Style,
+                           root: UIViewController? = nil
     ) -> UINavigationController {
-        
         func createStyledNavigation(rootVC: UIViewController?,
-                                      barTint: UIColor,
-                                      fontTint: UIColor,
-                                      titleTint: UIColor
+                                    barTint: UIColor,
+                                    fontTint: UIColor,
+                                    titleTint: UIColor
         ) -> UINavigationController {
             let navigationController = (rootVC != nil) ? UINavigationController(rootViewController: rootVC!) : UINavigationController()
             navigationController.navigationBar.barTintColor = barTint
@@ -34,12 +38,16 @@ extension UINavigationController {
         
         switch style {
         case .blue:
-            return createStyledNavigation(rootVC: rootVC, barTint: .blue, fontTint: .white, titleTint: .white)
+            return createStyledNavigation(rootVC: root, barTint: .blue, fontTint: .white, titleTint: .white)
         case .black:
-            return createStyledNavigation(rootVC: rootVC, barTint: .black, fontTint: .white, titleTint: .lightGray)
+            return createStyledNavigation(rootVC: root, barTint: .black, fontTint: .white, titleTint: .lightGray)
+        case .profile:
+            return createStyledNavigation(rootVC: root, barTint: .cyan, fontTint: .white, titleTint: .white)
+        case .feed:
+            return createStyledNavigation(rootVC: root, barTint: .magenta, fontTint: .white, titleTint: .lightGray)
         }
-        
     }
-
+    
+    
 }
 

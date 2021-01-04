@@ -8,8 +8,6 @@
 
 import Foundation
 
-final class CreditCardsViewController: NoStoryboardController, Storyboarded {
-    
-    
+final class CreditCardsViewController: NoStoryboardedController {
     
 }

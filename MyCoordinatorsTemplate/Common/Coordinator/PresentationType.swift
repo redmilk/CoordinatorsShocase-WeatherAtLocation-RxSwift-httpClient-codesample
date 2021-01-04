@@ -9,6 +9,7 @@
 import UIKit
 
 enum PresentationType {
+    // TODO: maybe delete this associated value
     case push(UINavigationController)
     case modal
 }

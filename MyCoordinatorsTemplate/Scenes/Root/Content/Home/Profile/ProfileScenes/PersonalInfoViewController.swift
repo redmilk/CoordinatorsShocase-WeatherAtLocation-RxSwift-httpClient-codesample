@@ -8,13 +8,6 @@
 
 import UIKit
 
-final class PersonalInfoViewController: ViewController, Storyboarded {
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
-    }
-    
+final class PersonalInfoViewController: ViewController, Instantiatable {
     
 }

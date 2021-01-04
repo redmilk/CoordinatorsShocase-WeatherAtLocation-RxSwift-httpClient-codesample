@@ -8,7 +8,12 @@
 
 import UIKit
 
-final class ProfileCoordinator: BaseCoordinator {
+protocol ProfileCoordinatorProtocol {
+    func displayCreditCardsModally()
+    func end()
+}
+
+final class ProfileCoordinator: BaseCoordinator, ProfileCoordinatorProtocol {
     
     private let title: String
     private let presentationType: PresentationType
@@ -25,25 +30,30 @@ final class ProfileCoordinator: BaseCoordinator {
     
     override func start() {
         switch presentationType {
-            
+        
         case .push(let navigation):
             navigationController = navigation
-            let controller = ProfileViewController.instantiate(storyboardName: .profile)
-            controller.coordinator = self
+            let viewModel = ProfileViewModel(coordinator: self, vcTitle: "Profile")
+            let controller = ProfileViewController.instantiate(storyboard: .profile,
+                                                               instantiation: .withIdentifier) {
+                return ProfileViewController(viewModel: viewModel, coder: $0)!
+            }
             navigation.pushViewController(controller, animated: true)
             
         case .modal:
-            let storyboard = UIStoryboard(name: Storyboard.profile.rawValue, bundle: nil)
-            let navigation = storyboard.instantiateInitialViewController() as! UINavigationController
+            let viewModel = ProfileViewModel(coordinator: self, vcTitle: "Profile")
+            let controller = ProfileViewController.instantiate(storyboard: .profile,
+                                                               instantiation: .withIdentifier) {
+                return ProfileViewController(viewModel: viewModel, coder: $0)!
+            }
+            let navigation = UINavigationController.makeStyled(style: .profile, root: controller)
             navigationController = navigation
             assignNavigationDelegates()
             
             guard
-                let parentController = parentCoordinator?.navigationController?.viewControllers.last,
-                let profileController = navigation.viewControllers.first as? ProfileViewController
-                else { fatalError("Internal inconsistency") }
+                let parentController = parentCoordinator?.navigationController?.viewControllers.last
+            else { fatalError("Internal inconsistency") }
             
-            profileController.coordinator = self
             parentController.present(navigation, animated: true, completion: nil)
         }
         
@@ -62,8 +72,8 @@ final class ProfileCoordinator: BaseCoordinator {
     }
     
     override func didNavigate(_ navigationController: UINavigationController,
-                               to viewController: UIViewController,
-                               animated: Bool
+                              to viewController: UIViewController,
+                              animated: Bool
     ) {
         super.didNavigate(navigationController, to: viewController, animated: animated)
         if let _ = viewController as? HomeViewController {
@@ -72,9 +82,9 @@ final class ProfileCoordinator: BaseCoordinator {
     }
     
     func displayCreditCardsModally() {
-        let controller = CreditCardsViewController.instantiate(storyboardName: .profile)
-        controller.title = "Credit Cards"
-        navigationController?.present(controller, animated: true, completion: nil)
+        //        let controller = CreditCardsViewController.instantiate(storyboardName: .profile)
+        //        controller.title = "Credit Cards"
+        //        navigationController?.present(controller, animated: true, completion: nil)
     }
     
 }

@@ -8,11 +8,15 @@
 
 import UIKit
 
+protocol AuthCoordinatorProtocol {
+    func dismiss()
+}
+
 protocol AuthCoordinatorDelegate: class {
     func didAuthenticate(_ coordinator: AuthCoordinator)
 }
 
-final class AuthCoordinator: BaseCoordinator {
+final class AuthCoordinator: BaseCoordinator, AuthCoordinatorProtocol {
     
     weak var delegate: AuthCoordinatorDelegate!
     
@@ -31,9 +35,12 @@ final class AuthCoordinator: BaseCoordinator {
     }
     
     override func start() {
-        let controller = AuthViewController.instantiate(storyboardName: .auth)
-        navigationController = UINavigationController.styledNavigation(controller, style: .black)
-        controller.coordinator = self
+        let viewModel = AuthViewModel(coordinator: self, vcTitle: "Authentication")
+        let controller = AuthViewController.instantiate(storyboard: .auth,
+                                                                  instantiation: .initial) {
+           return AuthViewController(viewModel: viewModel, coder: $0)!
+        }
+        navigationController = UINavigationController.makeStyled(style: .black, root: controller)
         controller.title = title
         window.rootViewController = navigationController
         assignNavigationDelegates()
@@ -42,6 +49,10 @@ final class AuthCoordinator: BaseCoordinator {
     override func end() {
         parentCoordinator.removeChild(self)
         delegate.didAuthenticate(self)
+    }
+    
+    func dismiss() {
+        end()
     }
     
 }

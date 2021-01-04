@@ -28,9 +28,10 @@ final class MainTabBarCoordinator: BaseCoordinator {
     }
     
     override func start() {
-        let storyboard = UIStoryboard(name: Storyboard.content.rawValue, bundle: nil)
         let tabBarViewModel = MainTabBarViewModel(coordinator: self)
-        let tabBarController: MainTabBarController! = storyboard.instantiateInitialViewController { MainTabBarController(viewModel: tabBarViewModel, coder: $0)
+        let tabBarController = MainTabBarController.instantiate(storyboard: .content,
+                                                                          instantiation: .initial) {
+            return MainTabBarController(viewModel: tabBarViewModel, coder: $0)!
         }
         window.rootViewController = tabBarController
         self.tabBarController = tabBarController

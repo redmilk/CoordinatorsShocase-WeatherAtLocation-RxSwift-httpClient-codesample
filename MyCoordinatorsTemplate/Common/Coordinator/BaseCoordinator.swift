@@ -14,8 +14,16 @@ class BaseCoordinator: NSObject, CoordinatorProtocol {
     var childCoordinators: [CoordinatorProtocol] = []
     
     weak var parentCoordinator: CoordinatorProtocol!
-    weak var navigationController: UINavigationController?
-    weak var tabBarController: UITabBarController?
+    weak var navigationController: UINavigationController? {
+        didSet {
+            //assignNavigationDelegates()
+        }
+    }
+    weak var tabBarController: UITabBarController? {
+        didSet {
+            //assignNavigationDelegates()
+        }
+    }
     
     override init() {
         super.init()

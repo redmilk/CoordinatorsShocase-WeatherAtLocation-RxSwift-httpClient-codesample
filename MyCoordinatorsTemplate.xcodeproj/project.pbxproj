@@ -16,7 +16,7 @@
 		790516AC2590D69300B9E3DA /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516AB2590D69300B9E3DA /* MainTabBarController.swift */; };
 		790516AE2590D97300B9E3DA /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516AD2590D97300B9E3DA /* HomeViewController.swift */; };
 		790516B02590D99C00B9E3DA /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516AF2590D99C00B9E3DA /* FeedViewController.swift */; };
-		790516B42590DAD600B9E3DA /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516B32590DAD600B9E3DA /* Storyboarded.swift */; };
+		790516B42590DAD600B9E3DA /* Instantiatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516B32590DAD600B9E3DA /* Instantiatable.swift */; };
 		790516B62590E31F00B9E3DA /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516B52590E31F00B9E3DA /* ProfileViewController.swift */; };
 		790516B82590E34700B9E3DA /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516B72590E34700B9E3DA /* AuthViewController.swift */; };
 		790516BD2590E86F00B9E3DA /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516BC2590E86F00B9E3DA /* HomeCoordinator.swift */; };
@@ -37,12 +37,17 @@
 		7905170B2597E06300B9E3DA /* UITabBarController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7905170A2597E06300B9E3DA /* UITabBarController+Extensions.swift */; };
 		7905170D2597E35900B9E3DA /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7905170C2597E35900B9E3DA /* DetailViewController.swift */; };
 		79051712259980A600B9E3DA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79051711259980A600B9E3DA /* ViewController.swift */; };
-		7905171625A0C3CA00B9E3DA /* FeedCustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7905171525A0C3CA00B9E3DA /* FeedCustomViewController.swift */; };
+		7905171625A0C3CA00B9E3DA /* NoStoryboardedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7905171525A0C3CA00B9E3DA /* NoStoryboardedViewController.swift */; };
 		7905171825A0C63C00B9E3DA /* CreditCardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7905171725A0C63C00B9E3DA /* CreditCardsViewController.swift */; };
 		7905171F25A1283C00B9E3DA /* MainTabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7905171E25A1283C00B9E3DA /* MainTabBarViewModel.swift */; };
 		7905172225A15E2100B9E3DA /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7905172125A15E2100B9E3DA /* HomeViewModel.swift */; };
 		79686D5125A23C59008CF481 /* UINavigationController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79686D5025A23C59008CF481 /* UINavigationController+Extensions.swift */; };
-		79686D5725A24BE6008CF481 /* NoStoryboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79686D5625A24BE6008CF481 /* NoStoryboardController.swift */; };
+		79686D5725A24BE6008CF481 /* NoStoryboardedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79686D5625A24BE6008CF481 /* NoStoryboardedController.swift */; };
+		79686D5C25A24EA8008CF481 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79686D5B25A24EA8008CF481 /* ProfileViewModel.swift */; };
+		79686D6325A25385008CF481 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79686D6225A25385008CF481 /* AuthViewModel.swift */; };
+		79686D6B25A2B701008CF481 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79686D6A25A2B701008CF481 /* FeedViewModel.swift */; };
+		79686D7125A2BCBE008CF481 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79686D7025A2BCBE008CF481 /* DetailViewModel.swift */; };
+		79686D7425A2BD5A008CF481 /* NoStoryboardedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79686D7325A2BD5A008CF481 /* NoStoryboardedViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,7 +62,7 @@
 		790516AB2590D69300B9E3DA /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		790516AD2590D97300B9E3DA /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		790516AF2590D99C00B9E3DA /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
-		790516B32590DAD600B9E3DA /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
+		790516B32590DAD600B9E3DA /* Instantiatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Instantiatable.swift; sourceTree = "<group>"; };
 		790516B52590E31F00B9E3DA /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		790516B72590E34700B9E3DA /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		790516BC2590E86F00B9E3DA /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
@@ -78,12 +83,17 @@
 		7905170A2597E06300B9E3DA /* UITabBarController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBarController+Extensions.swift"; sourceTree = "<group>"; };
 		7905170C2597E35900B9E3DA /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		79051711259980A600B9E3DA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		7905171525A0C3CA00B9E3DA /* FeedCustomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCustomViewController.swift; sourceTree = "<group>"; };
+		7905171525A0C3CA00B9E3DA /* NoStoryboardedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoStoryboardedViewController.swift; sourceTree = "<group>"; };
 		7905171725A0C63C00B9E3DA /* CreditCardsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardsViewController.swift; sourceTree = "<group>"; };
 		7905171E25A1283C00B9E3DA /* MainTabBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewModel.swift; sourceTree = "<group>"; };
 		7905172125A15E2100B9E3DA /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		79686D5025A23C59008CF481 /* UINavigationController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Extensions.swift"; sourceTree = "<group>"; };
-		79686D5625A24BE6008CF481 /* NoStoryboardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoStoryboardController.swift; sourceTree = "<group>"; };
+		79686D5625A24BE6008CF481 /* NoStoryboardedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoStoryboardedController.swift; sourceTree = "<group>"; };
+		79686D5B25A24EA8008CF481 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		79686D6225A25385008CF481 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		79686D6A25A2B701008CF481 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
+		79686D7025A2BCBE008CF481 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
+		79686D7325A2BD5A008CF481 /* NoStoryboardedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoStoryboardedViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +159,7 @@
 			children = (
 				790516B72590E34700B9E3DA /* AuthViewController.swift */,
 				790516C225925A2D00B9E3DA /* AuthCoordinator.swift */,
+				79686D6225A25385008CF481 /* AuthViewModel.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -156,6 +167,7 @@
 		790516B12590DAB000B9E3DA /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				790516B32590DAD600B9E3DA /* Instantiatable.swift */,
 				79686D4C25A23B3B008CF481 /* Extensions */,
 				790516F52595181700B9E3DA /* Utils */,
 				790516EE25940BBC00B9E3DA /* Coordinator */,
@@ -168,6 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				790516B52590E31F00B9E3DA /* ProfileViewController.swift */,
+				79686D5B25A24EA8008CF481 /* ProfileViewModel.swift */,
 				790516C025925A1500B9E3DA /* ProfileCoordinator.swift */,
 				790516C72592B84100B9E3DA /* ProfileScenes */,
 			);
@@ -199,6 +212,7 @@
 			children = (
 				790516AF2590D99C00B9E3DA /* FeedViewController.swift */,
 				790516BE2590ECB400B9E3DA /* FeedCoordinator.swift */,
+				79686D6A25A2B701008CF481 /* FeedViewModel.swift */,
 				7905170E2599560F00B9E3DA /* FeedScenes */,
 			);
 			path = Feed;
@@ -240,7 +254,6 @@
 			isa = PBXGroup;
 			children = (
 				790516F62595182400B9E3DA /* Logger.swift */,
-				790516B32590DAD600B9E3DA /* Storyboarded.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -248,8 +261,10 @@
 		7905170E2599560F00B9E3DA /* FeedScenes */ = {
 			isa = PBXGroup;
 			children = (
-				7905171525A0C3CA00B9E3DA /* FeedCustomViewController.swift */,
+				7905171525A0C3CA00B9E3DA /* NoStoryboardedViewController.swift */,
+				79686D7325A2BD5A008CF481 /* NoStoryboardedViewModel.swift */,
 				7905170C2597E35900B9E3DA /* DetailViewController.swift */,
+				79686D7025A2BCBE008CF481 /* DetailViewModel.swift */,
 			);
 			path = FeedScenes;
 			sourceTree = "<group>";
@@ -280,7 +295,7 @@
 			isa = PBXGroup;
 			children = (
 				79051711259980A600B9E3DA /* ViewController.swift */,
-				79686D5625A24BE6008CF481 /* NoStoryboardController.swift */,
+				79686D5625A24BE6008CF481 /* NoStoryboardedController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -366,13 +381,16 @@
 				790516A72590D4BF00B9E3DA /* CoordinatorProtocol.swift in Sources */,
 				790516AC2590D69300B9E3DA /* MainTabBarController.swift in Sources */,
 				7905171F25A1283C00B9E3DA /* MainTabBarViewModel.swift in Sources */,
-				7905171625A0C3CA00B9E3DA /* FeedCustomViewController.swift in Sources */,
+				7905171625A0C3CA00B9E3DA /* NoStoryboardedViewController.swift in Sources */,
 				790516CB2592BCE600B9E3DA /* PersonalInfoViewController.swift in Sources */,
 				7905168F2590C4C100B9E3DA /* AppDelegate.swift in Sources */,
 				790516FB25956F8C00B9E3DA /* BaseCoordinator.swift in Sources */,
 				790516F72595182400B9E3DA /* Logger.swift in Sources */,
 				790516C125925A1500B9E3DA /* ProfileCoordinator.swift in Sources */,
+				79686D6325A25385008CF481 /* AuthViewModel.swift in Sources */,
+				79686D7425A2BD5A008CF481 /* NoStoryboardedViewModel.swift in Sources */,
 				79686D5125A23C59008CF481 /* UINavigationController+Extensions.swift in Sources */,
+				79686D6B25A2B701008CF481 /* FeedViewModel.swift in Sources */,
 				790516F225942D3B00B9E3DA /* MainTabBarCoordinator.swift in Sources */,
 				7905172225A15E2100B9E3DA /* HomeViewModel.swift in Sources */,
 				790516F9259538C500B9E3DA /* String+Extensions.swift in Sources */,
@@ -384,10 +402,12 @@
 				790516B62590E31F00B9E3DA /* ProfileViewController.swift in Sources */,
 				790516ED2593948B00B9E3DA /* PresentationType.swift in Sources */,
 				790516BF2590ECB400B9E3DA /* FeedCoordinator.swift in Sources */,
+				79686D5C25A24EA8008CF481 /* ProfileViewModel.swift in Sources */,
 				790516B82590E34700B9E3DA /* AuthViewController.swift in Sources */,
-				790516B42590DAD600B9E3DA /* Storyboarded.swift in Sources */,
+				790516B42590DAD600B9E3DA /* Instantiatable.swift in Sources */,
 				790516BD2590E86F00B9E3DA /* HomeCoordinator.swift in Sources */,
-				79686D5725A24BE6008CF481 /* NoStoryboardController.swift in Sources */,
+				79686D5725A24BE6008CF481 /* NoStoryboardedController.swift in Sources */,
+				79686D7125A2BCBE008CF481 /* DetailViewModel.swift in Sources */,
 				790516DC2592C38000B9E3DA /* ApplicationCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -20,13 +20,11 @@ final class ApplicationCoordinator: BaseCoordinator {
     
    override func start() {
         isLoggedIn ? showContent() : showAuth()
-        assignNavigationDelegates()
+        /// Check it in different conditions
+        /// assignNavigationDelegates()
     }
     
     private func showContent() {
-        childCoordinators.forEach { (coordinator) in
-            print(coordinator)
-        }
         let mainTabBarCoordinator = MainTabBarCoordinator(window: window, parentCoordinator: self, delegate: self)
         childCoordinators.append(mainTabBarCoordinator)
         mainTabBarCoordinator.start()

@@ -20,12 +20,12 @@ class BaseCoordinator: NSObject, CoordinatorProtocol {
     weak var parentCoordinator: CoordinatorProtocol!
     weak var navigationController: UINavigationController? {
         didSet {
-            assignNavigationDelegates()
+            reassignNavigationDelegates()
         }
     }
     weak var tabBarController: UITabBarController? {
         didSet {
-            assignNavigationDelegates()
+            reassignNavigationDelegates()
         }
     }
     
@@ -44,7 +44,7 @@ class BaseCoordinator: NSObject, CoordinatorProtocol {
     /// We call this at the end of 'start()'
     /// for enabling navigation and tabbar delegate events
     /// TODO: rename reassign
-    func assignNavigationDelegates() {
+    func reassignNavigationDelegates() {
         navigationController?.delegate = self
         tabBarController?.delegate = self
     }
@@ -59,7 +59,7 @@ class BaseCoordinator: NSObject, CoordinatorProtocol {
         childCoordinators.removeValue(forKey: key)
         /// Reassign navigation delegates to self when removing child coordinator
         /// otherwise current parent coordinator won't handle navigation events
-        assignNavigationDelegates()
+        reassignNavigationDelegates()
         /// TODO: check if this isn't a useless line
      }
     

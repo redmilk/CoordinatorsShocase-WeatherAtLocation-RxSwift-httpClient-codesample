@@ -17,29 +17,28 @@ protocol ProfileCoordinatorProtocol {
 final class ProfileCoordinator: BaseCoordinator, ProfileCoordinatorProtocol {
     
     private let title: String
-    private let presentationType: PresentationType
+    private let presentationMode: PresentationMode
     
     init(parentCoordinator: HomeCoordinator,
          title: String,
-         presentationType: PresentationType
+         presentationType: PresentationMode
     ) {
         self.title = title
-        self.presentationType = presentationType
+        self.presentationMode = presentationType
         super.init()
         self.parentCoordinator = parentCoordinator
     }
     
     override func start() {
-        switch presentationType {
+        switch presentationMode {
         
-        case .push(let navigation):
-            navigationController = navigation
+        case .push:
             let viewModel = ProfileViewModel(coordinator: self, vcTitle: "Profile")
             let controller = ProfileViewController.instantiate(storyboard: .profile,
                                                                instantiation: .withIdentifier) {
                 return ProfileViewController(viewModel: viewModel, coder: $0)!
             }
-            navigation.pushViewController(controller, animated: true)
+            navigationController?.pushViewController(controller, animated: true)
             
         case .modal:
             let viewModel = ProfileViewModel(coordinator: self, vcTitle: "Profile")
@@ -58,7 +57,7 @@ final class ProfileCoordinator: BaseCoordinator, ProfileCoordinatorProtocol {
     }
     
     override func end() {
-        switch presentationType {
+        switch presentationMode {
         case .modal:
             navigationController?.dismiss(animated: true, completion: nil)
             self.parentCoordinator.removeChild(self)

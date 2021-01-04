@@ -9,19 +9,23 @@
 import UIKit
 
 class BaseCoordinator: NSObject, CoordinatorProtocol {
-        
-    var window: UIWindow!
-    var childCoordinators: [CoordinatorProtocol] = []
     
+    enum PresentationMode {
+        case push
+        case modal
+    }
+    
+    private var childCoordinators: [String : CoordinatorProtocol] = [:]
+    var window: UIWindow!
     weak var parentCoordinator: CoordinatorProtocol!
     weak var navigationController: UINavigationController? {
         didSet {
-            //assignNavigationDelegates()
+            reassignNavigationDelegates()
         }
     }
     weak var tabBarController: UITabBarController? {
         didSet {
-            //assignNavigationDelegates()
+            reassignNavigationDelegates()
         }
     }
     
@@ -39,22 +43,29 @@ class BaseCoordinator: NSObject, CoordinatorProtocol {
     
     /// We call this at the end of 'start()'
     /// for enabling navigation and tabbar delegate events
-    func assignNavigationDelegates() {
+    /// TODO: rename reassign
+    func reassignNavigationDelegates() {
         navigationController?.delegate = self
         tabBarController?.delegate = self
     }
     
+    func addChild(_ child: CoordinatorProtocol) {
+        let key = String(describing: child)
+        childCoordinators[key] = child
+    }
+    
     func removeChild(_ child: CoordinatorProtocol) {
-         for (index, coordinator) in childCoordinators.enumerated() {
-             if coordinator === child {
-                 childCoordinators.remove(at: index)
-                 break
-             }
-         }
+        let key = String(describing: child)
+        childCoordinators.removeValue(forKey: key)
         /// Reassign navigation delegates to self when removing child coordinator
         /// otherwise current parent coordinator won't handle navigation events
-        assignNavigationDelegates()
+        reassignNavigationDelegates()
+        /// TODO: check if this isn't a useless line
      }
+    
+    func removeAllChildCoordinators() {
+        childCoordinators.removeAll()
+    }
     
     /// Navigation events for UINavigationController
     func didNavigate(_ navigationController: UINavigationController,

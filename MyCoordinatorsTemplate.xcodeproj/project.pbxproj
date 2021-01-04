@@ -29,7 +29,6 @@
 		790516D52592BEF700B9E3DA /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 790516D42592BEF700B9E3DA /* Home.storyboard */; };
 		790516D92592BF4B00B9E3DA /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 790516D82592BF4B00B9E3DA /* Profile.storyboard */; };
 		790516DC2592C38000B9E3DA /* ApplicationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516DB2592C38000B9E3DA /* ApplicationCoordinator.swift */; };
-		790516ED2593948B00B9E3DA /* PresentationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516EC2593948B00B9E3DA /* PresentationType.swift */; };
 		790516F225942D3B00B9E3DA /* MainTabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516F125942D3B00B9E3DA /* MainTabBarCoordinator.swift */; };
 		790516F72595182400B9E3DA /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516F62595182400B9E3DA /* Logger.swift */; };
 		790516F9259538C500B9E3DA /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516F8259538C500B9E3DA /* String+Extensions.swift */; };
@@ -75,7 +74,6 @@
 		790516D42592BEF700B9E3DA /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		790516D82592BF4B00B9E3DA /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		790516DB2592C38000B9E3DA /* ApplicationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationCoordinator.swift; sourceTree = "<group>"; };
-		790516EC2593948B00B9E3DA /* PresentationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationType.swift; sourceTree = "<group>"; };
 		790516F125942D3B00B9E3DA /* MainTabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarCoordinator.swift; sourceTree = "<group>"; };
 		790516F62595182400B9E3DA /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		790516F8259538C500B9E3DA /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
@@ -242,7 +240,6 @@
 		790516EE25940BBC00B9E3DA /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
-				790516EC2593948B00B9E3DA /* PresentationType.swift */,
 				790516A62590D4BF00B9E3DA /* CoordinatorProtocol.swift */,
 				790516FA25956F8C00B9E3DA /* BaseCoordinator.swift */,
 				790516DB2592C38000B9E3DA /* ApplicationCoordinator.swift */,
@@ -400,7 +397,6 @@
 				7905170D2597E35900B9E3DA /* DetailViewController.swift in Sources */,
 				790516912590C4C100B9E3DA /* SceneDelegate.swift in Sources */,
 				790516B62590E31F00B9E3DA /* ProfileViewController.swift in Sources */,
-				790516ED2593948B00B9E3DA /* PresentationType.swift in Sources */,
 				790516BF2590ECB400B9E3DA /* FeedCoordinator.swift in Sources */,
 				79686D5C25A24EA8008CF481 /* ProfileViewModel.swift in Sources */,
 				790516B82590E34700B9E3DA /* AuthViewController.swift in Sources */,

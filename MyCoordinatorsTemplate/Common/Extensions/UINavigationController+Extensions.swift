@@ -42,7 +42,7 @@ extension UINavigationController {
         case .black:
             return createStyledNavigation(rootVC: root, barTint: .black, fontTint: .white, titleTint: .lightGray)
         case .profile:
-            return createStyledNavigation(rootVC: root, barTint: .cyan, fontTint: .white, titleTint: .white)
+            return createStyledNavigation(rootVC: root, barTint: .cyan, fontTint: .black, titleTint: .black)
         case .feed:
             return createStyledNavigation(rootVC: root, barTint: .magenta, fontTint: .white, titleTint: .lightGray)
         }

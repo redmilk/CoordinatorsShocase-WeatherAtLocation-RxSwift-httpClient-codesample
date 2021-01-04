@@ -43,7 +43,6 @@ final class AuthCoordinator: BaseCoordinator, AuthCoordinatorProtocol {
         navigationController = UINavigationController.makeStyled(style: .black, root: controller)
         controller.title = title
         window.rootViewController = navigationController
-        assignNavigationDelegates()
     }
     
     override func end() {

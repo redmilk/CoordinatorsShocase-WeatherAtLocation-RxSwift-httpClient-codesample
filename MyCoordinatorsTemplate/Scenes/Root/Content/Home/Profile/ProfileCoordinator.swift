@@ -9,36 +9,36 @@
 import UIKit
 
 protocol ProfileCoordinatorProtocol {
-    func displayCreditCardsModally()
+    func presentPersonalInfo()
+    func pushCreditCards()
     func end()
 }
 
 final class ProfileCoordinator: BaseCoordinator, ProfileCoordinatorProtocol {
     
     private let title: String
-    private let presentationType: PresentationType
+    private let presentationMode: PresentationMode
     
     init(parentCoordinator: HomeCoordinator,
          title: String,
-         presentationType: PresentationType
+         presentationType: PresentationMode
     ) {
         self.title = title
-        self.presentationType = presentationType
+        self.presentationMode = presentationType
         super.init()
         self.parentCoordinator = parentCoordinator
     }
     
     override func start() {
-        switch presentationType {
+        switch presentationMode {
         
-        case .push(let navigation):
-            navigationController = navigation
+        case .push:
             let viewModel = ProfileViewModel(coordinator: self, vcTitle: "Profile")
             let controller = ProfileViewController.instantiate(storyboard: .profile,
                                                                instantiation: .withIdentifier) {
                 return ProfileViewController(viewModel: viewModel, coder: $0)!
             }
-            navigation.pushViewController(controller, animated: true)
+            navigationController?.pushViewController(controller, animated: true)
             
         case .modal:
             let viewModel = ProfileViewModel(coordinator: self, vcTitle: "Profile")
@@ -48,20 +48,16 @@ final class ProfileCoordinator: BaseCoordinator, ProfileCoordinatorProtocol {
             }
             let navigation = UINavigationController.makeStyled(style: .profile, root: controller)
             navigationController = navigation
-            assignNavigationDelegates()
-            
             guard
                 let parentController = parentCoordinator?.navigationController?.viewControllers.last
             else { fatalError("Internal inconsistency") }
             
             parentController.present(navigation, animated: true, completion: nil)
         }
-        
-        assignNavigationDelegates()
     }
     
     override func end() {
-        switch presentationType {
+        switch presentationMode {
         case .modal:
             navigationController?.dismiss(animated: true, completion: nil)
             self.parentCoordinator.removeChild(self)
@@ -81,10 +77,20 @@ final class ProfileCoordinator: BaseCoordinator, ProfileCoordinatorProtocol {
         }
     }
     
-    func displayCreditCardsModally() {
-        //        let controller = CreditCardsViewController.instantiate(storyboardName: .profile)
-        //        controller.title = "Credit Cards"
-        //        navigationController?.present(controller, animated: true, completion: nil)
+    func presentPersonalInfo() {
+        let controller = PersonalInfoViewController.instantiate(storyboard: .profile, instantiation: .withIdentifier) {
+            return PersonalInfoViewController(coder: $0)!
+        }
+        controller.title = "Personal Information"
+        navigationController?.present(controller, animated: true, completion: nil)
+    }
+    
+    func pushCreditCards() {
+        let controller = CreditCardsViewController.instantiate(storyboard: .profile, instantiation: .withIdentifier) {
+            return CreditCardsViewController(coder: $0)!
+        }
+        controller.title = "Credit Cards"
+        navigationController?.pushViewController(controller, animated: true)
     }
     
 }

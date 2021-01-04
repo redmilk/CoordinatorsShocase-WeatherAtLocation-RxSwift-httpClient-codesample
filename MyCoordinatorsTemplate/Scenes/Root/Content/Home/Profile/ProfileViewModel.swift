@@ -10,7 +10,8 @@ import Foundation
 
 protocol ProfileViewModelProtocol {
     var vcTitle: String { get }
-    func presentCreditCards()
+    func pushCreditCards()
+    func presentPersonalInfo()
     func dismiss()
 }
 
@@ -24,8 +25,12 @@ struct ProfileViewModel: ProfileViewModelProtocol {
         self.vcTitle = vcTitle
     }
     
-    func presentCreditCards() {
-        coordinator.displayCreditCardsModally()
+    func presentPersonalInfo() {
+        coordinator.presentPersonalInfo()
+    }
+    
+    func pushCreditCards() {
+        coordinator.pushCreditCards()
     }
     
     func dismiss() {

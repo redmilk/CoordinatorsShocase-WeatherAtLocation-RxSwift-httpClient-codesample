@@ -47,16 +47,14 @@ final class HomeCoordinator: BaseCoordinator, HomeCoordinatorProtocol {
         
         tabBarController.addControllerForTab(navigationController)
         self.navigationController = navigationController
-        assignNavigationDelegates()
     }
     
     // MARK: - Display profile scene
     func pushProfile() {
-        guard let navigation = navigationController else { return }
         let child = ProfileCoordinator(parentCoordinator: self,
                                        title: "Profile",
-                                       presentationType: .push(navigation))
-        childCoordinators.append(child)
+                                       presentationType: .push)
+        addChild(child)
         child.start()
     }
     
@@ -64,8 +62,8 @@ final class HomeCoordinator: BaseCoordinator, HomeCoordinatorProtocol {
         let child = ProfileCoordinator(parentCoordinator: self,
                                        title: "Profile",
                                        presentationType: .modal)
-        childCoordinators.append(child)
-        child.start()        
+        addChild(child)
+        child.start()
     }
     
     func displayAuthAsRoot() {

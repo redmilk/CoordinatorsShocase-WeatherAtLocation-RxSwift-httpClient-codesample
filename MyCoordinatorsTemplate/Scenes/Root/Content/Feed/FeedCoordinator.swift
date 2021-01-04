@@ -34,7 +34,6 @@ final class FeedCoordinator: BaseCoordinator, FeedCoordinatorProtocol {
         navigationController = UINavigationController.makeStyled(style: .feed, root: controller)
         navigationController?.tabBarItem = UITabBarItem(title: "Feed", image: nil, selectedImage: nil)
         tabBarController?.addControllerForTab(navigationController!)
-        assignNavigationDelegates()
     }
     
     func pushDetail() {

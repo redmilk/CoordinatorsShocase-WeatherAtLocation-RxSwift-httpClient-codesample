@@ -55,7 +55,7 @@ final class HomeCoordinator: BaseCoordinator, HomeCoordinatorProtocol {
         let child = ProfileCoordinator(parentCoordinator: self,
                                        title: "Profile",
                                        presentationType: .push(navigation))
-        childCoordinators.append(child)
+        addChild(child)
         child.start()
     }
     
@@ -63,8 +63,8 @@ final class HomeCoordinator: BaseCoordinator, HomeCoordinatorProtocol {
         let child = ProfileCoordinator(parentCoordinator: self,
                                        title: "Profile",
                                        presentationType: .modal)
-        childCoordinators.append(child)
-        child.start()        
+        addChild(child)
+        child.start()
     }
     
     func displayAuthAsRoot() {

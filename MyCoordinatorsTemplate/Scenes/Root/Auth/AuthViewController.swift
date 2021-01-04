@@ -8,19 +8,29 @@
 
 import UIKit
 
-final class AuthViewController: ViewController, Storyboarded {
+final class AuthViewController: ViewController, Instantiatable {
     
-    weak var coordinator: AuthCoordinator!
+    let viewModel: AuthViewModelProtocol
+    
+    required init?(viewModel: AuthViewModelProtocol, coder: NSCoder) {
+        self.viewModel = viewModel
+        super.init(coder: coder)
+    }
+    
+    @available(*, unavailable, renamed: "init(viewModel:coder:)")
+    required public init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
+        title = viewModel.title
     }
     
     @IBAction func loggedInPressed(_ sender: Any) {
-        isLoggedIn = true
-        coordinator.end()
+        if viewModel.performLogIn() {
+            viewModel.dismiss()
+        }
     }
     
 }

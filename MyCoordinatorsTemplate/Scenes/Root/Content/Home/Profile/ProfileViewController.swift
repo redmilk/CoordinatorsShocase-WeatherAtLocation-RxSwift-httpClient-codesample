@@ -40,14 +40,18 @@ final class ProfileViewController: ViewController, Instantiatable {
         viewModel.pushCreditCards()
     }
     
-    @IBAction func orderHistoryPressed(_ sender: Any) {
-        
+    @IBAction func pushAuthPressed(_ sender: Any) {
+        viewModel.pushAuth()
     }
     
-    @IBAction func settingsPressed(_ sender: Any) {
-        
+    @IBAction func presentAuthPressed(_ sender: Any) {
+        viewModel.presentAuth()
     }
-
+    
+    @IBAction func rootAuthPressed(_ sender: Any) {
+        viewModel.rootAuth()
+    }
+    
     @IBAction func closePressed(_ sender: Any) {
         viewModel.dismiss()
     }

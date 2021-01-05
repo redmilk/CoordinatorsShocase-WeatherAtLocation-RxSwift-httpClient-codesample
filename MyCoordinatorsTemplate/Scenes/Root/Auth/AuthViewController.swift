@@ -27,6 +27,14 @@ final class AuthViewController: ViewController, Instantiatable {
         title = viewModel.title
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        /// For iOS modal dragging VC dismiss handling
+        if isBeingDismissed {
+            viewModel.dismiss()
+        }
+    }
+    
     @IBAction func loggedInPressed(_ sender: Any) {
         if viewModel.performLogIn() {
             viewModel.dismiss()

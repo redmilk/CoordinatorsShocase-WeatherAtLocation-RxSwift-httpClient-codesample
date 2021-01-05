@@ -22,6 +22,9 @@ protocol CoordinatorProtocol: AnyObject {
     /// if coordinator can set root scene for application
     var window: UIWindow! { get set }
     
+    /// for scene modal presentation and for other conveniences
+    var currentController: UIViewController? { get set }
+    
     func addChild(_ child: CoordinatorProtocol)
     func removeChild(_ child: CoordinatorProtocol)
     func removeAllChildCoordinators()

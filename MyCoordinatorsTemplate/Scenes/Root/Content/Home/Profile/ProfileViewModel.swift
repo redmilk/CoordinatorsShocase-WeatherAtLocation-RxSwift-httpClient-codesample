@@ -12,9 +12,13 @@ protocol ProfileViewModelProtocol {
     var vcTitle: String { get }
     func pushCreditCards()
     func presentPersonalInfo()
+    func pushAuth()
+    func presentAuth()
+    func rootAuth()
     func dismiss()
 }
 
+// TODO: - make viewmodel as class, and protocols with weak, constraint them to class
 struct ProfileViewModel: ProfileViewModelProtocol {
     
     let coordinator: ProfileCoordinatorProtocol
@@ -26,11 +30,23 @@ struct ProfileViewModel: ProfileViewModelProtocol {
     }
     
     func presentPersonalInfo() {
-        coordinator.presentPersonalInfo()
+        coordinator.pushPersonalInfo()
     }
     
     func pushCreditCards() {
-        coordinator.pushCreditCards()
+        coordinator.presentCreditCards()
+    }
+    
+    func pushAuth() {
+        coordinator.pushAuth()
+    }
+    
+    func presentAuth() {
+        coordinator.presentAuth()
+    }
+    
+    func rootAuth() {
+        coordinator.rootAuth()
     }
     
     func dismiss() {

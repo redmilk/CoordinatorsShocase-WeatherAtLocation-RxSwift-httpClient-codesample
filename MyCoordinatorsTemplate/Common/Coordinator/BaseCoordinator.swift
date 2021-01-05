@@ -9,15 +9,17 @@
 import UIKit
 
 class BaseCoordinator: NSObject, CoordinatorProtocol {
-    
+        
     enum PresentationMode {
-        case push
-        case modal
+        case push(UINavigationController)
+        case modal(UIViewController)
+        case root(UIWindow)
     }
     
     private var childCoordinators: [String : CoordinatorProtocol] = [:]
     var window: UIWindow!
     weak var parentCoordinator: CoordinatorProtocol!
+    weak var currentController: UIViewController?
     weak var navigationController: UINavigationController? {
         didSet {
             reassignNavigationDelegates()
@@ -43,7 +45,6 @@ class BaseCoordinator: NSObject, CoordinatorProtocol {
     
     /// We call this at the end of 'start()'
     /// for enabling navigation and tabbar delegate events
-    /// TODO: rename reassign
     func reassignNavigationDelegates() {
         navigationController?.delegate = self
         tabBarController?.delegate = self
@@ -60,7 +61,6 @@ class BaseCoordinator: NSObject, CoordinatorProtocol {
         /// Reassign navigation delegates to self when removing child coordinator
         /// otherwise current parent coordinator won't handle navigation events
         reassignNavigationDelegates()
-        /// TODO: check if this isn't a useless line
      }
     
     func removeAllChildCoordinators() {
@@ -71,7 +71,7 @@ class BaseCoordinator: NSObject, CoordinatorProtocol {
     func didNavigate(_ navigationController: UINavigationController,
                       to viewController: UIViewController,
                       animated: Bool) {
-        Logger.log("Navigation to", entity: viewController, symbol: "[STACK]")
+        Logger.log("Navigated to", entity: viewController, symbol: "[STACK]")
     }
     
     /// Navigation events for UITabBarController
@@ -80,10 +80,10 @@ class BaseCoordinator: NSObject, CoordinatorProtocol {
         guard
             let navigationController = selectedTabController as? UINavigationController,
             let topControllerInStack = navigationController.viewControllers.last else {
-                Logger.log("Pure tab selected", entity: selectedTabController, symbol: "[PURE TAB]")
+                Logger.log("Tab selected with no navigation controller embedded", entity: selectedTabController, symbol: "[PURE TAB]")
                 return
         }
-        Logger.log("Selected tab with navigation stack", entity: topControllerInStack, symbol: "[NAV TAB]")
+        Logger.log("Selected tab with navigation controller", entity: topControllerInStack, symbol: "[NAV TAB]")
     }
 }
 

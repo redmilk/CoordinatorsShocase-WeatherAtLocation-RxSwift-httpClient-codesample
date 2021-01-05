@@ -27,6 +27,7 @@ struct AuthViewModel: AuthViewModelProtocol {
     }
     
     func performLogIn() -> Bool {
+        /// Pseudo log in
         isLoggedIn = true
         return isLoggedIn
     }

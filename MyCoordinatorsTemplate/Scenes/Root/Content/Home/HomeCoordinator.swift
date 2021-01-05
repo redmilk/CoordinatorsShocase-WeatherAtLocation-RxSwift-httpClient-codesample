@@ -53,7 +53,7 @@ final class HomeCoordinator: BaseCoordinator, HomeCoordinatorProtocol {
     func pushProfile() {
         let child = ProfileCoordinator(parentCoordinator: self,
                                        title: "Profile",
-                                       presentationType: .push)
+                                       presentationType: .push(navigationController!))
         addChild(child)
         child.start()
     }
@@ -61,7 +61,7 @@ final class HomeCoordinator: BaseCoordinator, HomeCoordinatorProtocol {
     func presentProfile() {
         let child = ProfileCoordinator(parentCoordinator: self,
                                        title: "Profile",
-                                       presentationType: .modal)
+                                       presentationType: .modal(navigationController!))
         addChild(child)
         child.start()
     }

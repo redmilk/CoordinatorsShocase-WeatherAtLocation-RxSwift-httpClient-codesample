@@ -13,7 +13,6 @@ final class HomeViewController: ViewController, Instantiatable {
     private let viewModel: HomeViewModelProtocol
     
     @IBOutlet weak var navItem: UINavigationItem!
-    @IBOutlet weak var navigationBar: UINavigationBar!
     
     init?(title: String, viewModel: HomeViewModelProtocol, coder: NSCoder) {
         self.viewModel = viewModel
@@ -49,11 +48,7 @@ final class HomeViewController: ViewController, Instantiatable {
         viewModel.presentProfile()
     }
     
-    @IBAction func presentAuthPressed(_ sender: Any) {
-        
-    }
-    
-    @IBAction func presentFormsPressed(_ sender: Any) {
+    @IBAction func rootProfilePressed(_ sender: Any) {
         
     }
     

@@ -9,8 +9,11 @@
 import UIKit
 
 protocol ProfileCoordinatorProtocol {
-    func presentPersonalInfo()
-    func pushCreditCards()
+    func pushPersonalInfo()
+    func presentCreditCards()
+    func pushAuth()
+    func presentAuth()
+    func rootAuth()
     func end()
 }
 
@@ -41,7 +44,7 @@ final class ProfileCoordinator: BaseCoordinator, ProfileCoordinatorProtocol {
             }
             navigationController?.pushViewController(controller, animated: true)
             
-        case .modal:
+        case .modal(let parentVC):
             let viewModel = ProfileViewModel(coordinator: self, vcTitle: "Profile")
             let controller = ProfileViewController.instantiate(storyboard: .profile,
                                                                instantiation: .withIdentifier) {
@@ -49,49 +52,78 @@ final class ProfileCoordinator: BaseCoordinator, ProfileCoordinatorProtocol {
             }
             let navigation = UINavigationController.makeStyled(style: .profile, root: controller)
             navigationController = navigation
-            guard
-                let parentController = parentCoordinator?.navigationController?.viewControllers.last
-            else { fatalError("Internal inconsistency") }
+            currentController = navigation
+            parentVC.present(navigation, animated: true, completion: nil)
             
-            parentController.present(navigation, animated: true, completion: nil)
+        case _: return
         }
     }
     
     override func end() {
         switch presentationMode {
         case .modal:
-            navigationController?.dismiss(animated: true, completion: nil)
+            guard let currentController = currentController else { fatalError("Internal inconsistency") }
+            currentController.dismiss(animated: true, completion: nil)
             self.parentCoordinator.removeChild(self)
         case .push:
             navigationController?.popViewController(animated: true)
             parentCoordinator.removeChild(self)
+        case _: return
         }
     }
     
+    /// Here we finish our current coordinator when user taps default back button
     override func didNavigate(_ navigationController: UINavigationController,
                               to viewController: UIViewController,
                               animated: Bool
     ) {
         super.didNavigate(navigationController, to: viewController, animated: animated)
+        // TODO: check with trying to avoid this if let
         if let _ = viewController as? HomeViewController {
             end()
         }
     }
     
-    func presentPersonalInfo() {
+    func pushPersonalInfo() {
         let controller = PersonalInfoViewController.instantiate(storyboard: .profile, instantiation: .withIdentifier) {
             return PersonalInfoViewController(coder: $0)!
         }
         controller.title = "Personal Information"
-        navigationController?.present(controller, animated: true, completion: nil)
+        navigationController?.pushViewController(controller, animated: true)
     }
     
-    func pushCreditCards() {
+    func presentCreditCards() {
         let controller = CreditCardsViewController.instantiate(storyboard: .profile, instantiation: .withIdentifier) {
             return CreditCardsViewController(coder: $0)!
         }
         controller.title = "Credit Cards"
-        navigationController?.pushViewController(controller, animated: true)
+        navigationController?.present(controller, animated: true, completion: nil)
+    }
+    
+    func pushAuth() {
+        guard let navigationController = navigationController else { fatalError("Inconsistency") }
+        let child = AuthCoordinator(title: "Authentication",
+                                    presentationMode: .push(navigationController),
+                                    parentCoordinator: self)
+        addChild(child)
+        child.start()
+    }
+    
+    func presentAuth() {
+        guard let navigationController = navigationController else { fatalError("Inconsistency") }
+        let child = AuthCoordinator(title: "Authentication",
+                                    presentationMode: .modal(navigationController),
+                                    parentCoordinator: self)
+        addChild(child)
+        child.start()
+    }
+    
+    func rootAuth() {
+        let child = AuthCoordinator(title: "Authentication",
+                                    presentationMode: .root(UIApplication.currentWindow!),
+                                    parentCoordinator: self)
+        addChild(child)
+        child.start()
     }
     
 }

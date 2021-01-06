@@ -18,29 +18,64 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Auth" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ykX-4C-Wad">
-                                <rect key="frame" x="189" y="144" width="36" height="21"/>
+                                <rect key="frame" x="189.5" y="144" width="35.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nh7-UJ-L1d">
-                                <rect key="frame" x="113.5" y="265" width="187" height="30"/>
-                                <state key="normal" title="Press to become Logged In"/>
-                                <connections>
-                                    <action selector="loggedInPressed:" destination="Xiz-N0-yos" eventType="touchUpInside" id="QBa-Ka-gYk"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Y6K-JN-vQB">
+                                <rect key="frame" x="113.5" y="265" width="187" height="140.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="- user name -" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jKN-Gq-pBX">
+                                        <rect key="frame" x="0.0" y="0.0" width="187" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UBU-x5-Hb4">
+                                        <rect key="frame" x="0.0" y="20.5" width="187" height="30"/>
+                                        <state key="normal" title="Save User"/>
+                                        <connections>
+                                            <action selector="saveUserPressed:" destination="Xiz-N0-yos" eventType="touchUpInside" id="Bed-KJ-tvC"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nbZ-5Z-pCA">
+                                        <rect key="frame" x="0.0" y="50.5" width="187" height="30"/>
+                                        <state key="normal" title="Retreive user"/>
+                                        <connections>
+                                            <action selector="retreiveUserPressed:" destination="Xiz-N0-yos" eventType="touchUpInside" id="eBc-gh-kNF"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AAc-cv-sMs">
+                                        <rect key="frame" x="0.0" y="80.5" width="187" height="30"/>
+                                        <state key="normal" title="Delete User"/>
+                                        <connections>
+                                            <action selector="deleteUserPressed:" destination="Xiz-N0-yos" eventType="touchUpInside" id="Chd-J2-4lu"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nh7-UJ-L1d">
+                                        <rect key="frame" x="0.0" y="110.5" width="187" height="30"/>
+                                        <state key="normal" title="Press to become Logged In"/>
+                                        <connections>
+                                            <action selector="loggedInPressed:" destination="Xiz-N0-yos" eventType="touchUpInside" id="QBa-Ka-gYk"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="GZF-ls-d1p"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="nh7-UJ-L1d" firstAttribute="top" secondItem="ykX-4C-Wad" secondAttribute="bottom" constant="100" id="6iC-LH-Vxu"/>
-                            <constraint firstItem="nh7-UJ-L1d" firstAttribute="centerX" secondItem="ykX-4C-Wad" secondAttribute="centerX" id="G8h-2f-lI4"/>
+                            <constraint firstItem="Y6K-JN-vQB" firstAttribute="top" secondItem="ykX-4C-Wad" secondAttribute="bottom" constant="100.5" id="QTP-Y5-xSD"/>
+                            <constraint firstItem="Y6K-JN-vQB" firstAttribute="centerX" secondItem="ykX-4C-Wad" secondAttribute="centerX" id="ZPR-pQ-pkj"/>
                             <constraint firstItem="ykX-4C-Wad" firstAttribute="top" secondItem="GZF-ls-d1p" secondAttribute="top" constant="100" id="cVx-fP-HR6"/>
                             <constraint firstItem="ykX-4C-Wad" firstAttribute="centerX" secondItem="GZF-ls-d1p" secondAttribute="centerX" id="nMf-C9-k0d"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Zbx-WV-HAY"/>
+                    <connections>
+                        <outlet property="userNameLabel" destination="jKN-Gq-pBX" id="SYq-FR-G2w"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FC3-U6-iUG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -17,7 +17,7 @@ open class ViewController: UIViewController, UITextFieldDelegate, UITextViewDele
     
     required public init?(coder: NSCoder) {
         super.init(coder: coder)
-        Logger.initialization(entity: self)
+        //Logger.initialization(entity: self)
     }
 
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -25,7 +25,7 @@ open class ViewController: UIViewController, UITextFieldDelegate, UITextViewDele
     }
     
     deinit {
-        Logger.deinitialization(entity: self)
+        //Logger.deinitialization(entity: self)
     }
     
     open override func viewDidLoad() {

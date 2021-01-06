@@ -24,34 +24,41 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="K1O-Ci-wGI">
-                                <rect key="frame" x="136.5" y="264.5" width="141" height="168"/>
+                                <rect key="frame" x="117.5" y="264.5" width="179" height="214"/>
                                 <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zc4-EJ-tYb">
+                                        <rect key="frame" x="0.0" y="0.0" width="179" height="30"/>
+                                        <state key="normal" title="Push Authentication"/>
+                                        <connections>
+                                            <action selector="pushAuthPressed:" destination="zcH-7f-lXq" eventType="touchUpInside" id="Rqq-b4-xYC"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EaO-5E-oG9">
+                                        <rect key="frame" x="0.0" y="46" width="179" height="30"/>
+                                        <state key="normal" title="Present Authentication"/>
+                                        <connections>
+                                            <action selector="presentAuthPressed:" destination="zcH-7f-lXq" eventType="touchUpInside" id="Mno-mU-56e"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tdQ-Y9-aCc">
+                                        <rect key="frame" x="0.0" y="92" width="179" height="30"/>
+                                        <state key="normal" title="Root Authentication"/>
+                                        <connections>
+                                            <action selector="rootAuthPressed:" destination="zcH-7f-lXq" eventType="touchUpInside" id="PqV-PS-COE"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mUQ-fr-zIi">
-                                        <rect key="frame" x="0.0" y="0.0" width="141" height="30"/>
-                                        <state key="normal" title="Personal information"/>
+                                        <rect key="frame" x="0.0" y="138" width="179" height="30"/>
+                                        <state key="normal" title="Push personal information"/>
                                         <connections>
                                             <action selector="personalInformationPressed:" destination="zcH-7f-lXq" eventType="touchUpInside" id="Jyx-hA-cTh"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mmb-vN-w1X">
-                                        <rect key="frame" x="0.0" y="46" width="141" height="30"/>
-                                        <state key="normal" title="Credit cards"/>
+                                        <rect key="frame" x="0.0" y="184" width="179" height="30"/>
+                                        <state key="normal" title="Present credit cards"/>
                                         <connections>
                                             <action selector="creditCardsPressed:" destination="zcH-7f-lXq" eventType="touchUpInside" id="3vM-zn-2gB"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zc4-EJ-tYb">
-                                        <rect key="frame" x="0.0" y="92" width="141" height="30"/>
-                                        <state key="normal" title="Order history"/>
-                                        <connections>
-                                            <action selector="orderHistoryPressed:" destination="zcH-7f-lXq" eventType="touchUpInside" id="Rqq-b4-xYC"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EaO-5E-oG9">
-                                        <rect key="frame" x="0.0" y="138" width="141" height="30"/>
-                                        <state key="normal" title="Settings"/>
-                                        <connections>
-                                            <action selector="settingsPressed:" destination="zcH-7f-lXq" eventType="touchUpInside" id="ny0-Vs-c6g"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -113,8 +120,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Credit Cards modally presented" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EWb-tl-P3A">
-                                <rect key="frame" x="86.5" y="144" width="241" height="20.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Credit Cards" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EWb-tl-P3A">
+                                <rect key="frame" x="159" y="144" width="96" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>

@@ -40,6 +40,13 @@
 		7905171825A0C63C00B9E3DA /* CreditCardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7905171725A0C63C00B9E3DA /* CreditCardsViewController.swift */; };
 		7905171F25A1283C00B9E3DA /* MainTabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7905171E25A1283C00B9E3DA /* MainTabBarViewModel.swift */; };
 		7905172225A15E2100B9E3DA /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7905172125A15E2100B9E3DA /* HomeViewModel.swift */; };
+		79469ADA25A4DDF300ECC90B /* UIApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79469AD925A4DDF300ECC90B /* UIApplication+Extensions.swift */; };
+		79469ADE25A4E9A300ECC90B /* ServicesContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79469ADD25A4E9A300ECC90B /* ServicesContainer.swift */; };
+		79469AE225A4EA1400ECC90B /* AuthSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79469AE125A4EA1400ECC90B /* AuthSession.swift */; };
+		79469AEC25A4F60A00ECC90B /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79469AEB25A4F60A00ECC90B /* KeyChain.swift */; };
+		79469AF025A4F75C00ECC90B /* Obfuscator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79469AEF25A4F75C00ECC90B /* Obfuscator.swift */; };
+		79469AF425A5042E00ECC90B /* AccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79469AF325A5042E00ECC90B /* AccessToken.swift */; };
+		79469AF825A5043A00ECC90B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79469AF725A5043A00ECC90B /* User.swift */; };
 		79686D5125A23C59008CF481 /* UINavigationController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79686D5025A23C59008CF481 /* UINavigationController+Extensions.swift */; };
 		79686D5725A24BE6008CF481 /* NoStoryboardedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79686D5625A24BE6008CF481 /* NoStoryboardedController.swift */; };
 		79686D5C25A24EA8008CF481 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79686D5B25A24EA8008CF481 /* ProfileViewModel.swift */; };
@@ -85,6 +92,13 @@
 		7905171725A0C63C00B9E3DA /* CreditCardsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardsViewController.swift; sourceTree = "<group>"; };
 		7905171E25A1283C00B9E3DA /* MainTabBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewModel.swift; sourceTree = "<group>"; };
 		7905172125A15E2100B9E3DA /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		79469AD925A4DDF300ECC90B /* UIApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extensions.swift"; sourceTree = "<group>"; };
+		79469ADD25A4E9A300ECC90B /* ServicesContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesContainer.swift; sourceTree = "<group>"; };
+		79469AE125A4EA1400ECC90B /* AuthSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSession.swift; sourceTree = "<group>"; };
+		79469AEB25A4F60A00ECC90B /* KeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
+		79469AEF25A4F75C00ECC90B /* Obfuscator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Obfuscator.swift; sourceTree = "<group>"; };
+		79469AF325A5042E00ECC90B /* AccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessToken.swift; sourceTree = "<group>"; };
+		79469AF725A5043A00ECC90B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		79686D5025A23C59008CF481 /* UINavigationController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Extensions.swift"; sourceTree = "<group>"; };
 		79686D5625A24BE6008CF481 /* NoStoryboardedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoStoryboardedController.swift; sourceTree = "<group>"; };
 		79686D5B25A24EA8008CF481 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -166,6 +180,8 @@
 			isa = PBXGroup;
 			children = (
 				790516B32590DAD600B9E3DA /* Instantiatable.swift */,
+				79469ADD25A4E9A300ECC90B /* ServicesContainer.swift */,
+				79469AE025A4E9F200ECC90B /* Services */,
 				79686D4C25A23B3B008CF481 /* Extensions */,
 				790516F52595181700B9E3DA /* Utils */,
 				790516EE25940BBC00B9E3DA /* Coordinator */,
@@ -278,12 +294,33 @@
 			path = Content;
 			sourceTree = "<group>";
 		};
+		79469AE025A4E9F200ECC90B /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				79469AF225A5041700ECC90B /* Authentication */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		79469AF225A5041700ECC90B /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				79469AE125A4EA1400ECC90B /* AuthSession.swift */,
+				79469AF725A5043A00ECC90B /* User.swift */,
+				79469AF325A5042E00ECC90B /* AccessToken.swift */,
+				79469AEB25A4F60A00ECC90B /* KeyChain.swift */,
+				79469AEF25A4F75C00ECC90B /* Obfuscator.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
 		79686D4C25A23B3B008CF481 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				790516F8259538C500B9E3DA /* String+Extensions.swift */,
 				7905170A2597E06300B9E3DA /* UITabBarController+Extensions.swift */,
 				79686D5025A23C59008CF481 /* UINavigationController+Extensions.swift */,
+				79469AD925A4DDF300ECC90B /* UIApplication+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -376,12 +413,17 @@
 				790516AE2590D97300B9E3DA /* HomeViewController.swift in Sources */,
 				790516C325925A2D00B9E3DA /* AuthCoordinator.swift in Sources */,
 				790516A72590D4BF00B9E3DA /* CoordinatorProtocol.swift in Sources */,
+				79469ADA25A4DDF300ECC90B /* UIApplication+Extensions.swift in Sources */,
 				790516AC2590D69300B9E3DA /* MainTabBarController.swift in Sources */,
 				7905171F25A1283C00B9E3DA /* MainTabBarViewModel.swift in Sources */,
+				79469ADE25A4E9A300ECC90B /* ServicesContainer.swift in Sources */,
 				7905171625A0C3CA00B9E3DA /* NoStoryboardedViewController.swift in Sources */,
 				790516CB2592BCE600B9E3DA /* PersonalInfoViewController.swift in Sources */,
 				7905168F2590C4C100B9E3DA /* AppDelegate.swift in Sources */,
+				79469AE225A4EA1400ECC90B /* AuthSession.swift in Sources */,
 				790516FB25956F8C00B9E3DA /* BaseCoordinator.swift in Sources */,
+				79469AF025A4F75C00ECC90B /* Obfuscator.swift in Sources */,
+				79469AF425A5042E00ECC90B /* AccessToken.swift in Sources */,
 				790516F72595182400B9E3DA /* Logger.swift in Sources */,
 				790516C125925A1500B9E3DA /* ProfileCoordinator.swift in Sources */,
 				79686D6325A25385008CF481 /* AuthViewModel.swift in Sources */,
@@ -395,9 +437,11 @@
 				7905171825A0C63C00B9E3DA /* CreditCardsViewController.swift in Sources */,
 				7905170B2597E06300B9E3DA /* UITabBarController+Extensions.swift in Sources */,
 				7905170D2597E35900B9E3DA /* DetailViewController.swift in Sources */,
+				79469AF825A5043A00ECC90B /* User.swift in Sources */,
 				790516912590C4C100B9E3DA /* SceneDelegate.swift in Sources */,
 				790516B62590E31F00B9E3DA /* ProfileViewController.swift in Sources */,
 				790516BF2590ECB400B9E3DA /* FeedCoordinator.swift in Sources */,
+				79469AEC25A4F60A00ECC90B /* KeyChain.swift in Sources */,
 				79686D5C25A24EA8008CF481 /* ProfileViewModel.swift in Sources */,
 				790516B82590E34700B9E3DA /* AuthViewController.swift in Sources */,
 				790516B42590DAD600B9E3DA /* Instantiatable.swift in Sources */,

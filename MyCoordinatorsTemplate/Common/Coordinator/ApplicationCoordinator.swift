@@ -11,7 +11,7 @@ import UIKit
 /// Pseudo user session
 var isLoggedIn: Bool = false
 
-final class ApplicationCoordinator: BaseCoordinator {
+final class ApplicationCoordinator: BaseCoordinator, AuthSessionSupporting {
         
     init(window: UIWindow) {
         super.init()
@@ -20,8 +20,6 @@ final class ApplicationCoordinator: BaseCoordinator {
     
    override func start() {
         isLoggedIn ? showContent() : showAuth()
-        /// Check it in different conditions
-        /// assignNavigationDelegates()
     }
     
     private func showContent() {
@@ -31,8 +29,8 @@ final class ApplicationCoordinator: BaseCoordinator {
     }
     
     private func showAuth() {
-        let child = AuthCoordinator(title: "Auth",
-                                    window: window,
+        let child = AuthCoordinator(title: "Authentication",
+                                    presentationMode: .root(window),
                                     parentCoordinator: self,
                                     delegate: self)
         addChild(child)
@@ -42,7 +40,7 @@ final class ApplicationCoordinator: BaseCoordinator {
 
 // MARK: - Authenticate flow delegate for log in
 extension ApplicationCoordinator: AuthCoordinatorDelegate {
-    func didAuthenticate(_ coordinator: AuthCoordinator) {
+    func authFlowDidFinish(_ coordinator: AuthCoordinator) {
         start()
     }
 }

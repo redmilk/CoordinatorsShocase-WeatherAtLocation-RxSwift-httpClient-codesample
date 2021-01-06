@@ -12,6 +12,7 @@ protocol HomeViewModelProtocol {
     func displayAuth()
     func pushProfile()
     func presentProfile()
+    func rootProfile()
 }
 
 struct HomeViewModel: HomeViewModelProtocol {
@@ -32,6 +33,10 @@ struct HomeViewModel: HomeViewModelProtocol {
     
     func presentProfile() {
         coordinator.presentProfile()
+    }
+    
+    func rootProfile() {
+        
     }
     
 }

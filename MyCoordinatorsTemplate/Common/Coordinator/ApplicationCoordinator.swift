@@ -11,7 +11,7 @@ import UIKit
 /// Pseudo user session
 var isLoggedIn: Bool = false
 
-final class ApplicationCoordinator: BaseCoordinator {
+final class ApplicationCoordinator: BaseCoordinator, AuthSessionSupporting {
         
     init(window: UIWindow) {
         super.init()

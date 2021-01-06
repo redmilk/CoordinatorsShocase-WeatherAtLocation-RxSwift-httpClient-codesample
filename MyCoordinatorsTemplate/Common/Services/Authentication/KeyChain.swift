@@ -79,17 +79,21 @@ final class KeychainService {
         }
     }
 
-    func delete() throws {
+    func delete(onSuccess: (()->Void)? = nil) throws {
         let query = KeychainService.query(withService: service, account: account, accessGroup: accessGroup)
         let status = SecItemDelete(query as CFDictionary)
 
         guard status == noErr || status == errSecItemNotFound else {
             throw KeychainError.unhandledError(status: status)
         }
+        onSuccess?()
     }
 
     //MARK: Convenience
-    private static func query(withService service: String, account: String? = nil, accessGroup: String? = nil) -> [String: AnyObject] {
+    private static func query(withService service: String,
+                              account: String? = nil,
+                              accessGroup: String? = nil
+    ) -> [String: AnyObject] {
         var query = [String: AnyObject]()
         query[kSecClass as String] = kSecClassGenericPassword
         query[kSecAttrService as String] = service as AnyObject?

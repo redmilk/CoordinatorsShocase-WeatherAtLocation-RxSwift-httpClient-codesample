@@ -8,10 +8,8 @@
 
 import Foundation
 
-fileprivate let serviceName = "MyCoordinatorsTemplate"
-
 final class AuthSession {
-
+    
     typealias UserChangesCallback = (User?) -> Void
     
     private(set) var user: User? {
@@ -19,19 +17,11 @@ final class AuthSession {
             notify()
         }
     }
+    
+    private let serviceName = "MyCoordinatorsTemplate"
     private let kAccount = "kAccount"
     private var callbacks: [UserChangesCallback] = []
     
-//    lazy var archiver: NSKeyedArchiver = {
-//       let archiver = NSKeyedArchiver()
-//        archiver.delegate = self
-//    }()
-//
-//    lazy var unarchiver: NSKeyedUnarchiver = {
-//        let unarchiver = NSKeyedUnarchiver()
-//        unarchiver.delegate = self
-//    }()
-
     init() {
         guard let user = fetchUser() else { return }
         self.user = user
@@ -52,25 +42,27 @@ final class AuthSession {
     func subscribeToUserChanges(_ callback: @escaping UserChangesCallback) {
         self.callbacks.append(callback)
     }
-
-    func setupUser(_ user: User) {
+    
+    func setupUser(_ user: User, onSuccess: (()->Void)? = nil) {
         guard let accessToken = user.accessToken else { fatalError("Internal inconsistency") }
         let account: String = accessToken.uid
+        /// obfuscted user id --> data --> save to UserDefaults
         let obfuscatingArray: [UInt8] = Obfuscator().bytesByObfuscatingString(string: account)
         do {
             let data: Data = try NSKeyedArchiver.archivedData(withRootObject: obfuscatingArray,
-                                                              requiringSecureCoding: false)
-            /// obfuscted user id --> data --> save to UserDefaults
+                                                              requiringSecureCoding: true)
             UserDefaults.standard.set(data, forKey: kAccount)
-            /// user --> data --> save to keychain
             do {
+                /// user --> data --> save to keychain
                 let data = try NSKeyedArchiver.archivedData(withRootObject: user,
-                                                            requiringSecureCoding: false)
+                                                            requiringSecureCoding: true)
                 let item = KeychainService(service: serviceName,
                                            account: account)
                 do {
                     try item.save(data)
                     self.user = user
+                    onSuccess?()
+                    /// debug errors
                 } catch {
                     Logger.log(error.localizedDescription,
                                entity: self,
@@ -90,6 +82,7 @@ final class AuthSession {
     
     func fetchUser() -> User? {
         var user: User?
+        /// kAccount(UserDefault key) --> data --> [UInt8] --> obfuscation to userId
         if let data = UserDefaults.standard.object(forKey: kAccount) as? Data {
             do {
                 if let obfuscatingArray = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [UInt8] {
@@ -97,19 +90,24 @@ final class AuthSession {
                     let item = KeychainService(service: serviceName,
                                                account: account)
                     do {
+                        /// userId request to keychain to get User object as Data
+                        /// Data --> User
                         let data: Data = try item.readData()
                         do {
                             user = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? User
+                            /// debug errors
                         } catch {
-                            Logger.log(error.localizedDescription, entity: self, symbol: "[⛔️ unarchiveTopLevelObjectWithData(data:)]")
+                            Logger.log(error.localizedDescription,
+                                       entity: self,
+                                       symbol: "[⛔️ Unarchive from Data to User failure]")
                         }
                     } catch {
                         if let error = error as? KeychainService.KeychainError {
                             switch error {
                             case .noObject:
-                                Logger.log(error.localizedDescription,
-                                           entity: self,
-                                           symbol: "[⛔️ keychain: No object]")
+                                Logger.log("Keychain: No object",
+                                           entity: nil,
+                                           symbol: "❕")
                             case .unexpectedItemData:
                                 Logger.log(error.localizedDescription,
                                            entity: self,
@@ -142,11 +140,13 @@ final class AuthSession {
     func logout(_ completion: (() -> Void)? = nil) {
         guard let user = self.user,
               let accessToken = user.accessToken else { return }
+        
+        let keychain = KeychainService(service: serviceName, account: accessToken.uid)
         do {
-            let keychain = KeychainService(service: serviceName, account: accessToken.uid)
             try keychain.delete()
             UserDefaults.standard.removeObject(forKey: kAccount)
-            notify()
+            self.user = nil
+            completion?()
         } catch {
             Logger.log(error.localizedDescription, entity: self, symbol: "[⛔️ keychain.delete()]")
         }
@@ -162,7 +162,10 @@ final class AuthSession {
                     let item = KeychainService(service: serviceName,
                                                account: account)
                     do {
-                        try item.delete()
+                        try item.delete() { [weak self] in
+                            self?.user = nil
+                            completion?()
+                        }
                     } catch {
                         Logger.log(error.localizedDescription,
                                    entity: self,
@@ -177,11 +180,11 @@ final class AuthSession {
         }
     }
     
-    //    func updateCurrentUser(_ user: User) {
-    //        guard let currentUser = self.user,
-    //              let token = currentUser.accessToken else { return }
-    //        self.user = user
-    //        self.user?.accessToken = token
-    //        save()
-    //    }
+    func updateCurrentUser(_ user: User) {
+        guard let currentUser = self.user,
+              let token = currentUser.accessToken else { return }
+        setupUser(user) { [weak self] in
+            self?.user?.accessToken = token
+        }
+    }
 }

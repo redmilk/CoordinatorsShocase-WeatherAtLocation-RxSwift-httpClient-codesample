@@ -23,7 +23,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Y6K-JN-vQB">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Y6K-JN-vQB">
                                 <rect key="frame" x="113.5" y="265" width="187" height="140.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="- user name -" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jKN-Gq-pBX">
@@ -33,21 +33,14 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UBU-x5-Hb4">
-                                        <rect key="frame" x="0.0" y="20.5" width="187" height="30"/>
+                                        <rect key="frame" x="0.0" y="30.5" width="187" height="30"/>
                                         <state key="normal" title="Save User"/>
                                         <connections>
                                             <action selector="saveUserPressed:" destination="Xiz-N0-yos" eventType="touchUpInside" id="Bed-KJ-tvC"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nbZ-5Z-pCA">
-                                        <rect key="frame" x="0.0" y="50.5" width="187" height="30"/>
-                                        <state key="normal" title="Retreive user"/>
-                                        <connections>
-                                            <action selector="retreiveUserPressed:" destination="Xiz-N0-yos" eventType="touchUpInside" id="eBc-gh-kNF"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AAc-cv-sMs">
-                                        <rect key="frame" x="0.0" y="80.5" width="187" height="30"/>
+                                        <rect key="frame" x="0.0" y="70.5" width="187" height="30"/>
                                         <state key="normal" title="Delete User"/>
                                         <connections>
                                             <action selector="deleteUserPressed:" destination="Xiz-N0-yos" eventType="touchUpInside" id="Chd-J2-4lu"/>
@@ -74,6 +67,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Zbx-WV-HAY"/>
                     <connections>
+                        <outlet property="logInButton" destination="nh7-UJ-L1d" id="EcE-mD-OQj"/>
                         <outlet property="userNameLabel" destination="jKN-Gq-pBX" id="SYq-FR-G2w"/>
                     </connections>
                 </viewController>

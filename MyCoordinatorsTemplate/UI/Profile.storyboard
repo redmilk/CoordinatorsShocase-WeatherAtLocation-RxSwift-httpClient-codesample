@@ -73,13 +73,16 @@
                             <constraint firstItem="K1O-Ci-wGI" firstAttribute="top" secondItem="9mq-2h-3Ah" secondAttribute="bottom" constant="100" id="xOK-lC-CtH"/>
                         </constraints>
                     </view>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" id="2tQ-S1-eCJ">
-                        <barButtonItem key="rightBarButtonItem" title="Close" id="6Ye-Za-fld">
+                        <barButtonItem key="rightBarButtonItem" title="Log out" id="vEd-CJ-Y4d">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <action selector="closePressed:" destination="zcH-7f-lXq" id="V90-1a-w9J"/>
+                                <action selector="logOutPressed:" destination="zcH-7f-lXq" id="sOT-f5-Lxn"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7VH-Y9-m0V" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

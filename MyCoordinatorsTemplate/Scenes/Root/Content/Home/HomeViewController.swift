@@ -25,21 +25,6 @@ final class HomeViewController: ViewController, Instantiatable {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-//        if coordinator?.navigationController?.delegate != nil  {
-//            //Logger.log(entity: coordinator?.navigationController?.delegate)
-//        } else {
-//            print("HomeViewController Navigation delegate NIL")
-//        }
-    }
-    
-    @IBAction func logOutPressed(_ sender: Any) {
-        isLoggedIn = false
-        viewModel.displayAuth()
-    }
-    
     @IBAction func pushProfilePressed(_ sender: Any) {
         viewModel.pushProfile()
     }

@@ -14,7 +14,7 @@ open class ViewController: UIViewController, UITextFieldDelegate, UITextViewDele
     
     public var textFieldsArrayForFreeSpaceTapKeyboardHiding: [UITextField] = []
     public var textViewArrayForFreeSpaceTapKeyboardHiding: [UITextView] = []
-    
+        
     required public init?(coder: NSCoder) {
         super.init(coder: coder)
         //Logger.initialization(entity: self)
@@ -34,10 +34,27 @@ open class ViewController: UIViewController, UITextFieldDelegate, UITextViewDele
         view.addGestureRecognizer(tap)
     }
     
+    open override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        /// For iOS default modal dismiss handling by dragging VC
+        /// if this controller is embedded in navigation controller
+        if let nc = navigationController, nc.isBeingDismissed {
+            handleDefaultModalDismissing()
+        }
+        /// if this controller is not embedded in navigation controller
+        if isBeingDismissed {
+            handleDefaultModalDismissing()
+        }
+    }
+    
     @objc func handleTap() {
         textFieldsArrayForFreeSpaceTapKeyboardHiding.forEach { $0.resignFirstResponder() }
         textViewArrayForFreeSpaceTapKeyboardHiding.forEach { $0.resignFirstResponder() }
     }
+    
+    /// override this for handling iOS default modal dismissing, by dragging
+    public func handleDefaultModalDismissing() { }
     
     public func addTextSourceFieldToConvenienceKeyboardHidingList(textFields: [UITextField] = [],
                                                                   textViews: [UITextView] = []

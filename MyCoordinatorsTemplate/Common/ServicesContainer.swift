@@ -18,7 +18,7 @@ final class ServicesContainer {
 /// List of services protocols to get needed functionality
 protocol AuthSessionSupporting { }
 extension AuthSessionSupporting {
-    var auth: AuthSession {
+    var authService: AuthSession {
         return services.auth
     }
 }

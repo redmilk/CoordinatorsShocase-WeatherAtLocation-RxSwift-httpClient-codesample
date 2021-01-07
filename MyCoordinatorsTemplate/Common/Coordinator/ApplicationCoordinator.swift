@@ -8,18 +8,22 @@
 
 import UIKit
 
-/// Pseudo user session
-var isLoggedIn: Bool = false
+// MARK: - Capabilities
+extension ApplicationCoordinator: AuthSessionSupporting { }
 
-final class ApplicationCoordinator: BaseCoordinator, AuthSessionSupporting {
+
+final class ApplicationCoordinator: BaseCoordinator {
         
     init(window: UIWindow) {
         super.init()
         self.window = window
     }
     
-   override func start() {
-        isLoggedIn ? showContent() : showAuth()
+    override func start() {
+        authService.subscribeToUserChanges { [unowned(unsafe) self] (user) in /// this object will live during the app's life
+            self.authService.isAuthorized ? self.showContent() : self.showAuth()
+        }
+        authService.isAuthorized ? self.showContent() : self.showAuth()
     }
     
     private func showContent() {

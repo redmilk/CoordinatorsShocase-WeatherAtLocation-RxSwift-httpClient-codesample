@@ -8,7 +8,16 @@
 
 import Foundation
 
-final class AuthSession {
+protocol AuthSessionProtocol: class {
+    var isAuthorized: Bool { get }
+    
+    func setupUser(_ user: User, onSuccess: (()->Void)?)
+    func fetchUser() -> User?
+    func logout(user: User, completion: (() -> Void)?)
+    func updateCurrentUser(_ user: User)
+}
+
+final class AuthSession: AuthSessionProtocol {
     
     typealias UserChangesCallback = (User?) -> Void
     
@@ -153,7 +162,7 @@ final class AuthSession {
     }
     
     func logout(user: User,
-                completion: (() -> Void)? = nil
+                completion: (() -> Void)?
     ) {
         if let data = UserDefaults.standard.object(forKey: kAccount) as? Data {
             do {

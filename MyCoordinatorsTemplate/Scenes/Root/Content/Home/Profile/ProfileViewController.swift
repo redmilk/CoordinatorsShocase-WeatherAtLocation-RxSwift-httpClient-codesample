@@ -21,15 +21,9 @@ final class ProfileViewController: ViewController, Instantiatable {
     required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-//        if coordinator?.navigationController?.delegate != nil  {
-//            //Logger.log(entity: coordinator?.navigationController?.delegate)
-//        } else {
-//            print("ProfileViewController Navigation delegate NIL")
-//        }
+
+    override func handleDefaultModalDismissing() {
+        viewModel.dismiss()
     }
     
     @IBAction func personalInformationPressed(_ sender: Any) {
@@ -51,8 +45,8 @@ final class ProfileViewController: ViewController, Instantiatable {
     @IBAction func rootAuthPressed(_ sender: Any) {
         viewModel.rootAuth()
     }
-    
-    @IBAction func closePressed(_ sender: Any) {
-        viewModel.dismiss()
+        
+    @IBAction func logOutPressed(_ sender: Any) {
+        viewModel.logOut()
     }
 }

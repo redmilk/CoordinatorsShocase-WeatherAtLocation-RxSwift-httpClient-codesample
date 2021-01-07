@@ -18,7 +18,7 @@ class BaseCoordinator: NSObject, CoordinatorProtocol {
     
     private var childCoordinators: [String : CoordinatorProtocol] = [:]
     var window: UIWindow!
-    weak var parentCoordinator: CoordinatorProtocol!
+    weak var parentCoordinator: CoordinatorProtocol?
     weak var currentController: UIViewController?
     weak var navigationController: UINavigationController? {
         didSet {

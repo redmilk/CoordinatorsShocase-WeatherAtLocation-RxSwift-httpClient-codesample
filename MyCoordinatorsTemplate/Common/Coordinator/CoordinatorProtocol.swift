@@ -11,7 +11,7 @@ import UIKit
 protocol CoordinatorProtocol: AnyObject {
     
     /// if current coordinator has parent
-    var parentCoordinator: CoordinatorProtocol! { get set }
+    var parentCoordinator: CoordinatorProtocol? { get set }
     
     /// if navigation starts from UINavigationController
     var navigationController: UINavigationController? { get set }

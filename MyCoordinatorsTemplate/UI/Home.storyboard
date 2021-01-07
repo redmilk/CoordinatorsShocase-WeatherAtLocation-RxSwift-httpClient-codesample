@@ -59,14 +59,7 @@
                             <constraint firstItem="aHz-1W-beV" firstAttribute="centerX" secondItem="cod-Su-xvl" secondAttribute="centerX" id="xFL-CJ-xd9"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="FVi-2i-foy">
-                        <barButtonItem key="rightBarButtonItem" title="Log out" id="QjU-fG-USL">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <action selector="logOutPressed:" destination="Vp4-Ve-fGF" id="BDl-Ep-bYW"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="FVi-2i-foy"/>
                     <connections>
                         <outlet property="navigationItem" destination="FVi-2i-foy" id="0zh-CO-bQR"/>
                     </connections>

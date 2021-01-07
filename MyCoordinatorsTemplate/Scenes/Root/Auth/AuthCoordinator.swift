@@ -39,7 +39,8 @@ final class AuthCoordinator: BaseCoordinator, AuthCoordinatorProtocol {
     override func start() {
         switch presentationMode {
         case .root(let window):
-            let viewModel = AuthViewModel(coordinator: self, vcTitle: title)
+            let viewModel = AuthViewModel(coordinator: self,
+                                          vcTitle: title)
             let controller = AuthViewController.instantiate(storyboard: .auth,
                                                             instantiation: .initial) {
                 return AuthViewController(viewModel: viewModel, coder: $0)!
@@ -49,7 +50,8 @@ final class AuthCoordinator: BaseCoordinator, AuthCoordinatorProtocol {
             window.rootViewController = navigationController
         case .push(let navigation):
             navigationController = navigation
-            let viewModel = AuthViewModel(coordinator: self, vcTitle: title)
+            let viewModel = AuthViewModel(coordinator: self,
+                                          vcTitle: title)
             let controller = AuthViewController.instantiate(storyboard: .auth,
                                                             instantiation: .initial) {
                 return AuthViewController(viewModel: viewModel, coder: $0)!
@@ -57,7 +59,8 @@ final class AuthCoordinator: BaseCoordinator, AuthCoordinatorProtocol {
             controller.title = title
             navigation.pushViewController(controller, animated: true)
         case .modal(let parentVC):
-            let viewModel = AuthViewModel(coordinator: self, vcTitle: title)
+            let viewModel = AuthViewModel(coordinator: self,
+                                          vcTitle: title)
             let controller = AuthViewController.instantiate(storyboard: .auth,
                                                             instantiation: .initial) {
                 return AuthViewController(viewModel: viewModel, coder: $0)!
@@ -72,12 +75,12 @@ final class AuthCoordinator: BaseCoordinator, AuthCoordinatorProtocol {
         super.didNavigate(navigationController, to: viewController, animated: animated)
         if let _ = viewController as? ProfileViewController {
             /// handling of going back with iOS default back button
-            parentCoordinator.removeChild(self)
+            parentCoordinator?.removeChild(self)
         }
     }
     
     override func end() {
-        parentCoordinator.removeChild(self)
+        parentCoordinator?.removeChild(self)
         
         switch presentationMode {
         case .root:

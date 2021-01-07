@@ -64,10 +64,10 @@ final class ProfileCoordinator: BaseCoordinator, ProfileCoordinatorProtocol {
         case .modal:
             guard let currentController = currentController else { fatalError("Internal inconsistency") }
             currentController.dismiss(animated: true, completion: nil)
-            self.parentCoordinator.removeChild(self)
+            parentCoordinator?.removeChild(self)
         case .push:
             navigationController?.popViewController(animated: true)
-            parentCoordinator.removeChild(self)
+            parentCoordinator?.removeChild(self)
         case _: return
         }
     }

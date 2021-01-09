@@ -48,19 +48,21 @@ open class ViewController: UIViewController, UITextFieldDelegate, UITextViewDele
         }
     }
     
+    /// override this for handling iOS default modal dismissing, by dragging
+    public func handleDefaultModalDismissing() { }
+    
     @objc func handleTap() {
         textFieldsArrayForFreeSpaceTapKeyboardHiding.forEach { $0.resignFirstResponder() }
         textViewArrayForFreeSpaceTapKeyboardHiding.forEach { $0.resignFirstResponder() }
     }
-    
-    /// override this for handling iOS default modal dismissing, by dragging
-    public func handleDefaultModalDismissing() { }
-    
+        
     public func addTextSourceFieldToConvenienceKeyboardHidingList(textFields: [UITextField] = [],
                                                                   textViews: [UITextView] = []
     ) {
         textFieldsArrayForFreeSpaceTapKeyboardHiding.append(contentsOf: textFields)
         textViewArrayForFreeSpaceTapKeyboardHiding.append(contentsOf: textViews)
+        textFieldsArrayForFreeSpaceTapKeyboardHiding.forEach { $0.delegate = self }
+        textViewArrayForFreeSpaceTapKeyboardHiding.forEach { $0.delegate = self }
     }
     
     // MARK: - Keyboard events
@@ -92,9 +94,10 @@ open class ViewController: UIViewController, UITextFieldDelegate, UITextViewDele
         let options = UIView.AnimationOptions.beginFromCurrentState
         UIView.animate(withDuration: animationDuration, delay: 0, options:options, animations: { () -> Void in
             let insetHeight = (self.internalScrollView.frame.height + self.internalScrollView.frame.origin.y) - keyboardFrameConvertedToViewFrame.origin.y
-            self.internalScrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: insetHeight, right: 0)
+            self.internalScrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: insetHeight + 24.0, right: 0)
             self.internalScrollView.scrollIndicatorInsets  = UIEdgeInsets(top: 0, left: 0, bottom: insetHeight, right: 0)
         }) { (complete) -> Void in
+            self.internalScrollView.isScrollEnabled = false
         }
     }
     
@@ -106,6 +109,7 @@ open class ViewController: UIViewController, UITextFieldDelegate, UITextViewDele
             self.internalScrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             self.internalScrollView.scrollIndicatorInsets  = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         }) { (complete) -> Void in
+            self.internalScrollView.isScrollEnabled = true
         }
     }
     

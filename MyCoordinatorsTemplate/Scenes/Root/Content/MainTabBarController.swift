@@ -24,7 +24,7 @@ final class MainTabBarController: UITabBarController, Instantiatable {
     }
     
     deinit {
-        Logger.deinitialization(entity: self)
+        //Logger.deinitialization(entity: self)
     }
     
     // MARK: - Lifecycle

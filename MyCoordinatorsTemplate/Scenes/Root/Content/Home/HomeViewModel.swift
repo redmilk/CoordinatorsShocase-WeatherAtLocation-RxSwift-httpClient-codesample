@@ -9,10 +9,8 @@
 import Foundation
 
 protocol HomeViewModelProtocol {
-    func displayAuth()
     func pushProfile()
     func presentProfile()
-    func rootProfile()
 }
 
 struct HomeViewModel: HomeViewModelProtocol {
@@ -23,10 +21,6 @@ struct HomeViewModel: HomeViewModelProtocol {
         self.coordinator = coordinator
     }
     
-    func displayAuth() {
-        coordinator.displayAuthAsRoot()
-    }
-    
     func pushProfile() {
         coordinator.pushProfile()
     }
@@ -34,9 +28,4 @@ struct HomeViewModel: HomeViewModelProtocol {
     func presentProfile() {
         coordinator.presentProfile()
     }
-    
-    func rootProfile() {
-        
-    }
-    
 }

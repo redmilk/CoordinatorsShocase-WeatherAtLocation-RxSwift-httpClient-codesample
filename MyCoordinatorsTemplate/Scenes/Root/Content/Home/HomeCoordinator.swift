@@ -11,27 +11,23 @@ import UIKit
 protocol HomeCoordinatorProtocol {
     func pushProfile()
     func presentProfile()
-    func displayAuthAsRoot()
-}
-
-protocol HomeCoordinatorDelegate: class {
-    func didLogOut(_ coordinator: CoordinatorProtocol)
 }
 
 final class HomeCoordinator: BaseCoordinator, HomeCoordinatorProtocol {
-    
-    weak var delegate: HomeCoordinatorDelegate?
-    
+        
     private let title: String
+    private var onEnd: () -> Void
     
     init(tabBarController: UITabBarController,
-         delegate: HomeCoordinatorDelegate,
-         title: String
+         parentCoordinator: CoordinatorProtocol,
+         title: String,
+         onEnd: @escaping () -> Void
     ) {
-        self.delegate = delegate
         self.title = title
+        self.onEnd = onEnd
         super.init()
         self.tabBarController = tabBarController
+        self.parentCoordinator = parentCoordinator
     }
     
     override func start() {
@@ -49,11 +45,19 @@ final class HomeCoordinator: BaseCoordinator, HomeCoordinatorProtocol {
         self.navigationController = navigationController
     }
     
+    override func end() {
+        self.onEnd()
+        super.end()
+    }
+    
     // MARK: - Display profile scene
     func pushProfile() {
         let child = ProfileCoordinator(parentCoordinator: self,
                                        title: "Profile",
-                                       presentationType: .push(navigationController!))
+                                       presentationType: .push(navigationController!),
+                                       onEnd: { [weak self] in
+                                        self?.end()
+                                       })
         addChild(child)
         child.start()
     }
@@ -61,13 +65,12 @@ final class HomeCoordinator: BaseCoordinator, HomeCoordinatorProtocol {
     func presentProfile() {
         let child = ProfileCoordinator(parentCoordinator: self,
                                        title: "Profile",
-                                       presentationType: .modal(navigationController!))
+                                       presentationType: .modal(navigationController!),
+                                       onEnd: { [weak self] in
+                                        self?.end()
+                                       })
         addChild(child)
         child.start()
-    }
-    
-    func displayAuthAsRoot() {
-        delegate?.didLogOut(self)
     }
     
 }

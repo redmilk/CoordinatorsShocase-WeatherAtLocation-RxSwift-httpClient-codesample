@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class AuthViewController: ViewController, Instantiatable, AuthSessionSupporting {
+final class AuthViewController: ViewController, Instantiatable, Sessionable {
     
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var logInButton: UIButton!
@@ -18,6 +18,7 @@ final class AuthViewController: ViewController, Instantiatable, AuthSessionSuppo
     required init?(viewModel: AuthViewModelProtocol, coder: NSCoder) {
         self.viewModel = viewModel
         super.init(coder: coder)
+        title = viewModel.title
     }
     
     @available(*, unavailable, renamed: "init(viewModel:coder:)")
@@ -27,31 +28,17 @@ final class AuthViewController: ViewController, Instantiatable, AuthSessionSuppo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = viewModel.title
-        userNameLabel.text = authService.user?.fullName
-        authService.subscribeToUserChanges { [weak self] (user) in
-            guard let user = user else {
-                self?.userNameLabel.text = "Not logged in"
-                self?.logInButton.isHidden = true
-                return
-            }
-            self?.userNameLabel.text = user.fullName
-            self?.logInButton.isHidden = false
-        }
+        userNameLabel.text = viewModel.user.fullName
     }
  
     override func handleDefaultModalDismissing() {
-        viewModel.dismiss()
-    }
-    
-    @IBAction func loggedInPressed(_ sender: Any) {
-        viewModel.performLogIn { [weak self] (isLoggedIn) in
-            self?.viewModel.dismiss()
-        }
+        viewModel.dismissAuthFlow()
     }
     
     @IBAction func saveUserPressed(_ sender: Any) {
-        viewModel.saveUser()
+        viewModel.performLogIn(completion: { () -> Bool in
+            return true
+        })
     }
     
     @IBAction func deleteUserPressed(_ sender: Any) {

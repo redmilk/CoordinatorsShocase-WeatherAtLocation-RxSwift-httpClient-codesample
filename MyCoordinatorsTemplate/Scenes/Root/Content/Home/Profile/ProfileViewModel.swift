@@ -20,7 +20,7 @@ protocol ProfileViewModelProtocol {
 }
 
 /// injecting capabilities
-extension ProfileViewModel: AuthSessionSupporting { }
+extension ProfileViewModel: Sessionable { }
 
 // TODO: - make viewmodel as class, and protocols with weak, constraint them to class
 struct ProfileViewModel: ProfileViewModelProtocol {
@@ -34,8 +34,8 @@ struct ProfileViewModel: ProfileViewModelProtocol {
     }
     
     func logOut() {
-        guard let user = authService.user else { return }
-        authService.logout(user: user) {
+        guard let user = auth.user else { return }
+        auth.logout(user: user) {
             self.coordinator.rootAuth()
         }
     }
@@ -57,7 +57,10 @@ struct ProfileViewModel: ProfileViewModelProtocol {
     }
     
     func rootAuth() {
-        coordinator.rootAuth()
+        guard let user = auth.user else { return }
+        auth.logout(user: user) {
+            self.coordinator.rootAuth()
+        }
     }
     
     func dismiss() {

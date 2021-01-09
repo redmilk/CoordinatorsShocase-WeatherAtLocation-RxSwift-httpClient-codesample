@@ -21,13 +21,16 @@ final class ProfileCoordinator: BaseCoordinator, ProfileCoordinatorProtocol {
     
     private let title: String
     private let presentationMode: PresentationMode
+    private let onEnd: () -> Void
     
     init(parentCoordinator: HomeCoordinator,
          title: String,
-         presentationType: PresentationMode
+         presentationType: PresentationMode,
+         onEnd: @escaping () -> Void
     ) {
         self.title = title
         self.presentationMode = presentationType
+        self.onEnd = onEnd
         super.init()
         self.parentCoordinator = parentCoordinator
         self.navigationController = parentCoordinator.navigationController
@@ -64,12 +67,17 @@ final class ProfileCoordinator: BaseCoordinator, ProfileCoordinatorProtocol {
         case .modal:
             guard let currentController = currentController else { fatalError("Internal inconsistency") }
             currentController.dismiss(animated: true, completion: nil)
-            parentCoordinator?.removeChild(self)
+            //parentCoordinator?.removeChild(self)
+            //removeAllChildCoordinators()
+        break
         case .push:
-            navigationController?.popViewController(animated: true)
-            parentCoordinator?.removeChild(self)
-        case _: return
+            //parentCoordinator?.removeChild(self)
+            //removeAllChildCoordinators()
+            //navigationController?.popToRootViewController(animated: true)//popViewController(animated: true)
+        break
+        case _: break
         }
+        super.end()
     }
     
     /// Here we finish our current coordinator when user taps default back button
@@ -85,10 +93,10 @@ final class ProfileCoordinator: BaseCoordinator, ProfileCoordinatorProtocol {
     }
     
     func pushPersonalInfo() {
+        let viewModel = PersonalInfoViewModel(coordinator: self, vcTitle: "Personal Information")
         let controller = PersonalInfoViewController.instantiate(storyboard: .profile, instantiation: .withIdentifier) {
-            return PersonalInfoViewController(coder: $0)!
+            return PersonalInfoViewController(viewModel: viewModel, coder: $0)!
         }
-        controller.title = "Personal Information"
         navigationController?.pushViewController(controller, animated: true)
     }
     
@@ -119,11 +127,13 @@ final class ProfileCoordinator: BaseCoordinator, ProfileCoordinatorProtocol {
     }
     
     func rootAuth() {
-        let child = AuthCoordinator(title: "Authentication",
-                                    presentationMode: .root(UIApplication.currentWindow!),
-                                    parentCoordinator: self)
-        addChild(child)
-        child.start()
+         end()
+         collapseCoordinatorStackRecursevly()
+//        parentCoordinator?.removeChild(self)
+//        let root = AuthCoordinator(title: "Authentication",
+//                                    presentationMode: .root(UIApplication.currentWindow!),
+//                                    parentCoordinator: nil)
+        //root.start()
     }
     
 }

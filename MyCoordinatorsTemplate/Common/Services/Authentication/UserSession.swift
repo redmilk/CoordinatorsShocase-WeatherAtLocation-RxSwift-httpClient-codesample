@@ -17,7 +17,7 @@ protocol AuthSessionProtocol: class {
     func updateCurrentUser(_ user: User)
 }
 
-final class AuthSession: AuthSessionProtocol {
+final class UserSession: AuthSessionProtocol {
     
     typealias UserChangesCallback = (User?) -> Void
     

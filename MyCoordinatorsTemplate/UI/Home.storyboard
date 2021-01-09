@@ -24,7 +24,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="aHz-1W-beV">
-                                <rect key="frame" x="156.5" y="244" width="101" height="122"/>
+                                <rect key="frame" x="156.5" y="244" width="101" height="76"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I1C-qj-Dmq">
                                         <rect key="frame" x="0.0" y="0.0" width="101" height="30"/>
@@ -38,13 +38,6 @@
                                         <state key="normal" title="Present Profile"/>
                                         <connections>
                                             <action selector="presentProfilePressed:" destination="Vp4-Ve-fGF" eventType="touchUpInside" id="7z1-3R-Ki1"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q5j-sE-sRz">
-                                        <rect key="frame" x="0.0" y="92" width="101" height="30"/>
-                                        <state key="normal" title="Profile as Root"/>
-                                        <connections>
-                                            <action selector="rootProfilePressed:" destination="Vp4-Ve-fGF" eventType="touchUpInside" id="K2z-TE-Lzy"/>
                                         </connections>
                                     </button>
                                 </subviews>

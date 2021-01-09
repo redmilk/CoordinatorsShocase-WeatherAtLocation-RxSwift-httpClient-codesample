@@ -9,27 +9,21 @@
 import UIKit
 
 protocol AuthCoordinatorProtocol {
-    func dismiss()
-}
-
-protocol AuthCoordinatorDelegate: class {
-    func authFlowDidFinish(_ coordinator: AuthCoordinator)
+    func displayFinalStepScene(user: User)
+    func displayLastNameScene(user: User)
+    func end()
 }
 
 final class AuthCoordinator: BaseCoordinator, AuthCoordinatorProtocol {
-    
-    weak var delegate: AuthCoordinatorDelegate?
-    
+        
     private let title: String
-    private let presentationMode: PresentationMode
+    private var presentationMode: PresentationMode
     
     init(title: String,
          presentationMode: PresentationMode,
-         parentCoordinator: CoordinatorProtocol,
-         delegate: AuthCoordinatorDelegate? = nil
+         parentCoordinator: CoordinatorProtocol?
     ) {
         self.title = title
-        self.delegate = delegate
         self.presentationMode = presentationMode
         super.init()
         self.window = window
@@ -39,35 +33,35 @@ final class AuthCoordinator: BaseCoordinator, AuthCoordinatorProtocol {
     override func start() {
         switch presentationMode {
         case .root(let window):
-            let viewModel = AuthViewModel(coordinator: self,
-                                          vcTitle: title)
-            let controller = AuthViewController.instantiate(storyboard: .auth,
-                                                            instantiation: .initial) {
-                return AuthViewController(viewModel: viewModel, coder: $0)!
-            }
+            self.window = window
+            let viewModel = FirstNameViewModel(vcTitle: "Your first name", coordinator: self)
+            let controller = FirstNameViewController.instantiate(storyboard: .auth,
+                                                                 instantiation: .withIdentifier,
+                                                                 creator: {
+                FirstNameViewController(viewModel: viewModel, coder: $0)!
+            })
             navigationController = UINavigationController.makeStyled(style: .black, root: controller)
-            controller.title = title
-            window.rootViewController = navigationController
+            self.window.rootViewController = navigationController
         case .push(let navigation):
             navigationController = navigation
-            let viewModel = AuthViewModel(coordinator: self,
-                                          vcTitle: title)
-            let controller = AuthViewController.instantiate(storyboard: .auth,
-                                                            instantiation: .initial) {
-                return AuthViewController(viewModel: viewModel, coder: $0)!
-            }
-            controller.title = title
+            currentController = navigation
+            let viewModel = FirstNameViewModel(vcTitle: "Your first name", coordinator: self)
+            let controller = FirstNameViewController.instantiate(storyboard: .auth,
+                                                                 instantiation: .withIdentifier,
+                                                                 creator: {
+                FirstNameViewController(viewModel: viewModel, coder: $0)!
+            })
             navigation.pushViewController(controller, animated: true)
         case .modal(let parentVC):
-            let viewModel = AuthViewModel(coordinator: self,
-                                          vcTitle: title)
-            let controller = AuthViewController.instantiate(storyboard: .auth,
-                                                            instantiation: .initial) {
-                return AuthViewController(viewModel: viewModel, coder: $0)!
-            }
-            currentController = controller
-            controller.title = title
-            parentVC.present(controller, animated: true, completion: nil)
+            let viewModel = FirstNameViewModel(vcTitle: "Your first name", coordinator: self)
+            let controller = FirstNameViewController.instantiate(storyboard: .auth,
+                                                                 instantiation: .withIdentifier,
+                                                                 creator: {
+                FirstNameViewController(viewModel: viewModel, coder: $0)!
+            })
+            navigationController = UINavigationController.makeStyled(style: .black, root: controller)
+            currentController = navigationController
+            parentVC.present(navigationController!, animated: true, completion: nil)
         }
     }
     
@@ -79,24 +73,31 @@ final class AuthCoordinator: BaseCoordinator, AuthCoordinatorProtocol {
         }
     }
     
-    override func end() {
-        parentCoordinator?.removeChild(self)
-        
-        switch presentationMode {
-        case .root:
-            if delegate == nil {
-                print("NIL")
-            }
-            delegate?.authFlowDidFinish(self)
-        case .push:
-            navigationController?.popViewController(animated: true)
-        case .modal:
-            currentController?.dismiss(animated: true, completion: nil)
-        }
+    func displayLastNameScene(user: User) {
+        guard let navigationController = navigationController else { fatalError("Internal inconsistency") }
+        let viewModel = LastNameViewModel(vcTitle: "Your last name", user: user, coordinator: self)
+        let controller = LastNameViewController.instantiate(storyboard: .auth,
+                                                            instantiation: .withIdentifier,
+                                                            creator: {
+            LastNameViewController(viewModel: viewModel, coder: $0)!
+        })
+        navigationController.pushViewController(controller, animated: true)
     }
     
-    func dismiss() {
-        end()
+    func displayFinalStepScene(user: User) {
+        guard let navigationController = navigationController else { fatalError("Internal inconsistency") }
+        let viewModel = AuthViewModel(coordinator: self,
+                                      vcTitle: title,
+                                      user: user)
+        let controller = AuthViewController.instantiate(storyboard: .auth,
+                                                        instantiation: .withIdentifier) {
+            return AuthViewController(viewModel: viewModel, coder: $0)!
+        }
+        navigationController.pushViewController(controller, animated: true)
+    }
+    
+    override func end() {
+        super.end()
     }
     
 }

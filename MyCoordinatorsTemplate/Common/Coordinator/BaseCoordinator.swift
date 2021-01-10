@@ -72,25 +72,17 @@ class BaseCoordinator: NSObject, CoordinatorProtocol {
      }
     
     func removeAllChildCoordinators() {
-        //childCoordinators.enumerated().forEach { $0.element.value.end() }
+        // TODO: - check it
         childCoordinators.enumerated().forEach { $0.element.value.removeAllChildCoordinators() }
         childCoordinators.enumerated().forEach { $0.element.value.parentCoordinator?.removeChild(self) }
         childCoordinators.removeAll()
-    }
-    
-    func collapseCoordinatorStackRecursevly() {
-        if let parent = parentCoordinator {
-            //print(parent)
-            parent.removeAllChildCoordinators()
-            parent.collapseCoordinatorStackRecursevly()
-        }
     }
     
     /// Navigation events for UINavigationController
     func didNavigate(_ navigationController: UINavigationController,
                       to viewController: UIViewController,
                       animated: Bool) {
-        //Logger.log("Navigated to", entity: viewController, symbol: "[STACK]")
+        Logger.log("Navigated to", entity: viewController, symbol: "[STACK]")
     }
     
     /// Navigation events for UITabBarController
@@ -99,10 +91,10 @@ class BaseCoordinator: NSObject, CoordinatorProtocol {
         guard
             let navigationController = selectedTabController as? UINavigationController,
             let topControllerInStack = navigationController.viewControllers.last else {
-                //Logger.log("Tab selected with no navigation controller embedded", entity: selectedTabController, symbol: "[PURE TAB]")
+                Logger.log("Tab selected with no navigation controller embedded", entity: selectedTabController, symbol: "[PURE TAB]")
                 return
         }
-        //Logger.log("Selected tab with navigation controller", entity: topControllerInStack, symbol: "[NAV TAB]")
+        Logger.log("Selected tab with navigation controller", entity: topControllerInStack, symbol: "[NAV TAB]")
     }
 }
 

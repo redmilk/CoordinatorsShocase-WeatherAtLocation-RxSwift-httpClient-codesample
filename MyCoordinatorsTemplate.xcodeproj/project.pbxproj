@@ -47,7 +47,6 @@
 		79469AF025A4F75C00ECC90B /* Obfuscator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79469AEF25A4F75C00ECC90B /* Obfuscator.swift */; };
 		79469AF425A5042E00ECC90B /* AccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79469AF325A5042E00ECC90B /* AccessToken.swift */; };
 		79469AF825A5043A00ECC90B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79469AF725A5043A00ECC90B /* User.swift */; };
-		79469B3525A7BA7B00ECC90B /* DeepLinkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79469B3425A7BA7B00ECC90B /* DeepLinkService.swift */; };
 		79469B3F25A8E39900ECC90B /* FirstNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79469B3E25A8E39900ECC90B /* FirstNameViewController.swift */; };
 		79469B4325A8E3AF00ECC90B /* LastNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79469B4225A8E3AF00ECC90B /* LastNameViewController.swift */; };
 		79469B4625A8F7DB00ECC90B /* FirstNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79469B4525A8F7DB00ECC90B /* FirstNameViewModel.swift */; };
@@ -106,7 +105,6 @@
 		79469AEF25A4F75C00ECC90B /* Obfuscator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Obfuscator.swift; sourceTree = "<group>"; };
 		79469AF325A5042E00ECC90B /* AccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessToken.swift; sourceTree = "<group>"; };
 		79469AF725A5043A00ECC90B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		79469B3425A7BA7B00ECC90B /* DeepLinkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkService.swift; sourceTree = "<group>"; };
 		79469B3E25A8E39900ECC90B /* FirstNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstNameViewController.swift; sourceTree = "<group>"; };
 		79469B4225A8E3AF00ECC90B /* LastNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastNameViewController.swift; sourceTree = "<group>"; };
 		79469B4525A8F7DB00ECC90B /* FirstNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstNameViewModel.swift; sourceTree = "<group>"; };
@@ -311,7 +309,6 @@
 			isa = PBXGroup;
 			children = (
 				79469ADD25A4E9A300ECC90B /* ServicesContainer.swift */,
-				79469B3425A7BA7B00ECC90B /* DeepLinkService.swift */,
 				79469AF225A5041700ECC90B /* Authentication */,
 			);
 			path = Services;
@@ -479,7 +476,6 @@
 				79469ADA25A4DDF300ECC90B /* UIApplication+Extensions.swift in Sources */,
 				790516AC2590D69300B9E3DA /* MainTabBarController.swift in Sources */,
 				7905171F25A1283C00B9E3DA /* MainTabBarViewModel.swift in Sources */,
-				79469B3525A7BA7B00ECC90B /* DeepLinkService.swift in Sources */,
 				79469ADE25A4E9A300ECC90B /* ServicesContainer.swift in Sources */,
 				7905171625A0C3CA00B9E3DA /* NoStoryboardedViewController.swift in Sources */,
 				790516CB2592BCE600B9E3DA /* PersonalInfoViewController.swift in Sources */,

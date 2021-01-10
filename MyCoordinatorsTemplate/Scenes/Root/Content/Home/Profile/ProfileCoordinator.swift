@@ -21,16 +21,13 @@ final class ProfileCoordinator: BaseCoordinator, ProfileCoordinatorProtocol {
     
     private let title: String
     private let presentationMode: PresentationMode
-    private let onEnd: () -> Void
     
     init(parentCoordinator: HomeCoordinator,
          title: String,
-         presentationType: PresentationMode,
-         onEnd: @escaping () -> Void
+         presentationType: PresentationMode
     ) {
         self.title = title
         self.presentationMode = presentationType
-        self.onEnd = onEnd
         super.init()
         self.parentCoordinator = parentCoordinator
         self.navigationController = parentCoordinator.navigationController
@@ -62,31 +59,12 @@ final class ProfileCoordinator: BaseCoordinator, ProfileCoordinatorProtocol {
         }
     }
     
-    override func end() {
-        switch presentationMode {
-        case .modal:
-            guard let currentController = currentController else { fatalError("Internal inconsistency") }
-            currentController.dismiss(animated: true, completion: nil)
-            //parentCoordinator?.removeChild(self)
-            //removeAllChildCoordinators()
-        break
-        case .push:
-            //parentCoordinator?.removeChild(self)
-            //removeAllChildCoordinators()
-            //navigationController?.popToRootViewController(animated: true)//popViewController(animated: true)
-        break
-        case _: break
-        }
-        super.end()
-    }
-    
-    /// Here we finish our current coordinator when user taps default back button
+    /// finish our current coordinator when user taps default back button
     override func didNavigate(_ navigationController: UINavigationController,
                               to viewController: UIViewController,
                               animated: Bool
     ) {
         super.didNavigate(navigationController, to: viewController, animated: animated)
-        // TODO: check with trying to avoid this if let
         if let _ = viewController as? HomeViewController {
             end()
         }
@@ -128,12 +106,6 @@ final class ProfileCoordinator: BaseCoordinator, ProfileCoordinatorProtocol {
     
     func rootAuth() {
          end()
-         collapseCoordinatorStackRecursevly()
-//        parentCoordinator?.removeChild(self)
-//        let root = AuthCoordinator(title: "Authentication",
-//                                    presentationMode: .root(UIApplication.currentWindow!),
-//                                    parentCoordinator: nil)
-        //root.start()
     }
     
 }

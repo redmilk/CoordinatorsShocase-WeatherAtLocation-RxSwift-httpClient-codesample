@@ -26,14 +26,13 @@ final class MainTabBarCoordinator: BaseCoordinator {
             return MainTabBarController(viewModel: tabBarViewModel, coder: $0)!
         }
         window.rootViewController = tabBarController
+        window.becomeKey()
         self.tabBarController = tabBarController
         
         /// tab bar's first controller coordinator
         let homeCoordinator = HomeCoordinator(tabBarController: tabBarController,
                                               parentCoordinator: self,
-                                              title: "Home", onEnd: { [weak self] in
-                                                self?.end()
-                                              })
+                                              title: "Home")
         /// tab bar's second controller coordinator
         let feedCoordinator = FeedCoordinator(tabBarController: tabBarController, title: "Feed")
         

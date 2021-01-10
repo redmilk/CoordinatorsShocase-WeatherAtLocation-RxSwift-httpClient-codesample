@@ -12,7 +12,6 @@ fileprivate let services = ServicesContainer()
 
 final class ServicesContainer {
     lazy var session: UserSession = { UserSession() }()
-    lazy var deepLink: DeepLinkService = { DeepLinkService() }()
 }
 
 /// List of services protocols to get needed functionality
@@ -20,13 +19,6 @@ protocol Sessionable { }
 extension Sessionable {
     var auth: UserSession {
         return services.session
-    }
-}
-
-protocol DeepLinking { }
-extension DeepLinking {
-    var deepLinker: DeepLinkService {
-        return services.deepLink
     }
 }
 

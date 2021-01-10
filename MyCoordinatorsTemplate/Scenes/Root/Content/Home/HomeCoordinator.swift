@@ -16,15 +16,12 @@ protocol HomeCoordinatorProtocol {
 final class HomeCoordinator: BaseCoordinator, HomeCoordinatorProtocol {
         
     private let title: String
-    private var onEnd: () -> Void
     
     init(tabBarController: UITabBarController,
          parentCoordinator: CoordinatorProtocol,
-         title: String,
-         onEnd: @escaping () -> Void
+         title: String
     ) {
         self.title = title
-        self.onEnd = onEnd
         super.init()
         self.tabBarController = tabBarController
         self.parentCoordinator = parentCoordinator
@@ -45,19 +42,11 @@ final class HomeCoordinator: BaseCoordinator, HomeCoordinatorProtocol {
         self.navigationController = navigationController
     }
     
-    override func end() {
-        self.onEnd()
-        super.end()
-    }
-    
     // MARK: - Display profile scene
     func pushProfile() {
         let child = ProfileCoordinator(parentCoordinator: self,
                                        title: "Profile",
-                                       presentationType: .push(navigationController!),
-                                       onEnd: { [weak self] in
-                                        self?.end()
-                                       })
+                                       presentationType: .push(navigationController!))
         addChild(child)
         child.start()
     }
@@ -65,10 +54,7 @@ final class HomeCoordinator: BaseCoordinator, HomeCoordinatorProtocol {
     func presentProfile() {
         let child = ProfileCoordinator(parentCoordinator: self,
                                        title: "Profile",
-                                       presentationType: .modal(navigationController!),
-                                       onEnd: { [weak self] in
-                                        self?.end()
-                                       })
+                                       presentationType: .modal(navigationController!))
         addChild(child)
         child.start()
     }

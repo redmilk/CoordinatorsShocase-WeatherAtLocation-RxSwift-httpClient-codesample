@@ -28,7 +28,6 @@ protocol CoordinatorProtocol: AnyObject {
     func addChild(_ child: CoordinatorProtocol)
     func removeChild(_ child: CoordinatorProtocol)
     func removeAllChildCoordinators()
-    func collapseCoordinatorStackRecursevly()
         
     func start()
     func end()

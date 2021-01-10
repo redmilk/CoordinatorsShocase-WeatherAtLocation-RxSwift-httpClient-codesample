@@ -14,7 +14,7 @@ open class ViewController: UIViewController, UITextFieldDelegate, UITextViewDele
     
     public var textFieldsArrayForFreeSpaceTapKeyboardHiding: [UITextField] = []
     public var textViewArrayForFreeSpaceTapKeyboardHiding: [UITextView] = []
-    
+        
     required public init?(coder: NSCoder) {
         super.init(coder: coder)
         //Logger.initialization(entity: self)
@@ -34,16 +34,35 @@ open class ViewController: UIViewController, UITextFieldDelegate, UITextViewDele
         view.addGestureRecognizer(tap)
     }
     
+    open override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        /// For iOS default modal dismiss handling by dragging VC
+        /// if this controller is embedded in navigation controller
+        if let nc = navigationController, nc.isBeingDismissed {
+            handleDefaultModalDismissing()
+        }
+        /// if this controller is not embedded in navigation controller
+        if isBeingDismissed {
+            handleDefaultModalDismissing()
+        }
+    }
+    
+    /// override this for handling iOS default modal dismissing, by dragging
+    public func handleDefaultModalDismissing() { }
+    
     @objc func handleTap() {
         textFieldsArrayForFreeSpaceTapKeyboardHiding.forEach { $0.resignFirstResponder() }
         textViewArrayForFreeSpaceTapKeyboardHiding.forEach { $0.resignFirstResponder() }
     }
-    
+        
     public func addTextSourceFieldToConvenienceKeyboardHidingList(textFields: [UITextField] = [],
                                                                   textViews: [UITextView] = []
     ) {
         textFieldsArrayForFreeSpaceTapKeyboardHiding.append(contentsOf: textFields)
         textViewArrayForFreeSpaceTapKeyboardHiding.append(contentsOf: textViews)
+        textFieldsArrayForFreeSpaceTapKeyboardHiding.forEach { $0.delegate = self }
+        textViewArrayForFreeSpaceTapKeyboardHiding.forEach { $0.delegate = self }
     }
     
     // MARK: - Keyboard events
@@ -75,9 +94,10 @@ open class ViewController: UIViewController, UITextFieldDelegate, UITextViewDele
         let options = UIView.AnimationOptions.beginFromCurrentState
         UIView.animate(withDuration: animationDuration, delay: 0, options:options, animations: { () -> Void in
             let insetHeight = (self.internalScrollView.frame.height + self.internalScrollView.frame.origin.y) - keyboardFrameConvertedToViewFrame.origin.y
-            self.internalScrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: insetHeight, right: 0)
+            self.internalScrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: insetHeight + 24.0, right: 0)
             self.internalScrollView.scrollIndicatorInsets  = UIEdgeInsets(top: 0, left: 0, bottom: insetHeight, right: 0)
         }) { (complete) -> Void in
+            self.internalScrollView.isScrollEnabled = false
         }
     }
     
@@ -89,6 +109,7 @@ open class ViewController: UIViewController, UITextFieldDelegate, UITextViewDele
             self.internalScrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             self.internalScrollView.scrollIndicatorInsets  = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         }) { (complete) -> Void in
+            self.internalScrollView.isScrollEnabled = true
         }
     }
     

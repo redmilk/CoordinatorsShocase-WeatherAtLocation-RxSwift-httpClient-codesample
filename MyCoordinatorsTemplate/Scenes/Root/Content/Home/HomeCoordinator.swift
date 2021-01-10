@@ -11,27 +11,20 @@ import UIKit
 protocol HomeCoordinatorProtocol {
     func pushProfile()
     func presentProfile()
-    func displayAuthAsRoot()
-}
-
-protocol HomeCoordinatorDelegate: class {
-    func didLogOut(_ coordinator: CoordinatorProtocol)
 }
 
 final class HomeCoordinator: BaseCoordinator, HomeCoordinatorProtocol {
-    
-    weak var delegate: HomeCoordinatorDelegate?
-    
+        
     private let title: String
     
     init(tabBarController: UITabBarController,
-         delegate: HomeCoordinatorDelegate,
+         parentCoordinator: CoordinatorProtocol,
          title: String
     ) {
-        self.delegate = delegate
         self.title = title
         super.init()
         self.tabBarController = tabBarController
+        self.parentCoordinator = parentCoordinator
     }
     
     override func start() {
@@ -64,10 +57,6 @@ final class HomeCoordinator: BaseCoordinator, HomeCoordinatorProtocol {
                                        presentationType: .modal(navigationController!))
         addChild(child)
         child.start()
-    }
-    
-    func displayAuthAsRoot() {
-        delegate?.didLogOut(self)
     }
     
 }

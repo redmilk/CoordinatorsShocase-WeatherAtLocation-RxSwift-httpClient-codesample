@@ -10,6 +10,7 @@ import Foundation
 
 protocol ProfileViewModelProtocol {
     var vcTitle: String { get }
+    func logOut()
     func pushCreditCards()
     func presentPersonalInfo()
     func pushAuth()
@@ -17,6 +18,9 @@ protocol ProfileViewModelProtocol {
     func rootAuth()
     func dismiss()
 }
+
+/// injecting capabilities
+extension ProfileViewModel: Sessionable { }
 
 // TODO: - make viewmodel as class, and protocols with weak, constraint them to class
 struct ProfileViewModel: ProfileViewModelProtocol {
@@ -27,6 +31,13 @@ struct ProfileViewModel: ProfileViewModelProtocol {
     init(coordinator: ProfileCoordinatorProtocol, vcTitle: String) {
         self.coordinator = coordinator
         self.vcTitle = vcTitle
+    }
+    
+    func logOut() {
+        guard let user = auth.user else { return }
+        auth.logout(user: user) {
+            self.coordinator.rootAuth()
+        }
     }
     
     func presentPersonalInfo() {
@@ -46,7 +57,10 @@ struct ProfileViewModel: ProfileViewModelProtocol {
     }
     
     func rootAuth() {
-        coordinator.rootAuth()
+        guard let user = auth.user else { return }
+        auth.logout(user: user) {
+            self.coordinator.rootAuth()
+        }
     }
     
     func dismiss() {

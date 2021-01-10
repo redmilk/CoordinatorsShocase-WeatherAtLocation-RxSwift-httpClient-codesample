@@ -40,11 +40,11 @@
                                             <action selector="presentAuthPressed:" destination="zcH-7f-lXq" eventType="touchUpInside" id="Mno-mU-56e"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tdQ-Y9-aCc">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w7z-Pk-vfi">
                                         <rect key="frame" x="0.0" y="92" width="179" height="30"/>
                                         <state key="normal" title="Root Authentication"/>
                                         <connections>
-                                            <action selector="rootAuthPressed:" destination="zcH-7f-lXq" eventType="touchUpInside" id="PqV-PS-COE"/>
+                                            <action selector="rootAuthPressed:" destination="zcH-7f-lXq" eventType="touchUpInside" id="XQm-gP-qZn"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mUQ-fr-zIi">
@@ -73,13 +73,16 @@
                             <constraint firstItem="K1O-Ci-wGI" firstAttribute="top" secondItem="9mq-2h-3Ah" secondAttribute="bottom" constant="100" id="xOK-lC-CtH"/>
                         </constraints>
                     </view>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" id="2tQ-S1-eCJ">
-                        <barButtonItem key="rightBarButtonItem" title="Close" id="6Ye-Za-fld">
+                        <barButtonItem key="rightBarButtonItem" title="Log out" id="vEd-CJ-Y4d">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <action selector="closePressed:" destination="zcH-7f-lXq" id="V90-1a-w9J"/>
+                                <action selector="logOutPressed:" destination="zcH-7f-lXq" id="sOT-f5-Lxn"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7VH-Y9-m0V" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -93,9 +96,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Personal Info" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i7L-bc-eor">
-                                <rect key="frame" x="157.5" y="144" width="99" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Full name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i7L-bc-eor">
+                                <rect key="frame" x="170.5" y="144" width="73" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7bd-go-Kqk">
+                                <rect key="frame" x="24" y="189" width="366" height="35"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="29"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -103,10 +112,16 @@
                         <viewLayoutGuide key="safeArea" id="hn3-d8-hYE"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="hn3-d8-hYE" firstAttribute="trailing" secondItem="7bd-go-Kqk" secondAttribute="trailing" constant="24" id="Adb-aW-1Fn"/>
+                            <constraint firstItem="7bd-go-Kqk" firstAttribute="top" secondItem="i7L-bc-eor" secondAttribute="bottom" constant="24" id="XiC-Eb-chh"/>
+                            <constraint firstItem="7bd-go-Kqk" firstAttribute="leading" secondItem="hn3-d8-hYE" secondAttribute="leading" constant="24" id="aWD-ip-dPD"/>
                             <constraint firstItem="i7L-bc-eor" firstAttribute="top" secondItem="hn3-d8-hYE" secondAttribute="top" constant="100" id="cnj-UW-Ykv"/>
                             <constraint firstItem="i7L-bc-eor" firstAttribute="centerX" secondItem="hn3-d8-hYE" secondAttribute="centerX" id="dPm-7q-K02"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="nameLabel" destination="7bd-go-Kqk" id="7Sn-bl-XNX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ssZ-BS-vXW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

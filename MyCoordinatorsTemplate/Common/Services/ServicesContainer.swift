@@ -11,15 +11,14 @@ import Foundation
 fileprivate let services = ServicesContainer()
 
 final class ServicesContainer {
-    lazy var auth: AuthSession = { AuthSession() }()
-    ///lazy var baseApiClient: ApiClient = { ApiClient() }()
+    lazy var session: UserSession = { UserSession() }()
 }
 
 /// List of services protocols to get needed functionality
-protocol AuthSessionSupporting { }
-extension AuthSessionSupporting {
-    var auth: AuthSession {
-        return services.auth
+protocol Sessionable { }
+extension Sessionable {
+    var auth: UserSession {
+        return services.session
     }
 }
 

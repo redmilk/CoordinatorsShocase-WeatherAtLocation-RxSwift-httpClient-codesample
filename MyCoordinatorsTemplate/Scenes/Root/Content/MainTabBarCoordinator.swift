@@ -8,20 +8,12 @@
 
 import UIKit
 
-protocol MainTabBarCoordinatorDelegate: class {
-    func displayAuth(_ coordinator: MainTabBarCoordinator)
-}
-
 /// Coordinator for tab bar content
 final class MainTabBarCoordinator: BaseCoordinator {
-    
-    weak var delegate: MainTabBarCoordinatorDelegate!
-    
+        
     init(window: UIWindow,
-         parentCoordinator: CoordinatorProtocol,
-         delegate: MainTabBarCoordinatorDelegate
+         parentCoordinator: CoordinatorProtocol
     ) {
-        self.delegate = delegate
         super.init()
         self.window = window
         self.parentCoordinator = parentCoordinator
@@ -34,10 +26,13 @@ final class MainTabBarCoordinator: BaseCoordinator {
             return MainTabBarController(viewModel: tabBarViewModel, coder: $0)!
         }
         window.rootViewController = tabBarController
+        window.becomeKey()
         self.tabBarController = tabBarController
         
         /// tab bar's first controller coordinator
-        let homeCoordinator = HomeCoordinator(tabBarController: tabBarController, delegate: self, title: "Home")
+        let homeCoordinator = HomeCoordinator(tabBarController: tabBarController,
+                                              parentCoordinator: self,
+                                              title: "Home")
         /// tab bar's second controller coordinator
         let feedCoordinator = FeedCoordinator(tabBarController: tabBarController, title: "Feed")
         
@@ -48,18 +43,4 @@ final class MainTabBarCoordinator: BaseCoordinator {
         feedCoordinator.start()        
     }
     
-}
-
-extension MainTabBarCoordinator: HomeCoordinatorDelegate {
-    func didLogOut(_ coordinator: CoordinatorProtocol) {
-        /// removes both HomeCoordinator and FeedCoordinator
-        /// this classes (HomeCoordinator and FeedCoordinator which are TabBar members)
-        /// don't need to call removeChild(_ child:) on their own
-        /// and we can not remove them both one by one
-        /// because only one of them signals for changing the root
-        /// in our case it is done for closing content and displaying auth flow
-        /// we remove them all manually by this method call
-        removeAllChildCoordinators()
-        delegate?.displayAuth(self)
-    }
 }

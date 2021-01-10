@@ -59,36 +59,22 @@ final class ProfileCoordinator: BaseCoordinator, ProfileCoordinatorProtocol {
         }
     }
     
-    override func end() {
-        switch presentationMode {
-        case .modal:
-            guard let currentController = currentController else { fatalError("Internal inconsistency") }
-            currentController.dismiss(animated: true, completion: nil)
-            self.parentCoordinator.removeChild(self)
-        case .push:
-            navigationController?.popViewController(animated: true)
-            parentCoordinator.removeChild(self)
-        case _: return
-        }
-    }
-    
-    /// Here we finish our current coordinator when user taps default back button
+    /// finish our current coordinator when user taps default back button
     override func didNavigate(_ navigationController: UINavigationController,
                               to viewController: UIViewController,
                               animated: Bool
     ) {
         super.didNavigate(navigationController, to: viewController, animated: animated)
-        // TODO: check with trying to avoid this if let
         if let _ = viewController as? HomeViewController {
             end()
         }
     }
     
     func pushPersonalInfo() {
+        let viewModel = PersonalInfoViewModel(coordinator: self, vcTitle: "Personal Information")
         let controller = PersonalInfoViewController.instantiate(storyboard: .profile, instantiation: .withIdentifier) {
-            return PersonalInfoViewController(coder: $0)!
+            return PersonalInfoViewController(viewModel: viewModel, coder: $0)!
         }
-        controller.title = "Personal Information"
         navigationController?.pushViewController(controller, animated: true)
     }
     
@@ -119,11 +105,7 @@ final class ProfileCoordinator: BaseCoordinator, ProfileCoordinatorProtocol {
     }
     
     func rootAuth() {
-        let child = AuthCoordinator(title: "Authentication",
-                                    presentationMode: .root(UIApplication.currentWindow!),
-                                    parentCoordinator: self)
-        addChild(child)
-        child.start()
+         end()
     }
     
 }

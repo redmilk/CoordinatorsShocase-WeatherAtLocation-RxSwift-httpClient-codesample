@@ -15,10 +15,10 @@ class BaseCoordinator: NSObject, CoordinatorProtocol {
         case modal(UIViewController)
         case root(UIWindow)
     }
-    
+        
     private var childCoordinators: [String : CoordinatorProtocol] = [:]
-    var window: UIWindow!
-    weak var parentCoordinator: CoordinatorProtocol!
+    weak var window: UIWindow!
+    weak var parentCoordinator: CoordinatorProtocol?
     weak var currentController: UIViewController?
     weak var navigationController: UINavigationController? {
         didSet {
@@ -40,8 +40,16 @@ class BaseCoordinator: NSObject, CoordinatorProtocol {
         Logger.deinitialization(entity: self)
     }
     
-    func start() { }
-    func end() { }
+    func start() {
+        
+    }
+    
+    func end() {
+        removeAllChildCoordinators()
+        parentCoordinator?.removeChild(self)
+        navigationController?.popToRootViewController(animated: true)
+        currentController?.dismiss(animated: true, completion: nil)
+    }
     
     /// We call this at the end of 'start()'
     /// for enabling navigation and tabbar delegate events
@@ -64,6 +72,9 @@ class BaseCoordinator: NSObject, CoordinatorProtocol {
      }
     
     func removeAllChildCoordinators() {
+        // TODO: - check it
+        childCoordinators.enumerated().forEach { $0.element.value.removeAllChildCoordinators() }
+        childCoordinators.enumerated().forEach { $0.element.value.parentCoordinator?.removeChild(self) }
         childCoordinators.removeAll()
     }
     

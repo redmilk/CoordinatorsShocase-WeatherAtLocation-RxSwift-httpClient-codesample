@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Feed View Controller-->
+        <!--Item-->
         <scene sceneID="BL2-QD-BiV">
             <objects>
                 <viewController id="w3T-wk-ZTE" customClass="FeedViewController" customModule="MyCoordinatorsTemplate" customModuleProvider="target" sceneMemberID="viewController">
@@ -56,7 +56,9 @@
                             <constraint firstItem="9mm-C6-In2" firstAttribute="centerX" secondItem="dmQ-NK-3WC" secondAttribute="centerX" id="t6i-5I-WER"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item" image="feed" selectedImage="feed" id="faC-Cb-QKM"/>
                     <navigationItem key="navigationItem" id="eRl-eT-sO8"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bie-6v-gLm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -91,6 +93,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="feed" width="30" height="30"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -31,6 +31,8 @@ final class AuthCoordinator: Coordinator, AuthCoordinatorProtocol {
     }
     
     override func start() {
+        /// different presentation types of coordinator for demonstration purpose
+        /// in real app more likely will be only one
         switch presentationMode {
         case .root(let window):
             self.window = window

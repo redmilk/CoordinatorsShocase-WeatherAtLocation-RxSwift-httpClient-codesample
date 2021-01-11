@@ -57,6 +57,7 @@
 		79686D6B25A2B701008CF481 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79686D6A25A2B701008CF481 /* FeedViewModel.swift */; };
 		79686D7125A2BCBE008CF481 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79686D7025A2BCBE008CF481 /* DetailViewModel.swift */; };
 		79715C2625AA537B0028E9B9 /* PersonalInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79715C2525AA537B0028E9B9 /* PersonalInfoViewModel.swift */; };
+		799107AD25ACA564003FC014 /* TabBarIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799107AC25ACA564003FC014 /* TabBarIcons.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -112,6 +113,7 @@
 		79686D6A25A2B701008CF481 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		79686D7025A2BCBE008CF481 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		79715C2525AA537B0028E9B9 /* PersonalInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInfoViewModel.swift; sourceTree = "<group>"; };
+		799107AC25ACA564003FC014 /* TabBarIcons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarIcons.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,7 +167,7 @@
 		790516A42590C79A00B9E3DA /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				7905172025A12F8500B9E3DA /* Content */,
+				79348D9725ABE0B60035246A /* Content */,
 				790516AA2590D65000B9E3DA /* Auth */,
 			);
 			path = Scenes;
@@ -174,11 +176,9 @@
 		790516AA2590D65000B9E3DA /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				790516D02592BED800B9E3DA /* Auth.storyboard */,
-				790516C225925A2D00B9E3DA /* AuthCoordinator.swift */,
-				79469B3D25A8E35400ECC90B /* FirstName */,
-				79469B4E25A9006E00ECC90B /* LastName */,
-				79469B4F25A9009300ECC90B /* FinalStep */,
+				79469B3D25A8E35400ECC90B /* FirstNameViewController */,
+				79469B4E25A9006E00ECC90B /* LastNameViewController */,
+				79469B4F25A9009300ECC90B /* FinalStepViewController */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -195,53 +195,43 @@
 			path = Source;
 			sourceTree = "<group>";
 		};
-		790516C62592B83400B9E3DA /* Profile */ = {
+		790516C62592B83400B9E3DA /* ProfileViewController */ = {
 			isa = PBXGroup;
 			children = (
-				790516D82592BF4B00B9E3DA /* Profile.storyboard */,
-				790516C025925A1500B9E3DA /* ProfileCoordinator.swift */,
 				79348D9325ABE0600035246A /* ProfileViewController */,
-				790516C72592B84100B9E3DA /* ProfileScenes */,
+				79348DA125AC9F920035246A /* PersonalInfo */,
+				79348DA325AC9FA00035246A /* CreditCards */,
 			);
-			path = Profile;
+			path = ProfileViewController;
 			sourceTree = "<group>";
 		};
-		790516C72592B84100B9E3DA /* ProfileScenes */ = {
+		790516CC2592BD1700B9E3DA /* HomeViewController */ = {
 			isa = PBXGroup;
 			children = (
-				790516CA2592BCE600B9E3DA /* PersonalInfoViewController.swift */,
-				79715C2525AA537B0028E9B9 /* PersonalInfoViewModel.swift */,
-				7905171725A0C63C00B9E3DA /* CreditCardsViewController.swift */,
+				79348D9C25AC9F0E0035246A /* HomeViewController */,
+				790516C62592B83400B9E3DA /* ProfileViewController */,
 			);
-			path = ProfileScenes;
+			path = HomeViewController;
 			sourceTree = "<group>";
 		};
-		790516CC2592BD1700B9E3DA /* Home */ = {
+		790516CD2592BDD800B9E3DA /* FeedViewController */ = {
 			isa = PBXGroup;
 			children = (
-				790516D42592BEF700B9E3DA /* Home.storyboard */,
-				790516BC2590E86F00B9E3DA /* HomeCoordinator.swift */,
-				79348D9525ABE0780035246A /* HomeViewController */,
-				790516C62592B83400B9E3DA /* Profile */,
-			);
-			path = Home;
-			sourceTree = "<group>";
-		};
-		790516CD2592BDD800B9E3DA /* Feed */ = {
-			isa = PBXGroup;
-			children = (
-				790516A82590D58000B9E3DA /* Feed.storyboard */,
-				790516BE2590ECB400B9E3DA /* FeedCoordinator.swift */,
 				79348D9125ABE0500035246A /* FeedViewController */,
-				79469B5225A900D100ECC90B /* Detail */,
+				79469B5225A900D100ECC90B /* DetailViewController */,
 			);
-			path = Feed;
+			path = FeedViewController;
 			sourceTree = "<group>";
 		};
 		790516CF2592BE2B00B9E3DA /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
 				790516992590C4C300B9E3DA /* LaunchScreen.storyboard */,
+				790516D02592BED800B9E3DA /* Auth.storyboard */,
+				790516D22592BEEC00B9E3DA /* Content.storyboard */,
+				790516D42592BEF700B9E3DA /* Home.storyboard */,
+				790516D82592BF4B00B9E3DA /* Profile.storyboard */,
+				790516A82590D58000B9E3DA /* Feed.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -250,8 +240,12 @@
 			isa = PBXGroup;
 			children = (
 				790516DB2592C38000B9E3DA /* ApplicationCoordinator.swift */,
-				790516A62590D4BF00B9E3DA /* CoordinatorProtocol.swift */,
-				790516FA25956F8C00B9E3DA /* Coordinator.swift */,
+				790516C225925A2D00B9E3DA /* AuthCoordinator.swift */,
+				790516F125942D3B00B9E3DA /* MainTabBarCoordinator.swift */,
+				790516BC2590E86F00B9E3DA /* HomeCoordinator.swift */,
+				790516C025925A1500B9E3DA /* ProfileCoordinator.swift */,
+				790516BE2590ECB400B9E3DA /* FeedCoordinator.swift */,
+				79348D9A25AC9C200035246A /* Core */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -262,16 +256,6 @@
 				790516F62595182400B9E3DA /* Logger.swift */,
 			);
 			path = Helper;
-			sourceTree = "<group>";
-		};
-		7905172025A12F8500B9E3DA /* Content */ = {
-			isa = PBXGroup;
-			children = (
-				790516D22592BEEC00B9E3DA /* Content.storyboard */,
-				790516F125942D3B00B9E3DA /* MainTabBarCoordinator.swift */,
-				79348D9725ABE0B60035246A /* MainTabBarController */,
-			);
-			path = Content;
 			sourceTree = "<group>";
 		};
 		79348D8525ABDAE40035246A /* Resources */ = {
@@ -297,6 +281,7 @@
 		79348D8825ABDB790035246A /* Constants */ = {
 			isa = PBXGroup;
 			children = (
+				799107AC25ACA564003FC014 /* TabBarIcons.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -330,7 +315,26 @@
 			path = ProfileViewController;
 			sourceTree = "<group>";
 		};
-		79348D9525ABE0780035246A /* HomeViewController */ = {
+		79348D9725ABE0B60035246A /* Content */ = {
+			isa = PBXGroup;
+			children = (
+				79348D9E25AC9F380035246A /* MainTabBarViewController */,
+				790516CC2592BD1700B9E3DA /* HomeViewController */,
+				790516CD2592BDD800B9E3DA /* FeedViewController */,
+			);
+			path = Content;
+			sourceTree = "<group>";
+		};
+		79348D9A25AC9C200035246A /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				790516A62590D4BF00B9E3DA /* CoordinatorProtocol.swift */,
+				790516FA25956F8C00B9E3DA /* Coordinator.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		79348D9C25AC9F0E0035246A /* HomeViewController */ = {
 			isa = PBXGroup;
 			children = (
 				790516AD2590D97300B9E3DA /* HomeViewController.swift */,
@@ -339,15 +343,30 @@
 			path = HomeViewController;
 			sourceTree = "<group>";
 		};
-		79348D9725ABE0B60035246A /* MainTabBarController */ = {
+		79348D9E25AC9F380035246A /* MainTabBarViewController */ = {
 			isa = PBXGroup;
 			children = (
 				790516AB2590D69300B9E3DA /* MainTabBarController.swift */,
 				7905171E25A1283C00B9E3DA /* MainTabBarViewModel.swift */,
-				790516CC2592BD1700B9E3DA /* Home */,
-				790516CD2592BDD800B9E3DA /* Feed */,
 			);
-			path = MainTabBarController;
+			path = MainTabBarViewController;
+			sourceTree = "<group>";
+		};
+		79348DA125AC9F920035246A /* PersonalInfo */ = {
+			isa = PBXGroup;
+			children = (
+				790516CA2592BCE600B9E3DA /* PersonalInfoViewController.swift */,
+				79715C2525AA537B0028E9B9 /* PersonalInfoViewModel.swift */,
+			);
+			path = PersonalInfo;
+			sourceTree = "<group>";
+		};
+		79348DA325AC9FA00035246A /* CreditCards */ = {
+			isa = PBXGroup;
+			children = (
+				7905171725A0C63C00B9E3DA /* CreditCardsViewController.swift */,
+			);
+			path = CreditCards;
 			sourceTree = "<group>";
 		};
 		79469AE025A4E9F200ECC90B /* Services */ = {
@@ -371,40 +390,40 @@
 			path = Authentication;
 			sourceTree = "<group>";
 		};
-		79469B3D25A8E35400ECC90B /* FirstName */ = {
+		79469B3D25A8E35400ECC90B /* FirstNameViewController */ = {
 			isa = PBXGroup;
 			children = (
 				79469B3E25A8E39900ECC90B /* FirstNameViewController.swift */,
 				79469B4525A8F7DB00ECC90B /* FirstNameViewModel.swift */,
 			);
-			path = FirstName;
+			path = FirstNameViewController;
 			sourceTree = "<group>";
 		};
-		79469B4E25A9006E00ECC90B /* LastName */ = {
+		79469B4E25A9006E00ECC90B /* LastNameViewController */ = {
 			isa = PBXGroup;
 			children = (
 				79469B4225A8E3AF00ECC90B /* LastNameViewController.swift */,
 				79469B4825A8F7E900ECC90B /* LastNameViewModel.swift */,
 			);
-			path = LastName;
+			path = LastNameViewController;
 			sourceTree = "<group>";
 		};
-		79469B4F25A9009300ECC90B /* FinalStep */ = {
+		79469B4F25A9009300ECC90B /* FinalStepViewController */ = {
 			isa = PBXGroup;
 			children = (
 				790516B72590E34700B9E3DA /* AuthViewController.swift */,
 				79686D6225A25385008CF481 /* AuthViewModel.swift */,
 			);
-			path = FinalStep;
+			path = FinalStepViewController;
 			sourceTree = "<group>";
 		};
-		79469B5225A900D100ECC90B /* Detail */ = {
+		79469B5225A900D100ECC90B /* DetailViewController */ = {
 			isa = PBXGroup;
 			children = (
 				7905170C2597E35900B9E3DA /* DetailViewController.swift */,
 				79686D7025A2BCBE008CF481 /* DetailViewModel.swift */,
 			);
-			path = Detail;
+			path = DetailViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -522,6 +541,7 @@
 				79686D5C25A24EA8008CF481 /* ProfileViewModel.swift in Sources */,
 				790516B82590E34700B9E3DA /* AuthViewController.swift in Sources */,
 				790516B42590DAD600B9E3DA /* Instantiatable.swift in Sources */,
+				799107AD25ACA564003FC014 /* TabBarIcons.swift in Sources */,
 				790516BD2590E86F00B9E3DA /* HomeCoordinator.swift in Sources */,
 				79686D7125A2BCBE008CF481 /* DetailViewModel.swift in Sources */,
 				790516DC2592C38000B9E3DA /* ApplicationCoordinator.swift in Sources */,

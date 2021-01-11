@@ -52,7 +52,9 @@
                             <constraint firstItem="aHz-1W-beV" firstAttribute="centerX" secondItem="cod-Su-xvl" secondAttribute="centerX" id="xFL-CJ-xd9"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" image="home" selectedImage="home" id="7nf-nx-VDe"/>
                     <navigationItem key="navigationItem" id="FVi-2i-foy"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="navigationItem" destination="FVi-2i-foy" id="0zh-CO-bQR"/>
                     </connections>
@@ -63,6 +65,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="home" width="30" height="30"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

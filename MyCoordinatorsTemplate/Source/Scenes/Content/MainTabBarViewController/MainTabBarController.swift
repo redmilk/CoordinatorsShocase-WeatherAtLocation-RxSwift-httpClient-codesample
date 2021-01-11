@@ -30,7 +30,5 @@ final class MainTabBarController: UITabBarController, Instantiatable {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-                
     }
-
 }

@@ -11,9 +11,7 @@ import UIKit
 final class HomeViewController: ViewController, Instantiatable {
 
     private let viewModel: HomeViewModelProtocol
-    
-    @IBOutlet weak var navItem: UINavigationItem!
-    
+        
     init?(title: String, viewModel: HomeViewModelProtocol, coder: NSCoder) {
         self.viewModel = viewModel
         super.init(coder: coder)
@@ -23,6 +21,11 @@ final class HomeViewController: ViewController, Instantiatable {
     @available(*, unavailable, renamed: "init(viewModel:coder:)")
     required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        //tabBarController?.tabBar.items?[0].image = TabBarIcons.home
     }
     
     @IBAction func pushProfilePressed(_ sender: Any) {

@@ -31,16 +31,16 @@ final class FeedCoordinator: Coordinator, FeedCoordinatorProtocol {
         let controller = FeedViewController.instantiate(storyboard: .feed, instantiation: .initial) {
             return FeedViewController(viewModel: viewModel, coder: $0)!
         }
-        navigationController = StyledNavigationControllerFactory.makeStyled(style: .feed, root: controller)
+        navigationController = NavigationControllerFactory.makeStyled(style: .feed, root: controller)
         navigationController?.tabBarItem = UITabBarItem(title: "Feed", image: nil, selectedImage: nil)
         tabBarController?.addControllerForTab(navigationController!)
     }
     
     func pushDetail() {
-        let viewModel = DetailViewModel(coordinator: self, vcTitle: "Detail screen")
-        let controller = DetailViewController.instantiate(storyboard: .feed,
+        let viewModel = WeatherViewModel(coordinator: self, vcTitle: "Weather screen")
+        let controller = WeatherViewController.instantiate(storyboard: .feed,
                                                           instantiation: .withIdentifier) {
-            return DetailViewController(viewModel: viewModel, coder: $0)!
+            return WeatherViewController(viewModel: viewModel, coder: $0)!
         }
         navigationController?.pushViewController(controller, animated: true)
     }

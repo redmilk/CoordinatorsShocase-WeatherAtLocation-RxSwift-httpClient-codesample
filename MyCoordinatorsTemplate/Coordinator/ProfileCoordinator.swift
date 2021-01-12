@@ -50,7 +50,7 @@ final class ProfileCoordinator: Coordinator, ProfileCoordinatorProtocol {
                                                                instantiation: .withIdentifier) {
                 return ProfileViewController(viewModel: viewModel, coder: $0)!
             }
-            let navigation = StyledNavigationControllerFactory.makeStyled(style: .profile, root: controller)
+            let navigation = NavigationControllerFactory.makeStyled(style: .profile, root: controller)
             navigationController = navigation
             currentController = controller
             parentVC.present(navigation, animated: true, completion: nil)

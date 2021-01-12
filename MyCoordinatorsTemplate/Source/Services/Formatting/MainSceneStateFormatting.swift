@@ -7,12 +7,6 @@
 
 import Foundation
 
-struct FormattingService {
-    var mainSceneFormatter: MainSceneStateFormatter {
-        return MainSceneStateFormatter()
-    }
-}
-
 struct MainSceneStateFormatter: StateContentFormattable {
     func format(state: MainSceneState) -> MainSceneState {
         let formatted = state.copy()

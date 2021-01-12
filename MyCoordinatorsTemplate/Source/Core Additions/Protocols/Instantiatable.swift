@@ -8,15 +8,6 @@
 
 import UIKit
 
-enum Storyboard: String {
-    case root = "Root"
-    case auth = "Auth"
-    case content = "Content" /// tabbar
-    case home = "Home"
-    case feed = "Feed"
-    case profile = "Profile"
-}
-
 enum Instantiate {
     case initial
     case withIdentifier

@@ -11,6 +11,8 @@ import UIKit
 struct TabBarIcons {
     static let home = UIImage(named: "home")!
     static let feed = UIImage(named: "feed")!
+    
+    private init() {}
 }
 
 

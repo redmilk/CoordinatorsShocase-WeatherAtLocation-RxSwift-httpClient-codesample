@@ -58,7 +58,7 @@ final class ApiClient: ApiRequestable {
         }
         return URLSession.shared.rx
             .decodable(request: request, type: D.self)
-            .retryWhen(retryHandler)
+            .retry(when: retryHandler)
     }
     
     private func buildRequest(method: String = "GET", pathComponent: String, params: [(String, String)]) -> URLRequest {

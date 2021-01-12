@@ -46,4 +46,6 @@ struct NavigationControllerFactory {
             return createStyledNavigation(rootVC: root, barTint: #colorLiteral(red: 0.09019608051, green: 0, blue: 0.3019607961, alpha: 1), fontTint: .white, titleTint: .white)
         }
     }
+    
+    private init() { }
 }

@@ -8,11 +8,7 @@
 import RxSwift
 import RxCocoa
 
-protocol StateStoreWriting { }
-extension StateStoreWriting { }
-protocol StateStoreFetching { }
-
-final class StateStore {
+final class StateStorage {
     
     public let mainSceneState: BehaviorSubject<MainSceneState>
     

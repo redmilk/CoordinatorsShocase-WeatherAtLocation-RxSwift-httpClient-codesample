@@ -42,7 +42,7 @@ final class AuthCoordinator: Coordinator, AuthCoordinatorProtocol {
                                                                  creator: {
                 FirstNameViewController(viewModel: viewModel, coder: $0)!
             })
-            navigationController = StyledNavigationControllerFactory.makeStyled(style: .auth, root: controller)
+            navigationController = NavigationControllerFactory.makeStyled(style: .auth, root: controller)
             self.window.rootViewController = navigationController
         case .push(let navigation):
             navigationController = navigation
@@ -60,7 +60,7 @@ final class AuthCoordinator: Coordinator, AuthCoordinatorProtocol {
                                                                  creator: {
                 FirstNameViewController(viewModel: viewModel, coder: $0)!
             })
-            navigationController = StyledNavigationControllerFactory.makeStyled(style: .auth, root: controller)
+            navigationController = NavigationControllerFactory.makeStyled(style: .auth, root: controller)
             currentController = navigationController
             parentVC.present(navigationController!, animated: true, completion: nil)
         }

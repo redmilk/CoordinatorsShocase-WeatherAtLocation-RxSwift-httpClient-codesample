@@ -32,7 +32,7 @@ final class HomeCoordinator: Coordinator, HomeCoordinatorProtocol {
         let homeVewController = HomeViewController.instantiate(storyboard: .home, instantiation: .initial) {
             return  HomeViewController(title: "Home", viewModel: homeViewModel, coder: $0)!
         }
-        let navigationController = StyledNavigationControllerFactory.makeStyled(style: .home, root: homeVewController)
+        let navigationController = NavigationControllerFactory.makeStyled(style: .home, root: homeVewController)
         
         guard
             let tabBarController = tabBarController

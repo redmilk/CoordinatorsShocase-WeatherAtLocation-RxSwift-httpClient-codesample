@@ -12,6 +12,12 @@ fileprivate let services = ServicesContainer()
 
 final class ServicesContainer {
     lazy var session: UserSession = { UserSession() }()
+    lazy var baseApiClient: ApiClient = { ApiClient() }()
+    lazy var weatherApi: WeatherApi = { WeatherApi(requestable: ApiClient()) }()
+    lazy var reachability: Reachability = { Reachability() }()
+    lazy var location: LocationService = { LocationService() }()
+    lazy var stateStore: StateStore = { StateStore() }()
+    lazy var formatting: FormattingService = { FormattingService() }()
 }
 
 /// List of services protocols to get needed functionality.

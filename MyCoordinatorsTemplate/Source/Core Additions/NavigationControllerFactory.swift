@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct StyledNavigationControllerFactory {
+struct NavigationControllerFactory {
     
     /// application nav style
     enum Style {

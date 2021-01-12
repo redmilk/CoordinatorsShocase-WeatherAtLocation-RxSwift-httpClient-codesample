@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct DetailViewModel {
+struct WeatherViewModel {
     
     let coordinator: FeedCoordinator
     let vcTitle: String

@@ -12,13 +12,29 @@ fileprivate let services = ServicesContainer()
 
 final class ServicesContainer {
     lazy var session: UserSession = { UserSession() }()
+    lazy var baseApiClient: BaseNetworkClient = { BaseNetworkClient() }()
+    lazy var weatherApi: WeatherApi = { WeatherApi(requestable: BaseNetworkClient()) }()
+    lazy var reachability: Reachability = { Reachability() }()
+    lazy var location: LocationService = { LocationService() }()
+    lazy var stateStore: StateStorage = { StateStorage() }()
+    lazy var formatting: FormattingService = { FormattingService() }()
 }
 
-/// List of services protocols to get needed functionality.
-/// Another way of passing dependencies - we do decorate entities by
-/// adopting to empty specific services protocols.
-/// By doing this way we avoid codegen in initializers
+/// List of service-protocols to get needed capability.
+/// This is another way of passing dependencies. We do decorate entities by
+/// adopting to specific services protocols which already has internal implementation
+/// by doing so we avoid codegen in initializers
+/// also it's clear what functionality inside given object
 
+/// - Storage of application scene states
+protocol StateStoreSupporting { }
+extension StateStoreSupporting {
+    var store: StateStorage {
+        return services.stateStore
+    }
+}
+
+/// - User session
 protocol Sessionable { }
 extension Sessionable {
     var auth: UserSession {
@@ -26,12 +42,43 @@ extension Sessionable {
     }
 }
 
-// example
-///// - Api client
-///protocol NetworkSupporting { }
-///extension NetworkSupporting {
-///    var apiClient: ApiClient  {
-///        return services.baseApiClient
-///     }
-///}
+/// - Location service
+protocol LocationSupporting { }
+extension LocationSupporting {
+    var locationService: LocationService {
+        return services.location
+    }
+}
+
+/// - Reachability
+protocol ReachabilitySupporting { }
+extension ReachabilitySupporting {
+    var reachability: Reachability {
+        return services.reachability
+    }
+}
+
+/// - Common api client
+protocol NetworkSupporting { }
+extension NetworkSupporting {
+    var apiClient: BaseNetworkClient  {
+        return services.baseApiClient
+     }
+}
+
+/// - Weather API
+protocol WeatherApiSupporting { }
+extension WeatherApiSupporting {
+    var weatherApi: WeatherApi {
+        return services.weatherApi
+    }
+}
+
+/// - Formatting
+protocol Formatting { }
+extension Formatting {
+    var formatting: FormattingService {
+        return services.formatting
+    }
+}
 

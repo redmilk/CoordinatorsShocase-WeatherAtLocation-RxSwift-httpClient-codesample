@@ -12,8 +12,8 @@ fileprivate let services = ServicesContainer()
 
 final class ServicesContainer {
     lazy var session: UserSession = { UserSession() }()
-    lazy var baseApiClient: ApiClient = { ApiClient() }()
-    lazy var weatherApi: WeatherApi = { WeatherApi(requestable: ApiClient()) }()
+    lazy var baseApiClient: BaseNetworkClient = { BaseNetworkClient() }()
+    lazy var weatherApi: WeatherApi = { WeatherApi(requestable: BaseNetworkClient()) }()
     lazy var reachability: Reachability = { Reachability() }()
     lazy var location: LocationService = { LocationService() }()
     lazy var stateStore: StateStorage = { StateStorage() }()
@@ -61,7 +61,7 @@ extension ReachabilitySupporting {
 /// - Common api client
 protocol NetworkSupporting { }
 extension NetworkSupporting {
-    var apiClient: ApiClient  {
+    var apiClient: BaseNetworkClient  {
         return services.baseApiClient
      }
 }

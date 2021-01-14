@@ -9,7 +9,7 @@
 import Foundation
 
 struct FormattingService {
-    var mainSceneFormatter: MainSceneStateFormatter {
-        return MainSceneStateFormatter()
+    var weatherStateFormatter: WeatherSceneStateFormatter {
+        return WeatherSceneStateFormatter()
     }
 }

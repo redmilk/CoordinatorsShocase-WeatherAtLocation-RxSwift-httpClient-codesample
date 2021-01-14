@@ -9,9 +9,15 @@ import CoreLocation
 import RxCocoa
 import RxSwift
 
+// MARK: - State formatting
+extension WeatherSceneState: Formatting {
+    var formatted: WeatherSceneState {
+        return formatting.weatherStateFormatter.format(state: self)
+    }
+}
 
 // MARK: State
-class MainSceneState {
+class WeatherSceneState {
  
     var searchText = BehaviorSubject<String>(value: "")
     var temperature = BehaviorSubject<String>(value: "")
@@ -30,8 +36,8 @@ class MainSceneState {
         weatherIcon.onNext(weather.weather?.first?.icon ?? "")
     }
         
-    func copy() -> MainSceneState {
-        let state = MainSceneState()
+    func copy() -> WeatherSceneState {
+        let state = WeatherSceneState()
         state.searchText = self.searchText
         state.temperature = self.temperature
         state.humidity = self.humidity
@@ -44,12 +50,12 @@ class MainSceneState {
         return state
     }
     
-    static var initial: MainSceneState {
-        let state = MainSceneState()
+    static var initial: WeatherSceneState {
+        let state = WeatherSceneState()
         state.searchText.onNext("Kiev")
         state.weatherIcon.onNext("Initial")
-        state.temperature.onNext("24")
-        state.humidity.onNext("65")
-        return state
+        state.temperature.onNext("2")
+        state.humidity.onNext("73")
+        return state.formatted
     }
 }

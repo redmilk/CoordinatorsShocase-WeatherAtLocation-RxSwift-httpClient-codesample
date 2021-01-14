@@ -10,10 +10,10 @@ import RxCocoa
 
 final class StateStorage {
     
-    public let mainSceneState: BehaviorSubject<MainSceneState>
+    public let mainSceneState: BehaviorSubject<WeatherSceneState>
     
     init() {
-        mainSceneState = BehaviorSubject<MainSceneState>(value: MainSceneState.initial)
+        mainSceneState = BehaviorSubject<WeatherSceneState>(value: WeatherSceneState.initial)
     }
     
     private let bag = DisposeBag()

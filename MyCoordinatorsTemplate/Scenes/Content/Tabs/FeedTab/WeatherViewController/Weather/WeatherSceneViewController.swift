@@ -17,9 +17,9 @@ import RxCocoa
 // TODO: - Letter appear animation
 
 /// Access to state store
-extension MainSceneViewController: StateStoreSupporting, NetworkSupporting { }
+extension WeatherSceneViewController: StateStoreSupporting, NetworkSupporting { }
 
-final class MainSceneViewController: UIViewController, Instantiatable {
+final class WeatherSceneViewController: UIViewController, Instantiatable {
     
     @IBOutlet private weak var searchTextField: UITextField!
     @IBOutlet private weak var tempLabel: UILabel!
@@ -29,10 +29,10 @@ final class MainSceneViewController: UIViewController, Instantiatable {
     @IBOutlet private weak var locationButton: UIButton!
     @IBOutlet private weak var errorLabel: UILabel!
     
-    private let reducer: MainSceneReducer
+    private let reducer: WeatherSceneViewModel
     private let bag = DisposeBag()
         
-    required init?(viewModel: MainSceneReducer, coder: NSCoder) {
+    required init?(viewModel: WeatherSceneViewModel, coder: NSCoder) {
         self.reducer = viewModel
         super.init(coder: coder)
     }
@@ -47,14 +47,14 @@ final class MainSceneViewController: UIViewController, Instantiatable {
         
         /// Output
         locationButton.rx.controlEvent(.touchUpInside)
-            .map { MainSceneReducer.Action.currentLocationWeather }
+            .map { WeatherSceneViewModel.Action.currentLocationWeather }
             .bind(to: reducer.action)
             .disposed(by: bag)
         
         searchTextField.rx.controlEvent(.editingDidEndOnExit)
             .map { self.searchTextField.text ?? nil }
             .unwrap()
-            .map { MainSceneReducer.Action.getWeatherBy(city: $0) }
+            .map { WeatherSceneViewModel.Action.getWeatherBy(city: $0) }
             .bind(to: reducer.action)
             .disposed(by: bag)
         

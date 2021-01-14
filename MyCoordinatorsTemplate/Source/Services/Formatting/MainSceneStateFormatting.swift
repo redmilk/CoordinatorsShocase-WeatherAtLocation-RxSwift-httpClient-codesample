@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct MainSceneStateFormatter: StateContentFormattable {
-    func format(state: MainSceneState) -> MainSceneState {
+struct WeatherSceneStateFormatter: StateContentFormattable {
+    func format(state: WeatherSceneState) -> WeatherSceneState {
         let formatted = state.copy()
         let humidity = try? state.humidity.value()
         let temperature = try? state.temperature.value()

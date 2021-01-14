@@ -12,14 +12,13 @@ import CoreLocation
 
 
 // MARK: Reducer
-extension MainSceneReducer: StateStoreSupporting,
-                            LocationSupporting,
-                            Formatting,
-                            ReachabilitySupporting,
-                            NetworkSupporting,
-                            WeatherApiSupporting { }
+extension WeatherSceneViewModel: StateStoreSupporting,
+                                 LocationSupporting,
+                                 ReachabilitySupporting,
+                                 NetworkSupporting,
+                                 WeatherApiSupporting { }
 
-class MainSceneReducer {
+class WeatherSceneViewModel {
     
     enum Action {
         case getWeatherBy(city: String)
@@ -28,15 +27,13 @@ class MainSceneReducer {
     }
     
     private var currentLocationWeather: Observable<Weather> {
-       return self.locationService.currentLocation
+        return self.locationService.currentLocation
             .map { ($0.coordinate.latitude, $0.coordinate.longitude) }
             .flatMap { self.weatherApi.currentWeather(at: $0.0, lon: $0.1) }
     }
     
-    private lazy var actualState: BehaviorSubject<MainSceneState> = {
-        let formatted = formatting.mainSceneFormatter.format(state: .initial)
-        let state = BehaviorSubject<MainSceneState>(value: formatted)
-        return state
+    private lazy var actualState: BehaviorSubject<WeatherSceneState> = {
+        return BehaviorSubject<WeatherSceneState>(value: WeatherSceneState.initial)
     }()
     
     private let bag = DisposeBag()
@@ -52,12 +49,13 @@ class MainSceneReducer {
             .disposed(by: bag)
         
         /// Dispatching actions
-        action.asObservable()
+        action
+            .asObservable()
             .subscribe(onNext: { [weak self] action in
                 guard let self = self else { return }
                 
-                let newState = (try? self.actualState.value()) ?? self.formatting.mainSceneFormatter.format(state: .initial)
-                newState.requestRetryText.onNext(ApiClient.requestRetryMessage.value)
+                let newState = (try? self.actualState.value()) ?? WeatherSceneState.initial
+                newState.requestRetryText.onNext(BaseNetworkClient.requestRetryMessage.value)
                 
                 switch action {
                 
@@ -90,31 +88,28 @@ class MainSceneReducer {
             .disposed(by: bag)
         
         /// for debug
-        ApiClient.requestRetryMessage
+        BaseNetworkClient.requestRetryMessage
             .filter { !$0.isEmpty }
             .subscribe(onNext: { msg in
                 let state = try? self.actualState.value()
                 state?.requestRetryText.onNext(msg)
             })
-        .disposed(by: bag)
+            .disposed(by: bag)
     }
     
     /// Internal
-    private func loadWeather(_ weather: Observable<Weather>, state: MainSceneState) {
+    private func loadWeather(_ weather: Observable<Weather>, state: WeatherSceneState) {
         state.isLoading.onNext(true)
-        return weather.asObservable()
+        return weather
             .take(1)
-            .map { (weather) -> MainSceneState in
+            .map { (weather) -> WeatherSceneState in
                 state.isLoading.onNext(false)
                 state.updateWeather(weather)
-                return state
+                return state.formatted
             }
-            .do(onError: { _ in
-                state.isLoading.onNext(false)
-            })
-            .map { self.formatting.mainSceneFormatter.format(state: $0) }
             .catch { [weak self] error in
                 guard let self = self else { return Observable.just(state) }
+                state.isLoading.onNext(false)
                 state.errorAlertContent.onNext(self.handleError(error))
                 state.errorAlertContent.onNext(nil)
                 //let cachedWeather: Weather = Weather()
@@ -128,7 +123,7 @@ class MainSceneReducer {
 
 
 // MARK: Error handling
-extension MainSceneReducer: ErrorHandling {
+extension WeatherSceneViewModel: ErrorHandling {
     func handleError(_ error: Error) -> (String, String)? {
         switch error {
         case let request as ApplicationErrors.ApiClient:

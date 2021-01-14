@@ -30,7 +30,7 @@ final class HomeCoordinator: Coordinator, HomeCoordinatorProtocol {
     override func start() {
         let homeViewModel = HomeViewModel(coordinator: self)
         let homeVewController = HomeViewController.instantiate(storyboard: .home, instantiation: .initial) {
-            return  HomeViewController(title: "Home", viewModel: homeViewModel, coder: $0)!
+            return HomeViewController(title: self.title, viewModel: homeViewModel, coder: $0)!
         }
         let navigationController = NavigationControllerFactory.makeStyled(style: .home, root: homeVewController)
         

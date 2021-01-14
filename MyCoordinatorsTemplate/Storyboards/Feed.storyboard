@@ -91,10 +91,10 @@
             </objects>
             <point key="canvasLocation" x="1487" y="844"/>
         </scene>
-        <!--Main Scene View Controller-->
+        <!--Weather Scene View Controller-->
         <scene sceneID="8pQ-Y4-JVA">
             <objects>
-                <viewController storyboardIdentifier="MainSceneViewController" id="kgW-Rs-RLT" customClass="MainSceneViewController" customModule="MyCoordinatorsTemplate" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WeatherSceneViewController" id="kgW-Rs-RLT" customClass="WeatherSceneViewController" customModule="MyCoordinatorsTemplate" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wUb-ut-j1j">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

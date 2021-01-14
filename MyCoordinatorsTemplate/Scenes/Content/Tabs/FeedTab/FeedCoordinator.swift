@@ -46,9 +46,9 @@ final class FeedCoordinator: Coordinator, FeedCoordinatorProtocol {
     }
     
     func presentNoStoryboardedVC() {
-        let viewModel = MainSceneReducer()
-        let controller = MainSceneViewController.instantiate(storyboard: .feed, instantiation: .withIdentifier) {
-            MainSceneViewController(viewModel: viewModel, coder: $0)!
+        let viewModel = WeatherSceneViewModel()
+        let controller = WeatherSceneViewController.instantiate(storyboard: .feed, instantiation: .withIdentifier) {
+            WeatherSceneViewController(viewModel: viewModel, coder: $0)!
         }
         navigationController?.pushViewController(controller, animated: true)
     }

@@ -32,8 +32,8 @@ final class MainTabBarCoordinator: Coordinator {
         /// tab bar's first controller coordinator
         let homeCoordinator = HomeCoordinator(tabBarController: tabBarController,
                                               parentCoordinator: self,
-                                              title: "Home")
-        /// tab bar's second controller coordinator
+                                              title: "Coordinator demo")
+        /// tab bar's second controller coordinatorr
         let feedCoordinator = FeedCoordinator(tabBarController: tabBarController, title: "Feed")
         
         addChild(homeCoordinator)

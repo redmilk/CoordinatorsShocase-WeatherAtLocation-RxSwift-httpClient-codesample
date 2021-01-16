@@ -10,39 +10,57 @@ import RxCocoa
 import CoreLocation
 import MapKit
 
-fileprivate var internalCache = [String: Data]()
+/**
+ 
+ // TODO: - remove
+ 
+ - Full list of networking errors handling
+ 
+ - Automatic token recovering on error 401 with further failed request retrying
+ 
+ - Request caching for saving traffic and better scene response
+   (unless data needs to be up-to-date on every similar request, also we can configure time of cache keeping)
+ 
+ - Request retrying attempts on errors (unless 401 and -1009 which are handled individually)
+ 
+ - No-internet-connection handling and auto retry when connection appears
+  
+ - Request cancelation
+  
+ */
 
-extension BaseNetworkClient: ReachabilitySupporting { }
+public typealias RetryHandler = (Observable<Error>) -> Observable<Int>
 
 final class BaseNetworkClient {
-    
-    private let bag = DisposeBag()
-    static let requestRetryMessage = BehaviorRelay<String>(value: "")
-    
-    func request<D: Decodable>(with request: URLRequest,
-                               maxRetry: Int) -> Observable<D> {
-        let retryHandler: (Observable<Error>) -> Observable<Int> = { err in
-            return err.enumerated().flatMap { count, error -> Observable<Int> in
-                if count >= maxRetry - 1 {
-                    return Observable.error(error)
-                } else if (error as NSError).code == -1009 {
-                    return self.reachability
-                        .status
-                        .map { (status: Reachability.Status) -> Bool in
-                            return status == .online
-                        }
-                        .distinctUntilChanged()
-                        .filter { $0 == true }
-                        .map { _ in 1 }
-                }
-                BaseNetworkClient.requestRetryMessage.accept("🟥🟥🟥 Retry attempt: \(count + 1)")
-                return Observable<Int>
-                    .timer(RxTimeInterval.milliseconds(2000), scheduler: MainScheduler.instance)
-                    .take(1)
+        
+    public typealias Response = (URLRequest) -> Observable<(response: HTTPURLResponse, data: Data)>
+
+    /// Builds and makes network requests using the token provided by the service. Will request a new token and retry if the result is an unauthorized (401) error.
+    ///
+    /// - Parameters:
+    ///   - response: A function that sends requests to the network and emits responses. Can be for example `URLSession.shared.rx.response`
+    ///   - tokenAcquisitionService: The object responsible for tracking the auth token. All requests should use the same object.
+    ///   - request: A function that can build the request when given a token.
+    /// - Returns: response of a guaranteed authorized network request.
+    public func getData<T>(response: @escaping Response, tokenAcquisitionService: TokenRecoverService<T>, request: @escaping (T) throws -> URLRequest) -> Observable<(response: HTTPURLResponse, data: Data)> {
+        return Observable
+            .deferred { tokenAcquisitionService.token.take(1) }
+            .map { try request($0) }
+            .flatMap { response($0) }
+            .map { response in
+                guard response.response.statusCode != 401 else { throw ApplicationErrors.TokenRecoverError.unauthorized }
+                return response
             }
-        }
+            .retry { $0.renewToken(with: tokenAcquisitionService) }
+    }
+        
+    func request<D: Decodable>(with request: URLRequest,
+                               retryHandler: @escaping RetryHandler) -> Observable<D> {
+     
+        /// request execution
         return URLSession.shared.rx
             .decodable(request: request, type: D.self)
             .retry(when: retryHandler)
     }
+    
 }

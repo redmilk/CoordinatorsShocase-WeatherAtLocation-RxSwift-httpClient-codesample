@@ -28,6 +28,8 @@ final class WeatherSceneViewController: UIViewController, Instantiatable {
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet private weak var locationButton: UIButton!
     @IBOutlet private weak var errorLabel: UILabel!
+    @IBOutlet private weak var cancelRequestButton: UIButton!
+    @IBOutlet private weak var mapButton: UIButton!
     
     private let reducer: WeatherSceneViewModel
     private let bag = DisposeBag()
@@ -55,6 +57,11 @@ final class WeatherSceneViewController: UIViewController, Instantiatable {
             .map { self.searchTextField.text ?? nil }
             .unwrap()
             .map { WeatherSceneViewModel.Action.getWeatherBy(city: $0) }
+            .bind(to: reducer.action)
+            .disposed(by: bag)
+        
+        cancelRequestButton.rx.controlEvent(.touchUpInside)
+            .map { WeatherSceneViewModel.Action.cancelRequest }
             .bind(to: reducer.action)
             .disposed(by: bag)
         
@@ -106,6 +113,16 @@ final class WeatherSceneViewController: UIViewController, Instantiatable {
         loading
             .map { !$0 }
             .drive(searchTextField.rx.isEnabled)
+            .disposed(by: bag)
+        
+        loading
+            .map { !$0 }
+            .drive(cancelRequestButton.rx.isHidden)
+            .disposed(by: bag)
+        
+        loading
+            .map { !$0 }
+            .drive(mapButton.rx.isEnabled)
             .disposed(by: bag)
         
         /// retry text alert for debug

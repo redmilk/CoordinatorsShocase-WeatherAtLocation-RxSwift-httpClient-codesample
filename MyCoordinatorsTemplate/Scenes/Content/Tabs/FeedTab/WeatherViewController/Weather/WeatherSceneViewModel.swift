@@ -20,9 +20,13 @@ extension WeatherSceneViewModel: StateStoreSupporting,
 
 class WeatherSceneViewModel {
     
+    // TODO: - user drivers
+    // TODO: - refactor to actions
+    
     enum Action {
         case getWeatherBy(city: String)
         case currentLocationWeather
+        case cancelRequest
         case none
     }
     
@@ -36,12 +40,17 @@ class WeatherSceneViewModel {
         return BehaviorSubject<WeatherSceneState>(value: WeatherSceneState.initial)
     }()
     
-    private let bag = DisposeBag()
+    private var bag = DisposeBag()
     
     /// Input
     var action = PublishSubject<Action>()
     
     init() {
+        bind()
+    }
+    
+    private func bind() {
+        bag = DisposeBag()
         /// Output to state storage
         actualState
             .asObservable()
@@ -55,7 +64,7 @@ class WeatherSceneViewModel {
                 guard let self = self else { return }
                 
                 let newState = (try? self.actualState.value()) ?? WeatherSceneState.initial
-                newState.requestRetryText.onNext(BaseNetworkClient.requestRetryMessage.value)
+                newState.requestRetryText.onNext(self.weatherApi.requestRetryMessage.value)
                 
                 switch action {
                 
@@ -65,7 +74,7 @@ class WeatherSceneViewModel {
                         newState.errorAlertContent.onNext(self.handleError(ApplicationErrors.Network.noConnection))
                         newState.errorAlertContent.onNext(nil)
                     }
-                    self.loadWeather(self.weatherApi.currentWeather(city: city), state: newState)
+                    self.loadWeather(self.weatherApi.currentWeather(city: city, maxRetryTimes: 5), state: newState)
                     
                 /// current location weather
                 case .currentLocationWeather:
@@ -81,6 +90,9 @@ class WeatherSceneViewModel {
                     }
                     self.loadWeather(self.currentLocationWeather, state: newState)
                     
+                    /// cancel currentrunning request
+                case .cancelRequest:
+                    self.cancelRequest(Observable.just(()), state: newState)
                 case .none:
                     break
                 }
@@ -88,7 +100,7 @@ class WeatherSceneViewModel {
             .disposed(by: bag)
         
         /// for debug
-        BaseNetworkClient.requestRetryMessage
+        weatherApi.requestRetryMessage
             .filter { !$0.isEmpty }
             .subscribe(onNext: { msg in
                 let state = try? self.actualState.value()
@@ -118,6 +130,23 @@ class WeatherSceneViewModel {
             }
             .bind(to: self.actualState)
             .disposed(by: self.bag)
+    }
+    
+    private func cancelRequest(_ cancel: Observable<()>, state: WeatherSceneState) {
+        bind()
+        
+        return cancel
+            .map { [weak self] in
+                state.isLoading.onNext(false)
+                state.errorAlertContent.onNext(nil)
+                state.requestRetryText.onNext("")
+                
+                self?.weatherApi.requestRetryMessage.accept("")
+                self?.weatherApi.weatherRequestMaxRetry.onNext(0)
+                return state
+            }
+            .bind(to: self.actualState)
+            .disposed(by: bag)
     }
 }
 

@@ -100,91 +100,121 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="3WK-6J-c4L">
-                                <rect key="frame" x="24" y="68" width="366" height="200"/>
+                                <rect key="frame" x="24" y="60" width="366" height="479.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="J8S-VC-1Mf">
-                                        <rect key="frame" x="0.0" y="0.0" width="366" height="28.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="366" height="40"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zcx-4n-9md">
-                                                <rect key="frame" x="0.0" y="0.0" width="323" height="28.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="323" height="40"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="406-xb-1BP">
-                                                <rect key="frame" x="326" y="0.0" width="40" height="28.5"/>
+                                                <rect key="frame" x="326" y="0.0" width="40" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="40" id="afD-WW-dde"/>
                                                 </constraints>
                                             </activityIndicatorView>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="4Kr-Xa-rRT"/>
+                                        </constraints>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="OVJ-SU-WF5">
-                                        <rect key="frame" x="0.0" y="38.5" width="366" height="20.5"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="OVJ-SU-WF5">
+                                        <rect key="frame" x="0.0" y="50" width="366" height="20"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="temp" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uXk-9p-faR">
-                                                <rect key="frame" x="0.0" y="0.0" width="133" height="20.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="temp" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uXk-9p-faR">
+                                                <rect key="frame" x="0.0" y="0.0" width="183" height="20"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="humidity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bTN-pW-h9E">
-                                                <rect key="frame" x="233" y="0.0" width="133" height="20.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="humidity" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bTN-pW-h9E">
+                                                <rect key="frame" x="183" y="0.0" width="183" height="20"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="yWg-b9-Rg2"/>
+                                        </constraints>
                                     </stackView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weather Icon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E0p-HD-C7D">
-                                        <rect key="frame" x="0.0" y="69" width="366" height="41"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E0p-HD-C7D">
+                                        <rect key="frame" x="0.0" y="80" width="366" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="Wgn-sv-Iz6"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="34"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="c94-MR-Mbr">
-                                        <rect key="frame" x="0.0" y="120" width="366" height="50"/>
+                                        <rect key="frame" x="0.0" y="120" width="366" height="30"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MK2-H9-BpN">
-                                                <rect key="frame" x="0.0" y="0.0" width="183" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="122" height="30"/>
                                                 <state key="normal" title="Location"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YkO-vW-q7Z">
-                                                <rect key="frame" x="183" y="0.0" width="183" height="50"/>
+                                                <rect key="frame" x="122" y="0.0" width="122" height="30"/>
                                                 <state key="normal" title="Map"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ahD-Eg-Ldp">
+                                                <rect key="frame" x="244" y="0.0" width="122" height="30"/>
+                                                <state key="normal" title="Cancel request"/>
                                             </button>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="r4H-WO-tjH"/>
+                                            <constraint firstAttribute="height" constant="30" id="r4H-WO-tjH"/>
                                         </constraints>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sXC-Mp-EjJ">
-                                        <rect key="frame" x="0.0" y="180" width="366" height="20"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="20" id="mf9-B6-jAh"/>
-                                        </constraints>
+                                        <rect key="frame" x="0.0" y="160" width="366" height="14.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WBo-Qf-1Z1">
+                                        <rect key="frame" x="0.0" y="184.5" width="366" height="295"/>
+                                        <string key="text"> 
+ - Full list of networking errors handling
+ 
+ - Automatic token recovering on error 401 with further failed request retrying
+ 
+ - Request caching for saving traffic and better scene response
+   (unless data needs to be up-to-date on every similar request, also we can configure time of cache keeping)
+ 
+ - Request retrying attempts on errors (unless 401 and -1009 which are handled individually)
+ 
+ - No-internet-connection handling and auto retry when connection appears
+  
+ - Request cancelation
+  </string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="qfs-fc-Dkd"/>
-                                </constraints>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="jBF-X6-X9X"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="3WK-6J-c4L" firstAttribute="top" secondItem="jBF-X6-X9X" secondAttribute="top" constant="24" id="G6u-ec-Dzf"/>
+                            <constraint firstItem="3WK-6J-c4L" firstAttribute="top" secondItem="jBF-X6-X9X" secondAttribute="top" constant="16" id="G6u-ec-Dzf"/>
+                            <constraint firstItem="jBF-X6-X9X" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="3WK-6J-c4L" secondAttribute="bottom" constant="24" id="mwt-t5-Og1"/>
                             <constraint firstItem="jBF-X6-X9X" firstAttribute="trailing" secondItem="3WK-6J-c4L" secondAttribute="trailing" constant="24" id="mxs-Ga-0gc"/>
                             <constraint firstItem="3WK-6J-c4L" firstAttribute="leading" secondItem="jBF-X6-X9X" secondAttribute="leading" constant="24" id="r09-OA-cPW"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="406-xb-1BP" id="blf-Cq-M3f"/>
+                        <outlet property="cancelRequestButton" destination="ahD-Eg-Ldp" id="Na7-jH-YOf"/>
                         <outlet property="errorLabel" destination="sXC-Mp-EjJ" id="lfC-PR-E1X"/>
                         <outlet property="humidityLabel" destination="bTN-pW-h9E" id="IjC-hE-IsC"/>
                         <outlet property="locationButton" destination="MK2-H9-BpN" id="lnE-pm-89m"/>
+                        <outlet property="mapButton" destination="YkO-vW-q7Z" id="Ke3-DX-TIg"/>
                         <outlet property="searchTextField" destination="Zcx-4n-9md" id="XRg-PY-ml1"/>
                         <outlet property="tempLabel" destination="uXk-9p-faR" id="js0-t0-d1T"/>
                         <outlet property="weatherIconLabel" destination="E0p-HD-C7D" id="vRq-5z-kW9"/>

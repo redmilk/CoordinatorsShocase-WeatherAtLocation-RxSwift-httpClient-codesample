@@ -39,6 +39,7 @@
 		7905171825A0C63C00B9E3DA /* CreditCardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7905171725A0C63C00B9E3DA /* CreditCardsViewController.swift */; };
 		7905171F25A1283C00B9E3DA /* MainTabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7905171E25A1283C00B9E3DA /* MainTabBarViewModel.swift */; };
 		7905172225A15E2100B9E3DA /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7905172125A15E2100B9E3DA /* HomeViewModel.swift */; };
+		792CA17425B3800D00924F2F /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792CA17325B3800D00924F2F /* Debug.swift */; };
 		79348D8125ABD7A90035246A /* NavigationControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79348D8025ABD7A90035246A /* NavigationControllerFactory.swift */; };
 		79469ADA25A4DDF300ECC90B /* UIApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79469AD925A4DDF300ECC90B /* UIApplication+Extensions.swift */; };
 		79469ADE25A4E9A300ECC90B /* ServicesContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79469ADD25A4E9A300ECC90B /* ServicesContainer.swift */; };
@@ -85,6 +86,8 @@
 		79B0229925AE227600BBBE12 /* FormattingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B0229825AE227600BBBE12 /* FormattingService.swift */; };
 		79B022A625AE7A7500BBBE12 /* RequestHeaderAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B022A525AE7A7500BBBE12 /* RequestHeaderAdapter.swift */; };
 		79B022A925AE811B00BBBE12 /* RequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B022A825AE811B00BBBE12 /* RequestBuilder.swift */; };
+		79F05BF625B33F3400E21283 /* TokenRecoverService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F05BF525B33F3400E21283 /* TokenRecoverService.swift */; };
+		79F05BFC25B340CD00E21283 /* ObservableConvertible+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F05BFB25B340CD00E21283 /* ObservableConvertible+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -122,6 +125,7 @@
 		7905171725A0C63C00B9E3DA /* CreditCardsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardsViewController.swift; sourceTree = "<group>"; };
 		7905171E25A1283C00B9E3DA /* MainTabBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewModel.swift; sourceTree = "<group>"; };
 		7905172125A15E2100B9E3DA /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		792CA17325B3800D00924F2F /* Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
 		79348D8025ABD7A90035246A /* NavigationControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerFactory.swift; sourceTree = "<group>"; };
 		79469AD925A4DDF300ECC90B /* UIApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extensions.swift"; sourceTree = "<group>"; };
 		79469ADD25A4E9A300ECC90B /* ServicesContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesContainer.swift; sourceTree = "<group>"; };
@@ -166,6 +170,8 @@
 		79B0229825AE227600BBBE12 /* FormattingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormattingService.swift; sourceTree = "<group>"; };
 		79B022A525AE7A7500BBBE12 /* RequestHeaderAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestHeaderAdapter.swift; sourceTree = "<group>"; };
 		79B022A825AE811B00BBBE12 /* RequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBuilder.swift; sourceTree = "<group>"; };
+		79F05BF525B33F3400E21283 /* TokenRecoverService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRecoverService.swift; sourceTree = "<group>"; };
+		79F05BFB25B340CD00E21283 /* ObservableConvertible+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ObservableConvertible+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -298,6 +304,7 @@
 			children = (
 				79B0228325AE18B100BBBE12 /* Utils.swift */,
 				790516F62595182400B9E3DA /* Logger.swift */,
+				792CA17325B3800D00924F2F /* Debug.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -492,8 +499,10 @@
 		79B0224C25AE045500BBBE12 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				79B0224F25AE048200BBBE12 /* WeatherApi.swift */,
+				79F05BFA25B3409900E21283 /* TokenRecovering */,
 				79B0224D25AE048200BBBE12 /* BaseNetworkClient.swift */,
+				79B0225625AE058400BBBE12 /* URLSession+Rx.swift */,
+				79B0224F25AE048200BBBE12 /* WeatherApi.swift */,
 				79B0226425AE082400BBBE12 /* Reachability.swift */,
 				79B022A825AE811B00BBBE12 /* RequestBuilder.swift */,
 				79563DEB25AF8FBB00636F91 /* HTTPMethod.swift */,
@@ -507,7 +516,6 @@
 			children = (
 				79B0225725AE058400BBBE12 /* OptionalUnwrap+Rx.swift */,
 				79B0225525AE058400BBBE12 /* UIViewController+Rx.swift */,
-				79B0225625AE058400BBBE12 /* URLSession+Rx.swift */,
 			);
 			path = "Extensions+Rx";
 			sourceTree = "<group>";
@@ -567,6 +575,15 @@
 				79B0226B25AE0D5100BBBE12 /* MainSceneStateFormatting.swift */,
 			);
 			path = Formatting;
+			sourceTree = "<group>";
+		};
+		79F05BFA25B3409900E21283 /* TokenRecovering */ = {
+			isa = PBXGroup;
+			children = (
+				79F05BF525B33F3400E21283 /* TokenRecoverService.swift */,
+				79F05BFB25B340CD00E21283 /* ObservableConvertible+Extensions.swift */,
+			);
+			path = TokenRecovering;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -664,6 +681,7 @@
 				79B0227F25AE172A00BBBE12 /* WeatherSceneViewModel.swift in Sources */,
 				79B0227D25AE172A00BBBE12 /* WeatherSceneViewController.swift in Sources */,
 				7905171F25A1283C00B9E3DA /* MainTabBarViewModel.swift in Sources */,
+				792CA17425B3800D00924F2F /* Debug.swift in Sources */,
 				79469ADE25A4E9A300ECC90B /* ServicesContainer.swift in Sources */,
 				79B0225825AE058400BBBE12 /* UIViewController+Rx.swift in Sources */,
 				790516CB2592BCE600B9E3DA /* PersonalInfoViewController.swift in Sources */,
@@ -711,9 +729,11 @@
 				79B0225225AE048200BBBE12 /* WeatherApi.swift in Sources */,
 				79B0225125AE048200BBBE12 /* Weather.swift in Sources */,
 				79B0226225AE078200BBBE12 /* ErrorHandling.swift in Sources */,
+				79F05BF625B33F3400E21283 /* TokenRecoverService.swift in Sources */,
 				790516B82590E34700B9E3DA /* AuthViewController.swift in Sources */,
 				790516B42590DAD600B9E3DA /* Instantiatable.swift in Sources */,
 				799107AD25ACA564003FC014 /* TabBarIcons.swift in Sources */,
+				79F05BFC25B340CD00E21283 /* ObservableConvertible+Extensions.swift in Sources */,
 				790516BD2590E86F00B9E3DA /* HomeCoordinator.swift in Sources */,
 				79B0224925AE044400BBBE12 /* CLLocationManager+Rx.swift in Sources */,
 				79B0225925AE058400BBBE12 /* URLSession+Rx.swift in Sources */,

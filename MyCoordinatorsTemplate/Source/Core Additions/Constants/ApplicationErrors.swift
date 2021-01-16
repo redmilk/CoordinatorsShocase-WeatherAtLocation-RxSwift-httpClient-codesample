@@ -17,6 +17,11 @@ enum ApplicationErrors {
         case deserializationFailed
     }
     
+    enum TokenRecoverError: Error, Equatable {
+        case unauthorized
+        case getTokenFailure(response: HTTPURLResponse, data: Data)
+    }
+    
     enum Location: Error {
         case noPermission
     }

@@ -18,17 +18,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9mm-C6-In2">
-                                <rect key="frame" x="188" y="144" width="38" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="174" y="68" width="66" height="36"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="W11-rB-r9o">
-                                <rect key="frame" x="57" y="214.5" width="300" height="76"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="W11-rB-r9o">
+                                <rect key="frame" x="24" y="128" width="366" height="116"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RqU-IB-Qov">
-                                        <rect key="frame" x="0.0" y="0.0" width="300" height="33"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="366" height="50"/>
+                                        <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="NSG-Jb-jvR"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <state key="normal" title="Present no-storyboarded draggable VC">
                                             <color key="titleColor" systemColor="systemBlueColor"/>
                                         </state>
@@ -37,8 +41,12 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1fJ-4y-MIC">
-                                        <rect key="frame" x="96.5" y="43" width="107" height="33"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <rect key="frame" x="0.0" y="66" width="366" height="50"/>
+                                        <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="KmG-zT-nZQ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <state key="normal" title="Push Weather"/>
                                         <connections>
                                             <action selector="pushDetailPressed:" destination="w3T-wk-ZTE" eventType="touchUpInside" id="xtp-ZV-IJX"/>
@@ -50,9 +58,10 @@
                         <viewLayoutGuide key="safeArea" id="dmQ-NK-3WC"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="9mm-C6-In2" firstAttribute="top" secondItem="dmQ-NK-3WC" secondAttribute="top" constant="100" id="654-4H-ylk"/>
-                            <constraint firstItem="W11-rB-r9o" firstAttribute="centerX" secondItem="9mm-C6-In2" secondAttribute="centerX" id="731-1a-ySj"/>
-                            <constraint firstItem="W11-rB-r9o" firstAttribute="top" secondItem="9mm-C6-In2" secondAttribute="bottom" constant="50" id="8Nv-mx-Wh9"/>
+                            <constraint firstItem="9mm-C6-In2" firstAttribute="top" secondItem="dmQ-NK-3WC" secondAttribute="top" constant="24" id="654-4H-ylk"/>
+                            <constraint firstItem="dmQ-NK-3WC" firstAttribute="trailing" secondItem="W11-rB-r9o" secondAttribute="trailing" constant="24" id="6HL-4a-XMd"/>
+                            <constraint firstItem="W11-rB-r9o" firstAttribute="top" secondItem="9mm-C6-In2" secondAttribute="bottom" constant="24" id="8Nv-mx-Wh9"/>
+                            <constraint firstItem="W11-rB-r9o" firstAttribute="leading" secondItem="dmQ-NK-3WC" secondAttribute="leading" constant="24" id="mKx-ic-3X1"/>
                             <constraint firstItem="9mm-C6-In2" firstAttribute="centerX" secondItem="dmQ-NK-3WC" secondAttribute="centerX" id="t6i-5I-WER"/>
                         </constraints>
                     </view>
@@ -100,7 +109,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="3WK-6J-c4L">
-                                <rect key="frame" x="24" y="60" width="366" height="479.5"/>
+                                <rect key="frame" x="24" y="60" width="366" height="623.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="J8S-VC-1Mf">
                                         <rect key="frame" x="0.0" y="0.0" width="366" height="40"/>
@@ -146,40 +155,49 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="Wgn-sv-Iz6"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="c94-MR-Mbr">
-                                        <rect key="frame" x="0.0" y="120" width="366" height="30"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="c94-MR-Mbr">
+                                        <rect key="frame" x="0.0" y="120" width="366" height="50"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MK2-H9-BpN">
-                                                <rect key="frame" x="0.0" y="0.0" width="122" height="30"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="116.5" height="50"/>
+                                                <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                 <state key="normal" title="Location"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YkO-vW-q7Z">
-                                                <rect key="frame" x="122" y="0.0" width="122" height="30"/>
+                                                <rect key="frame" x="124.5" y="0.0" width="117" height="50"/>
+                                                <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                 <state key="normal" title="Map"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ahD-Eg-Ldp">
-                                                <rect key="frame" x="244" y="0.0" width="122" height="30"/>
+                                                <rect key="frame" x="249.5" y="0.0" width="116.5" height="50"/>
+                                                <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                 <state key="normal" title="Cancel request"/>
                                             </button>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="r4H-WO-tjH"/>
+                                            <constraint firstAttribute="height" constant="50" id="r4H-WO-tjH"/>
                                         </constraints>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sXC-Mp-EjJ">
-                                        <rect key="frame" x="0.0" y="160" width="366" height="14.5"/>
+                                        <rect key="frame" x="0.0" y="180" width="366" height="14.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WBo-Qf-1Z1">
-                                        <rect key="frame" x="0.0" y="184.5" width="366" height="295"/>
-                                        <string key="text"> 
- - Full list of networking errors handling
+                                        <rect key="frame" x="0.0" y="204.5" width="366" height="419"/>
+                                        <mutableString key="text">Introduction helper of current tab:
+
+ - Flux + Rx demo, state as single source of truth for view controller, the only difference is - it has separated state storages for
+   every screen and reducers in view model
+ 
+ - Location services and all interactions with permissions, including ongoing permission change cases
+ 
+ - List of available networking errors handling
  
  - Automatic token recovering on error 401 with further failed request retrying
  
@@ -190,8 +208,7 @@
  
  - No-internet-connection handling and auto retry when connection appears
   
- - Request cancelation
-  </string>
+ - Request cancelation</mutableString>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -232,6 +249,9 @@
         </systemColor>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

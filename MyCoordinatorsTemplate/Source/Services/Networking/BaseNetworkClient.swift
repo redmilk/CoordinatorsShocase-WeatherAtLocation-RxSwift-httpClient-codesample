@@ -11,10 +11,28 @@ import CoreLocation
 import MapKit
 
 /**
+ All of these is just my opinion, I'm sure you will find some inaccuracies or you know better solutions, will appreciate to discuss and consolidate this knowledge. I'm always looking for ways of better myself and grateful for the new aprroaches gained from my collegues :]
+ 
+ Introduction helper of current tab:
+ 
+ - Coordinator pattern demo with base coordinator as the only place for addopting to navigation controller and tabbar delegates. Handling default os navbar interactions, different presentation modes available from any spot of the application. Auto clean-up after coordinator's end. Absence of memory leaks.
+ 
+ - User session demo with user obfuscation and keychain.
+ 
+   saving flow: user id --> obfuscation --> to data --> to UserDefaults --| user model --> to data --> to KeyChain
+ 
+   fetching flow: UserDefault get --> data --> [UInt8] --> obfuscation to userId --> get from keychain --> data --> User model
  
  // TODO: - remove
  
- - Full list of networking errors handling
+ Introduction helper of current tab:
+
+ - Flux + Rx demo, state as single source of truth for view controller, the only difference is - it has separated state storages for
+   every screen and reducers in view model
+ 
+ - Location services and all interactions with permissions, including ongoing permission change cases
+ 
+ - List of available networking errors handling
  
  - Automatic token recovering on error 401 with further failed request retrying
  

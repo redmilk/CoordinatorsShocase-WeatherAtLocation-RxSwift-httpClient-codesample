@@ -10,19 +10,18 @@ import RxCocoa
 import Foundation
 import CoreLocation
 
+// TODO: - user drivers
+// TODO: - refactor to actions
 
-// MARK: Reducer
+/// capabilities
 extension WeatherSceneViewModel: StateStoreSupporting,
                                  LocationSupporting,
                                  ReachabilitySupporting,
-                                 NetworkSupporting,
                                  WeatherApiSupporting { }
 
-class WeatherSceneViewModel {
-    
-    // TODO: - user drivers
-    // TODO: - refactor to actions
-    
+
+/// internal types
+extension WeatherSceneViewModel {
     enum Action {
         case getWeatherBy(city: String)
         case currentLocationWeather
@@ -30,87 +29,96 @@ class WeatherSceneViewModel {
         case none
     }
     
-    private var currentLocationWeather: Observable<Weather> {
-        return self.locationService.currentLocation
-            .map { ($0.coordinate.latitude, $0.coordinate.longitude) }
-            .flatMap { self.weatherApi.currentWeather(at: $0.0, lon: $0.1) }
+    struct Input {
+        var action: PublishSubject<Action>
     }
     
-    private lazy var actualState: BehaviorSubject<WeatherSceneState> = {
-        return BehaviorSubject<WeatherSceneState>(value: WeatherSceneState.initial)
-    }()
+    struct Output {
+        var actualState: BehaviorSubject<WeatherSceneState>
+    }
+}
+
+
+/// implementation
+class WeatherSceneViewModel {
     
-    private var bag = DisposeBag()
-    
-    /// Input
-    var action = PublishSubject<Action>()
+    /// input from view
+    public var input = Input(action: PublishSubject<Action>())
     
     init() {
         bind()
     }
     
+    // MARK: - Internal
+    
+    /// output to state storage
+    private var output = Output(actualState: BehaviorSubject<WeatherSceneState>(value: WeatherSceneState.initial))
+    
     private func bind() {
         bag = DisposeBag()
-        /// Output to state storage
-        actualState
-            .asObservable()
-            .bind(to: store.mainSceneState)
-            .disposed(by: bag)
-        
-        /// Dispatching actions
-        action
+
+        /// Reducing actions
+        input.action
             .asObservable()
             .subscribe(onNext: { [weak self] action in
                 guard let self = self else { return }
-                
-                let newState = (try? self.actualState.value()) ?? WeatherSceneState.initial
+                /// fetching current actual state
+                let newState = (try? self.output.actualState.value()) ?? WeatherSceneState.initial
                 newState.requestRetryText.onNext(self.weatherApi.requestRetryMessage.value)
                 
                 switch action {
                 
                 /// city search weather
                 case .getWeatherBy(let city):
-                    if self.reachability.status.value != .online {
-                        newState.errorAlertContent.onNext(self.handleError(ApplicationErrors.Network.noConnection))
-                        newState.errorAlertContent.onNext(nil)
-                    }
                     self.loadWeather(self.weatherApi.currentWeather(city: city, maxRetryTimes: 5), state: newState)
                     
                 /// current location weather
                 case .currentLocationWeather:
                     self.locationService.requestPermission()
-                    if self.reachability.status.value != .online {
-                        newState.errorAlertContent.onNext(self.handleError(ApplicationErrors.Network.noConnection))
-                        newState.errorAlertContent.onNext(nil)
-                    }
-                    guard self.locationService.locationServicesEnabled() else {
-                        newState.errorAlertContent.onNext(self.handleError(ApplicationErrors.Location.noPermission))
-                        newState.errorAlertContent.onNext(nil)
-                        return
-                    }
-                    self.loadWeather(self.currentLocationWeather, state: newState)
-                    
-                    /// cancel currentrunning request
+                    self.locationService
+                        .locationServicesAuthorizationStatus
+                        .subscribe(onNext: { status in
+                            switch status {
+                            case .authorizedAlways, .authorizedWhenInUse:
+                                self.loadWeather(self.currentLocationWeather, state: newState)
+                            case .restricted, .denied:
+                                newState.errorAlertContent.onNext(self.handleError(ApplicationErrors.Location.noPermission))
+                                newState.errorAlertContent.onNext(nil)
+                            case _: break
+                            }
+                        })
+                        .disposed(by: self.bag)
+                    /// cancel current processing request
+                
                 case .cancelRequest:
                     self.cancelRequest(Observable.just(()), state: newState)
+                    
                 case .none:
                     break
                 }
             })
             .disposed(by: bag)
         
-        /// for debug
+        output.actualState
+            .asObservable()
+            .bind(to: store.mainSceneState)
+            .disposed(by: bag)
+        
+        /// debug
         weatherApi.requestRetryMessage
             .filter { !$0.isEmpty }
             .subscribe(onNext: { msg in
-                let state = try? self.actualState.value()
+                let state = try? self.output.actualState.value()
                 state?.requestRetryText.onNext(msg)
             })
             .disposed(by: bag)
     }
     
-    /// Internal
     private func loadWeather(_ weather: Observable<Weather>, state: WeatherSceneState) {
+        if self.reachability.status.value != .online {
+            state.errorAlertContent.onNext(self.handleError(ApplicationErrors.Network.noConnection))
+            state.errorAlertContent.onNext(nil)
+        }
         state.isLoading.onNext(true)
         return weather
             .take(1)
@@ -128,26 +136,32 @@ class WeatherSceneViewModel {
                 //state.updateWeather(<#T##weather: Weather##Weather#>)
                 return Observable.just(state)
             }
-            .bind(to: self.actualState)
+            .bind(to: self.output.actualState)
             .disposed(by: self.bag)
     }
     
     private func cancelRequest(_ cancel: Observable<()>, state: WeatherSceneState) {
         bind()
-        
         return cancel
             .map { [weak self] in
                 state.isLoading.onNext(false)
                 state.errorAlertContent.onNext(nil)
                 state.requestRetryText.onNext("")
-                
                 self?.weatherApi.requestRetryMessage.accept("")
                 self?.weatherApi.weatherRequestMaxRetry.onNext(0)
                 return state
             }
-            .bind(to: self.actualState)
+            .bind(to: self.output.actualState)
             .disposed(by: bag)
     }
+    
+    private var currentLocationWeather: Observable<Weather> {
+        return self.locationService.currentLocation
+            .map { ($0.coordinate.latitude, $0.coordinate.longitude) }
+            .flatMap { self.weatherApi.currentWeather(at: $0.0, lon: $0.1) }
+    }
+    
+    private var bag = DisposeBag()
 }
 
 

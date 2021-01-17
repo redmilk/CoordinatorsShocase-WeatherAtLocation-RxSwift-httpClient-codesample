@@ -18,44 +18,52 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9mq-2h-3Ah">
-                                <rect key="frame" x="183" y="144" width="48.5" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="164.5" y="68" width="85" height="36"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="K1O-Ci-wGI">
-                                <rect key="frame" x="117.5" y="264.5" width="179" height="214"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="K1O-Ci-wGI">
+                                <rect key="frame" x="24" y="128" width="366" height="314"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zc4-EJ-tYb">
-                                        <rect key="frame" x="0.0" y="0.0" width="179" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="366" height="50"/>
+                                        <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="jG2-nN-X24"/>
+                                        </constraints>
                                         <state key="normal" title="Push Authentication"/>
                                         <connections>
                                             <action selector="pushAuthPressed:" destination="zcH-7f-lXq" eventType="touchUpInside" id="Rqq-b4-xYC"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EaO-5E-oG9">
-                                        <rect key="frame" x="0.0" y="46" width="179" height="30"/>
+                                        <rect key="frame" x="0.0" y="66" width="366" height="50"/>
+                                        <color key="backgroundColor" systemColor="systemGray6Color"/>
                                         <state key="normal" title="Present Authentication"/>
                                         <connections>
                                             <action selector="presentAuthPressed:" destination="zcH-7f-lXq" eventType="touchUpInside" id="Mno-mU-56e"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w7z-Pk-vfi">
-                                        <rect key="frame" x="0.0" y="92" width="179" height="30"/>
+                                        <rect key="frame" x="0.0" y="132" width="366" height="50"/>
+                                        <color key="backgroundColor" systemColor="systemGray6Color"/>
                                         <state key="normal" title="Root Authentication"/>
                                         <connections>
                                             <action selector="rootAuthPressed:" destination="zcH-7f-lXq" eventType="touchUpInside" id="XQm-gP-qZn"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mUQ-fr-zIi">
-                                        <rect key="frame" x="0.0" y="138" width="179" height="30"/>
+                                        <rect key="frame" x="0.0" y="198" width="366" height="50"/>
+                                        <color key="backgroundColor" systemColor="systemGray6Color"/>
                                         <state key="normal" title="Push personal information"/>
                                         <connections>
                                             <action selector="personalInformationPressed:" destination="zcH-7f-lXq" eventType="touchUpInside" id="Jyx-hA-cTh"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mmb-vN-w1X">
-                                        <rect key="frame" x="0.0" y="184" width="179" height="30"/>
+                                        <rect key="frame" x="0.0" y="264" width="366" height="50"/>
+                                        <color key="backgroundColor" systemColor="systemGray6Color"/>
                                         <state key="normal" title="Present credit cards"/>
                                         <connections>
                                             <action selector="creditCardsPressed:" destination="zcH-7f-lXq" eventType="touchUpInside" id="3vM-zn-2gB"/>
@@ -68,9 +76,10 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="9mq-2h-3Ah" firstAttribute="centerX" secondItem="S0K-XL-bfD" secondAttribute="centerX" id="1MA-Gp-Nql"/>
-                            <constraint firstItem="9mq-2h-3Ah" firstAttribute="top" secondItem="S0K-XL-bfD" secondAttribute="top" constant="100" id="RW7-YG-xJz"/>
-                            <constraint firstItem="K1O-Ci-wGI" firstAttribute="centerX" secondItem="9mq-2h-3Ah" secondAttribute="centerX" id="Y5U-mP-2HM"/>
-                            <constraint firstItem="K1O-Ci-wGI" firstAttribute="top" secondItem="9mq-2h-3Ah" secondAttribute="bottom" constant="100" id="xOK-lC-CtH"/>
+                            <constraint firstItem="K1O-Ci-wGI" firstAttribute="leading" secondItem="S0K-XL-bfD" secondAttribute="leading" constant="24" id="34q-Eo-kds"/>
+                            <constraint firstItem="S0K-XL-bfD" firstAttribute="trailing" secondItem="K1O-Ci-wGI" secondAttribute="trailing" constant="24" id="KK8-0I-3zG"/>
+                            <constraint firstItem="9mq-2h-3Ah" firstAttribute="top" secondItem="S0K-XL-bfD" secondAttribute="top" constant="24" id="RW7-YG-xJz"/>
+                            <constraint firstItem="K1O-Ci-wGI" firstAttribute="top" secondItem="9mq-2h-3Ah" secondAttribute="bottom" constant="24" id="xOK-lC-CtH"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
@@ -97,14 +106,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Full name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i7L-bc-eor">
-                                <rect key="frame" x="170.5" y="144" width="73" height="21"/>
+                                <rect key="frame" x="170.5" y="68" width="73" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7bd-go-Kqk">
-                                <rect key="frame" x="24" y="189" width="366" height="35"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="29"/>
+                                <rect key="frame" x="24" y="113" width="366" height="36"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -115,7 +124,7 @@
                             <constraint firstItem="hn3-d8-hYE" firstAttribute="trailing" secondItem="7bd-go-Kqk" secondAttribute="trailing" constant="24" id="Adb-aW-1Fn"/>
                             <constraint firstItem="7bd-go-Kqk" firstAttribute="top" secondItem="i7L-bc-eor" secondAttribute="bottom" constant="24" id="XiC-Eb-chh"/>
                             <constraint firstItem="7bd-go-Kqk" firstAttribute="leading" secondItem="hn3-d8-hYE" secondAttribute="leading" constant="24" id="aWD-ip-dPD"/>
-                            <constraint firstItem="i7L-bc-eor" firstAttribute="top" secondItem="hn3-d8-hYE" secondAttribute="top" constant="100" id="cnj-UW-Ykv"/>
+                            <constraint firstItem="i7L-bc-eor" firstAttribute="top" secondItem="hn3-d8-hYE" secondAttribute="top" constant="24" id="cnj-UW-Ykv"/>
                             <constraint firstItem="i7L-bc-eor" firstAttribute="centerX" secondItem="hn3-d8-hYE" secondAttribute="centerX" id="dPm-7q-K02"/>
                         </constraints>
                     </view>
@@ -135,9 +144,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Credit Cards" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EWb-tl-P3A">
-                                <rect key="frame" x="159" y="144" width="96" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Saved Cards" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EWb-tl-P3A">
+                                <rect key="frame" x="122.5" y="68" width="169" height="36"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -145,7 +154,7 @@
                         <viewLayoutGuide key="safeArea" id="ZWO-dS-rLj"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="EWb-tl-P3A" firstAttribute="top" secondItem="ZWO-dS-rLj" secondAttribute="top" constant="100" id="73R-UR-0sy"/>
+                            <constraint firstItem="EWb-tl-P3A" firstAttribute="top" secondItem="ZWO-dS-rLj" secondAttribute="top" constant="24" id="73R-UR-0sy"/>
                             <constraint firstItem="EWb-tl-P3A" firstAttribute="centerX" secondItem="ZWO-dS-rLj" secondAttribute="centerX" id="Bvx-0e-xMM"/>
                         </constraints>
                     </view>
@@ -158,6 +167,9 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

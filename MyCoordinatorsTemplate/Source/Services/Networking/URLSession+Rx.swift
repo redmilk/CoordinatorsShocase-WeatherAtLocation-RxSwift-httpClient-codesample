@@ -16,7 +16,8 @@ extension ObservableType where Element == (response: HTTPURLResponse, data: Data
         return self.do(onNext: { response, data in
             guard let url = response.url?.absoluteString,
                   200..<300 ~= response.statusCode else { return }
-            //internalCache[url] = data
+//            internalCache[url] = data
+            // TODO: - remove
         })
     }
 }
@@ -25,7 +26,7 @@ extension Reactive where Base: URLSession {
 
     func decodable<D: Decodable>(request: URLRequest, type: D.Type) -> Observable<D> {
         return data(request: request).map { data in
-            let decoder = JSONDecoder()
+            let decoder = CustomJSONDecoder()
             do {
                 return try decoder.decode(type, from: data)
             } catch {

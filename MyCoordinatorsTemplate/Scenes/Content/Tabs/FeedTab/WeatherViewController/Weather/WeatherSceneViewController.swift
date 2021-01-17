@@ -17,7 +17,8 @@ import RxCocoa
 // TODO: - Letter appear animation
 
 /// Access to state store
-extension WeatherSceneViewController: StateStoreSupporting, NetworkSupporting { }
+extension WeatherSceneViewController: StateStoreSupporting,
+                                      NetworkSupporting { }
 
 final class WeatherSceneViewController: UIViewController, Instantiatable {
     
@@ -31,11 +32,11 @@ final class WeatherSceneViewController: UIViewController, Instantiatable {
     @IBOutlet private weak var cancelRequestButton: UIButton!
     @IBOutlet private weak var mapButton: UIButton!
     
-    private let reducer: WeatherSceneViewModel
+    private let viewModel: WeatherSceneViewModel
     private let bag = DisposeBag()
         
     required init?(viewModel: WeatherSceneViewModel, coder: NSCoder) {
-        self.reducer = viewModel
+        self.viewModel = viewModel
         super.init(coder: coder)
     }
     
@@ -50,19 +51,19 @@ final class WeatherSceneViewController: UIViewController, Instantiatable {
         /// Output
         locationButton.rx.controlEvent(.touchUpInside)
             .map { WeatherSceneViewModel.Action.currentLocationWeather }
-            .bind(to: reducer.action)
+            .bind(to: viewModel.input.action)
             .disposed(by: bag)
         
         searchTextField.rx.controlEvent(.editingDidEndOnExit)
             .map { self.searchTextField.text ?? nil }
             .unwrap()
             .map { WeatherSceneViewModel.Action.getWeatherBy(city: $0) }
-            .bind(to: reducer.action)
+            .bind(to: viewModel.input.action)
             .disposed(by: bag)
         
         cancelRequestButton.rx.controlEvent(.touchUpInside)
             .map { WeatherSceneViewModel.Action.cancelRequest }
-            .bind(to: reducer.action)
+            .bind(to: viewModel.input.action)
             .disposed(by: bag)
         
         /// Input from state

@@ -66,7 +66,6 @@ final class WeatherApi {
     // inject request with retry handler
     let requestRetryMessage = BehaviorRelay<String>(value: "")
 
-    
     private lazy var retryHandler: RetryHandler = { [weak self] err in
         guard let self = self else { return Observable.just(0) }
         return err.enumerated().flatMap { count, error -> Observable<Int> in

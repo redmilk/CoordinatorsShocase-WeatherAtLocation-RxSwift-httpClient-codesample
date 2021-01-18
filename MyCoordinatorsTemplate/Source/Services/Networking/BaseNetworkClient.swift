@@ -30,7 +30,7 @@ import MapKit
  - Flux + Rx demo, state as single source of truth for view controller, the only difference is - it has separated state storages for
    every screen and reducers in view model
  
- - Location services and all interactions with permissions, including ongoing permission change cases
+ - Location service with permissions and ongoing permission change cases
  
  - List of available networking errors handling
  
@@ -47,20 +47,17 @@ import MapKit
   
  */
 
-public typealias RetryHandler = (Observable<Error>) -> Observable<Int>
+// TODO: - all screen clean code
+
+typealias RetryHandler = (Observable<Error>) -> Observable<Int>
+typealias Response = (URLRequest) -> Observable<(response: HTTPURLResponse, data: Data)>
 
 final class BaseNetworkClient {
         
-    public typealias Response = (URLRequest) -> Observable<(response: HTTPURLResponse, data: Data)>
-
-    /// Builds and makes network requests using the token provided by the service. Will request a new token and retry if the result is an unauthorized (401) error.
-    ///
-    /// - Parameters:
-    ///   - response: A function that sends requests to the network and emits responses. Can be for example `URLSession.shared.rx.response`
-    ///   - tokenAcquisitionService: The object responsible for tracking the auth token. All requests should use the same object.
-    ///   - request: A function that can build the request when given a token.
-    /// - Returns: response of a guaranteed authorized network request.
-    public func getData<T>(response: @escaping Response, tokenAcquisitionService: TokenRecoverService<T>, request: @escaping (T) throws -> URLRequest) -> Observable<(response: HTTPURLResponse, data: Data)> {
+    public func getData<T>(response: @escaping Response,
+                           tokenAcquisitionService: TokenRecovering<T>,
+                           request: @escaping (T) throws -> URLRequest
+    ) -> Observable<(response: HTTPURLResponse, data: Data)> {
         return Observable
             .deferred { tokenAcquisitionService.token.take(1) }
             .map { try request($0) }
@@ -80,5 +77,10 @@ final class BaseNetworkClient {
             .decodable(request: request, type: D.self)
             .retry(when: retryHandler)
     }
-    
+}
+
+extension ObservableConvertibleType where Element == Error {
+    func renewToken<T>(with service: TokenRecovering<T>) -> Observable<Void> {
+        return service.trackErrors(for: self)
+    }
 }

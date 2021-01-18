@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 
-final class TokenRecoverService<T> {
+final class TokenRecovering<T> {
 
     var token: Observable<T> {
         return _token.asObservable()

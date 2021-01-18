@@ -87,8 +87,7 @@
 		79B0229925AE227600BBBE12 /* FormattingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B0229825AE227600BBBE12 /* FormattingService.swift */; };
 		79B022A625AE7A7500BBBE12 /* RequestHeaderAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B022A525AE7A7500BBBE12 /* RequestHeaderAdapter.swift */; };
 		79B022A925AE811B00BBBE12 /* RequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B022A825AE811B00BBBE12 /* RequestBuilder.swift */; };
-		79F05BF625B33F3400E21283 /* TokenRecoverService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F05BF525B33F3400E21283 /* TokenRecoverService.swift */; };
-		79F05BFC25B340CD00E21283 /* ObservableConvertible+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F05BFB25B340CD00E21283 /* ObservableConvertible+Extensions.swift */; };
+		79F05BF625B33F3400E21283 /* TokenRecovering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F05BF525B33F3400E21283 /* TokenRecovering.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -172,8 +171,7 @@
 		79B0229825AE227600BBBE12 /* FormattingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormattingService.swift; sourceTree = "<group>"; };
 		79B022A525AE7A7500BBBE12 /* RequestHeaderAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestHeaderAdapter.swift; sourceTree = "<group>"; };
 		79B022A825AE811B00BBBE12 /* RequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBuilder.swift; sourceTree = "<group>"; };
-		79F05BF525B33F3400E21283 /* TokenRecoverService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRecoverService.swift; sourceTree = "<group>"; };
-		79F05BFB25B340CD00E21283 /* ObservableConvertible+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ObservableConvertible+Extensions.swift"; sourceTree = "<group>"; };
+		79F05BF525B33F3400E21283 /* TokenRecovering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRecovering.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -501,7 +499,7 @@
 		79B0224C25AE045500BBBE12 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				79F05BFA25B3409900E21283 /* TokenRecovering */,
+				79F05BF525B33F3400E21283 /* TokenRecovering.swift */,
 				79B0224D25AE048200BBBE12 /* BaseNetworkClient.swift */,
 				79B0225625AE058400BBBE12 /* URLSession+Rx.swift */,
 				79B0224F25AE048200BBBE12 /* WeatherApi.swift */,
@@ -578,15 +576,6 @@
 				79B0226B25AE0D5100BBBE12 /* MainSceneStateFormatting.swift */,
 			);
 			path = Formatting;
-			sourceTree = "<group>";
-		};
-		79F05BFA25B3409900E21283 /* TokenRecovering */ = {
-			isa = PBXGroup;
-			children = (
-				79F05BF525B33F3400E21283 /* TokenRecoverService.swift */,
-				79F05BFB25B340CD00E21283 /* ObservableConvertible+Extensions.swift */,
-			);
-			path = TokenRecovering;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -733,11 +722,10 @@
 				79B0225225AE048200BBBE12 /* WeatherApi.swift in Sources */,
 				79B0225125AE048200BBBE12 /* Weather.swift in Sources */,
 				79B0226225AE078200BBBE12 /* ErrorHandling.swift in Sources */,
-				79F05BF625B33F3400E21283 /* TokenRecoverService.swift in Sources */,
+				79F05BF625B33F3400E21283 /* TokenRecovering.swift in Sources */,
 				790516B82590E34700B9E3DA /* AuthViewController.swift in Sources */,
 				790516B42590DAD600B9E3DA /* Instantiatable.swift in Sources */,
 				799107AD25ACA564003FC014 /* TabBarIcons.swift in Sources */,
-				79F05BFC25B340CD00E21283 /* ObservableConvertible+Extensions.swift in Sources */,
 				790516BD2590E86F00B9E3DA /* HomeCoordinator.swift in Sources */,
 				79B0224925AE044400BBBE12 /* CLLocationManager+Rx.swift in Sources */,
 				79B0225925AE058400BBBE12 /* URLSession+Rx.swift in Sources */,

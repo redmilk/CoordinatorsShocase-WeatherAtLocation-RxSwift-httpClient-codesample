@@ -8,13 +8,13 @@
 
 import UIKit
 
-protocol FeedCoordinatorProtocol {
+protocol WeatherCoordinatorProtocol {
     func presentWeather()
     func pushWeather()
 }
 
 /// MainTabBarCoordinator on start fills array of child with both Home and Weather coordinators
-final class FeedCoordinator: Coordinator, FeedCoordinatorProtocol {
+final class WeatherCoordinator: Coordinator, WeatherCoordinatorProtocol {
     
     private let vcTitle: String
     
@@ -27,9 +27,9 @@ final class FeedCoordinator: Coordinator, FeedCoordinatorProtocol {
     }
     
     override func start() {
-        let viewModel = FeedViewModel(coordinator: self, vcTitle: "Weather")
-        let controller = FeedViewController.instantiate(storyboard: .weather, instantiation: .initial) {
-            return FeedViewController(viewModel: viewModel, coder: $0)!
+        let viewModel = WeatherLobbyViewModel(coordinator: self, vcTitle: vcTitle)
+        let controller = WeatherLobbyController.instantiate(storyboard: .weather, instantiation: .initial) {
+            return WeatherLobbyController(viewModel: viewModel, coder: $0)!
         }
         navigationController = NavigationControllerFactory.makeStyled(style: .weather, root: controller)
         navigationController?.tabBarItem = UITabBarItem(title: "Weather", image: nil, selectedImage: nil)

@@ -16,12 +16,12 @@
 		790516A92590D58000B9E3DA /* Weather.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 790516A82590D58000B9E3DA /* Weather.storyboard */; };
 		790516AC2590D69300B9E3DA /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516AB2590D69300B9E3DA /* MainTabBarController.swift */; };
 		790516AE2590D97300B9E3DA /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516AD2590D97300B9E3DA /* HomeViewController.swift */; };
-		790516B02590D99C00B9E3DA /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516AF2590D99C00B9E3DA /* FeedViewController.swift */; };
+		790516B02590D99C00B9E3DA /* WeatherLobbyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516AF2590D99C00B9E3DA /* WeatherLobbyController.swift */; };
 		790516B42590DAD600B9E3DA /* Instantiatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516B32590DAD600B9E3DA /* Instantiatable.swift */; };
 		790516B62590E31F00B9E3DA /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516B52590E31F00B9E3DA /* ProfileViewController.swift */; };
 		790516B82590E34700B9E3DA /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516B72590E34700B9E3DA /* AuthViewController.swift */; };
 		790516BD2590E86F00B9E3DA /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516BC2590E86F00B9E3DA /* HomeCoordinator.swift */; };
-		790516BF2590ECB400B9E3DA /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516BE2590ECB400B9E3DA /* FeedCoordinator.swift */; };
+		790516BF2590ECB400B9E3DA /* WeatherCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516BE2590ECB400B9E3DA /* WeatherCoordinator.swift */; };
 		790516C125925A1500B9E3DA /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516C025925A1500B9E3DA /* ProfileCoordinator.swift */; };
 		790516C325925A2D00B9E3DA /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516C225925A2D00B9E3DA /* AuthCoordinator.swift */; };
 		790516CB2592BCE600B9E3DA /* PersonalInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790516CA2592BCE600B9E3DA /* PersonalInfoViewController.swift */; };
@@ -58,7 +58,7 @@
 		79563DEC25AF8FBB00636F91 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79563DEB25AF8FBB00636F91 /* HTTPMethod.swift */; };
 		79686D5C25A24EA8008CF481 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79686D5B25A24EA8008CF481 /* ProfileViewModel.swift */; };
 		79686D6325A25385008CF481 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79686D6225A25385008CF481 /* AuthViewModel.swift */; };
-		79686D6B25A2B701008CF481 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79686D6A25A2B701008CF481 /* FeedViewModel.swift */; };
+		79686D6B25A2B701008CF481 /* WeatherLobbyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79686D6A25A2B701008CF481 /* WeatherLobbyViewModel.swift */; };
 		79715C2625AA537B0028E9B9 /* PersonalInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79715C2525AA537B0028E9B9 /* PersonalInfoViewModel.swift */; };
 		799107AD25ACA564003FC014 /* TabBarIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799107AC25ACA564003FC014 /* TabBarIcons.swift */; };
 		79B0223C25ADFEB300BBBE12 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 79B0223B25ADFEB300BBBE12 /* RxCocoa */; };
@@ -100,12 +100,12 @@
 		790516A82590D58000B9E3DA /* Weather.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Weather.storyboard; sourceTree = "<group>"; };
 		790516AB2590D69300B9E3DA /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		790516AD2590D97300B9E3DA /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		790516AF2590D99C00B9E3DA /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		790516AF2590D99C00B9E3DA /* WeatherLobbyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherLobbyController.swift; sourceTree = "<group>"; };
 		790516B32590DAD600B9E3DA /* Instantiatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Instantiatable.swift; sourceTree = "<group>"; };
 		790516B52590E31F00B9E3DA /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		790516B72590E34700B9E3DA /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		790516BC2590E86F00B9E3DA /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
-		790516BE2590ECB400B9E3DA /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
+		790516BE2590ECB400B9E3DA /* WeatherCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCoordinator.swift; sourceTree = "<group>"; };
 		790516C025925A1500B9E3DA /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 		790516C225925A2D00B9E3DA /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		790516CA2592BCE600B9E3DA /* PersonalInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInfoViewController.swift; sourceTree = "<group>"; };
@@ -142,7 +142,7 @@
 		79563DEB25AF8FBB00636F91 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		79686D5B25A24EA8008CF481 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		79686D6225A25385008CF481 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
-		79686D6A25A2B701008CF481 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
+		79686D6A25A2B701008CF481 /* WeatherLobbyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherLobbyViewModel.swift; sourceTree = "<group>"; };
 		79715C2525AA537B0028E9B9 /* PersonalInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInfoViewModel.swift; sourceTree = "<group>"; };
 		799107AC25ACA564003FC014 /* TabBarIcons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarIcons.swift; sourceTree = "<group>"; };
 		79B0224725AE044400BBBE12 /* CLLocationManager+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CLLocationManager+Rx.swift"; sourceTree = "<group>"; };
@@ -275,8 +275,8 @@
 		790516CD2592BDD800B9E3DA /* FeedTab */ = {
 			isa = PBXGroup;
 			children = (
-				790516BE2590ECB400B9E3DA /* FeedCoordinator.swift */,
-				79348D9125ABE0500035246A /* FeedViewController */,
+				790516BE2590ECB400B9E3DA /* WeatherCoordinator.swift */,
+				79348D9125ABE0500035246A /* WeatherLobbyViewController */,
 				79469B5225A900D100ECC90B /* WeatherViewController */,
 			);
 			path = FeedTab;
@@ -348,13 +348,13 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		79348D9125ABE0500035246A /* FeedViewController */ = {
+		79348D9125ABE0500035246A /* WeatherLobbyViewController */ = {
 			isa = PBXGroup;
 			children = (
-				790516AF2590D99C00B9E3DA /* FeedViewController.swift */,
-				79686D6A25A2B701008CF481 /* FeedViewModel.swift */,
+				790516AF2590D99C00B9E3DA /* WeatherLobbyController.swift */,
+				79686D6A25A2B701008CF481 /* WeatherLobbyViewModel.swift */,
 			);
-			path = FeedViewController;
+			path = WeatherLobbyViewController;
 			sourceTree = "<group>";
 		};
 		79348D9325ABE0600035246A /* ProfileViewController */ = {
@@ -678,7 +678,7 @@
 				79B022A625AE7A7500BBBE12 /* RequestHeaderAdapter.swift in Sources */,
 				79686D6325A25385008CF481 /* AuthViewModel.swift in Sources */,
 				79563DDD25AF858000636F91 /* RequestHeaderAdaptable.swift in Sources */,
-				79686D6B25A2B701008CF481 /* FeedViewModel.swift in Sources */,
+				79686D6B25A2B701008CF481 /* WeatherLobbyViewModel.swift in Sources */,
 				790516F225942D3B00B9E3DA /* MainTabBarCoordinator.swift in Sources */,
 				79B022A925AE811B00BBBE12 /* RequestBuilder.swift in Sources */,
 				79B0229925AE227600BBBE12 /* FormattingService.swift in Sources */,
@@ -688,7 +688,7 @@
 				7905172225A15E2100B9E3DA /* HomeViewModel.swift in Sources */,
 				790516F9259538C500B9E3DA /* String+Extensions.swift in Sources */,
 				79B0224A25AE044400BBBE12 /* LocationService.swift in Sources */,
-				790516B02590D99C00B9E3DA /* FeedViewController.swift in Sources */,
+				790516B02590D99C00B9E3DA /* WeatherLobbyController.swift in Sources */,
 				79469B3F25A8E39900ECC90B /* FirstNameViewController.swift in Sources */,
 				7905171825A0C63C00B9E3DA /* CreditCardsViewController.swift in Sources */,
 				7905170B2597E06300B9E3DA /* UITabBarController+Extensions.swift in Sources */,
@@ -698,7 +698,7 @@
 				790516912590C4C100B9E3DA /* SceneDelegate.swift in Sources */,
 				79B0228425AE18B100BBBE12 /* Utils.swift in Sources */,
 				790516B62590E31F00B9E3DA /* ProfileViewController.swift in Sources */,
-				790516BF2590ECB400B9E3DA /* FeedCoordinator.swift in Sources */,
+				790516BF2590ECB400B9E3DA /* WeatherCoordinator.swift in Sources */,
 				79B0229025AE218A00BBBE12 /* StoryboardNames.swift in Sources */,
 				79469AEC25A4F60A00ECC90B /* KeyChain.swift in Sources */,
 				79563DEC25AF8FBB00636F91 /* HTTPMethod.swift in Sources */,

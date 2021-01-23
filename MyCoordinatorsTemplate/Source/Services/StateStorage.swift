@@ -8,6 +8,7 @@
 import RxSwift
 import RxCocoa
 
+// TODO: - make protocol for writing to state, same for reading
 final class StateStorage {
     
     public let mainSceneState: BehaviorSubject<WeatherSceneState>
@@ -15,7 +16,4 @@ final class StateStorage {
     init() {
         mainSceneState = BehaviorSubject<WeatherSceneState>(value: WeatherSceneState.initial)
     }
-    
-    private let bag = DisposeBag()
-    
 }

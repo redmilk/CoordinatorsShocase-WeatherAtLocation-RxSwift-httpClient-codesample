@@ -55,7 +55,7 @@ final class UserSession: AuthSessionProtocol {
     func setupUser(_ user: User, onSuccess: (()->Void)? = nil) {
         guard let accessToken = user.accessToken else { fatalError("Internal inconsistency") }
         let account: String = accessToken.uid
-        /// obfuscted user id --> data --> save to UserDefaults
+        ///user id --> obfuscation --> data --> save to UserDefaults
         let obfuscatingArray: [UInt8] = Obfuscator().bytesByObfuscatingString(string: account)
         do {
             let data: Data = try NSKeyedArchiver.archivedData(withRootObject: obfuscatingArray,

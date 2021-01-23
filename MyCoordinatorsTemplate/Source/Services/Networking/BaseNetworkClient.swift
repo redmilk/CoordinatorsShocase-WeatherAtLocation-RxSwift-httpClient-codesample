@@ -10,37 +10,53 @@ import RxCocoa
 import CoreLocation
 import MapKit
 
-fileprivate var internalCache = [String: Data]()
+/**
+ All of these is just my opinion, I'm sure you will find some inaccuracies or you know better solutions, will appreciate to discuss and consolidate this knowledge. I'm always looking for ways of better myself and grateful for the new aprroaches gained from my collegues :]
+ 
+ Introduction helper of current tab:
+ 
+ - Coordinator pattern demo with base coordinator as the only place for addopting to navigation controller and tabbar delegates. Handling default os navbar interactions, different presentation modes available from any spot of the application. Auto clean-up after coordinator's end. Absence of memory leaks.
+ 
+ - User session demo with user obfuscation and keychain.
+ 
+   saving flow: user id --> obfuscation --> to data --> to UserDefaults --| user model --> to data --> to KeyChain
+ 
+   fetching flow: UserDefault get --> data --> [UInt8] --> obfuscation to userId --> get from keychain --> data --> User model
+ 
+ // TODO: - remove
+ 
+ Introduction helper of current tab:
 
-extension BaseNetworkClient: ReachabilitySupporting { }
+ - Flux + Rx demo, state as single source of truth for view controller, the only difference is - it has separated state storages for
+   every screen and reducers in view model
+ 
+ - Location service with permissions and ongoing permission change cases
+ 
+ - List of available networking errors handling
+ 
+ - Automatic token recovering on error 401 with further failed request retrying, all the network requests that need to retry will be merged together so they can all be notified once the new token is acquired.
+ 
+ - Request caching for saving traffic and better scene response
+   (unless data needs to be up-to-date on every similar request, also we can configure time of cache keeping)
+ 
+ - Request retrying attempts on errors (unless 401 and -1009 which are handled individually)
+ 
+ - No-internet-connection handling and auto retry when connection appears
+  
+ - Request cancelation
+  
+ */
+
+// TODO: - all screen clean code
+
+typealias RetryHandler = (Observable<Error>) -> Observable<Int>
+typealias Response = (URLRequest) -> Observable<(response: HTTPURLResponse, data: Data)>
 
 final class BaseNetworkClient {
-    
-    private let bag = DisposeBag()
-    static let requestRetryMessage = BehaviorRelay<String>(value: "")
-    
     func request<D: Decodable>(with request: URLRequest,
-                               maxRetry: Int) -> Observable<D> {
-        let retryHandler: (Observable<Error>) -> Observable<Int> = { err in
-            return err.enumerated().flatMap { count, error -> Observable<Int> in
-                if count >= maxRetry - 1 {
-                    return Observable.error(error)
-                } else if (error as NSError).code == -1009 {
-                    return self.reachability
-                        .status
-                        .map { (status: Reachability.Status) -> Bool in
-                            return status == .online
-                        }
-                        .distinctUntilChanged()
-                        .filter { $0 == true }
-                        .map { _ in 1 }
-                }
-                BaseNetworkClient.requestRetryMessage.accept("🟥🟥🟥 Retry attempt: \(count + 1)")
-                return Observable<Int>
-                    .timer(RxTimeInterval.milliseconds(2000), scheduler: MainScheduler.instance)
-                    .take(1)
-            }
-        }
+                               retryHandler: @escaping RetryHandler) -> Observable<D> {
+     
+        /// request execution
         return URLSession.shared.rx
             .decodable(request: request, type: D.self)
             .retry(when: retryHandler)

@@ -8,11 +8,11 @@
 
 import UIKit
 
-final class FeedViewController: ViewController, Instantiatable {
+final class WeatherLobbyController: ViewController, Instantiatable {
     
-    let viewModel: FeedViewModel
+    let viewModel: WeatherLobbyViewModel
     
-    required init?(viewModel: FeedViewModel, coder: NSCoder) {
+    required init?(viewModel: WeatherLobbyViewModel, coder: NSCoder) {
         self.viewModel = viewModel
         super.init(coder: coder)
         title = viewModel.vcTitle
@@ -24,14 +24,10 @@ final class FeedViewController: ViewController, Instantiatable {
     }
 
     @IBAction func pushDetailPressed(_ sender: Any) {
-        viewModel.pushDetail()
+        viewModel.pushWeather()
     }
     
     @IBAction func customControllerPressed(_ sender: Any) {
-        viewModel.presentNoStoryboardVC()
-    }
-    
-    @IBAction func presentDraggableProtocolController(_ sender: Any) {
-        
+        viewModel.presentWeather()
     }
 }

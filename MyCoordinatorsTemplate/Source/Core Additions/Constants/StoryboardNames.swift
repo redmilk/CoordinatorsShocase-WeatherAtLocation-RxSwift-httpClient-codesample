@@ -13,6 +13,6 @@ enum Storyboard: String {
     case auth = "Auth"
     case content = "Content" /// tabbar
     case home = "Home"
-    case feed = "Feed"
+    case weather = "Weather"
     case profile = "Profile"
 }

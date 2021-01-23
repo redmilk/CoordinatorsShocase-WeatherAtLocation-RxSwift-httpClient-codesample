@@ -17,29 +17,52 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cod-Su-xvl">
-                                <rect key="frame" x="184.5" y="144" width="45.5" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Coordinator" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cod-Su-xvl">
+                                <rect key="frame" x="128" y="68" width="158.5" height="36"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="aHz-1W-beV">
-                                <rect key="frame" x="156.5" y="244" width="101" height="76"/>
+                                <rect key="frame" x="24" y="118" width="366" height="396"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I1C-qj-Dmq">
-                                        <rect key="frame" x="0.0" y="0.0" width="101" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="366" height="50"/>
+                                        <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="bSW-9I-L1r"/>
+                                        </constraints>
                                         <state key="normal" title="Push Profile"/>
                                         <connections>
                                             <action selector="pushProfilePressed:" destination="Vp4-Ve-fGF" eventType="touchUpInside" id="A7B-f9-6Ew"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Bf-Y0-5mq">
-                                        <rect key="frame" x="0.0" y="46" width="101" height="30"/>
+                                        <rect key="frame" x="0.0" y="66" width="366" height="50"/>
+                                        <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="y0J-co-ZSk"/>
+                                        </constraints>
                                         <state key="normal" title="Present Profile"/>
                                         <connections>
                                             <action selector="presentProfilePressed:" destination="Vp4-Ve-fGF" eventType="touchUpInside" id="7z1-3R-Ki1"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zRi-cd-ooo">
+                                        <rect key="frame" x="0.0" y="132" width="366" height="264"/>
+                                        <string key="text"> Introduction helper of current tab:
+ 
+ - Coordinator pattern demo with base coordinator as the only place for addopting to navigation controller and tabbar delegates. Handling default os navbar interactions, different presentation modes available from any spot of the application. Auto clean-up after coordinator's end. Absence of memory leaks.
+ 
+ - User session demo with user obfuscation and keychain.
+ 
+   saving flow: user id --&gt; obfuscation --&gt; to data --&gt; to UserDefaults --| user model --&gt; to data --&gt; to KeyChain
+ 
+   fetching flow: UserDefault get --&gt; data --&gt; [UInt8] --&gt; obfuscation to userId --&gt; get from keychain --&gt; data --&gt; User model</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -47,9 +70,11 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="cod-Su-xvl" firstAttribute="centerX" secondItem="Uya-v5-KGz" secondAttribute="centerX" id="0ul-K5-7Ik"/>
-                            <constraint firstItem="cod-Su-xvl" firstAttribute="top" secondItem="Uya-v5-KGz" secondAttribute="top" constant="100" id="Lxv-e5-gsX"/>
-                            <constraint firstItem="aHz-1W-beV" firstAttribute="top" secondItem="cod-Su-xvl" secondAttribute="top" constant="100" id="XWh-oz-k8W"/>
-                            <constraint firstItem="aHz-1W-beV" firstAttribute="centerX" secondItem="cod-Su-xvl" secondAttribute="centerX" id="xFL-CJ-xd9"/>
+                            <constraint firstItem="Uya-v5-KGz" firstAttribute="trailing" secondItem="aHz-1W-beV" secondAttribute="trailing" constant="24" id="LKu-3P-hCX"/>
+                            <constraint firstItem="cod-Su-xvl" firstAttribute="top" secondItem="Uya-v5-KGz" secondAttribute="top" constant="24" id="Lxv-e5-gsX"/>
+                            <constraint firstItem="aHz-1W-beV" firstAttribute="top" secondItem="cod-Su-xvl" secondAttribute="top" constant="50" id="XWh-oz-k8W"/>
+                            <constraint firstItem="aHz-1W-beV" firstAttribute="leading" secondItem="Uya-v5-KGz" secondAttribute="leading" constant="24" id="aGu-2Z-l61"/>
+                            <constraint firstItem="Uya-v5-KGz" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="aHz-1W-beV" secondAttribute="bottom" constant="24" id="qf9-T0-9YR"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" image="home" selectedImage="home" id="7nf-nx-VDe"/>
@@ -68,6 +93,9 @@
         <image name="home" width="30" height="30"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

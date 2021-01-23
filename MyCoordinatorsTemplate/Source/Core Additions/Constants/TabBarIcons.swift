@@ -10,7 +10,7 @@ import UIKit
 
 struct TabBarIcons {
     static let home = UIImage(named: "home")!
-    static let feed = UIImage(named: "feed")!
+    static let weather = UIImage(named: "globe")!
     
     private init() {}
 }

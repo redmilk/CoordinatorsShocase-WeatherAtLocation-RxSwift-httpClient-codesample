@@ -9,8 +9,7 @@ import CoreLocation
 import RxSwift
 import RxCocoa
 
-
-final class LocationService {
+final class LocationService: NSObject {
     
     enum LocationAccuracy {
         case bestForNavigation
@@ -52,9 +51,13 @@ final class LocationService {
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()
     }
-    
-    func locationServicesEnabled() -> Bool {
-        return CLLocationManager.locationServicesEnabled() && (CLLocationManager.authorizationStatus() == .authorizedWhenInUse || CLLocationManager.authorizationStatus() == .authorizedAlways)
+
+    func isEnabled() -> Bool {
+        guard let status = try? locationServicesAuthorizationStatus.value() else {
+            return false
+        }
+        print(status.rawValue)
+        return CLLocationManager.locationServicesEnabled() && (status == .authorizedWhenInUse || status == .authorizedAlways)
     }
     
     init(accuracy: CLLocationAccuracy = kCLLocationAccuracyHundredMeters) {
@@ -63,6 +66,7 @@ final class LocationService {
             .didChangeAuthorizationStatus
             .bind(to: locationServicesAuthorizationStatus)
             .disposed(by: bag)
+        super.init()
     }
     
     private let locationManager = CLLocationManager()

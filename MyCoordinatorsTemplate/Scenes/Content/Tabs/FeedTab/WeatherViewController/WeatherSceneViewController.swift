@@ -16,10 +16,10 @@ import RxCocoa
 // TODO: - Cache/Fetch cache on error
 // TODO: - Letter appear animation
 
-/// Access to state store
-extension WeatherSceneViewController: StateStoreSupporting, NetworkSupporting { }
+/// access to current state of view
+extension WeatherSceneViewController: StateStorageAccassible { }
 
-final class WeatherSceneViewController: UIViewController, Instantiatable {
+final class WeatherSceneViewController: ViewController, Instantiatable, BindableType {
     
     @IBOutlet private weak var searchTextField: UITextField!
     @IBOutlet private weak var tempLabel: UILabel!
@@ -28,12 +28,14 @@ final class WeatherSceneViewController: UIViewController, Instantiatable {
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet private weak var locationButton: UIButton!
     @IBOutlet private weak var errorLabel: UILabel!
+    @IBOutlet private weak var cancelRequestButton: UIButton!
+    @IBOutlet private weak var mapButton: UIButton!
     
-    private let reducer: WeatherSceneViewModel
-    private let bag = DisposeBag()
+    var viewModel: WeatherSceneViewModel!
+    private var bag = DisposeBag()
         
     required init?(viewModel: WeatherSceneViewModel, coder: NSCoder) {
-        self.reducer = viewModel
+        self.viewModel = viewModel
         super.init(coder: coder)
     }
     
@@ -42,20 +44,23 @@ final class WeatherSceneViewController: UIViewController, Instantiatable {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    func bindViewModel() {
         /// Output
         locationButton.rx.controlEvent(.touchUpInside)
             .map { WeatherSceneViewModel.Action.currentLocationWeather }
-            .bind(to: reducer.action)
+            .bind(to: viewModel.input.action)
             .disposed(by: bag)
         
         searchTextField.rx.controlEvent(.editingDidEndOnExit)
-            .map { self.searchTextField.text ?? nil }
+            .map { [weak self] in self?.searchTextField.text }
             .unwrap()
             .map { WeatherSceneViewModel.Action.getWeatherBy(city: $0) }
-            .bind(to: reducer.action)
+            .bind(to: viewModel.input.action)
+            .disposed(by: bag)
+        
+        cancelRequestButton.rx.controlEvent(.touchUpInside)
+            .map { WeatherSceneViewModel.Action.cancelRequest }
+            .bind(to: viewModel.input.action)
             .disposed(by: bag)
         
         /// Input from state
@@ -108,6 +113,17 @@ final class WeatherSceneViewController: UIViewController, Instantiatable {
             .drive(searchTextField.rx.isEnabled)
             .disposed(by: bag)
         
+        loading
+            .map { !$0 }
+            .drive(cancelRequestButton.rx.isHidden)
+            .disposed(by: bag)
+        
+        loading
+            .map { !$0 }
+            .drive(mapButton.rx.isEnabled)
+            .disposed(by: bag)
+        
+        /// TODO: - ????
         /// retry text alert for debug
         state
             .flatMap { $0.requestRetryText }
@@ -120,8 +136,8 @@ final class WeatherSceneViewController: UIViewController, Instantiatable {
             })
             .disposed(by: bag)
         
-        /// Error handling happens in Reducer and VC gets only data to present
-        /// VC concerns about how to present different types of error
+        /// error parsing at view model
+        /// TODO: - presenting error from coordinator
         state.flatMap { $0.errorAlertContent }
             .unwrap()
             .filter { !$0.0.isEmpty && !$0.1.isEmpty }

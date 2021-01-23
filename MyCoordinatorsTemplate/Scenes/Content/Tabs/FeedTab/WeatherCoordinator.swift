@@ -27,7 +27,7 @@ final class WeatherCoordinator: Coordinator, WeatherCoordinatorProtocol {
     }
     
     override func start() {
-        let viewModel = WeatherLobbyViewModel(coordinator: self, vcTitle: "Weather")
+        let viewModel = WeatherLobbyViewModel(coordinator: self, vcTitle: vcTitle)
         let controller = WeatherLobbyController.instantiate(storyboard: .weather, instantiation: .initial) {
             return WeatherLobbyController(viewModel: viewModel, coder: $0)!
         }

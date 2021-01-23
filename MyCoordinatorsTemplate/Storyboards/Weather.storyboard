@@ -12,7 +12,7 @@
         <!--Item-->
         <scene sceneID="BL2-QD-BiV">
             <objects>
-                <viewController id="w3T-wk-ZTE" customClass="FeedViewController" customModule="MyCoordinatorsTemplate" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="w3T-wk-ZTE" customClass="WeatherLobbyController" customModule="MyCoordinatorsTemplate" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eD1-uu-i6r">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

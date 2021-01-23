@@ -8,17 +8,17 @@
 
 import Foundation
 
-protocol FeedViewModelProtocol {
+protocol WeatherLobbyViewModelProtocol {
     func pushWeather()
     func presentWeather()
 }
 
-struct FeedViewModel: FeedViewModelProtocol {
+struct WeatherLobbyViewModel: WeatherLobbyViewModelProtocol {
     
-    let coordinator: FeedCoordinatorProtocol
+    let coordinator: WeatherCoordinatorProtocol
     let vcTitle: String
     
-    init(coordinator: FeedCoordinatorProtocol, vcTitle: String) {
+    init(coordinator: WeatherCoordinatorProtocol, vcTitle: String) {
         self.coordinator = coordinator
         self.vcTitle = vcTitle
     }

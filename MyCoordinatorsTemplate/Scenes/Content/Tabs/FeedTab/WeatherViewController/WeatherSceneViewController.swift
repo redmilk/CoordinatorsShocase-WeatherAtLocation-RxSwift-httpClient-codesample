@@ -44,11 +44,6 @@ final class WeatherSceneViewController: ViewController, Instantiatable, Bindable
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        bindViewModel()
-    }
-    
     func bindViewModel() {
         /// Output
         locationButton.rx.controlEvent(.touchUpInside)

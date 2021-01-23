@@ -9,11 +9,11 @@
 import UIKit
 
 protocol FeedCoordinatorProtocol {
-    func pushDetail()
-    func presentNoStoryboardedVC()
+    func presentWeather()
+    func pushWeather()
 }
 
-/// MainTabBarCoordinator on start fills array of child with both Home and Feed coordinators
+/// MainTabBarCoordinator on start fills array of child with both Home and Weather coordinators
 final class FeedCoordinator: Coordinator, FeedCoordinatorProtocol {
     
     private let vcTitle: String
@@ -27,30 +27,31 @@ final class FeedCoordinator: Coordinator, FeedCoordinatorProtocol {
     }
     
     override func start() {
-        let viewModel = FeedViewModel(coordinator: self, vcTitle: "Feed")
-        let controller = FeedViewController.instantiate(storyboard: .feed, instantiation: .initial) {
+        let viewModel = FeedViewModel(coordinator: self, vcTitle: "Weather")
+        let controller = FeedViewController.instantiate(storyboard: .weather, instantiation: .initial) {
             return FeedViewController(viewModel: viewModel, coder: $0)!
         }
-        navigationController = NavigationControllerFactory.makeStyled(style: .feed, root: controller)
-        navigationController?.tabBarItem = UITabBarItem(title: "Feed", image: nil, selectedImage: nil)
+        navigationController = NavigationControllerFactory.makeStyled(style: .weather, root: controller)
+        navigationController?.tabBarItem = UITabBarItem(title: "Weather", image: nil, selectedImage: nil)
         tabBarController?.addControllerForTab(navigationController!)
     }
     
-    func pushDetail() {
-        let viewModel = WeatherViewModel(coordinator: self, vcTitle: "Weather screen")
-        let controller = WeatherViewController.instantiate(storyboard: .feed,
-                                                          instantiation: .withIdentifier) {
-            return WeatherViewController(viewModel: viewModel, coder: $0)!
-        }
-        navigationController?.pushViewController(controller, animated: true)
-    }
-    
-    func presentNoStoryboardedVC() {
+    func presentWeather() {
         let viewModel = WeatherSceneViewModel()
-        let controller = WeatherSceneViewController.instantiate(storyboard: .feed, instantiation: .withIdentifier) {
+        var controller = WeatherSceneViewController.instantiate(storyboard: .weather, instantiation: .withIdentifier) {
             WeatherSceneViewController(viewModel: viewModel, coder: $0)!
         }
-        navigationController?.pushViewController(controller, animated: true)
+        controller.bindViewModel(to: viewModel)
+        navigationController?.present(controller, animated: isAnimatedTransition, completion: nil)
+    }
+    
+    func pushWeather() {
+        let viewModel = WeatherSceneViewModel()
+        var controller = WeatherSceneViewController.instantiate(storyboard: .weather, instantiation: .withIdentifier) {
+            WeatherSceneViewController(viewModel: viewModel, coder: $0)!
+        }
+        controller.bindViewModel(to: viewModel)
+        navigationController?.pushViewController(controller, animated: isAnimatedTransition)
     }
     
 }

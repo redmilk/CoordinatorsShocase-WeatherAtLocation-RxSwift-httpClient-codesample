@@ -27,8 +27,8 @@ final class ServicesContainer {
 /// also it's clear what functionality inside given object
 
 /// - Storage of application scene states
-protocol StateStoreSupporting { }
-extension StateStoreSupporting {
+protocol StateStorageAccassible { }
+extension StateStorageAccassible {
     var store: StateStorage {
         return services.stateStore
     }

@@ -17,8 +17,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9mm-C6-In2">
-                                <rect key="frame" x="174" y="68" width="66" height="36"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weather" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9mm-C6-In2">
+                                <rect key="frame" x="150.5" y="68" width="113" height="36"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -33,7 +33,7 @@
                                             <constraint firstAttribute="height" constant="50" id="NSG-Jb-jvR"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" title="Present no-storyboarded draggable VC">
+                                        <state key="normal" title="Push Weather">
                                             <color key="titleColor" systemColor="systemBlueColor"/>
                                         </state>
                                         <connections>
@@ -47,7 +47,7 @@
                                             <constraint firstAttribute="height" constant="50" id="KmG-zT-nZQ"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" title="Push Weather"/>
+                                        <state key="normal" title="Present Weather"/>
                                         <connections>
                                             <action selector="pushDetailPressed:" destination="w3T-wk-ZTE" eventType="touchUpInside" id="xtp-ZV-IJX"/>
                                         </connections>
@@ -65,40 +65,13 @@
                             <constraint firstItem="9mm-C6-In2" firstAttribute="centerX" secondItem="dmQ-NK-3WC" secondAttribute="centerX" id="t6i-5I-WER"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" image="feed" selectedImage="feed" id="faC-Cb-QKM"/>
+                    <tabBarItem key="tabBarItem" title="Item" image="globe" selectedImage="globe" id="faC-Cb-QKM"/>
                     <navigationItem key="navigationItem" id="eRl-eT-sO8"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bie-6v-gLm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="621.73913043478262" y="843.75"/>
-        </scene>
-        <!--Detail View Controller-->
-        <scene sceneID="nWx-CN-OMh">
-            <objects>
-                <viewController storyboardIdentifier="WeatherViewController" id="g5R-JZ-wlp" customClass="DetailViewController" customModule="MyCoordinatorsTemplate" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="zfK-hN-KqX">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weather" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fl6-XD-21A">
-                                <rect key="frame" x="175" y="244" width="64.5" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="C82-44-CJo"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="Fl6-XD-21A" firstAttribute="top" secondItem="C82-44-CJo" secondAttribute="top" constant="200" id="dja-QJ-pAs"/>
-                            <constraint firstItem="Fl6-XD-21A" firstAttribute="centerX" secondItem="C82-44-CJo" secondAttribute="centerX" id="rBg-9L-A7i"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6La-nd-iDL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1487" y="844"/>
         </scene>
         <!--Weather Scene View Controller-->
         <scene sceneID="8pQ-Y4-JVA">
@@ -190,7 +163,7 @@
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WBo-Qf-1Z1">
                                         <rect key="frame" x="0.0" y="204.5" width="366" height="419"/>
-                                        <mutableString key="text">Introduction helper of current tab:
+                                        <string key="text">Introduction helper of current tab:
 
  - Flux + Rx demo, state as single source of truth for view controller, the only difference is - it has separated state storages for
    every screen and reducers in view model
@@ -208,7 +181,7 @@
  
  - No-internet-connection handling and auto retry when connection appears
   
- - Request cancelation</mutableString>
+ - Request cancelation</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -239,11 +212,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vZj-Km-Fkk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1452" y="117"/>
+            <point key="canvasLocation" x="1401" y="844"/>
         </scene>
     </scenes>
     <resources>
-        <image name="feed" width="30" height="30"/>
+        <image name="globe" width="30" height="30"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

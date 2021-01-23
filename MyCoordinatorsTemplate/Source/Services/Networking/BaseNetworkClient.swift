@@ -34,7 +34,7 @@ import MapKit
  
  - List of available networking errors handling
  
- - Automatic token recovering on error 401 with further failed request retrying
+ - Automatic token recovering on error 401 with further failed request retrying, all the network requests that need to retry will be merged together so they can all be notified once the new token is acquired.
  
  - Request caching for saving traffic and better scene response
    (unless data needs to be up-to-date on every similar request, also we can configure time of cache keeping)
@@ -53,22 +53,6 @@ typealias RetryHandler = (Observable<Error>) -> Observable<Int>
 typealias Response = (URLRequest) -> Observable<(response: HTTPURLResponse, data: Data)>
 
 final class BaseNetworkClient {
-        
-    public func getData<T>(response: @escaping Response,
-                           tokenAcquisitionService: TokenRecovering<T>,
-                           request: @escaping (T) throws -> URLRequest
-    ) -> Observable<(response: HTTPURLResponse, data: Data)> {
-        return Observable
-            .deferred { tokenAcquisitionService.token.take(1) }
-            .map { try request($0) }
-            .flatMap { response($0) }
-            .map { response in
-                guard response.response.statusCode != 401 else { throw ApplicationErrors.TokenRecoverError.unauthorized }
-                return response
-            }
-            .retry { $0.renewToken(with: tokenAcquisitionService) }
-    }
-        
     func request<D: Decodable>(with request: URLRequest,
                                retryHandler: @escaping RetryHandler) -> Observable<D> {
      
@@ -76,11 +60,5 @@ final class BaseNetworkClient {
         return URLSession.shared.rx
             .decodable(request: request, type: D.self)
             .retry(when: retryHandler)
-    }
-}
-
-extension ObservableConvertibleType where Element == Error {
-    func renewToken<T>(with service: TokenRecovering<T>) -> Observable<Void> {
-        return service.trackErrors(for: self)
     }
 }

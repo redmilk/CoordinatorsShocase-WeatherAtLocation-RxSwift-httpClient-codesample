@@ -24,14 +24,10 @@ final class FeedViewController: ViewController, Instantiatable {
     }
 
     @IBAction func pushDetailPressed(_ sender: Any) {
-        viewModel.pushDetail()
+        viewModel.pushWeather()
     }
     
     @IBAction func customControllerPressed(_ sender: Any) {
-        viewModel.presentNoStoryboardVC()
-    }
-    
-    @IBAction func presentDraggableProtocolController(_ sender: Any) {
-        
+        viewModel.presentWeather()
     }
 }

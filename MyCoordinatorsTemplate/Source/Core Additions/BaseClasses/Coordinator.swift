@@ -17,7 +17,7 @@ class Coordinator: NSObject, CoordinatorProtocol {
     }
         
     private var childCoordinators: [String : CoordinatorProtocol] = [:]
-    private var isAnimatedTransition: Bool = true
+    private(set) var isAnimatedTransition: Bool = true
     
     weak var window: UIWindow!
     weak var parentCoordinator: CoordinatorProtocol?

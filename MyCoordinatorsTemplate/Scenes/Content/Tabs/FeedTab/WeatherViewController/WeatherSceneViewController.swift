@@ -16,11 +16,10 @@ import RxCocoa
 // TODO: - Cache/Fetch cache on error
 // TODO: - Letter appear animation
 
-/// Access to state store
-extension WeatherSceneViewController: StateStoreSupporting,
-                                      NetworkSupporting { }
+/// access to current state of view
+extension WeatherSceneViewController: StateStorageAccassible { }
 
-final class WeatherSceneViewController: UIViewController, Instantiatable {
+final class WeatherSceneViewController: ViewController, Instantiatable, BindableType {
     
     @IBOutlet private weak var searchTextField: UITextField!
     @IBOutlet private weak var tempLabel: UILabel!
@@ -32,8 +31,8 @@ final class WeatherSceneViewController: UIViewController, Instantiatable {
     @IBOutlet private weak var cancelRequestButton: UIButton!
     @IBOutlet private weak var mapButton: UIButton!
     
-    private let viewModel: WeatherSceneViewModel
-    private let bag = DisposeBag()
+    var viewModel: WeatherSceneViewModel!
+    private var bag = DisposeBag()
         
     required init?(viewModel: WeatherSceneViewModel, coder: NSCoder) {
         self.viewModel = viewModel
@@ -47,7 +46,10 @@ final class WeatherSceneViewController: UIViewController, Instantiatable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        bindViewModel()
+    }
+    
+    func bindViewModel() {
         /// Output
         locationButton.rx.controlEvent(.touchUpInside)
             .map { WeatherSceneViewModel.Action.currentLocationWeather }
@@ -55,7 +57,7 @@ final class WeatherSceneViewController: UIViewController, Instantiatable {
             .disposed(by: bag)
         
         searchTextField.rx.controlEvent(.editingDidEndOnExit)
-            .map { self.searchTextField.text ?? nil }
+            .map { [weak self] in self?.searchTextField.text }
             .unwrap()
             .map { WeatherSceneViewModel.Action.getWeatherBy(city: $0) }
             .bind(to: viewModel.input.action)
@@ -126,6 +128,7 @@ final class WeatherSceneViewController: UIViewController, Instantiatable {
             .drive(mapButton.rx.isEnabled)
             .disposed(by: bag)
         
+        /// TODO: - ????
         /// retry text alert for debug
         state
             .flatMap { $0.requestRetryText }
@@ -138,8 +141,8 @@ final class WeatherSceneViewController: UIViewController, Instantiatable {
             })
             .disposed(by: bag)
         
-        /// Error handling happens in Reducer and VC gets only data to present
-        /// VC concerns about how to present different types of error
+        /// error parsing at view model
+        /// TODO: - presenting error from coordinator
         state.flatMap { $0.errorAlertContent }
             .unwrap()
             .filter { !$0.0.isEmpty && !$0.1.isEmpty }

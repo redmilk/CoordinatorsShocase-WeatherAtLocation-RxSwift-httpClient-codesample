@@ -34,13 +34,13 @@ final class MainTabBarCoordinator: Coordinator {
                                               parentCoordinator: self,
                                               title: "Coordinator demo")
         /// tab bar's second controller coordinatorr
-        let feedCoordinator = FeedCoordinator(tabBarController: tabBarController, title: "Feed")
+        let weatherCoordinator = FeedCoordinator(tabBarController: tabBarController, title: "Weather")
         
         addChild(homeCoordinator)
-        addChild(feedCoordinator)
+        addChild(weatherCoordinator)
 
         homeCoordinator.start()
-        feedCoordinator.start()        
+        weatherCoordinator.start()        
     }
     
 }

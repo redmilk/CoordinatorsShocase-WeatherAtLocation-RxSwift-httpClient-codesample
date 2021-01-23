@@ -7,17 +7,15 @@
 //
 
 import UIKit
+import RxCocoa
 
 fileprivate var scrollViewKey: UInt8 = 0
 
 open class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
-    
-    public var textFieldsArrayForFreeSpaceTapKeyboardHiding: [UITextField] = []
-    public var textViewArrayForFreeSpaceTapKeyboardHiding: [UITextView] = []
         
     required public init?(coder: NSCoder) {
         super.init(coder: coder)
-        //Logger.initialization(entity: self)
+        Logger.initialization(entity: self)
     }
 
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -25,7 +23,7 @@ open class ViewController: UIViewController, UITextFieldDelegate, UITextViewDele
     }
     
     deinit {
-        //Logger.deinitialization(entity: self)
+        Logger.deinitialization(entity: self)
     }
     
     open override func viewDidLoad() {
@@ -49,32 +47,34 @@ open class ViewController: UIViewController, UITextFieldDelegate, UITextViewDele
     }
     
     /// override this for handling iOS default modal dismissing, by dragging
-    public func handleDefaultModalDismissing() { }
+    func handleDefaultModalDismissing() { }
     /// override this for uitextfield return key pressing
-    public func onTextFieldShouldReturn(_ textField: UITextField) { }
+    func onTextFieldShouldReturn(_ textField: UITextField) { }
     
     @objc func handleTap() {
         textFieldsArrayForFreeSpaceTapKeyboardHiding.forEach { $0.resignFirstResponder() }
         textViewArrayForFreeSpaceTapKeyboardHiding.forEach { $0.resignFirstResponder() }
     }
         
-    public func addTextSourceFieldToConvenienceKeyboardHidingList(textFields: [UITextField] = [],
+    /// for non reactive text source
+    func addTextSourceFieldToConvenienceKeyboardHidingList(textFields: [UITextField] = [],
                                                                   textViews: [UITextView] = []
     ) {
         textFieldsArrayForFreeSpaceTapKeyboardHiding.append(contentsOf: textFields)
         textViewArrayForFreeSpaceTapKeyboardHiding.append(contentsOf: textViews)
+        
         textFieldsArrayForFreeSpaceTapKeyboardHiding.forEach { $0.delegate = self }
         textViewArrayForFreeSpaceTapKeyboardHiding.forEach { $0.delegate = self }
     }
     
     // MARK: - Keyboard events
-    public func setupKeyboardNotifcationListenerForScrollView(_ scrollView: UIScrollView) {
+    func setupKeyboardNotifcationListenerForScrollView(_ scrollView: UIScrollView) {
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         internalScrollView = scrollView
     }
     
-    public func removeKeyboardNotificationListeners() {
+    func removeKeyboardNotificationListeners() {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
@@ -130,5 +130,8 @@ open class ViewController: UIViewController, UITextFieldDelegate, UITextViewDele
         }
         return true
     }
-    
+        
+    /// convenience for non-rx text sources
+    var textFieldsArrayForFreeSpaceTapKeyboardHiding: [UITextField] = []
+    var textViewArrayForFreeSpaceTapKeyboardHiding: [UITextView] = []
 }

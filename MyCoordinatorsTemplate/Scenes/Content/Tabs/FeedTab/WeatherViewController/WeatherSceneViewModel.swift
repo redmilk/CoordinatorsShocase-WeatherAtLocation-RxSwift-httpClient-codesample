@@ -10,13 +10,14 @@ import RxCocoa
 import Foundation
 import CoreLocation
 
-// TODO: - user drivers
+// TODO: - use drivers
 // TODO: - refactor to actions
 
 /// capabilities
-extension WeatherSceneViewModel: StateStoreSupporting,
+/// Access to state store
+extension WeatherSceneViewModel: StateStorageAccassible,
                                  LocationSupporting,
-                                 ReachabilitySupporting,
+                                 ReachabilitySupporting, // TODO: - check for neccessary
                                  WeatherApiSupporting { }
 
 
@@ -48,15 +49,14 @@ class WeatherSceneViewModel {
     init() {
         bind()
     }
-    
-    // MARK: - Internal
-    
+        
     /// output to state storage
     private var output = Output(actualState: BehaviorSubject<WeatherSceneState>(value: WeatherSceneState.initial))
     
-    private func bind() {
+    func bind() {
         bag = DisposeBag()
-
+        let newState = (try? self.output.actualState.value()) ?? WeatherSceneState.initial
+        
         /// Reducing actions
         input.action
             .asObservable()
@@ -107,8 +107,8 @@ class WeatherSceneViewModel {
         /// debug
         weatherApi.requestRetryMessage
             .filter { !$0.isEmpty }
-            .subscribe(onNext: { msg in
-                let state = try? self.output.actualState.value()
+            .subscribe(onNext: { [weak self] msg in
+                let state = try? self?.output.actualState.value()
                 state?.requestRetryText.onNext(msg)
             })
             .disposed(by: bag)
@@ -116,7 +116,7 @@ class WeatherSceneViewModel {
     
     private func loadWeather(_ weather: Observable<Weather>, state: WeatherSceneState) {
         if self.reachability.status.value != .online {
-            state.errorAlertContent.onNext(self.handleError(ApplicationErrors.Network.noConnection))
+            state.errorAlertContent.onNext(self.handleError(ApplicationErrors.ApiClient.noConnection))
             state.errorAlertContent.onNext(nil)
         }
         state.isLoading.onNext(true)
@@ -136,8 +136,8 @@ class WeatherSceneViewModel {
                 //state.updateWeather(<#T##weather: Weather##Weather#>)
                 return Observable.just(state)
             }
-            .bind(to: self.output.actualState)
-            .disposed(by: self.bag)
+            .bind(to: output.actualState)
+            .disposed(by: bag)
     }
     
     private func cancelRequest(_ cancel: Observable<()>, state: WeatherSceneState) {
@@ -151,14 +151,16 @@ class WeatherSceneViewModel {
                 self?.weatherApi.weatherRequestMaxRetry.onNext(0)
                 return state
             }
-            .bind(to: self.output.actualState)
+            .bind(to: output.actualState)
             .disposed(by: bag)
     }
     
     private var currentLocationWeather: Observable<Weather> {
         return self.locationService.currentLocation
             .map { ($0.coordinate.latitude, $0.coordinate.longitude) }
-            .flatMap { self.weatherApi.currentWeather(at: $0.0, lon: $0.1) }
+            .flatMap { [weak self] in
+                self?.weatherApi.currentWeather(at: $0.0, lon: $0.1) ?? Observable.just(Weather())
+            }
     }
     
     private var bag = DisposeBag()
@@ -175,22 +177,20 @@ extension WeatherSceneViewModel: ErrorHandling {
                 return ("City not found", "😰")
             case .serverError:
                 return ("Something went wrong", "Server error")
-            case .invalidToken:
+            case .unauthorized:
                 return ("Token is invalid", "Required authentication")
             case .invalidResponse:
                 return ("Request failure", "Ivalid response")
             case .deserializationFailed:
                 return ("Deserialization failure", "Decodable fail")
+            case .noConnection:
+                return ("Looking for internet connection...", "Internet connection failure")
+            case _: break
             }
         case let location as ApplicationErrors.Location:
             switch location {
             case .noPermission:
                 return ("Please provide access to location services in Settings app", "No location access")
-            }
-        case let network as ApplicationErrors.Network:
-            switch network {
-            case .noConnection:
-                return ("Looking for internet connection...", "Internet connection failure")
             }
         default: break
         }

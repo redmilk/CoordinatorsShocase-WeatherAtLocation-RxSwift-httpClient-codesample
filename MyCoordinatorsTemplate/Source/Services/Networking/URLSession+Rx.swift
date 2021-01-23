@@ -25,14 +25,15 @@ extension ObservableType where Element == (response: HTTPURLResponse, data: Data
 extension Reactive where Base: URLSession {
 
     func decodable<D: Decodable>(request: URLRequest, type: D.Type) -> Observable<D> {
-        return data(request: request).map { data in
-            let decoder = CustomJSONDecoder()
-            do {
-                return try decoder.decode(type, from: data)
-            } catch {
-                throw ApplicationErrors.ApiClient.deserializationFailed
+        return data(request: request)
+            .map { data in
+                let decoder = CustomJSONDecoder()
+                do {
+                    return try decoder.decode(type, from: data)
+                } catch {
+                    throw ApplicationErrors.ApiClient.deserializationFailed
+                }
             }
-        }
     }
     
     func json(request: URLRequest) -> Observable<Any> {
@@ -68,7 +69,7 @@ extension Reactive where Base: URLSession {
                 case 200..<300:
                     return data
                 case 401:
-                    throw ApplicationErrors.ApiClient.invalidToken
+                    throw ApplicationErrors.ApiClient.unauthorized
                 case 404:
                     throw ApplicationErrors.ApiClient.notFound
                 case 400..<500:

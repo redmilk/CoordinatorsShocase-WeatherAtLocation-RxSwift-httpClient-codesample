@@ -61,6 +61,7 @@ final class WeatherApi {
     private let apiKey = "66687e09dee0508032ac82d5785ee2ad"
     private let baseURL = URL(string: "https://api.openweathermap.org/data/2.5")!
     private let api: BaseNetworkClient
+   
     var weatherRequestMaxRetry: BehaviorSubject<Int> = .init(value: 0)
     // TODO: - move to weather api, it belongs to business logic
     // inject request with retry handler

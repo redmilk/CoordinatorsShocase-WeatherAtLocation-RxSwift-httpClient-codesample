@@ -9,19 +9,28 @@
 import Foundation
 import RxSwift
 
+extension ObservableConvertibleType where Element == Error {
+    func renewToken<T>(with service: TokenRecovering<T>) -> Observable<Void> {
+        return service.trackErrors(for: self)
+    }
+}
+
 final class TokenRecovering<T> {
 
+    typealias GetToken = (T) -> Observable<(response: HTTPURLResponse, data: Data)>
+    
     var token: Observable<T> {
         return _token.asObservable()
     }
 
-    typealias GetToken = (T) -> Observable<(response: HTTPURLResponse, data: Data)>
-
-    init(initialToken: T, getToken: @escaping GetToken, extractToken: @escaping (Data) throws -> T) {
+    init(initialToken: T,
+         getToken: @escaping GetToken,
+         extractToken: @escaping (Data) throws -> T
+    ) {
         relay
-            .flatMapFirst { getToken($0) }
+            .flatMap { getToken($0) }
             .map { (urlResponse) -> T in
-                guard urlResponse.response.statusCode / 100 == 2 else { throw ApplicationErrors.TokenRecoverError.getTokenFailure(response: urlResponse.response, data: urlResponse.data) }
+                guard urlResponse.response.statusCode / 100 == 2 else { throw ApplicationErrors.ApiClient.getTokenFailure(response: urlResponse.response, data: urlResponse.data) }
                 return try extractToken(urlResponse.data)
             }
             .startWith(initialToken)
@@ -41,9 +50,10 @@ final class TokenRecovering<T> {
         let error = source
             .asObservable()
             .map { error in
-                guard (error as? ApplicationErrors.TokenRecoverError) == .unauthorized else { throw error }
+                guard (error as? ApplicationErrors.ApiClient) == .unauthorized
+                else { throw error }
             }
-            .flatMap { [unowned self] in  self.token }
+            .flatMap { [unowned self] in self.token }
             .do(onNext: {
                 lock.lock()
                 relay.onNext($0)

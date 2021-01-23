@@ -9,8 +9,8 @@
 import Foundation
 
 protocol FeedViewModelProtocol {
-    func pushDetail()
-    func presentNoStoryboardVC()
+    func pushWeather()
+    func presentWeather()
 }
 
 struct FeedViewModel: FeedViewModelProtocol {
@@ -23,12 +23,12 @@ struct FeedViewModel: FeedViewModelProtocol {
         self.vcTitle = vcTitle
     }
     
-    func pushDetail() {
-        coordinator.pushDetail()
+    func pushWeather() {
+        coordinator.presentWeather()
     }
 
-    func presentNoStoryboardVC() {
-        coordinator.presentNoStoryboardedVC()
+    func presentWeather() {
+        coordinator.pushWeather()
     }
     
 }

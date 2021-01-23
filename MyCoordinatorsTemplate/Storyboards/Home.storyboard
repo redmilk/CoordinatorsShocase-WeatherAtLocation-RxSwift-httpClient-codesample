@@ -17,8 +17,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cod-Su-xvl">
-                                <rect key="frame" x="167" y="68" width="80" height="36"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Coordinator" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cod-Su-xvl">
+                                <rect key="frame" x="128" y="68" width="158.5" height="36"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -50,7 +50,7 @@
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zRi-cd-ooo">
                                         <rect key="frame" x="0.0" y="132" width="366" height="264"/>
-                                        <mutableString key="text"> Introduction helper of current tab:
+                                        <string key="text"> Introduction helper of current tab:
  
  - Coordinator pattern demo with base coordinator as the only place for addopting to navigation controller and tabbar delegates. Handling default os navbar interactions, different presentation modes available from any spot of the application. Auto clean-up after coordinator's end. Absence of memory leaks.
  
@@ -58,7 +58,7 @@
  
    saving flow: user id --&gt; obfuscation --&gt; to data --&gt; to UserDefaults --| user model --&gt; to data --&gt; to KeyChain
  
-   fetching flow: UserDefault get --&gt; data --&gt; [UInt8] --&gt; obfuscation to userId --&gt; get from keychain --&gt; data --&gt; User model</mutableString>
+   fetching flow: UserDefault get --&gt; data --&gt; [UInt8] --&gt; obfuscation to userId --&gt; get from keychain --&gt; data --&gt; User model</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>

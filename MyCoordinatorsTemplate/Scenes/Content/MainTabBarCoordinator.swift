@@ -12,7 +12,7 @@ import UIKit
 final class MainTabBarCoordinator: Coordinator {
         
     init(window: UIWindow,
-         parentCoordinator: CoordinatorProtocol
+         parentCoordinator: CoordinatorType
     ) {
         super.init()
         self.window = window

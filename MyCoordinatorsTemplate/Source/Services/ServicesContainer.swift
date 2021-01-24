@@ -13,11 +13,18 @@ fileprivate let services = ServicesContainer()
 final class ServicesContainer {
     lazy var session: UserSession = { UserSession() }()
     lazy var baseApiClient: BaseNetworkClient = { BaseNetworkClient() }()
-    lazy var weatherApi: WeatherApi = { WeatherApi(requestable: BaseNetworkClient()) }()
+    lazy var weatherApi: WeatherApi = { WeatherApi(baseApi: BaseNetworkClient()) }()
     lazy var reachability: Reachability = { Reachability() }()
     lazy var location: LocationService = { LocationService() }()
-    lazy var stateStore: StateStorage = { StateStorage() }()
+    lazy var stateStore: ViewStateStorage = { ViewStateStorage() }()
     lazy var formatting: FormattingService = { FormattingService() }()
+    
+    lazy var weatherService: WeatherService = {
+        let baseApi = BaseNetworkClient()
+        let weatherApi = WeatherApi(baseApi: baseApi)
+        return WeatherService(weatherApi: weatherApi)
+    }()
+
 }
 
 /// List of service-protocols to get needed capability.
@@ -29,7 +36,7 @@ final class ServicesContainer {
 /// - Storage of application scene states
 protocol StateStorageAccassible { }
 extension StateStorageAccassible {
-    var store: StateStorage {
+    var store: ViewStateStorage {
         return services.stateStore
     }
 }

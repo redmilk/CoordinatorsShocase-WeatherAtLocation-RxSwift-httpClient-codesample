@@ -163,7 +163,7 @@
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WBo-Qf-1Z1">
                                         <rect key="frame" x="0.0" y="204.5" width="366" height="419"/>
-                                        <string key="text">Introduction helper of current tab:
+                                        <mutableString key="text">Introduction helper of current tab:
 
  - Flux + Rx demo, state as single source of truth for view controller, the only difference is - it has separated state storages for
    every screen and reducers in view model
@@ -172,7 +172,7 @@
  
  - List of available networking errors handling
  
- - Automatic token recovering on error 401 with further failed request retrying
+ - Availability for automatic token recovering on error 401 with further failed request retrying
  
  - Request caching for saving traffic and better scene response
    (unless data needs to be up-to-date on every similar request, also we can configure time of cache keeping)
@@ -181,7 +181,7 @@
  
  - No-internet-connection handling and auto retry when connection appears
   
- - Request cancelation</string>
+ - Request cancelation</mutableString>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>

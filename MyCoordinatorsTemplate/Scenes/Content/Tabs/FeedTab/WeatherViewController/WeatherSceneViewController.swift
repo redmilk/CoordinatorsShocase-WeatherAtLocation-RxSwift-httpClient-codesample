@@ -9,15 +9,6 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-// TODO: - Provide different error types and handle them at once in VC
-// TODO: - Location permission Alert
-// TODO: - Show info view on request retry
-// TODO: - Maybe state should be shared, some of observables must be shared to prevent multiple handlers executing
-// TODO: - Cache/Fetch cache on error
-// TODO: - Letter appear animation
-
-/// access to current state of view
-extension WeatherSceneViewController: StateStorageAccassible { }
 
 final class WeatherSceneViewController: ViewController, Instantiatable, BindableType {
     
@@ -31,11 +22,16 @@ final class WeatherSceneViewController: ViewController, Instantiatable, Bindable
     @IBOutlet private weak var cancelRequestButton: UIButton!
     @IBOutlet private weak var mapButton: UIButton!
     
-    var viewModel: WeatherSceneViewModel!
+    private let stateStorage: ViewStateStorage
+    private(set) var viewModel: WeatherSceneViewModel
     private var bag = DisposeBag()
         
-    required init?(viewModel: WeatherSceneViewModel, coder: NSCoder) {
+    required init?(viewModel: WeatherSceneViewModel,
+                   stateStorage: ViewStateStorage,
+                   coder: NSCoder
+    ) {
         self.viewModel = viewModel
+        self.stateStorage = stateStorage
         super.init(coder: coder)
     }
     
@@ -64,7 +60,7 @@ final class WeatherSceneViewController: ViewController, Instantiatable, Bindable
             .disposed(by: bag)
         
         /// Input from state
-        let state = store
+        let state = stateStorage
             .mainSceneState
             .observe(on: MainScheduler.instance)
             .share(replay: 1)
@@ -138,25 +134,13 @@ final class WeatherSceneViewController: ViewController, Instantiatable, Bindable
         
         /// error parsing at view model
         /// TODO: - presenting error from coordinator
-        state.flatMap { $0.errorAlertContent }
-            .unwrap()
-            .filter { !$0.0.isEmpty && !$0.1.isEmpty }
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] (errorData: (msg: String, title: String)) -> Void in
-                guard let self = self else { return }
-                switch errorData.title {
-                case "No location access":
-                    self.present(alertWithActionAndText: errorData.msg, title: "Go to Settings", actionTitle: errorData.title) {
-                        Utils.openSettings()
-                    }
-                    .subscribe()
-                    .disposed(by: self.bag)
-                case _:
-                    self.present(simpleAlertWithText: errorData.msg, title: errorData.title)
-                        .subscribe()
-                        .disposed(by: self.bag)
-                }
-            })
-            .disposed(by: bag)
+//        state.flatMap { $0.errorAlertContent }
+//            .unwrap()
+//            .filter { !$0.0.isEmpty && !$0.1.isEmpty }
+//            .observe(on: MainScheduler.instance)
+//            .subscribe(onNext: { [weak self] (errorData: (msg: String, title: String)) -> Void in
+//
+//            })
+//            .disposed(by: bag)
     }
 }

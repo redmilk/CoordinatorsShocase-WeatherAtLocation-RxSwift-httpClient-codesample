@@ -11,10 +11,16 @@ import Foundation
 
 
 extension WeatherApi: ReachabilitySupporting { }
-final class WeatherApi {
+
+protocol WeatherApiType {
+    func currentWeather(city: String, maxRetryTimes: Int) -> Observable<Weather>
+    func currentWeather(at lat: Double, lon: Double, maxRetryTimes: Int) -> Observable<Weather>
+}
+
+final class WeatherApi: WeatherApiType {
     
-    init(requestable: BaseNetworkClient) {
-        self.api = requestable
+    init(baseApi: BaseNetworkClient) {
+        self.api = baseApi
     }
     
     func currentWeather(city: String,

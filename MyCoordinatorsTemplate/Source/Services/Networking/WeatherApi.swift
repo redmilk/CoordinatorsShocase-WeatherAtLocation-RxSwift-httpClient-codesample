@@ -13,14 +13,19 @@ import Foundation
 extension WeatherApi: ReachabilitySupporting { }
 
 protocol WeatherApiType {
+    var requestRetryMessage: BehaviorRelay<String> { get }
+    var weatherRequestMaxRetry: BehaviorSubject<Int> { get }
     func currentWeather(city: String, maxRetryTimes: Int) -> Observable<Weather>
     func currentWeather(at lat: Double, lon: Double, maxRetryTimes: Int) -> Observable<Weather>
 }
 
 final class WeatherApi: WeatherApiType {
     
-    init(baseApi: BaseNetworkClient) {
+    init(baseApi: BaseNetworkClient,
+         reachability: ReachabilityType
+    ) {
         self.api = baseApi
+        self.reachability = reachability
     }
     
     func currentWeather(city: String,
@@ -38,8 +43,13 @@ final class WeatherApi: WeatherApiType {
                                             adapters: [headers, params],
                                             method: .get)
         
-        return api.request(with: requestBuilder.request,
-                           retryHandler: retryHandler)
+        return api
+            .request(with: requestBuilder.request, retryHandler: retryHandler)
+            .do(onNext: { [unowned self] _ in
+                guard self.reachability.status.value == .online else {
+                    throw ApplicationErrors.ApiClient.noConnection
+                }
+            })
     }
     
     func currentWeather(at lat: Double,
@@ -59,14 +69,20 @@ final class WeatherApi: WeatherApiType {
                                             adapters: [headers, params],
                                             method: .get)
         
-        return api.request(with: requestBuilder.request,
-                           retryHandler: retryHandler)
+        return api
+            .request(with: requestBuilder.request, retryHandler: retryHandler)
+            .do(onNext: { [unowned self] _ in
+                guard self.reachability.status.value == .online else {
+                    throw ApplicationErrors.ApiClient.noConnection
+                }
+            })
     }
     
     /// Internal
     private let apiKey = "66687e09dee0508032ac82d5785ee2ad"
     private let baseURL = URL(string: "https://api.openweathermap.org/data/2.5")!
     private let api: BaseNetworkClient
+    private let reachability: ReachabilityType
    
     var weatherRequestMaxRetry: BehaviorSubject<Int> = .init(value: 0)
     // TODO: - move to weather api, it belongs to business logic
@@ -81,7 +97,7 @@ final class WeatherApi: WeatherApiType {
             } else if (error as NSError).code == -1009 {
                 return self.reachability
                     .status
-                    .map { (status: Reachability.Status) -> Bool in
+                    .map { (status: ReachabilityStatus) -> Bool in
                         return status == .online
                     }
                     .distinctUntilChanged()

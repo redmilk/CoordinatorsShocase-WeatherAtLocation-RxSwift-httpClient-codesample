@@ -12,8 +12,6 @@ fileprivate let services = ServicesContainer()
 
 final class ServicesContainer {
     lazy var session: UserSession = { UserSession() }()
-    lazy var baseApiClient: BaseNetworkClient = { BaseNetworkClient() }()
-    lazy var weatherApi: WeatherApi = { WeatherApi(baseApi: BaseNetworkClient()) }()
     lazy var reachability: Reachability = { Reachability() }()
     lazy var location: LocationService = { LocationService() }()
     lazy var stateStore: ViewStateStorage = { ViewStateStorage() }()
@@ -21,14 +19,16 @@ final class ServicesContainer {
     
     lazy var weatherService: WeatherService = {
         let baseApi = BaseNetworkClient()
-        let weatherApi = WeatherApi(baseApi: baseApi)
-        return WeatherService(weatherApi: weatherApi)
+        let weatherApi = WeatherApi(baseApi: baseApi,
+                                    reachability: reachability)
+        return WeatherService(weatherApi: weatherApi,
+                              location: location)
     }()
 
 }
 
 /// List of service-protocols to get needed capability.
-/// This is another way of passing dependencies. We do decorate entities by
+/// Just like a way of passing dependencies. We decorate entities by
 /// adopting to specific services protocols which already has internal implementation
 /// by doing so we avoid codegen in initializers
 /// also it's clear what functionality inside given object
@@ -38,6 +38,14 @@ protocol StateStorageAccassible { }
 extension StateStorageAccassible {
     var store: ViewStateStorage {
         return services.stateStore
+    }
+}
+
+/// - User session
+protocol WeatherServiceAccassible { }
+extension WeatherServiceAccassible {
+    var weatherService: WeatherService {
+        return services.weatherService
     }
 }
 
@@ -62,22 +70,6 @@ protocol ReachabilitySupporting { }
 extension ReachabilitySupporting {
     var reachability: Reachability {
         return services.reachability
-    }
-}
-
-/// - Common api client
-protocol NetworkSupporting { }
-extension NetworkSupporting {
-    var apiClient: BaseNetworkClient  {
-        return services.baseApiClient
-     }
-}
-
-/// - Weather API
-protocol WeatherApiSupporting { }
-extension WeatherApiSupporting {
-    var weatherApi: WeatherApi {
-        return services.weatherApi
     }
 }
 

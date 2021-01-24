@@ -81,40 +81,40 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="3WK-6J-c4L">
-                                <rect key="frame" x="24" y="60" width="366" height="623.5"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3WK-6J-c4L">
+                                <rect key="frame" x="24" y="60" width="366" height="493.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="J8S-VC-1Mf">
-                                        <rect key="frame" x="0.0" y="0.0" width="366" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="366" height="30"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zcx-4n-9md">
-                                                <rect key="frame" x="0.0" y="0.0" width="323" height="40"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="323" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="406-xb-1BP">
-                                                <rect key="frame" x="326" y="0.0" width="40" height="40"/>
+                                                <rect key="frame" x="326" y="0.0" width="40" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="40" id="afD-WW-dde"/>
                                                 </constraints>
                                             </activityIndicatorView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="4Kr-Xa-rRT"/>
+                                            <constraint firstAttribute="height" constant="30" id="4Kr-Xa-rRT"/>
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="OVJ-SU-WF5">
-                                        <rect key="frame" x="0.0" y="50" width="366" height="20"/>
+                                        <rect key="frame" x="0.0" y="38" width="366" height="20"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="temp" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uXk-9p-faR">
                                                 <rect key="frame" x="0.0" y="0.0" width="183" height="20"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="humidity" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bTN-pW-h9E">
                                                 <rect key="frame" x="183" y="0.0" width="183" height="20"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -124,7 +124,7 @@
                                         </constraints>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E0p-HD-C7D">
-                                        <rect key="frame" x="0.0" y="80" width="366" height="30"/>
+                                        <rect key="frame" x="0.0" y="66" width="366" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="Wgn-sv-Iz6"/>
                                         </constraints>
@@ -133,46 +133,49 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="c94-MR-Mbr">
-                                        <rect key="frame" x="0.0" y="120" width="366" height="50"/>
+                                        <rect key="frame" x="0.0" y="104" width="366" height="30"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MK2-H9-BpN">
-                                                <rect key="frame" x="0.0" y="0.0" width="116.5" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="116.5" height="30"/>
                                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                 <state key="normal" title="Location"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YkO-vW-q7Z">
-                                                <rect key="frame" x="124.5" y="0.0" width="117" height="50"/>
+                                                <rect key="frame" x="124.5" y="0.0" width="117" height="30"/>
                                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                 <state key="normal" title="Map"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ahD-Eg-Ldp">
-                                                <rect key="frame" x="249.5" y="0.0" width="116.5" height="50"/>
+                                                <rect key="frame" x="249.5" y="0.0" width="116.5" height="30"/>
                                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                 <state key="normal" title="Cancel request"/>
                                             </button>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="r4H-WO-tjH"/>
+                                            <constraint firstAttribute="height" constant="30" id="r4H-WO-tjH"/>
                                         </constraints>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sXC-Mp-EjJ">
-                                        <rect key="frame" x="0.0" y="180" width="366" height="14.5"/>
+                                        <rect key="frame" x="0.0" y="142" width="366" height="15"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="15" id="2PH-yk-iTS"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WBo-Qf-1Z1">
-                                        <rect key="frame" x="0.0" y="204.5" width="366" height="419"/>
-                                        <mutableString key="text">Introduction helper of current tab:
+                                        <rect key="frame" x="0.0" y="165" width="366" height="328.5"/>
+                                        <mutableString key="text">Introduction helper for current tab:
 
- - Flux + Rx demo, state as single source of truth for view controller, the only difference is - it has separated state storages for
+ - Flux + Rx demo, state as single source of truth for view, the only difference is - it has separated state storages for
    every screen and reducers in view model
  
  - Location service with permissions and ongoing permission change cases
  
  - List of available networking errors handling
  
- - Availability for automatic token recovering on error 401 with further failed request retrying
+ - Availability for automatic token recovering on error 401 with failed request retrying
  
  - Request caching for saving traffic and better scene response
    (unless data needs to be up-to-date on every similar request, also we can configure time of cache keeping)
@@ -182,7 +185,7 @@
  - No-internet-connection handling and auto retry when connection appears
   
  - Request cancelation</mutableString>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>

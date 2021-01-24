@@ -24,7 +24,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="aHz-1W-beV">
-                                <rect key="frame" x="24" y="118" width="366" height="396"/>
+                                <rect key="frame" x="24" y="128" width="366" height="396"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I1C-qj-Dmq">
                                         <rect key="frame" x="0.0" y="0.0" width="366" height="50"/>
@@ -70,9 +70,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="cod-Su-xvl" firstAttribute="centerX" secondItem="Uya-v5-KGz" secondAttribute="centerX" id="0ul-K5-7Ik"/>
+                            <constraint firstItem="aHz-1W-beV" firstAttribute="top" secondItem="cod-Su-xvl" secondAttribute="bottom" constant="24" id="BKT-JI-2UH"/>
                             <constraint firstItem="Uya-v5-KGz" firstAttribute="trailing" secondItem="aHz-1W-beV" secondAttribute="trailing" constant="24" id="LKu-3P-hCX"/>
                             <constraint firstItem="cod-Su-xvl" firstAttribute="top" secondItem="Uya-v5-KGz" secondAttribute="top" constant="24" id="Lxv-e5-gsX"/>
-                            <constraint firstItem="aHz-1W-beV" firstAttribute="top" secondItem="cod-Su-xvl" secondAttribute="top" constant="50" id="XWh-oz-k8W"/>
                             <constraint firstItem="aHz-1W-beV" firstAttribute="leading" secondItem="Uya-v5-KGz" secondAttribute="leading" constant="24" id="aGu-2Z-l61"/>
                             <constraint firstItem="Uya-v5-KGz" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="aHz-1W-beV" secondAttribute="bottom" constant="24" id="qf9-T0-9YR"/>
                         </constraints>

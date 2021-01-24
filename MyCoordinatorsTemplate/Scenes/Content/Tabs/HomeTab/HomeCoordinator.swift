@@ -18,7 +18,7 @@ final class HomeCoordinator: Coordinator, HomeCoordinatorProtocol {
     private let title: String
     
     init(tabBarController: UITabBarController,
-         parentCoordinator: CoordinatorProtocol,
+         parentCoordinator: CoordinatorType,
          title: String
     ) {
         self.title = title

@@ -8,10 +8,10 @@
 
 import UIKit
 
-protocol CoordinatorProtocol: AnyObject {
+protocol CoordinatorType: AnyObject {
     
     /// if current coordinator has parent
-    var parentCoordinator: CoordinatorProtocol? { get set }
+    var parentCoordinator: CoordinatorType? { get set }
     
     /// if navigation starts from UINavigationController
     var navigationController: UINavigationController? { get set }
@@ -25,8 +25,8 @@ protocol CoordinatorProtocol: AnyObject {
     /// for scene modal presentation and for other conveniences
     var currentController: UIViewController? { get set }
         
-    func addChild(_ child: CoordinatorProtocol)
-    func removeChild(_ child: CoordinatorProtocol)
+    func addChild(_ child: CoordinatorType)
+    func removeChild(_ child: CoordinatorType)
     func clear()
         
     func start()

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Coordinator: NSObject, CoordinatorProtocol {
+class Coordinator: NSObject, CoordinatorType {
         
     enum PresentationMode {
         case push(UINavigationController)
@@ -16,11 +16,11 @@ class Coordinator: NSObject, CoordinatorProtocol {
         case root(UIWindow)
     }
         
-    private var childCoordinators: [String : CoordinatorProtocol] = [:]
+    private var childCoordinators: [String : CoordinatorType] = [:]
     private(set) var isAnimatedTransition: Bool = true
     
     weak var window: UIWindow!
-    weak var parentCoordinator: CoordinatorProtocol?
+    weak var parentCoordinator: CoordinatorType?
     weak var currentController: UIViewController?
     weak var navigationController: UINavigationController? {
         didSet {
@@ -59,12 +59,12 @@ class Coordinator: NSObject, CoordinatorProtocol {
         tabBarController?.delegate = self
     }
     
-    func addChild(_ child: CoordinatorProtocol) {
+    func addChild(_ child: CoordinatorType) {
         let key = String(describing: child)
         childCoordinators[key] = child
     }
     
-    func removeChild(_ child: CoordinatorProtocol) {
+    func removeChild(_ child: CoordinatorType) {
         let key = String(describing: child)
         childCoordinators.removeValue(forKey: key)
         /// Reassign navigation delegates to self when removing child coordinator

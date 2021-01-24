@@ -13,14 +13,6 @@ import CoreLocation
 // TODO: - use drivers
 // TODO: - refactor to actions
 
-/// capabilities
-/// Access to state store
-extension WeatherSceneViewModel: StateStorageAccassible,
-                                 LocationSupporting,
-                                 ReachabilitySupporting, // TODO: - check for neccessary
-                                 WeatherApiSupporting { }
-
-
 /// internal types
 extension WeatherSceneViewModel {
     enum Action {
@@ -40,13 +32,24 @@ extension WeatherSceneViewModel {
 }
 
 
+/// capabilities
+/// Access to state store
+extension WeatherSceneViewModel: StateStorageAccassible,
+                                 LocationSupporting,
+                                 ReachabilitySupporting, // TODO: - check for neccessary
+                                 WeatherApiSupporting { }
+
+
 /// implementation
 class WeatherSceneViewModel {
+    
+    private let coordinator: WeatherCoordinator
     
     /// input from view
     public var input = Input(action: PublishSubject<Action>())
     
-    init() {
+    init(coordinator: WeatherCoordinator) {
+        self.coordinator = coordinator
         bind()
     }
         
@@ -82,8 +85,9 @@ class WeatherSceneViewModel {
                             case .authorizedAlways, .authorizedWhenInUse:
                                 self.loadWeather(self.currentLocationWeather, state: newState)
                             case .restricted, .denied:
-                                newState.errorAlertContent.onNext(self.handleError(ApplicationErrors.Location.noPermission))
-                                newState.errorAlertContent.onNext(nil)
+                                self.handleError(ApplicationErrors.Location.noPermission)
+                                //newState.errorAlertContent.onNext()
+                                //newState.errorAlertContent.onNext(nil)
                             case _: break
                             }
                         })
@@ -116,8 +120,9 @@ class WeatherSceneViewModel {
     
     private func loadWeather(_ weather: Observable<Weather>, state: WeatherSceneState) {
         if self.reachability.status.value != .online {
-            state.errorAlertContent.onNext(self.handleError(ApplicationErrors.ApiClient.noConnection))
-            state.errorAlertContent.onNext(nil)
+            self.handleError(ApplicationErrors.ApiClient.noConnection)
+//            state.errorAlertContent.onNext()
+//            state.errorAlertContent.onNext(nil)
         }
         state.isLoading.onNext(true)
         return weather
@@ -130,10 +135,9 @@ class WeatherSceneViewModel {
             .catch { [weak self] error in
                 guard let self = self else { return Observable.just(state) }
                 state.isLoading.onNext(false)
-                state.errorAlertContent.onNext(self.handleError(error))
-                state.errorAlertContent.onNext(nil)
-                //let cachedWeather: Weather = Weather()
-                //state.updateWeather(<#T##weather: Weather##Weather#>)
+                self.handleError(error)
+                //state.errorAlertContent.onNext(self.handleError(error))
+                //state.errorAlertContent.onNext(nil)
                 return Observable.just(state)
             }
             .bind(to: output.actualState)
@@ -169,28 +173,30 @@ class WeatherSceneViewModel {
 
 // MARK: Error handling
 extension WeatherSceneViewModel: ErrorHandling {
+    
+    @discardableResult
     func handleError(_ error: Error) -> (String, String)? {
         switch error {
         case let request as ApplicationErrors.ApiClient:
             switch request {
             case .notFound:
-                return ("City not found", "😰")
+                coordinator.displayAlert(errorData: ("City not found", "😰"), bag: bag)
             case .serverError:
-                return ("Something went wrong", "Server error")
+                coordinator.displayAlert(errorData: ("Something went wrong", "Server error"), bag: bag)
             case .unauthorized:
-                return ("Token is invalid", "Required authentication")
+                coordinator.displayAlert(errorData: ("Token is invalid", "Required authentication"), bag: bag)
             case .invalidResponse:
-                return ("Request failure", "Ivalid response")
+                coordinator.displayAlert(errorData: ("Request failure", "Ivalid response"), bag: bag)
             case .deserializationFailed:
-                return ("Deserialization failure", "Decodable fail")
+                coordinator.displayAlert(errorData: ("Deserialization failure", "Decodable fail"), bag: bag)
             case .noConnection:
-                return ("Looking for internet connection...", "Internet connection failure")
+                coordinator.displayAlert(errorData: ("Looking for internet connection...", "Internet connection failure"), bag: bag)
             case _: break
             }
         case let location as ApplicationErrors.Location:
             switch location {
             case .noPermission:
-                return ("Please provide access to location services in Settings app", "No location access")
+                coordinator.displayAlert(errorData: ("Please provide access to location services in Settings app", "No location access"), bag: bag)
             }
         default: break
         }

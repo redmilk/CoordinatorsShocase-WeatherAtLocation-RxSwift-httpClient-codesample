@@ -9,16 +9,24 @@ import CoreLocation
 import RxSwift
 import RxCocoa
 
-final class LocationService: NSObject {
+enum LocationAccuracy {
+    case bestForNavigation
+    case best
+    case nearestTenMeters
+    case hundredMeters
+    case kilometer
+    case threeKilometers
+}
+
+protocol LocationServiceType {
+    var locationServicesAuthorizationStatus: BehaviorSubject<CLAuthorizationStatus?> { get }
+    var currentLocation: Observable<CLLocation> { get }
     
-    enum LocationAccuracy {
-        case bestForNavigation
-        case best
-        case nearestTenMeters
-        case hundredMeters
-        case kilometer
-        case threeKilometers
-    }
+    func requestPermission()
+    func setAccuracy(_ accuracy: LocationAccuracy)
+}
+
+final class LocationService: NSObject, LocationServiceType {
     
     var currentLocation: Observable<CLLocation> {
         return locationManager.rx.didUpdateLocations

@@ -15,7 +15,7 @@ protocol WeatherCoordinatorProtocol {
 }
 
 /// MainTabBarCoordinator on start fills array of child with both Home and Weather coordinators
-final class WeatherCoordinator: Coordinator, WeatherCoordinatorProtocol, StateStorageAccassible {
+final class WeatherCoordinator: Coordinator, WeatherCoordinatorProtocol, StateStorageAccassible, WeatherServiceAccassible {
     
     private let vcTitle: String
     
@@ -38,7 +38,7 @@ final class WeatherCoordinator: Coordinator, WeatherCoordinatorProtocol, StateSt
     }
     
     func presentWeather() {
-        let viewModel = WeatherSceneViewModel(coordinator: self)
+        let viewModel = WeatherSceneViewModel(coordinator: self, weatherService: weatherService)
         var controller = WeatherSceneViewController.instantiate(storyboard: .weather, instantiation: .withIdentifier) {
             WeatherSceneViewController(viewModel: viewModel, stateStorage: self.store, coder: $0)!
         }
@@ -48,7 +48,7 @@ final class WeatherCoordinator: Coordinator, WeatherCoordinatorProtocol, StateSt
     }
      
     func pushWeather() {
-        let viewModel = WeatherSceneViewModel(coordinator: self)
+        let viewModel = WeatherSceneViewModel(coordinator: self, weatherService: weatherService)
         var controller = WeatherSceneViewController.instantiate(storyboard: .weather, instantiation: .withIdentifier) {
             WeatherSceneViewController(viewModel: viewModel, stateStorage: self.store, coder: $0)!
         }

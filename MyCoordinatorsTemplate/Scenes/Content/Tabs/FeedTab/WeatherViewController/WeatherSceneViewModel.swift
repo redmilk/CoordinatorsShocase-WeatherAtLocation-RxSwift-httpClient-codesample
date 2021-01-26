@@ -15,7 +15,7 @@ import CoreLocation
 
 //TODO: - show error message when is waiting for connection
 
-/// internal types
+/// view model types
 extension WeatherSceneViewModel {
     enum Action {
         case getWeatherBy(city: String)
@@ -42,28 +42,11 @@ extension WeatherSceneViewModel: StateStorageAccassible { }
 /// implementation
 class WeatherSceneViewModel {
     
-    private let coordinator: WeatherCoordinator
-    private let weatherService: WeatherServiceType
-    
     /// input from view
-    public var input = Input(action: PublishSubject<Action>())
+    var input = Input(action: PublishSubject<Action>())
     
-    init(coordinator: WeatherCoordinator,
-         weatherService: WeatherServiceType
-    ) {
-        self.coordinator = coordinator
-        self.weatherService = weatherService
-        bind()
-    }
-        
-    /// output to state storage
-    private var output = Output(actualState: BehaviorSubject<WeatherSceneState>(value: WeatherSceneState.initial))
-    
-    private var currentState: WeatherSceneState {
-        return (try? self.output.actualState.value()) ?? WeatherSceneState.initial
-    }
-    
-    func bind() {
+    func bind(disposeBag: DisposeBag) {
+        //self.disposeBag = disposeBag
         /// Reducing actions
         input.action
             .asObservable()
@@ -78,12 +61,12 @@ class WeatherSceneViewModel {
                 /// city search weather
                 case .getWeatherBy(let city):
                     let weather = self.weatherService.weather(by: city)
-                    self.reduce(weather, state: newState)
+                    self.reduce(weather, state: newState, disposeBag: disposeBag)
                     
                 /// current location weather
                 case .currentLocationWeather:
                     let weather = self.weatherService.weatherByCurrentLocation()
-                    self.reduce(weather, state: newState)
+                    self.reduce(weather, state: newState, disposeBag: disposeBag)
                     
                 case .cancelRequest:
                     self.terminate()
@@ -92,12 +75,12 @@ class WeatherSceneViewModel {
                     break
                 }
             })
-            .disposed(by: bag)
+            .disposed(by: disposeBag)
         
         output.actualState
             .asObservable()
             .bind(to: store.mainSceneState)
-            .disposed(by: bag)
+            .disposed(by: disposeBag)
         
         /// debug
         weatherService.requestRetryMessage
@@ -105,12 +88,11 @@ class WeatherSceneViewModel {
                 let state = (try? self.output.actualState.value()) ?? .initial
                 state.requestRetryText.onNext(msg)
             })
-            .disposed(by: bag)
+            .disposed(by: disposeBag)
     }
     
-    private func reduce(_ weather: Observable<Weather>, state: WeatherSceneState) {
+    private func reduce(_ weather: Observable<Weather>, state: WeatherSceneState, disposeBag: DisposeBag) {
         state.isLoading.onNext(true)
-        
         return weather
             .take(1)
             .map { (weather) -> WeatherSceneState in
@@ -125,20 +107,33 @@ class WeatherSceneViewModel {
                 return Observable.just(state)
             }
             .bind(to: output.actualState)
-            .disposed(by: bag)
+            .disposed(by: disposeBag)
     }
     
     private func terminate() {
-        self.bag = DisposeBag()
-        self.bind()
+        //self.bind(disposeBag: disposeBag)
         self.weatherService.terminateRequest()
         let newState = currentState
         newState.isLoading.onNext(false)
         newState.errorAlertContent.onNext(nil)
         self.output.actualState.onNext(newState)
     }
-
-    private var bag = DisposeBag()
+    
+    init(coordinator: WeatherCoordinator,
+         weatherService: WeatherServiceType
+    ) {
+        self.coordinator = coordinator
+        self.weatherService = weatherService
+    }
+    
+    /// output to state storage
+    private var output = Output(actualState: BehaviorSubject<WeatherSceneState>(value: WeatherSceneState.initial))
+    private let coordinator: WeatherCoordinator
+    private let weatherService: WeatherServiceType
+    //private var disposeBag: DisposeBag!
+    private var currentState: WeatherSceneState {
+        return (try? self.output.actualState.value()) ?? WeatherSceneState.initial
+    }
 }
 
 
@@ -149,7 +144,7 @@ extension WeatherSceneViewModel: ErrorHandling {
     func handleError(_ error: Error) -> (String, String)? {
         guard let error = error as? ApplicationError,
               let errorInfo = error.errorInfo else { return nil }
-        coordinator.displayAlert(errorData: errorInfo, bag: bag)
+        //coordinator.displayAlert(errorData: errorInfo, bag: disposeBag)
         return errorInfo
         
         // TODO: - check all errors presence

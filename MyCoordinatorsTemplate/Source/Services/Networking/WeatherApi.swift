@@ -35,8 +35,7 @@ final class WeatherApi: WeatherApiType {
         let params = RequestParametersAdapter(withBody: false,
                                               parameters: [("appid", apiKey),
                                                            ("q", city),
-                                                           ("units", "metric"),
-                                                           ("lang", "ru")])
+                                                           ("units", "metric")])
         let headers = RequestHeaderAdapter()
         let requestBuilder = RequestBuilder(baseUrl: baseURL,
                                             pathComponent: "weather",
@@ -63,8 +62,7 @@ final class WeatherApi: WeatherApiType {
                                               parameters: [("appid", apiKey),
                                                            ("lat", "\(lat)"),
                                                            ("lon", "\(lon)"),
-                                                           ("units", "metric"),
-                                                           ("lang", "ru")])
+                                                           ("units", "metric")])
         let headers = RequestHeaderAdapter()
         let requestBuilder = RequestBuilder(baseUrl: baseURL,
                                             pathComponent: "weather",
@@ -108,6 +106,7 @@ final class WeatherApi: WeatherApiType {
                     .filter { $0 == true }
                     .map { _ in 1 }
             }
+            // TODO: - refactor
             self.requestRetryMessage.accept("🟥🟥🟥 Retry attempt: \(count + 1)")
             return Observable<Int>
                 .timer(RxTimeInterval.milliseconds(2000), scheduler: MainScheduler.instance)

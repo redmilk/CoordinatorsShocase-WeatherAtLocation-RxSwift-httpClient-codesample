@@ -24,7 +24,7 @@ final class WeatherSceneViewController: ViewController, Instantiatable, Bindable
     
     private let stateStorage: ViewStateStorage
     private(set) var viewModel: WeatherSceneViewModel
-    private var bag = DisposeBag()
+    private var bag: DisposeBag!
         
     required init?(viewModel: WeatherSceneViewModel,
                    stateStorage: ViewStateStorage,
@@ -142,5 +142,17 @@ final class WeatherSceneViewController: ViewController, Instantiatable, Bindable
 //
 //            })
 //            .disposed(by: bag)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        bag = DisposeBag()
+        bindViewModel()
+        viewModel.bind(disposeBag: bag)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        bag = nil
     }
 }

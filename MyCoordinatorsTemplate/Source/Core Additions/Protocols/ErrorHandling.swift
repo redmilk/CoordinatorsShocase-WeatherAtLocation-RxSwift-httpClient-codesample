@@ -9,5 +9,6 @@ import RxSwift
 
 protocol ErrorHandling {
     typealias ErrorContent = (String, String)?
+    @discardableResult
     func handleError(_ error: Error) -> ErrorContent
 }

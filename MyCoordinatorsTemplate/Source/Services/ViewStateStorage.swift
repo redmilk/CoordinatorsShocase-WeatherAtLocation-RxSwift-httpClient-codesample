@@ -9,7 +9,11 @@ import RxSwift
 import RxCocoa
 
 // TODO: - make protocol for writing to state, same for reading
-final class StateStorage {
+/// we can avoid this storage and put state directly to ViewController
+/// but this storage allows us to provide state saving in future
+/// also it's must have part for flux architecture
+
+final class ViewStateStorage {
     
     public let mainSceneState: BehaviorSubject<WeatherSceneState>
     

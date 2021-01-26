@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 protocol WeatherCoordinatorProtocol {
     func presentWeather()
@@ -14,7 +15,7 @@ protocol WeatherCoordinatorProtocol {
 }
 
 /// MainTabBarCoordinator on start fills array of child with both Home and Weather coordinators
-final class WeatherCoordinator: Coordinator, WeatherCoordinatorProtocol {
+final class WeatherCoordinator: Coordinator, WeatherCoordinatorProtocol, StateStorageAccassible, WeatherServiceAccassible {
     
     private let vcTitle: String
     
@@ -37,21 +38,47 @@ final class WeatherCoordinator: Coordinator, WeatherCoordinatorProtocol {
     }
     
     func presentWeather() {
-        let viewModel = WeatherSceneViewModel()
+        let viewModel = WeatherSceneViewModel(coordinator: self, weatherService: weatherService)
         var controller = WeatherSceneViewController.instantiate(storyboard: .weather, instantiation: .withIdentifier) {
-            WeatherSceneViewController(viewModel: viewModel, coder: $0)!
+            WeatherSceneViewController(viewModel: viewModel, stateStorage: self.store, coder: $0)!
         }
         controller.bindViewModel(to: viewModel)
+        currentController = controller
         navigationController?.present(controller, animated: isAnimatedTransition, completion: nil)
     }
-    
+     
     func pushWeather() {
-        let viewModel = WeatherSceneViewModel()
+        let viewModel = WeatherSceneViewModel(coordinator: self, weatherService: weatherService)
         var controller = WeatherSceneViewController.instantiate(storyboard: .weather, instantiation: .withIdentifier) {
-            WeatherSceneViewController(viewModel: viewModel, coder: $0)!
+            WeatherSceneViewController(viewModel: viewModel, stateStorage: self.store, coder: $0)!
         }
         controller.bindViewModel(to: viewModel)
+        currentController = controller
         navigationController?.pushViewController(controller, animated: isAnimatedTransition)
+    }
+    
+    func displayAlert(errorData: (msg: String, title: String), bag: DisposeBag) {
+        switch errorData.title {
+        case "No location access":
+            currentController?.present(alertWithActionAndText: errorData.msg,
+                                       title: "Go to Settings",
+                                       actionTitle: errorData.title) { [weak self] in
+                self?.displayApplicationSettings()
+            }
+            .subscribe(on: MainScheduler.instance)
+            .subscribe()
+            .disposed(by: bag)
+        case _:
+            currentController?.present(simpleAlertWithText: errorData.msg,
+                                       title: errorData.title)
+                .subscribe(on: MainScheduler.instance)
+                .subscribe()
+                .disposed(by: bag)
+        }
+    }
+    
+    func displayApplicationSettings() {
+        Utils.openSettings()
     }
     
 }

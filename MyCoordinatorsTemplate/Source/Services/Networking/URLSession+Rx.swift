@@ -16,8 +16,7 @@ extension ObservableType where Element == (response: HTTPURLResponse, data: Data
         return self.do(onNext: { response, data in
             guard let url = response.url?.absoluteString,
                   200..<300 ~= response.statusCode else { return }
-//            internalCache[url] = data
-            // TODO: - remove
+            internalCache[url] = data
         })
     }
 }
@@ -69,6 +68,7 @@ extension Reactive where Base: URLSession {
                 case 200..<300:
                     return data
                 case 401:
+                    /// We can use TokenRecovering service here for fetching fresh token if BE is supporting it
                     throw ApplicationErrors.ApiClient.unauthorized
                 case 404:
                     throw ApplicationErrors.ApiClient.notFound

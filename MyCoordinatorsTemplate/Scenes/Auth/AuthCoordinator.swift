@@ -21,7 +21,7 @@ final class AuthCoordinator: Coordinator, AuthCoordinatorProtocol {
     
     init(title: String,
          presentationMode: PresentationMode,
-         parentCoordinator: CoordinatorProtocol?
+         parentCoordinator: CoordinatorType?
     ) {
         self.title = title
         self.presentationMode = presentationMode

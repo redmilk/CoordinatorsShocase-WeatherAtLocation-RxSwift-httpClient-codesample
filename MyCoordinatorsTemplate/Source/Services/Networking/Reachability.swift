@@ -9,29 +9,25 @@ import SystemConfiguration
 import RxSwift
 import RxCocoa
 
-extension Reachability {
-    enum Status {
-        case offline
-        case online
-        case unknown
-        
-        init(reachabilityFlags flags: SCNetworkReachabilityFlags) {
-            let connectionRequired = flags.contains(.connectionRequired)
-            let isReachable = flags.contains(.reachable)
-            self = (!connectionRequired && isReachable) ? .online : .offline
-        }
+enum ReachabilityStatus {
+    case offline
+    case online
+    case unknown
+    
+    init(reachabilityFlags flags: SCNetworkReachabilityFlags) {
+        let connectionRequired = flags.contains(.connectionRequired)
+        let isReachable = flags.contains(.reachable)
+        self = (!connectionRequired && isReachable) ? .online : .offline
     }
 }
 
+protocol ReachabilityType {
+    var status: BehaviorRelay<ReachabilityStatus> { get }
+}
 
-final class Reachability {
-    /// static private due to unable capturing self here
-    static private var _status = BehaviorRelay<Status>(value: .unknown)
-    private var reachability: SCNetworkReachability?
-    private let bag = DisposeBag()
-
-    /// API
-    public var status = BehaviorRelay<Status>(value: .online)
+final class Reachability: ReachabilityType {
+    
+    var status = BehaviorRelay<ReachabilityStatus>(value: .online)
     
     init() {
         Reachability._status
@@ -41,13 +37,11 @@ final class Reachability {
         
         startMonitor("google.com")
     }
-    /// 
 
     deinit {
         stopMonitor()
     }
     
-    /// Internal
     private func startMonitor(_ host: String) {
         var context = SCNetworkReachabilityContext(version: 0,
                                                    info: nil,
@@ -57,8 +51,8 @@ final class Reachability {
         
         guard let reachability = SCNetworkReachabilityCreateWithName(nil, host) else { return }
         SCNetworkReachabilitySetCallback(reachability, { (_, flags, _) in
-            let status = Status(reachabilityFlags: flags)
-            /// static due to unable capturing self
+            let status = ReachabilityStatus(reachabilityFlags: flags)
+            /// static due to unable of self capturing
             Reachability._status.accept(status)
         }, &context)
         SCNetworkReachabilityScheduleWithRunLoop(reachability,
@@ -75,4 +69,8 @@ final class Reachability {
             self.reachability = nil
         }
     }
+    
+    static private var _status = BehaviorRelay<ReachabilityStatus>(value: .unknown)
+    private var reachability: SCNetworkReachability?
+    private let bag = DisposeBag()
 }

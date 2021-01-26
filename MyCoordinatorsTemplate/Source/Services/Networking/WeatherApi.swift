@@ -47,7 +47,9 @@ final class WeatherApi: WeatherApiType {
             .request(with: requestBuilder.request, retryHandler: retryHandler)
             .do(onNext: { [unowned self] _ in
                 guard self.reachability.status.value == .online else {
-                    throw ApplicationErrors.ApiClient.noConnection
+                    throw ApplicationError(errorType: .noConnection,
+                                           errorInfo: ("Looking for internet connection...",
+                                                       "Internet connection failure"))
                 }
             })
     }
@@ -73,7 +75,9 @@ final class WeatherApi: WeatherApiType {
             .request(with: requestBuilder.request, retryHandler: retryHandler)
             .do(onNext: { [unowned self] _ in
                 guard self.reachability.status.value == .online else {
-                    throw ApplicationErrors.ApiClient.noConnection
+                    throw ApplicationError(errorType: .noConnection,
+                                           errorInfo: ("Looking for internet connection...",
+                                                       "Internet connection failure"))
                 }
             })
     }

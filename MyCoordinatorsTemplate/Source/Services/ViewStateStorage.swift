@@ -12,6 +12,7 @@ import RxCocoa
 /// we can avoid this storage and put state directly to ViewController
 /// but this storage allows us to provide state saving in future
 /// also it's must have part for flux architecture
+/// can be replaced by RxFeedback
 
 final class ViewStateStorage {
     

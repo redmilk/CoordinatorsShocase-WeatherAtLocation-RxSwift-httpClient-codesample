@@ -86,12 +86,7 @@ class WeatherSceneViewModel {
                     self.reduce(weather, state: newState)
                     
                 case .cancelRequest:
-                    self.bag = DisposeBag()
-                    self.bind()
-                    self.weatherService.terminateRequest()
-                    newState.isLoading.onNext(false)
-                    newState.errorAlertContent.onNext(nil)
-                    self.output.actualState.onNext(newState)
+                    self.terminate()
                     
                 case .none:
                     break
@@ -133,7 +128,7 @@ class WeatherSceneViewModel {
             .disposed(by: bag)
     }
     
-    private func terminateOperation() {
+    private func terminate() {
         self.bag = DisposeBag()
         self.bind()
         self.weatherService.terminateRequest()
@@ -152,30 +147,35 @@ extension WeatherSceneViewModel: ErrorHandling {
     
     @discardableResult
     func handleError(_ error: Error) -> (String, String)? {
-        switch error {
-        case let request as ApplicationErrors.ApiClient:
-            switch request {
-            case .notFound:
-                coordinator.displayAlert(errorData: ("City not found", "😰"), bag: bag)
-            case .serverError:
-                coordinator.displayAlert(errorData: ("Something went wrong", "Server error"), bag: bag)
-            case .unauthorized:
-                coordinator.displayAlert(errorData: ("Token is invalid", "Required authentication"), bag: bag)
-            case .invalidResponse:
-                coordinator.displayAlert(errorData: ("Request failure", "Ivalid response"), bag: bag)
-            case .deserializationFailed:
-                coordinator.displayAlert(errorData: ("Deserialization failure", "Decodable fail"), bag: bag)
-            case .noConnection:
-                coordinator.displayAlert(errorData: ("Looking for internet connection...", "Internet connection failure"), bag: bag)
-            case _: break
-            }
-        case let location as ApplicationErrors.Location:
-            switch location {
-            case .noPermission:
-                coordinator.displayAlert(errorData: ("Please provide access to location services in Settings app", "No location access"), bag: bag)
-            }
-        default: break
-        }
-        return nil
+        guard let error = error as? ApplicationError,
+              let errorInfo = error.errorInfo else { return nil }
+        coordinator.displayAlert(errorData: errorInfo, bag: bag)
+        return errorInfo
+        
+        // TODO: - check all errors presence
+//        switch error {
+//        case let requestError as ApplicationErrors.ApiClient:
+//            switch requestError {
+//            case .notFound(let errorData):
+//                coordinator.displayAlert(errorData: errorData, bag: bag)
+//            case .serverError:
+//                coordinator.displayAlert(errorData: ("Something went wrong", "Server error"), bag: bag)
+//            case .unauthorized:
+//                coordinator.displayAlert(errorData: ("Token is invalid", "Required authentication"), bag: bag)
+//            case .invalidResponse:
+//                coordinator.displayAlert(errorData: ("Request failure", "Ivalid response"), bag: bag)
+//            case .deserializationFailed:
+//                coordinator.displayAlert(errorData: ("Deserialization failure", "Decodable fail"), bag: bag)
+//            case .noConnection:
+//                coordinator.displayAlert(errorData: ("Looking for internet connection...", "Internet connection failure"), bag: bag)
+//            }
+//        case let location as ApplicationErrors.Location:
+//            switch location {
+//            case .noPermission:
+//                coordinator.displayAlert(errorData: ("Please provide access to location services in Settings app", "No location access"), bag: bag)
+//            }
+//        default: break
+//        }
+//        return nil
     }
 }

@@ -31,7 +31,9 @@ class WeatherService: WeatherServiceType {
             .do(onNext: { status in
                 switch status {
                 case .denied, .restricted:
-                    throw ApplicationErrors.Location.noPermission
+                    throw ApplicationError(errorType: .noLocationPermission,
+                                           errorInfo: ("Please provide access to location services in Settings app",
+                                                                                            "No location access"))
                 case _: break
                 }
             })

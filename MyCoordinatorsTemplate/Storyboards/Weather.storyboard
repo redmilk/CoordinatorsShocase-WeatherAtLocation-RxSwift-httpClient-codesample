@@ -128,7 +128,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="Wgn-sv-Iz6"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="25"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -166,7 +166,7 @@
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WBo-Qf-1Z1">
                                         <rect key="frame" x="0.0" y="165" width="366" height="328.5"/>
-                                        <mutableString key="text">Introduction helper for current tab:
+                                        <string key="text">Introduction helper for current tab:
 
  - Flux + Rx demo, state as single source of truth for view, the only difference is - it has separated state storages for
    every screen and reducers in view model
@@ -184,7 +184,7 @@
  
  - No-internet-connection handling and auto retry when connection appears
   
- - Request cancelation</mutableString>
+ - Request cancelation</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>

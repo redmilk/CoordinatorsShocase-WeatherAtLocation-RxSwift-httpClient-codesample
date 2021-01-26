@@ -24,7 +24,7 @@ final class WeatherSceneViewController: ViewController, Instantiatable, Bindable
     
     private let stateStorage: ViewStateStorage
     private(set) var viewModel: WeatherSceneViewModel
-    private var bag: DisposeBag!
+    private var disposeBag: DisposeBag!
         
     required init?(viewModel: WeatherSceneViewModel,
                    stateStorage: ViewStateStorage,
@@ -41,27 +41,27 @@ final class WeatherSceneViewController: ViewController, Instantiatable, Bindable
     }
     
     func bindViewModel() {
+        disposeBag = DisposeBag()
         /// Output
         locationButton.rx.controlEvent(.touchUpInside)
             .map { WeatherSceneViewModel.Action.currentLocationWeather }
             .bind(to: viewModel.input.action)
-            .disposed(by: bag)
+            .disposed(by: disposeBag)
         
         searchTextField.rx.controlEvent(.editingDidEndOnExit)
             .map { [weak self] in self?.searchTextField.text }
             .unwrap()
             .map { WeatherSceneViewModel.Action.getWeatherBy(city: $0) }
             .bind(to: viewModel.input.action)
-            .disposed(by: bag)
+            .disposed(by: disposeBag)
         
         cancelRequestButton.rx.controlEvent(.touchUpInside)
             .map { WeatherSceneViewModel.Action.cancelRequest }
             .bind(to: viewModel.input.action)
-            .disposed(by: bag)
+            .disposed(by: disposeBag)
         
         /// Input from state
-        let state = stateStorage
-            .mainSceneState
+        let state = viewModel.output.actualState
             .observe(on: MainScheduler.instance)
             .share(replay: 1)
         
@@ -69,25 +69,25 @@ final class WeatherSceneViewController: ViewController, Instantiatable, Bindable
             .flatMap { $0.searchText }
             .asDriver(onErrorJustReturn: "")
             .drive(searchTextField.rx.text)
-            .disposed(by: bag)
+            .disposed(by: disposeBag)
         
         state
             .flatMap { $0.temperature }
             .asDriver(onErrorJustReturn: "")
             .drive(tempLabel.rx.text)
-            .disposed(by: bag)
+            .disposed(by: disposeBag)
         
         state
             .flatMap { $0.humidity }
             .asDriver(onErrorJustReturn: "")
             .drive(humidityLabel.rx.text)
-            .disposed(by: bag)
+            .disposed(by: disposeBag)
         
         state
             .flatMap { $0.searchText }
             .asDriver(onErrorJustReturn: "")
             .drive(weatherIconLabel.rx.text)
-            .disposed(by: bag)
+            .disposed(by: disposeBag)
         
         let loading = state
             .flatMap { $0.isLoading }
@@ -97,27 +97,27 @@ final class WeatherSceneViewController: ViewController, Instantiatable, Bindable
         loading
             .map { !$0 }
             .drive(activityIndicator.rx.isHidden)
-            .disposed(by: bag)
+            .disposed(by: disposeBag)
         
         loading
             .map { !$0 }
             .drive(locationButton.rx.isEnabled)
-            .disposed(by: bag)
+            .disposed(by: disposeBag)
         
         loading
             .map { !$0 }
             .drive(searchTextField.rx.isEnabled)
-            .disposed(by: bag)
+            .disposed(by: disposeBag)
         
         loading
             .map { !$0 }
             .drive(cancelRequestButton.rx.isHidden)
-            .disposed(by: bag)
+            .disposed(by: disposeBag)
         
         loading
             .map { !$0 }
             .drive(mapButton.rx.isEnabled)
-            .disposed(by: bag)
+            .disposed(by: disposeBag)
         
         /// TODO: - ????
         /// retry text alert for debug
@@ -130,29 +130,11 @@ final class WeatherSceneViewController: ViewController, Instantiatable, Bindable
                     self?.errorLabel.text = ""
                 }
             })
-            .disposed(by: bag)
-        
-        /// error parsing at view model
-        /// TODO: - presenting error from coordinator
-//        state.flatMap { $0.errorAlertContent }
-//            .unwrap()
-//            .filter { !$0.0.isEmpty && !$0.1.isEmpty }
-//            .observe(on: MainScheduler.instance)
-//            .subscribe(onNext: { [weak self] (errorData: (msg: String, title: String)) -> Void in
-//
-//            })
-//            .disposed(by: bag)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        bag = DisposeBag()
-        bindViewModel()
-        viewModel.bind(disposeBag: bag)
+            .disposed(by: disposeBag)        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        bag = nil
+        disposeBag = nil
     }
 }

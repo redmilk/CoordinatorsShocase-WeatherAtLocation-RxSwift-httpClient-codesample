@@ -37,13 +37,8 @@ class WeatherService: WeatherServiceType {
                 case _: break
                 }
             })
-            .flatMap { [unowned self] status -> Observable<Weather> in
-                switch status {
-                case .authorizedAlways, .authorizedWhenInUse:
-                    return self.locationWeather
-                case _:
-                    return Observable.just(Weather.empty)
-                }
+            .flatMap { [unowned self] _ -> Observable<Weather> in
+                return self.locationWeather
             }
     }
     

@@ -38,7 +38,6 @@ extension WeatherSceneViewModel {
 /// Access to state store
 extension WeatherSceneViewModel: StateStorageAccassible { }
 
-
 /// implementation
 class WeatherSceneViewModel {
     
@@ -46,7 +45,7 @@ class WeatherSceneViewModel {
     var input = Input(action: PublishSubject<Action>())
     
     func bind(disposeBag: DisposeBag) {
-        //self.disposeBag = disposeBag
+        self.disposeBag = disposeBag
         /// Reducing actions
         input.action
             .asObservable()
@@ -111,7 +110,7 @@ class WeatherSceneViewModel {
     }
     
     private func terminate() {
-        //self.bind(disposeBag: disposeBag)
+        self.bind(disposeBag: disposeBag)
         self.weatherService.terminateRequest()
         let newState = currentState
         newState.isLoading.onNext(false)
@@ -130,7 +129,7 @@ class WeatherSceneViewModel {
     private var output = Output(actualState: BehaviorSubject<WeatherSceneState>(value: WeatherSceneState.initial))
     private let coordinator: WeatherCoordinator
     private let weatherService: WeatherServiceType
-    //private var disposeBag: DisposeBag!
+    private var disposeBag: DisposeBag!
     private var currentState: WeatherSceneState {
         return (try? self.output.actualState.value()) ?? WeatherSceneState.initial
     }
@@ -144,7 +143,7 @@ extension WeatherSceneViewModel: ErrorHandling {
     func handleError(_ error: Error) -> (String, String)? {
         guard let error = error as? ApplicationError,
               let errorInfo = error.errorInfo else { return nil }
-        //coordinator.displayAlert(errorData: errorInfo, bag: disposeBag)
+        coordinator.displayAlert(errorData: errorInfo, bag: disposeBag)
         return errorInfo
         
         // TODO: - check all errors presence

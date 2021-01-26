@@ -52,7 +52,7 @@ class WeatherSceneState {
     
     static var initial: WeatherSceneState {
         let state = WeatherSceneState()
-        state.searchText.onNext("Kiev")
+        state.searchText.onNext("Kievkdsf")
         state.weatherIcon.onNext("Initial")
         state.temperature.onNext("2")
         state.humidity.onNext("73")

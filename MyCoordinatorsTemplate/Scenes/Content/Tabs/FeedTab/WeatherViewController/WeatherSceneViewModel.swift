@@ -29,23 +29,24 @@ extension WeatherSceneViewModel {
     }
     
     struct Output {
-        var actualState: BehaviorSubject<WeatherSceneState>
+        var actualState = BehaviorSubject<WeatherSceneState>(value: .initial)
     }
 }
 
 
 /// capabilities
 /// Access to state store
-extension WeatherSceneViewModel: StateStorageAccassible { }
+//extension WeatherSceneViewModel: StateStorageAccassible { }
 
 /// implementation
 class WeatherSceneViewModel {
     
     /// input from view
     var input = Input(action: PublishSubject<Action>())
+    var output = Output()
     
-    func bind(disposeBag: DisposeBag) {
-        self.disposeBag = disposeBag
+    private func bindActions() {
+        disposeBag = DisposeBag()
         /// Reducing actions
         input.action
             .asObservable()
@@ -60,12 +61,12 @@ class WeatherSceneViewModel {
                 /// city search weather
                 case .getWeatherBy(let city):
                     let weather = self.weatherService.weather(by: city)
-                    self.reduce(weather, state: newState, disposeBag: disposeBag)
+                    self.reduce(weather, state: newState, disposeBag: self.disposeBag)
                     
                 /// current location weather
                 case .currentLocationWeather:
                     let weather = self.weatherService.weatherByCurrentLocation()
-                    self.reduce(weather, state: newState, disposeBag: disposeBag)
+                    self.reduce(weather, state: newState, disposeBag: self.disposeBag)
                     
                 case .cancelRequest:
                     self.terminate()
@@ -74,12 +75,7 @@ class WeatherSceneViewModel {
                     break
                 }
             })
-            .disposed(by: disposeBag)
-        
-        output.actualState
-            .asObservable()
-            .bind(to: store.mainSceneState)
-            .disposed(by: disposeBag)
+            .disposed(by: self.disposeBag)
         
         /// debug
         weatherService.requestRetryMessage
@@ -88,6 +84,14 @@ class WeatherSceneViewModel {
                 state.requestRetryText.onNext(msg)
             })
             .disposed(by: disposeBag)
+    }
+    
+    init(coordinator: WeatherCoordinator,
+         weatherService: WeatherServiceType
+    ) {
+        self.coordinator = coordinator
+        self.weatherService = weatherService
+        bindActions()
     }
     
     private func reduce(_ weather: Observable<Weather>, state: WeatherSceneState, disposeBag: DisposeBag) {
@@ -110,28 +114,19 @@ class WeatherSceneViewModel {
     }
     
     private func terminate() {
-        self.bind(disposeBag: disposeBag)
+        self.bindActions()
         self.weatherService.terminateRequest()
         let newState = currentState
         newState.isLoading.onNext(false)
         newState.errorAlertContent.onNext(nil)
         self.output.actualState.onNext(newState)
     }
-    
-    init(coordinator: WeatherCoordinator,
-         weatherService: WeatherServiceType
-    ) {
-        self.coordinator = coordinator
-        self.weatherService = weatherService
-    }
-    
-    /// output to state storage
-    private var output = Output(actualState: BehaviorSubject<WeatherSceneState>(value: WeatherSceneState.initial))
+        
     private let coordinator: WeatherCoordinator
     private let weatherService: WeatherServiceType
-    private var disposeBag: DisposeBag!
+    private var disposeBag = DisposeBag()
     private var currentState: WeatherSceneState {
-        return (try? self.output.actualState.value()) ?? WeatherSceneState.initial
+        return (try? self.output.actualState.value())!
     }
 }
 
@@ -145,31 +140,5 @@ extension WeatherSceneViewModel: ErrorHandling {
               let errorInfo = error.errorInfo else { return nil }
         coordinator.displayAlert(errorData: errorInfo, bag: disposeBag)
         return errorInfo
-        
-        // TODO: - check all errors presence
-//        switch error {
-//        case let requestError as ApplicationErrors.ApiClient:
-//            switch requestError {
-//            case .notFound(let errorData):
-//                coordinator.displayAlert(errorData: errorData, bag: bag)
-//            case .serverError:
-//                coordinator.displayAlert(errorData: ("Something went wrong", "Server error"), bag: bag)
-//            case .unauthorized:
-//                coordinator.displayAlert(errorData: ("Token is invalid", "Required authentication"), bag: bag)
-//            case .invalidResponse:
-//                coordinator.displayAlert(errorData: ("Request failure", "Ivalid response"), bag: bag)
-//            case .deserializationFailed:
-//                coordinator.displayAlert(errorData: ("Deserialization failure", "Decodable fail"), bag: bag)
-//            case .noConnection:
-//                coordinator.displayAlert(errorData: ("Looking for internet connection...", "Internet connection failure"), bag: bag)
-//            }
-//        case let location as ApplicationErrors.Location:
-//            switch location {
-//            case .noPermission:
-//                coordinator.displayAlert(errorData: ("Please provide access to location services in Settings app", "No location access"), bag: bag)
-//            }
-//        default: break
-//        }
-//        return nil
     }
 }

@@ -14,7 +14,7 @@ final class ServicesContainer {
     lazy var session: UserSession = { UserSession() }()
     lazy var reachability: Reachability = { Reachability() }()
     lazy var location: LocationService = { LocationService() }()
-    lazy var stateStore: ViewStateStorage = { ViewStateStorage() }()
+    lazy var stateStorage: GlobalStateStorage = { GlobalStateStorage() }()
     lazy var formatting: FormattingService = { FormattingService() }()
     
     lazy var weatherService: WeatherService = {
@@ -36,8 +36,8 @@ final class ServicesContainer {
 /// - Storage of application scene states
 protocol StateStorageAccassible { }
 extension StateStorageAccassible {
-    var store: ViewStateStorage {
-        return services.stateStore
+    var stateStorage: GlobalStateStorage {
+        return services.stateStorage
     }
 }
 

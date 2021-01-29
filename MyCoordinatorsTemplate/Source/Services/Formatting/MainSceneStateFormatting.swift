@@ -10,12 +10,10 @@ import Foundation
 struct WeatherSceneStateFormatter: StateContentFormattable {
     func format(state: WeatherSceneState) -> WeatherSceneState {
         let formatted = state.copy()
-        let humidity = try? state.humidity.value()
-        let temperature = try? state.temperature.value()
-        if let h = humidity, let t = temperature {
-            formatted.humidity.onNext("Humidity: " + h + "%")
-            formatted.temperature.onNext("Temp: " + t + "℃")
-        }
+        let humidity = state.humidity.value
+        let temperature = state.temperature.value
+        formatted.humidity.accept("Humidity: " + humidity + "%")
+        formatted.temperature.accept("Temp: " + temperature + "℃")
         return formatted
     }
 }

@@ -22,16 +22,16 @@ final class WeatherSceneViewController: ViewController, Instantiatable, Bindable
     @IBOutlet private weak var cancelRequestButton: UIButton!
     @IBOutlet private weak var mapButton: UIButton!
     
-    private let stateStorage: ViewStateStorage
+    private let stateStorageReader: WeatherStateStorageReadable
     private(set) var viewModel: WeatherSceneViewModel
     private var disposeBag: DisposeBag!
         
     required init?(viewModel: WeatherSceneViewModel,
-                   stateStorage: ViewStateStorage,
+                   stateStorageReader: WeatherStateStorageReadable,
                    coder: NSCoder
     ) {
         self.viewModel = viewModel
-        self.stateStorage = stateStorage
+        self.stateStorageReader = stateStorageReader
         super.init(coder: coder)
     }
     
@@ -42,7 +42,8 @@ final class WeatherSceneViewController: ViewController, Instantiatable, Bindable
     
     func bindViewModel() {
         disposeBag = DisposeBag()
-        /// Output
+        
+        /// Output to VM
         locationButton.rx.controlEvent(.touchUpInside)
             .map { WeatherSceneViewModel.Action.currentLocationWeather }
             .bind(to: viewModel.input.action)
@@ -60,38 +61,35 @@ final class WeatherSceneViewController: ViewController, Instantiatable, Bindable
             .bind(to: viewModel.input.action)
             .disposed(by: disposeBag)
         
-        /// Input from state
-        let state = viewModel.output.actualState
-            .observe(on: MainScheduler.instance)
-            .share(replay: 1)
+        /// Input from view state storage
+        let state = stateStorageReader
+            .weatherViewStateRead
+            //.observe(on: MainScheduler.instance)
+            //.share(replay: 1)
         
         state
-            .flatMap { $0.searchText }
-            .asDriver(onErrorJustReturn: "")
+            .debug("🔳")
+            .flatMap { $0.searchText.asDriver() }
             .drive(searchTextField.rx.text)
             .disposed(by: disposeBag)
         
         state
-            .flatMap { $0.temperature }
-            .asDriver(onErrorJustReturn: "")
+            .flatMap { $0.temperature.asDriver() }
             .drive(tempLabel.rx.text)
             .disposed(by: disposeBag)
         
         state
-            .flatMap { $0.humidity }
-            .asDriver(onErrorJustReturn: "")
+            .flatMap { $0.humidity.asDriver() }
             .drive(humidityLabel.rx.text)
             .disposed(by: disposeBag)
         
         state
-            .flatMap { $0.searchText }
-            .asDriver(onErrorJustReturn: "")
+            .flatMap { $0.searchText.asDriver() }
             .drive(weatherIconLabel.rx.text)
             .disposed(by: disposeBag)
         
         let loading = state
-            .flatMap { $0.isLoading }
-            .startWith(false)
+            .flatMap { $0.isLoading.asDriver() }
             .asDriver(onErrorJustReturn: false)
         
         loading
@@ -122,11 +120,8 @@ final class WeatherSceneViewController: ViewController, Instantiatable, Bindable
         /// TODO: - ????
         /// retry text alert for debug
         state
-            .flatMap { $0.requestRetryText }
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [unowned self] msg in
-                self.errorLabel.text = msg
-            })
+            .flatMap { $0.requestRetryText.asDriver() }
+            .drive(errorLabel.rx.text)
             .disposed(by: disposeBag)        
     }
     

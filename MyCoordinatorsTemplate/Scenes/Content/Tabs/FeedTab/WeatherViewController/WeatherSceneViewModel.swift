@@ -10,20 +10,6 @@ import RxCocoa
 import Foundation
 import CoreLocation
 
-// TODO: - use drivers
-// TODO: - refactor to actions
-
-//TODO: - show error message when is waiting for connection
-
-/// view model types
-extension WeatherSceneViewModel {
-  
-}
-
-
-/// capabilities
-/// Access to state store
-//extension WeatherSceneViewModel: StateStorageAccassible { }
 
 /// implementation
 class WeatherSceneViewModel {
@@ -36,21 +22,17 @@ class WeatherSceneViewModel {
         case none
     }
     
+    /// input from VC, output to view states storage
     struct Input {
         var action = PublishSubject<Action>()
     }
     
-    struct Output {
-        var actualState = BehaviorSubject<WeatherSceneState>(value: .initial)
-    }
-    
     /// input from view
     var input = Input()
-    var output = Output()
     
+    /// bind actions from VC
     private func bindActions() {
         disposeBag = DisposeBag()
-        /// Reducing actions
         input.action
             .asObservable()
             .subscribe(onNext: { [unowned self] action in
@@ -82,35 +64,37 @@ class WeatherSceneViewModel {
         weatherService.requestRetryMessage
             .subscribe(onNext: { [unowned self] msg in
                 let state = currentState
-                state.requestRetryText.onNext(msg)
+                state.requestRetryText.accept(msg)
             })
             .disposed(by: disposeBag)
     }
     
     init(coordinator: WeatherCoordinator,
-         weatherService: WeatherServiceType
+         weatherService: WeatherServiceType,
+         stateStorageWriter: WeatherStateStorageWritable
     ) {
         self.coordinator = coordinator
         self.weatherService = weatherService
+        self.stateStorageWriter = stateStorageWriter
         bindActions()
     }
     
     /// Reduce view state with new data
     private func reduce(_ weather: Observable<Weather>, state: WeatherSceneState, disposeBag: DisposeBag) {
-        state.isLoading.onNext(true)
+        state.isLoading.accept(true)
         return weather
             .take(1)
             .map { (weather) -> WeatherSceneState in
-                state.isLoading.onNext(false)
+                state.isLoading.accept(false)
                 state.updateWeather(weather)
                 return state.formatted
             }
             .catch { [unowned self] error in
-                state.isLoading.onNext(false)
+                state.isLoading.accept(false)
                 self.handleError(error)
                 return Observable.just(state)
             }
-            .bind(to: output.actualState)
+            .bind(to: stateStorageWriter.weatherViewState)
             .disposed(by: disposeBag)
     }
     
@@ -125,17 +109,18 @@ class WeatherSceneViewModel {
         self.bindActions()
         self.weatherService.terminateRequest()
         let newState = currentState
-        newState.isLoading.onNext(false)
-        newState.errorAlertContent.onNext(nil)
-        self.output.actualState.onNext(newState)
+        newState.isLoading.accept(false)
+        self.stateStorageWriter.weatherViewState.accept(newState)
     }
     
     /// VM dependencies
     private let coordinator: WeatherCoordinator
     private let weatherService: WeatherServiceType
+    private let stateStorageWriter: WeatherStateStorageWritable
+    
     /// internal
     private var disposeBag = DisposeBag()
     private var currentState: WeatherSceneState {
-        return (try? self.output.actualState.value())!
+        return self.stateStorageWriter.weatherViewState.value
     }
 }

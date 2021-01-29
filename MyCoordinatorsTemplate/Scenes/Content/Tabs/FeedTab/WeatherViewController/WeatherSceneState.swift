@@ -19,21 +19,20 @@ extension WeatherSceneState: Formatting {
 // MARK: State
 class WeatherSceneState {
  
-    var searchText = BehaviorSubject<String>(value: "")
-    var temperature = BehaviorSubject<String>(value: "")
-    var humidity = BehaviorSubject<String>(value: "")
-    var weatherIcon = BehaviorSubject<String>(value: "")
-    var isLoading = PublishSubject<Bool>()
-    var location = PublishSubject<CLLocationCoordinate2D?>()
-    var requestRetryText = PublishSubject<String>()
-    var locationPermission = PublishSubject<Bool>()
-    var errorAlertContent = BehaviorSubject<(String, String)?>(value: nil)
+    var searchText = BehaviorRelay<String>(value: "")
+    var temperature = BehaviorRelay<String>(value: "")
+    var humidity = BehaviorRelay<String>(value: "")
+    var weatherIcon = BehaviorRelay<String>(value: "")
+    var isLoading = BehaviorRelay<Bool>(value: false)
+    var location = BehaviorRelay<CLLocationCoordinate2D?>(value: nil)
+    var requestRetryText = BehaviorRelay<String>(value: "")
+    var locationPermission = BehaviorRelay<Bool?>(value: nil)
    
     func updateWeather(_ weather: Weather) {
-        searchText.onNext(weather.name)
-        temperature.onNext(weather.main.temp.description)
-        humidity.onNext(weather.main.humidity.description)
-        weatherIcon.onNext(weather.weather?.first?.icon ?? "")
+        searchText.accept(weather.name)
+        temperature.accept(weather.main.temp.description)
+        humidity.accept(weather.main.humidity.description)
+        weatherIcon.accept(weather.weather?.first?.icon ?? "")
     }
         
     func copy() -> WeatherSceneState {
@@ -44,18 +43,16 @@ class WeatherSceneState {
         state.weatherIcon = self.weatherIcon
         state.isLoading = self.isLoading
         state.location = self.location
-        state.errorAlertContent = self.errorAlertContent
         state.requestRetryText = self.requestRetryText
-        state.errorAlertContent = self.errorAlertContent
         return state
     }
     
     static var initial: WeatherSceneState {
         let state = WeatherSceneState()
-        state.searchText.onNext("Kievkdsf")
-        state.weatherIcon.onNext("Initial")
-        state.temperature.onNext("2")
-        state.humidity.onNext("73")
+        state.searchText.accept("Kievkdsf")
+        state.weatherIcon.accept("Initial")
+        state.temperature.accept("2")
+        state.humidity.accept("73")
         return state.formatted
     }
 }

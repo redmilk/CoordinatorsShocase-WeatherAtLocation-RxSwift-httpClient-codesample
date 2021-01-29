@@ -124,11 +124,8 @@ final class WeatherSceneViewController: ViewController, Instantiatable, Bindable
         state
             .flatMap { $0.requestRetryText }
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] msg in
-                self?.errorLabel.text = msg
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                    self?.errorLabel.text = ""
-                }
+            .subscribe(onNext: { [unowned self] msg in
+                self.errorLabel.text = msg
             })
             .disposed(by: disposeBag)        
     }

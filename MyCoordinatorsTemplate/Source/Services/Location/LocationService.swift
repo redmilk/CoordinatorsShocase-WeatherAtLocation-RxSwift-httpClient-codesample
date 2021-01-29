@@ -31,9 +31,10 @@ final class LocationService: NSObject, LocationServiceType {
     var currentLocation: Observable<CLLocation> {
         return locationManager.rx.didUpdateLocations
             .map { locations in locations[0] }
-            .filter { location in
-                return location.horizontalAccuracy < kCLLocationAccuracyHundredMeters
+            .filter { [unowned self] location in
+                return location.horizontalAccuracy < self.accuracy
             }
+            .throttle(.seconds(30), latest: true, scheduler: MainScheduler.asyncInstance)
     }
     
     var locationServicesAuthorizationStatus = BehaviorSubject<CLAuthorizationStatus?>(value: nil)
@@ -64,7 +65,6 @@ final class LocationService: NSObject, LocationServiceType {
         guard let status = try? locationServicesAuthorizationStatus.value() else {
             return false
         }
-        print(status.rawValue)
         return CLLocationManager.locationServicesEnabled() && (status == .authorizedWhenInUse || status == .authorizedAlways)
     }
     

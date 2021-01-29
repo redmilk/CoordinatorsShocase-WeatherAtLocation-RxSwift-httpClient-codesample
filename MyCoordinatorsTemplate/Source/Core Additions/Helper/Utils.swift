@@ -15,6 +15,12 @@ struct Utils {
          }
     }
     
+    static func fetchErrorInfoTitle(_ error: Error) -> String {
+        guard let appError = error as? ApplicationError,
+              let errorInfo = appError.errorContent else { return "" }
+        return errorInfo.0
+    }
+    
     private init() { }
 }
 

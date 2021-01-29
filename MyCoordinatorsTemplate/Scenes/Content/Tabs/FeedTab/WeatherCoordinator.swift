@@ -57,20 +57,21 @@ final class WeatherCoordinator: Coordinator, WeatherCoordinatorProtocol, StateSt
         navigationController?.pushViewController(controller, animated: isAnimatedTransition)
     }
     
-    func displayAlert(errorData: (msg: String, title: String), bag: DisposeBag) {
-        switch errorData.title {
-        case "No location access":
-            currentController?.present(alertWithActionAndText: errorData.msg,
+    func displayAlert(error: ApplicationError, bag: DisposeBag) {
+        guard let errorContent = error.errorContent else { fatalError("Internal inconsistency") }
+        switch error.errorType {
+        case .noLocationPermission:
+            currentController?.present(alertWithActionAndText: errorContent.message,
                                        title: "Go to Settings",
-                                       actionTitle: errorData.title) { [weak self] in
+                                       actionTitle: errorContent.title) { [weak self] in
                 self?.displayApplicationSettings()
             }
             .subscribe(on: MainScheduler.instance)
             .subscribe()
             .disposed(by: bag)
         case _:
-            currentController?.present(simpleAlertWithText: errorData.msg,
-                                       title: errorData.title)
+            currentController?.present(simpleAlertWithText: errorContent.message,
+                                       title: errorContent.title)
                 .subscribe(on: MainScheduler.instance)
                 .subscribe()
                 .disposed(by: bag)

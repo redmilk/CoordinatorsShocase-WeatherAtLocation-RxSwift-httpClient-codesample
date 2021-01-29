@@ -30,7 +30,8 @@ extension Reactive where Base: URLSession {
                 do {
                     return try decoder.decode(type, from: data)
                 } catch {
-                    throw ApplicationErrors.ApiClient.deserializationFailed
+                    throw ApplicationError(errorType: .deserializationFailed,
+                                           errorContent: ("Deserialization failure", "Decodable fail"))
                 }
             }
     }
@@ -50,7 +51,8 @@ extension Reactive where Base: URLSession {
     func image(request: URLRequest) -> Observable<UIImage> {
         return data(request: request).map { data in
             guard let image = UIImage(data: data) else {
-                throw ApplicationErrors.ApiClient.deserializationFailed
+                throw ApplicationError(errorType: .deserializationFailed,
+                                       errorContent: ("Deserialization failure", "Decodable fail"))
             }
             return image
         }
@@ -69,13 +71,17 @@ extension Reactive where Base: URLSession {
                     return data
                 case 401:
                     /// We can use TokenRecovering service here for fetching fresh token if BE is supporting it
-                    throw ApplicationErrors.ApiClient.unauthorized
+                    throw ApplicationError(errorType: .unauthorized,
+                                           errorContent: ("Token is invalid", "Required authentication"))
                 case 404:
-                    throw ApplicationErrors.ApiClient.notFound
+                    throw ApplicationError(errorType: .notFound,
+                                           errorContent: ("City not found", "😰"))
                 case 400..<500:
-                    throw ApplicationErrors.ApiClient.serverError
+                    throw ApplicationError(errorType: .serverError,
+                                           errorContent: ("Something went wrong", "Server error"))
                 default:
-                    throw ApplicationErrors.ApiClient.serverError
+                    throw ApplicationError(errorType: .serverError,
+                                           errorContent: ("Something went wrong", "Server error"))
                 }
             }
     }
@@ -85,12 +91,13 @@ extension Reactive where Base: URLSession {
             let task = self.base.dataTask(with: request) { (data, response, error) in
                 guard let response = response,
                       let data = data else {
-                    let err = ApplicationErrors.ApiClient.serverError
-                    observer.onError(err)
+                    observer.onError(ApplicationError(errorType: .serverError,
+                                                      errorContent: ("Something went wrong", "Server error")))
                     return
                 }
                 guard let httpResponse = response as? HTTPURLResponse else {
-                    observer.onError(ApplicationErrors.ApiClient.invalidResponse)
+                    observer.onError(ApplicationError(errorType: .invalidResponse,
+                                                      errorContent: ("Request failure", "Ivalid response")))
                     return
                 }
                 observer.onNext((httpResponse, data))

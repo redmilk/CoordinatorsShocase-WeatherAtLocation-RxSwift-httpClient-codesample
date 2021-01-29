@@ -7,23 +7,29 @@
 
 import Foundation
 
-enum ApplicationErrors {
+typealias ErrorContent = (title: String, message: String)
+
+struct ApplicationError: Error {
+    let errorType: ApplicationErrors
+    let errorContent: ErrorContent?
     
-    enum ApiClient: Error, Equatable {
+    init(errorType: ApplicationErrors, errorContent: ErrorContent? = nil) {
+        self.errorType = errorType
+        self.errorContent = errorContent
+    }
+    
+    enum ApplicationErrors {
         case noConnection
         case notFound
         case unauthorized
         case serverError
         case invalidResponse
         case deserializationFailed
+        case noLocationPermission
         case getTokenFailure(response: HTTPURLResponse, data: Data)
-    }
-    
-    enum Location: Error {
-        case noPermission
-    }
-    
-    enum Unexpected: Error {
         case internalInconsistency
     }
 }
+
+
+

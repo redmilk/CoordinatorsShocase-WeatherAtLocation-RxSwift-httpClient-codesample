@@ -19,7 +19,7 @@ struct Weather: Codable {
     
     let weather: [WeatherElement]?
     let base: String?
-    let main: Main
+    let main: MainWeatherInfo
     let visibility: Int?
     let wind: Wind?
     let clouds: Clouds?
@@ -28,27 +28,6 @@ struct Weather: Codable {
     let timezone, id: Int?
     let name: String
     let cod: Int?
-    
-    init() {
-        main = Main(temp: 1, feelsLike: 1, tempMin: 1, tempMax: 1, pressure: 1, humidity: 11, grndLevel: 0, seaLevel: 1)
-        name = "Example"
-        coord = Coord(lon: 66.6, lat: 66.6)
-        weather = nil
-        base = nil
-        visibility = nil
-        wind = nil
-        clouds = nil
-        dt = nil
-        sys = nil
-        timezone = nil
-        id = nil
-        cod = nil
-    }
-    
-    static var empty: Weather {
-        return Weather()
-    }
-    
 }
 
 // MARK: - Clouds
@@ -62,7 +41,7 @@ struct Coord: Codable {
 }
 
 // MARK: - Main
-struct Main: Codable {
+struct MainWeatherInfo: Codable {
     let temp, feelsLike, tempMin, tempMax: Double
     let pressure, humidity: Int
     let grndLevel: Int?

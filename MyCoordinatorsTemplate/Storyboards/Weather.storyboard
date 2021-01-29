@@ -82,7 +82,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3WK-6J-c4L">
-                                <rect key="frame" x="24" y="60" width="366" height="493.5"/>
+                                <rect key="frame" x="24" y="60" width="366" height="456.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="J8S-VC-1Mf">
                                         <rect key="frame" x="0.0" y="0.0" width="366" height="30"/>
@@ -128,64 +128,60 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="Wgn-sv-Iz6"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="25"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sXC-Mp-EjJ">
+                                        <rect key="frame" x="0.0" y="104" width="366" height="0.0"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="c94-MR-Mbr">
-                                        <rect key="frame" x="0.0" y="104" width="366" height="30"/>
+                                        <rect key="frame" x="0.0" y="112" width="366" height="50"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MK2-H9-BpN">
-                                                <rect key="frame" x="0.0" y="0.0" width="116.5" height="30"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="116.5" height="50"/>
                                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                 <state key="normal" title="Location"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YkO-vW-q7Z">
-                                                <rect key="frame" x="124.5" y="0.0" width="117" height="30"/>
+                                                <rect key="frame" x="124.5" y="0.0" width="117" height="50"/>
                                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                 <state key="normal" title="Map"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ahD-Eg-Ldp">
-                                                <rect key="frame" x="249.5" y="0.0" width="116.5" height="30"/>
+                                                <rect key="frame" x="249.5" y="0.0" width="116.5" height="50"/>
                                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                 <state key="normal" title="Cancel request"/>
                                             </button>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="r4H-WO-tjH"/>
+                                            <constraint firstAttribute="height" constant="50" id="r4H-WO-tjH"/>
                                         </constraints>
                                     </stackView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sXC-Mp-EjJ">
-                                        <rect key="frame" x="0.0" y="142" width="366" height="15"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="15" id="2PH-yk-iTS"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WBo-Qf-1Z1">
-                                        <rect key="frame" x="0.0" y="165" width="366" height="328.5"/>
+                                        <rect key="frame" x="0.0" y="170" width="366" height="286.5"/>
                                         <mutableString key="text">Introduction helper for current tab:
 
- - Flux + Rx demo, state as single source of truth for view, the only difference is - it has separated state storages for
-   every screen and reducers in view model
+ - MVVM-C + Rx + Flux demo, state as single source of truth for view, the only difference is - it has separated state storages for every screen and view models as action reducers
+
+  - Request caching for saving traffic and better scene response
+(unless data needs to be up-to-date on every similar request, also we can configure time of cache keeping)
  
- - Location service with permissions and ongoing permission change cases
- 
- - List of available networking errors handling
- 
- - Availability for automatic token recovering on error 401 with failed request retrying
- 
- - Request caching for saving traffic and better scene response
-   (unless data needs to be up-to-date on every similar request, also we can configure time of cache keeping)
- 
- - Request retrying attempts on errors (unless 401 and -1009 which are handled individually)
+ - Request retrying on errors with exponentialy growing delay between attempts (unless 401 and -1009 which are handled individually)
  
  - No-internet-connection handling and auto retry when connection appears
   
- - Request cancelation</mutableString>
-                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+ - Request cancelation
+
+ - Availability for automatic token recovering on error 401 with failed request retrying
+
+ - Location service with permissions and ongoing permission change cases
+ 
+ - List of the most available networking errors handling</mutableString>
+                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>

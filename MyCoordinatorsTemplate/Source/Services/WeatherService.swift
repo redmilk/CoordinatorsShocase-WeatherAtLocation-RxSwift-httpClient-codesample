@@ -31,23 +31,20 @@ class WeatherService: WeatherServiceType {
             .do(onNext: { status in
                 switch status {
                 case .denied, .restricted:
-                    throw ApplicationErrors.Location.noPermission
+                    throw ApplicationError(errorType: .noLocationPermission,
+                                           errorContent: ("No location access",
+                                                       "Please provide access to location services in Settings app"))
                 case _: break
                 }
             })
-            .flatMap { [unowned self] status -> Observable<Weather> in
-                switch status {
-                case .authorizedAlways, .authorizedWhenInUse:
-                    return self.locationWeather
-                case _:
-                    return Observable.just(Weather.empty)
-                }
+            .flatMap { [unowned self] _ -> Observable<Weather> in
+                return self.locationWeather
             }
     }
     
     func terminateRequest() {
         weatherApi.requestRetryMessage.accept("")
-        weatherApi.weatherRequestMaxRetry.onNext(0)
+        weatherApi.weatherRequestMaxRetry.accept(0)
     }
     
     var requestRetryMessage: BehaviorRelay<String> {
@@ -64,6 +61,7 @@ class WeatherService: WeatherServiceType {
     private var locationWeather: Observable<Weather> {
         return self.location.currentLocation
             .map { ($0.coordinate.latitude, $0.coordinate.longitude) }
+            .distinctUntilChanged { ($0.0 == $0.0) && ($1.1 == $1.1) }
             .flatMap { [unowned self] in
                 self.weatherApi.currentWeather(at: $0.0, lon: $0.1,
                                                maxRetryTimes: self.maxRetryTimes)

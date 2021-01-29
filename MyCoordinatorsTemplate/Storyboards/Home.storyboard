@@ -24,7 +24,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="aHz-1W-beV">
-                                <rect key="frame" x="24" y="128" width="366" height="396"/>
+                                <rect key="frame" x="24" y="128" width="366" height="311.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I1C-qj-Dmq">
                                         <rect key="frame" x="0.0" y="0.0" width="366" height="50"/>
@@ -49,17 +49,17 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zRi-cd-ooo">
-                                        <rect key="frame" x="0.0" y="132" width="366" height="264"/>
-                                        <string key="text"> Introduction helper of current tab:
+                                        <rect key="frame" x="0.0" y="132" width="366" height="179.5"/>
+                                        <mutableString key="text"> Introduction helper of current tab:
  
- - Coordinator pattern demo with base coordinator as the only place for addopting to navigation controller and tabbar delegates. Handling default os navbar interactions, different presentation modes available from any spot of the application. Auto clean-up after coordinator's end. Absence of memory leaks.
+ - Coordinator pattern demo with base coordinator as the only place for addopting to navigation controller and tabbar delegates. Handling default os navbar interactions, different presentation modes available from any spot of the application. Auto clean-up after coordinator's end. No memory leaks
  
- - User session demo with user obfuscation and keychain.
+ - User session demo with user obfuscation and keychain
  
-   saving flow: user id --&gt; obfuscation --&gt; to data --&gt; to UserDefaults --| user model --&gt; to data --&gt; to KeyChain
+Saving flow: user id --&gt; obfuscate to [UInt8] --&gt; key to data --|| then user model --&gt; to data --&gt; to KeyChain by key
  
-   fetching flow: UserDefault get --&gt; data --&gt; [UInt8] --&gt; obfuscation to userId --&gt; get from keychain --&gt; data --&gt; User model</string>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+Fetching flow: get key --&gt; to data --&gt; to [UInt8] --&gt; decode to userId --&gt; get from keychain --&gt; data --&gt; User model</mutableString>
+                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>

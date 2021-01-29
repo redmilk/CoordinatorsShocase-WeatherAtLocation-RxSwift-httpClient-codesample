@@ -30,7 +30,9 @@ final class TokenRecovering<T> {
         relay
             .flatMap { getToken($0) }
             .map { (urlResponse) -> T in
-                guard urlResponse.response.statusCode / 100 == 2 else { throw ApplicationErrors.ApiClient.getTokenFailure(response: urlResponse.response, data: urlResponse.data) }
+                guard urlResponse.response.statusCode / 100 == 2 else {
+                    throw ApplicationError(errorType: .getTokenFailure(response: urlResponse.response, data: urlResponse.data))
+                }
                 return try extractToken(urlResponse.data)
             }
             .startWith(initialToken)
@@ -50,8 +52,8 @@ final class TokenRecovering<T> {
         let error = source
             .asObservable()
             .map { error in
-                guard (error as? ApplicationErrors.ApiClient) == .unauthorized
-                else { throw error }
+                guard let casted = error as? ApplicationError,
+                      case .unauthorized = casted.errorType else { throw error }
             }
             .flatMap { [unowned self] in self.token }
             .do(onNext: {

@@ -30,7 +30,8 @@ extension Reactive where Base: URLSession {
                 do {
                     return try decoder.decode(type, from: data)
                 } catch {
-                    throw ApplicationError(errorType: .deserializationFailed, errorInfo: ("Deserialization failure", "Decodable fail"))
+                    throw ApplicationError(errorType: .deserializationFailed,
+                                           errorContent: ("Deserialization failure", "Decodable fail"))
                 }
             }
     }
@@ -51,7 +52,7 @@ extension Reactive where Base: URLSession {
         return data(request: request).map { data in
             guard let image = UIImage(data: data) else {
                 throw ApplicationError(errorType: .deserializationFailed,
-                                       errorInfo: ("Deserialization failure", "Decodable fail"))
+                                       errorContent: ("Deserialization failure", "Decodable fail"))
             }
             return image
         }
@@ -71,16 +72,16 @@ extension Reactive where Base: URLSession {
                 case 401:
                     /// We can use TokenRecovering service here for fetching fresh token if BE is supporting it
                     throw ApplicationError(errorType: .unauthorized,
-                                           errorInfo: ("Token is invalid", "Required authentication"))
+                                           errorContent: ("Token is invalid", "Required authentication"))
                 case 404:
                     throw ApplicationError(errorType: .notFound,
-                                           errorInfo: ("City not found", "😰"))
+                                           errorContent: ("City not found", "😰"))
                 case 400..<500:
                     throw ApplicationError(errorType: .serverError,
-                                           errorInfo: ("Something went wrong", "Server error"))
+                                           errorContent: ("Something went wrong", "Server error"))
                 default:
                     throw ApplicationError(errorType: .serverError,
-                                           errorInfo: ("Something went wrong", "Server error"))
+                                           errorContent: ("Something went wrong", "Server error"))
                 }
             }
     }
@@ -91,12 +92,12 @@ extension Reactive where Base: URLSession {
                 guard let response = response,
                       let data = data else {
                     observer.onError(ApplicationError(errorType: .serverError,
-                                                      errorInfo: ("Something went wrong", "Server error")))
+                                                      errorContent: ("Something went wrong", "Server error")))
                     return
                 }
                 guard let httpResponse = response as? HTTPURLResponse else {
                     observer.onError(ApplicationError(errorType: .invalidResponse,
-                                                      errorInfo: ("Request failure", "Ivalid response")))
+                                                      errorContent: ("Request failure", "Ivalid response")))
                     return
                 }
                 observer.onNext((httpResponse, data))

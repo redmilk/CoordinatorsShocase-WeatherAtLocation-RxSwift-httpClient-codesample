@@ -7,15 +7,15 @@
 
 import Foundation
 
-typealias ErrorInfo = (String, String)
+typealias ErrorContent = (title: String, message: String)
 
 struct ApplicationError: Error {
     let errorType: ApplicationErrors
-    let errorInfo: ErrorInfo?
+    let errorContent: ErrorContent?
     
-    init(errorType: ApplicationErrors, errorInfo: ErrorInfo? = nil) {
+    init(errorType: ApplicationErrors, errorContent: ErrorContent? = nil) {
         self.errorType = errorType
-        self.errorInfo = errorInfo
+        self.errorContent = errorContent
     }
     
     enum ApplicationErrors {

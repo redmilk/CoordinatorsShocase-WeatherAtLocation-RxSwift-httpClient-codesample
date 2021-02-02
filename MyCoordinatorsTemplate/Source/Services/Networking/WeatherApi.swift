@@ -26,7 +26,7 @@ final class WeatherApi: WeatherApiType {
     ) -> Observable<Weather> {
         weatherRequestMaxRetry.accept(maxRetryTimes)
         let params = RequestParametersAdapter(withBody: false,
-                                              parameters: [("appid", apiKey),
+                                              parameters: [("appid", Constants.weatherApiKey),
                                                            ("q", city),
                                                            ("units", "metric")])
         let headers = RequestHeaderAdapter()
@@ -45,7 +45,7 @@ final class WeatherApi: WeatherApiType {
     ) -> Observable<Weather> {
         weatherRequestMaxRetry.accept(maxRetryTimes)
         let params = RequestParametersAdapter(withBody: false,
-                                              parameters: [("appid", apiKey),
+                                              parameters: [("appid", Constants.weatherApiKey),
                                                            ("lat", "\(lat)"),
                                                            ("lon", "\(lon)"),
                                                            ("units", "metric")])
@@ -102,7 +102,6 @@ final class WeatherApi: WeatherApiType {
         return [String](repeating: symbol, count: currentAttempt).joined()
     }
     
-    private let apiKey = "66687e09dee0508032ac82d5785ee2ad"
     private let baseURL = URL(string: "https://api.openweathermap.org/data/2.5")!
     private let api: BaseNetworkClient
     private let reachability: ReachabilityType

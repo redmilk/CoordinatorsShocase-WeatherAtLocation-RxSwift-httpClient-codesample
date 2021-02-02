@@ -27,18 +27,8 @@ final class GlobalStateStorage: WeatherStateStorageWritable,
                                 WeatherStateStorageReadable {
     
     var weatherViewStateRead: Driver<WeatherSceneState> {
-        return weatherViewState
-            .asDriver(onErrorJustReturn: .initial)
+        return weatherViewState.asDriver(onErrorJustReturn: .initial)
     }
-    
+        
     let weatherViewState = BehaviorRelay<WeatherSceneState>(value: WeatherSceneState.initial)
-    
-    init() {
-        print("Init 🔴🔴🔴🔴")
-    }
-    
-    
-    deinit {
-        print("Deinit 🔵🔵🔵🔵")
-    }
 }

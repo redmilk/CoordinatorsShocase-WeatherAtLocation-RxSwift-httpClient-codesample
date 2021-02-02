@@ -10,9 +10,9 @@ import UIKit
 
 final class AuthViewController: ViewController, Instantiatable, Sessionable {
     
-    @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet private weak var userNameLabel: UILabel!
     
-    let viewModel: AuthViewModelProtocol
+    private let viewModel: AuthViewModelProtocol
     
     required init?(viewModel: AuthViewModelProtocol, coder: NSCoder) {
         self.viewModel = viewModel

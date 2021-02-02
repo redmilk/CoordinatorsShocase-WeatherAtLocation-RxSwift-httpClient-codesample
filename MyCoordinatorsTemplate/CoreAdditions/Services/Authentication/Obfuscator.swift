@@ -9,17 +9,7 @@
 import Foundation
 
 final class Obfuscator {
-    
-    private var salt: String
         
-    init() {
-        self.salt = "\(String(describing: AppDelegate.self))\(String(describing: NSObject.self))"
-    }
-    
-    init(with salt: String) {
-        self.salt = salt
-    }
-    
     func bytesByObfuscatingString(string: String) -> [UInt8] {
         let text = [UInt8](string.utf8)
         let cipher = [UInt8](self.salt.utf8)
@@ -46,4 +36,14 @@ final class Obfuscator {
         
         return String(bytes: decrypted, encoding: .utf8)!
     }
+            
+    init() {
+        self.salt = "\(String(describing: AppDelegate.self))\(String(describing: NSObject.self))"
+    }
+    
+    init(with salt: String) {
+        self.salt = salt
+    }
+
+    private var salt: String
 }

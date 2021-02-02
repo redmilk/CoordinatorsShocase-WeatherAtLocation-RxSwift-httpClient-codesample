@@ -17,17 +17,7 @@ protocol FirstNameViewModelProtocol {
 }
 
 struct FirstNameViewModel: FirstNameViewModelProtocol {
-    
-    let user: User
-    var coordinator: AuthCoordinatorProtocol
-    let vcTitle: String
-    
-    init(vcTitle: String, coordinator: AuthCoordinatorProtocol) {
-        self.coordinator = coordinator
-        self.user = User("1", nil, nil, nil, nil)
-        self.vcTitle = vcTitle
-    }
-    
+            
     func setFirstName(_ firstName: String?) {
         guard let name = firstName, !name.isEmpty else { return }
         self.user.firstName = firstName
@@ -45,4 +35,15 @@ struct FirstNameViewModel: FirstNameViewModelProtocol {
     func dismissAuthFlow() {
         coordinator.end()
     }
+    
+    init(vcTitle: String, coordinator: AuthCoordinatorProtocol) {
+        self.coordinator = coordinator
+        self.user = User("1", nil, nil, nil, nil)
+        self.vcTitle = vcTitle
+    }
+    
+    /// VM dependencies
+    let user: User
+    let coordinator: AuthCoordinatorProtocol
+    let vcTitle: String
 }

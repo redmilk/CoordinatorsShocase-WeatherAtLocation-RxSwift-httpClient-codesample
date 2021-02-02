@@ -23,12 +23,4 @@ final class MainTabBarController: UITabBarController, Instantiatable {
         fatalError("Invalid way of decoding this class")
     }
     
-    deinit {
-        //Logger.deinitialization(entity: self)
-    }
-    
-    // MARK: - Lifecycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
 }

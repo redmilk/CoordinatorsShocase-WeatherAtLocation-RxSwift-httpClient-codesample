@@ -14,7 +14,7 @@ final class ServicesContainer {
     lazy var session: UserSession = { UserSession() }()
     lazy var reachability: Reachability = { Reachability() }()
     lazy var location: LocationService = { LocationService() }()
-    lazy var stateStorage: GlobalStateStorage = { GlobalStateStorage() }()
+    lazy var stateStorage: StateStorage = { StateStorage() }()
     lazy var formatting: FormattingService = { FormattingService() }()
     
     lazy var weatherService: WeatherService = {
@@ -24,26 +24,25 @@ final class ServicesContainer {
         return WeatherService(weatherApi: weatherApi,
                               location: location)
     }()
-
 }
 
-/// List of service-protocols to get needed capability.
+/// List of service-protocols to get needed capability
 /// Just like a way of passing dependencies. We decorate entities by
 /// adopting to specific services protocols which already has internal implementation
-/// by doing so we avoid codegen in initializers
-/// also it's clear what functionality inside given object
+/// by doing so we avoid both codegen in initializers and injection by services' abstract protocols
+/// the con is that it violates Liskov substitution principle of SOLID
 
 /// - Storage of application scene states
-protocol StateStorageAccassible { }
-extension StateStorageAccassible {
-    var stateStorage: GlobalStateStorage {
+protocol StateStorageAccessible { }
+extension StateStorageAccessible {
+    var stateStorage: StateStorage {
         return services.stateStorage
     }
 }
 
 /// - User session
-protocol WeatherServiceAccassible { }
-extension WeatherServiceAccassible {
+protocol WeatherServiceAccessible { }
+extension WeatherServiceAccessible {
     var weatherService: WeatherService {
         return services.weatherService
     }
@@ -66,8 +65,8 @@ extension LocationSupporting {
 }
 
 /// - Reachability
-protocol ReachabilitySupporting { }
-extension ReachabilitySupporting {
+protocol ReachabilityCheckable { }
+extension ReachabilityCheckable {
     var reachability: Reachability {
         return services.reachability
     }

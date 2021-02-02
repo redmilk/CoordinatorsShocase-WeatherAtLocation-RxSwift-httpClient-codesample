@@ -10,16 +10,16 @@ import RxCocoa
 import Foundation
 
 
-extension WeatherApi: ReachabilitySupporting { }
+extension WeatherApi: ReachabilityCheckable { }
 
-protocol WeatherApiType {
+protocol WeatherApiProtocol {
     var requestRetryMessage: BehaviorRelay<String> { get }
     var weatherRequestMaxRetry: BehaviorRelay<Int> { get }
     func currentWeather(city: String, maxRetryTimes: Int) -> Observable<Weather>
     func currentWeather(at lat: Double, lon: Double, maxRetryTimes: Int) -> Observable<Weather>
 }
 
-final class WeatherApi: WeatherApiType {
+final class WeatherApi: WeatherApiProtocol {
     
     func currentWeather(city: String,
                         maxRetryTimes: Int = 5
@@ -63,7 +63,7 @@ final class WeatherApi: WeatherApiType {
     let requestRetryMessage = BehaviorRelay<String>(value: "")
 
     init(baseApi: BaseNetworkClient,
-         reachability: ReachabilityType
+         reachability: ReachabilityProtocol
     ) {
         self.api = baseApi
         self.reachability = reachability
@@ -104,5 +104,5 @@ final class WeatherApi: WeatherApiType {
     
     private let baseURL = URL(string: "https://api.openweathermap.org/data/2.5")!
     private let api: BaseNetworkClient
-    private let reachability: ReachabilityType
+    private let reachability: ReachabilityProtocol
 }

@@ -11,7 +11,7 @@ import UIKit
 // MARK: - Capabilities
 extension ApplicationCoordinator: Sessionable { }
 
-/// this object will live during the app's life
+/// main coordination model, decides which screen to open first
 final class ApplicationCoordinator: Coordinator {
         
     init(window: UIWindow) {
@@ -22,7 +22,7 @@ final class ApplicationCoordinator: Coordinator {
     override func start() {
         auth.isAuthorized ? self.showContent() : self.showAuth()
         
-        /// drive application auth logic, if current user is nil - run login flow
+        /// drives application auth logic, whether current user is nil it shows auth flow
         auth.subscribeToUserChanges { [unowned(unsafe) self] (user) in
             self.clear()
             self.auth.isAuthorized ? self.showContent() : self.showAuth()

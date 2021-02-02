@@ -22,7 +22,7 @@
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ykX-4C-Wad">
                                         <rect key="frame" x="0.0" y="0.0" width="366" height="53"/>
-                                        <string key="text">The implementation of current project is just my opinion, I'm sure you would find some inaccuracies or you know better solutions. Will appreciate to discuss it with you, and consolidate your advices about possible improvements :]</string>
+                                        <string key="text">The implementation of current project is just my opinion, I'm sure you would find some inaccuracies or you know better solutions. Will appreciate to discuss it and consolidate your advices about possible improvements!</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>

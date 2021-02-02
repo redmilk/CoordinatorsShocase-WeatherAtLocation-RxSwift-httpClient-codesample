@@ -21,11 +21,11 @@ enum ReachabilityStatus {
     }
 }
 
-protocol ReachabilityType {
+protocol ReachabilityProtocol {
     var status: BehaviorRelay<ReachabilityStatus> { get }
 }
 
-final class Reachability: ReachabilityType {
+final class Reachability: ReachabilityProtocol {
     
     var status = BehaviorRelay<ReachabilityStatus>(value: .online)
     

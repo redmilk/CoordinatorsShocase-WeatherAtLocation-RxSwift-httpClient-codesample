@@ -33,6 +33,4 @@ final class PersonalInfoViewController: ViewController, Instantiatable {
     override func handleDefaultModalDismissing() {
         viewModel.dismiss()
     }
-    
-    
 }

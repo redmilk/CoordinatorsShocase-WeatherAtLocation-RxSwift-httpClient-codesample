@@ -18,16 +18,6 @@ protocol LastNameViewModelProtocol {
 
 struct LastNameViewModel: LastNameViewModelProtocol {
     
-    let coordinator: AuthCoordinatorProtocol
-    let user: User
-    let vcTitle: String
-    
-    init(vcTitle: String, user: User, coordinator: AuthCoordinatorProtocol) {
-        self.user = user
-        self.coordinator = coordinator
-        self.vcTitle = vcTitle
-    }
-    
     func setLastName(_ lastName: String?) {
         guard let name = lastName, !name.isEmpty else { return }
         self.user.lastName = lastName
@@ -47,4 +37,14 @@ struct LastNameViewModel: LastNameViewModelProtocol {
     func dismissAuthFlow() {
         coordinator.end()
     }
+        
+    init(vcTitle: String, user: User, coordinator: AuthCoordinatorProtocol) {
+        self.user = user
+        self.coordinator = coordinator
+        self.vcTitle = vcTitle
+    }
+    
+    let coordinator: AuthCoordinatorProtocol
+    let user: User
+    let vcTitle: String
 }

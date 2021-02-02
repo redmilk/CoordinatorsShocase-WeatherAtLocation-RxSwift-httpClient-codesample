@@ -205,9 +205,8 @@
 			isa = PBXGroup;
 			children = (
 				790516A32590C53F00B9E3DA /* Application */,
-				790516CF2592BE2B00B9E3DA /* Storyboards */,
 				790516A42590C79A00B9E3DA /* Scenes */,
-				790516B12590DAB000B9E3DA /* Source */,
+				79348D8725ABDB4B0035246A /* CoreAdditions */,
 				79348D8525ABDAE40035246A /* Resources */,
 			);
 			path = MyCoordinatorsTemplate;
@@ -219,6 +218,7 @@
 				7905168E2590C4C100B9E3DA /* AppDelegate.swift */,
 				790516902590C4C100B9E3DA /* SceneDelegate.swift */,
 				7905169C2590C4C300B9E3DA /* Info.plist */,
+				790516992590C4C300B9E3DA /* LaunchScreen.storyboard */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -236,6 +236,7 @@
 		790516AA2590D65000B9E3DA /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				790516D02592BED800B9E3DA /* Auth.storyboard */,
 				790516C225925A2D00B9E3DA /* AuthCoordinator.swift */,
 				79469B3D25A8E35400ECC90B /* FirstNameViewController */,
 				79469B4E25A9006E00ECC90B /* LastNameViewController */,
@@ -244,18 +245,10 @@
 			path = Auth;
 			sourceTree = "<group>";
 		};
-		790516B12590DAB000B9E3DA /* Source */ = {
-			isa = PBXGroup;
-			children = (
-				79469AE025A4E9F200ECC90B /* Services */,
-				79348D8725ABDB4B0035246A /* Core Additions */,
-			);
-			path = Source;
-			sourceTree = "<group>";
-		};
 		790516C62592B83400B9E3DA /* ProfileViewController */ = {
 			isa = PBXGroup;
 			children = (
+				790516D82592BF4B00B9E3DA /* Profile.storyboard */,
 				790516C025925A1500B9E3DA /* ProfileCoordinator.swift */,
 				79348D9325ABE0600035246A /* ProfileViewController */,
 				79348DA125AC9F920035246A /* PersonalInfo */,
@@ -274,32 +267,21 @@
 			path = HomeTab;
 			sourceTree = "<group>";
 		};
-		790516CD2592BDD800B9E3DA /* FeedTab */ = {
+		790516CD2592BDD800B9E3DA /* WeatherTab */ = {
 			isa = PBXGroup;
 			children = (
+				790516A82590D58000B9E3DA /* Weather.storyboard */,
 				790516BE2590ECB400B9E3DA /* WeatherCoordinator.swift */,
 				79348D9125ABE0500035246A /* WeatherLobbyViewController */,
 				79469B5225A900D100ECC90B /* WeatherViewController */,
 			);
-			path = FeedTab;
-			sourceTree = "<group>";
-		};
-		790516CF2592BE2B00B9E3DA /* Storyboards */ = {
-			isa = PBXGroup;
-			children = (
-				790516992590C4C300B9E3DA /* LaunchScreen.storyboard */,
-				790516D02592BED800B9E3DA /* Auth.storyboard */,
-				790516D22592BEEC00B9E3DA /* Content.storyboard */,
-				790516D42592BEF700B9E3DA /* Home.storyboard */,
-				790516D82592BF4B00B9E3DA /* Profile.storyboard */,
-				790516A82590D58000B9E3DA /* Weather.storyboard */,
-			);
-			path = Storyboards;
+			path = WeatherTab;
 			sourceTree = "<group>";
 		};
 		790516F52595181700B9E3DA /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				79348D8025ABD7A90035246A /* NavigationControllerFactory.swift */,
 				79B0228325AE18B100BBBE12 /* Utils.swift */,
 				790516F62595182400B9E3DA /* Logger.swift */,
 			);
@@ -314,19 +296,19 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		79348D8725ABDB4B0035246A /* Core Additions */ = {
+		79348D8725ABDB4B0035246A /* CoreAdditions */ = {
 			isa = PBXGroup;
 			children = (
-				79348D8025ABD7A90035246A /* NavigationControllerFactory.swift */,
+				79469AE025A4E9F200ECC90B /* Services */,
+				79B0228D25AE212000BBBE12 /* BaseClasses */,
 				79348D8825ABDB790035246A /* Constants */,
 				79B0226825AE084900BBBE12 /* Models */,
 				79B0226025AE067E00BBBE12 /* Protocols */,
-				79B0228D25AE212000BBBE12 /* BaseClasses */,
 				79B0225425AE051100BBBE12 /* Extensions+Rx */,
 				79348D8D25ABDDC60035246A /* Extensions */,
 				790516F52595181700B9E3DA /* Helper */,
 			);
-			path = "Core Additions";
+			path = CoreAdditions;
 			sourceTree = "<group>";
 		};
 		79348D8825ABDB790035246A /* Constants */ = {
@@ -372,6 +354,7 @@
 		79348D9725ABE0B60035246A /* Content */ = {
 			isa = PBXGroup;
 			children = (
+				790516D22592BEEC00B9E3DA /* Content.storyboard */,
 				790516F125942D3B00B9E3DA /* MainTabBarCoordinator.swift */,
 				79348D9E25AC9F380035246A /* MainTabBarViewController */,
 				79B0228C25AE20E000BBBE12 /* Tabs */,
@@ -382,6 +365,7 @@
 		79348D9C25AC9F0E0035246A /* HomeViewController */ = {
 			isa = PBXGroup;
 			children = (
+				790516D42592BEF700B9E3DA /* Home.storyboard */,
 				790516AD2590D97300B9E3DA /* HomeViewController.swift */,
 				7905172125A15E2100B9E3DA /* HomeViewModel.swift */,
 			);
@@ -544,7 +528,7 @@
 			isa = PBXGroup;
 			children = (
 				790516CC2592BD1700B9E3DA /* HomeTab */,
-				790516CD2592BDD800B9E3DA /* FeedTab */,
+				790516CD2592BDD800B9E3DA /* WeatherTab */,
 			);
 			path = Tabs;
 			sourceTree = "<group>";

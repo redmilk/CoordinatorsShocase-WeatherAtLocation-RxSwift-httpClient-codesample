@@ -10,35 +10,21 @@ import Foundation
 
 protocol AuthViewModelProtocol {
     var user: User { get }
-    var title: String { get set }
+    var title: String { get }
     
     func performLogIn(completion: @escaping () -> Bool)
     func deleteUser()
     func dismissAuthFlow()
 }
 
-extension AuthViewModel: Sessionable { }
 
 struct AuthViewModel: AuthViewModelProtocol {
-    
-    let user: User
-    var coordinator: AuthCoordinatorProtocol
-    var title: String
-    
-    init(coordinator: AuthCoordinatorProtocol,
-         vcTitle: String,
-         user: User
-    ) {
-        self.coordinator = coordinator
-        self.title = vcTitle
-        self.user = user
-    }
     
     func performLogIn(completion: @escaping () -> Bool) {
         /// Pseudo log in
         let accessToken = AccessToken(token: "666777888999-TOKEN-111", uid: "190")
         user.accessToken = accessToken
-        auth.setupUser(user, onSuccess: {
+        authService.setupUser(user, onSuccess: {
             if completion() {
                 self.coordinator.end()
             }
@@ -46,11 +32,11 @@ struct AuthViewModel: AuthViewModelProtocol {
     }
     
     func deleteUser() {
-        guard let user = auth.user else {
+        guard let user = authService.fetchUser() else {
             Logger.log("Not logged in", entity: nil, symbol: "❕")
             return
         }
-        auth.logout(user: user, completion: {
+        authService.logout(user: user, completion: {
             self.coordinator.end()
         })
     }
@@ -58,5 +44,20 @@ struct AuthViewModel: AuthViewModelProtocol {
     func dismissAuthFlow() {
         coordinator.end()
     }
+        
+    init(coordinator: AuthCoordinatorProtocol,
+         vcTitle: String,
+         authService: AuthSessionProtocol,
+         user: User
+    ) {
+        self.coordinator = coordinator
+        self.title = vcTitle
+        self.user = user
+        self.authService = authService
+    }
     
+    let user: User
+    let coordinator: AuthCoordinatorProtocol
+    let title: String
+    let authService: AuthSessionProtocol
 }

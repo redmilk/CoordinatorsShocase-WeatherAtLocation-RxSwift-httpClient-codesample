@@ -8,11 +8,11 @@
 
 import UIKit
 
-/// Coordinator for tab bar content
+/// Content's main coordinator
 final class MainTabBarCoordinator: Coordinator {
         
     init(window: UIWindow,
-         parentCoordinator: CoordinatorType
+         parentCoordinator: CoordinatorProtocol
     ) {
         super.init()
         self.window = window

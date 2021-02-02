@@ -17,17 +17,6 @@ final class KeychainService {
         case unhandledError(status: OSStatus)
     }
 
-    let service: String
-    let accessGroup: String?
-
-    private(set) var account: String
-
-    init(service: String, account: String, accessGroup: String? = nil) {
-        self.service = service
-        self.account = account
-        self.accessGroup = accessGroup
-    }
-
     func readData() throws -> Data {
         var query = KeychainService.query(withService: service, account: account, accessGroup: accessGroup)
         query[kSecMatchLimit as String] = kSecMatchLimitOne
@@ -89,7 +78,6 @@ final class KeychainService {
         onSuccess?()
     }
 
-    //MARK: Convenience
     private static func query(withService service: String,
                               account: String? = nil,
                               accessGroup: String? = nil
@@ -108,4 +96,15 @@ final class KeychainService {
 
         return query
     }
+    
+    init(service: String, account: String, accessGroup: String? = nil) {
+        self.service = service
+        self.account = account
+        self.accessGroup = accessGroup
+    }
+
+    
+    private let service: String
+    private let accessGroup: String?
+    private(set) var account: String
 }

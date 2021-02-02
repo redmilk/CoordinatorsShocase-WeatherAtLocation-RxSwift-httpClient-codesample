@@ -10,8 +10,7 @@ import UIKit
 
 extension UIApplication {
     
-    /// I know this is bad, and it won't work with ipad multiple windowed case
-    /// just for simplicity, and excluding window field in coordinator initializers
+    // TODO: - replace with better implementation
     static var currentWindow: UIWindow? {
         if #available(iOS 13.0, *) {
             guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate,

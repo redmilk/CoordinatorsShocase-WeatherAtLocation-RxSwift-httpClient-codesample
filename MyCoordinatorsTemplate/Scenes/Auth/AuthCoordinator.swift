@@ -14,14 +14,14 @@ protocol AuthCoordinatorProtocol {
     func end()
 }
 
-final class AuthCoordinator: Coordinator, AuthCoordinatorProtocol {
+final class AuthCoordinator: Coordinator, AuthCoordinatorProtocol, Sessionable {
         
     private let title: String
     private var presentationMode: PresentationMode
     
     init(title: String,
          presentationMode: PresentationMode,
-         parentCoordinator: CoordinatorType?
+         parentCoordinator: CoordinatorProtocol?
     ) {
         self.title = title
         self.presentationMode = presentationMode
@@ -31,8 +31,7 @@ final class AuthCoordinator: Coordinator, AuthCoordinatorProtocol {
     }
     
     override func start() {
-        /// different presentation types of coordinator for demonstration purpose
-        /// in real app more likely will be only one
+        /// different presentation types of coordinator made for demonstration purpose
         switch presentationMode {
         case .root(let window):
             self.window = window
@@ -89,6 +88,7 @@ final class AuthCoordinator: Coordinator, AuthCoordinatorProtocol {
         guard let navigationController = navigationController else { fatalError("Internal inconsistency") }
         let viewModel = AuthViewModel(coordinator: self,
                                       vcTitle: title,
+                                      authService: auth,
                                       user: user)
         let controller = AuthViewController.instantiate(storyboard: .auth,
                                                         instantiation: .withIdentifier) {
@@ -99,8 +99,8 @@ final class AuthCoordinator: Coordinator, AuthCoordinatorProtocol {
     
     override func end() {
         /// In case during the modal presentation of profile coordinator and dismissing it:
-        /// if we push auth coordinator in profile coordinator (auth nav stack --into--> parent, profile nav stack)
-        /// We have to end parent coordinator. Otherwise only last (auth) coordinator will be deallocated
+        /// if we push auth coordinator in profile coordinator (auth nav stack --into--> parent profile nav stack)
+        /// We have to end parent coordinator. Otherwise only last or top (auth) coordinator will be deallocated
         /// same approach for nested coordinators. In case with more then 2 nested coordinators
         /// we can do it by passing callback with 'end()' to next coordinator
         if case PresentationMode.push = presentationMode {

@@ -8,10 +8,7 @@
 
 import Foundation
 
-/**
- //TODO: - Unbalanced calls to begin/end appearance transitions for <MyCoordinatorsTemplate.ProfileViewController:
- */
-
+// TODO: - refactor to switch for including/discluding neccassary/unneccessary logs
 struct Logger {
 
     static func log(_ text: String = "", entity: AnyObject?, symbol: String = "🌀") {

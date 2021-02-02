@@ -70,7 +70,7 @@ class WeatherSceneViewModel {
     }
     
     init(coordinator: WeatherCoordinator,
-         weatherService: WeatherServiceType,
+         weatherService: WeatherServiceProtocol,
          stateStorageWriter: WeatherStateStorageWritable
     ) {
         self.coordinator = coordinator
@@ -115,7 +115,7 @@ class WeatherSceneViewModel {
     
     /// VM dependencies
     private let coordinator: WeatherCoordinator
-    private let weatherService: WeatherServiceType
+    private let weatherService: WeatherServiceProtocol
     private let stateStorageWriter: WeatherStateStorageWritable
     
     /// internal

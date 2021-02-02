@@ -9,14 +9,14 @@
 import RxSwift
 import RxCocoa
 
-protocol WeatherServiceType {
+protocol WeatherServiceProtocol {
     func weather(by city: String) -> Observable<Weather>
     func weatherByCurrentLocation() -> Observable<Weather>
     func terminateRequest()
     var requestRetryMessage: BehaviorRelay<String> { get }
 }
 
-class WeatherService: WeatherServiceType {
+class WeatherService: WeatherServiceProtocol {
     
     func weather(by city: String) -> Observable<Weather> {
         return weatherApi.currentWeather(city: city,
@@ -33,7 +33,7 @@ class WeatherService: WeatherServiceType {
                 case .denied, .restricted:
                     throw ApplicationError(errorType: .noLocationPermission,
                                            errorContent: ("No location access",
-                                                       "Please provide access to location services in Settings app"))
+                                                          "Please provide access to location services in Settings app"))
                 case _: break
                 }
             })
@@ -51,8 +51,8 @@ class WeatherService: WeatherServiceType {
         return weatherApi.requestRetryMessage
     }
     
-    init(weatherApi: WeatherApiType,
-         location: LocationServiceType
+    init(weatherApi: WeatherApiProtocol,
+         location: LocationServiceProtocol
     ) {
         self.weatherApi = weatherApi
         self.location = location
@@ -68,7 +68,7 @@ class WeatherService: WeatherServiceType {
             }
     }
     
-    private let weatherApi: WeatherApiType
-    private let location: LocationServiceType
+    private let weatherApi: WeatherApiProtocol
+    private let location: LocationServiceProtocol
     private let maxRetryTimes: Int = 5
 }

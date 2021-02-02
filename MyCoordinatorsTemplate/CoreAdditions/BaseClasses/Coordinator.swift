@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Coordinator: NSObject, CoordinatorType {
+class Coordinator: NSObject, CoordinatorProtocol {
         
     enum PresentationMode {
         case push(UINavigationController)
@@ -16,11 +16,11 @@ class Coordinator: NSObject, CoordinatorType {
         case root(UIWindow)
     }
         
-    private var childCoordinators: [String : CoordinatorType] = [:]
+    private var childCoordinators: [String : CoordinatorProtocol] = [:]
     private(set) var isAnimatedTransition: Bool = true
     
     weak var window: UIWindow!
-    weak var parentCoordinator: CoordinatorType?
+    weak var parentCoordinator: CoordinatorProtocol?
     weak var currentController: UIViewController?
     weak var navigationController: UINavigationController? {
         didSet {
@@ -35,7 +35,7 @@ class Coordinator: NSObject, CoordinatorType {
     
     override init() {
         super.init()
-        //Logger.initialization(entity: self)
+        Logger.initialization(entity: self)
     }
     
     deinit {
@@ -52,23 +52,21 @@ class Coordinator: NSObject, CoordinatorType {
         clear()
     }
     
-    /// We call this at the end of 'start()'
-    /// for enabling navigation and tabbar delegate events
     func updateNavigationDelegates() {
         navigationController?.delegate = self
         tabBarController?.delegate = self
     }
     
-    func addChild(_ child: CoordinatorType) {
+    func addChild(_ child: CoordinatorProtocol) {
         let key = String(describing: child)
         childCoordinators[key] = child
     }
     
-    func removeChild(_ child: CoordinatorType) {
+    func removeChild(_ child: CoordinatorProtocol) {
         let key = String(describing: child)
         childCoordinators.removeValue(forKey: key)
         /// Reassign navigation delegates to self when removing child coordinator
-        /// otherwise current parent coordinator won't handle navigation events
+        /// otherwise current parent coordinator won't handle default OS navigation events
         updateNavigationDelegates()
      }
     
@@ -98,6 +96,8 @@ class Coordinator: NSObject, CoordinatorType {
         Logger.log("Selected tab with navigation controller", entity: topControllerInStack, symbol: "[NAV TAB]")
     }
 }
+
+///  - note: Also we can make base coordinator as generic for returning Observable values
 
 // MARK: - UINavigationControllerDelegate
 extension Coordinator: UINavigationControllerDelegate {

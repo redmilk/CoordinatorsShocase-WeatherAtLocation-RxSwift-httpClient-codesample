@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 extension String {
     
     func slice(from: String, to: String) -> String? {

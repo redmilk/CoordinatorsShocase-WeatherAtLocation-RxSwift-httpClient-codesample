@@ -18,7 +18,7 @@ enum LocationAccuracy {
     case threeKilometers
 }
 
-protocol LocationServiceType {
+protocol LocationServiceProtocol {
     var locationServicesAuthorizationStatus: BehaviorSubject<CLAuthorizationStatus?> { get }
     var currentLocation: Observable<CLLocation> { get }
     
@@ -26,7 +26,7 @@ protocol LocationServiceType {
     func setAccuracy(_ accuracy: LocationAccuracy)
 }
 
-final class LocationService: NSObject, LocationServiceType {
+final class LocationService: NSObject, LocationServiceProtocol {
     
     var currentLocation: Observable<CLLocation> {
         return locationManager.rx.didUpdateLocations

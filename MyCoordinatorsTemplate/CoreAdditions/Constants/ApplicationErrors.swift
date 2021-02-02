@@ -5,8 +5,6 @@
 //  Created by Danyl Timofeyev on 04.11.2020.
 //
 
-// TODO: - Project structure remove core additions
-
 import Foundation
 
 typealias ErrorContent = (title: String, message: String)

@@ -21,27 +21,6 @@ final class UserSession: AuthSessionProtocol {
     
     typealias UserChangesCallback = (User?) -> Void
     
-    private(set) var user: User? {
-        didSet {
-            notify()
-        }
-    }
-    
-    private let serviceName = "MyCoordinatorsTemplate"
-    private let kAccount = "kAccount"
-    private var callbacks: [UserChangesCallback] = []
-    
-    init() {
-        guard let user = fetchUser() else { return }
-        self.user = user
-    }
-    
-    private func notify() {
-        for callback in self.callbacks {
-            callback(self.user)
-        }
-    }
-    
     // MARK: - Public API
     var isAuthorized: Bool {
         let token = self.user?.accessToken?.token
@@ -196,4 +175,25 @@ final class UserSession: AuthSessionProtocol {
             self?.user?.accessToken = token
         }
     }
+    
+    init() {
+        guard let user = fetchUser() else { return }
+        self.user = user
+    }
+    
+    private func notify() {
+        for callback in self.callbacks {
+            callback(self.user)
+        }
+    }
+    
+    private(set) var user: User? {
+        didSet {
+            notify()
+        }
+    }
+    
+    private let serviceName = "MyCoordinatorsTemplate"
+    private let kAccount = "kAccount"
+    private var callbacks: [UserChangesCallback] = []
 }

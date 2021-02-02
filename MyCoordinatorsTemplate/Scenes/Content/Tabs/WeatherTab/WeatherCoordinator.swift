@@ -14,11 +14,11 @@ protocol WeatherCoordinatorProtocol {
     func pushWeather()
 }
 
-/// MainTabBarCoordinator on start fills array of child with both Home and Weather coordinators
+/// `MainTabBarCoordinator` on start fills array of child with both Home and Weather coordinators
 final class WeatherCoordinator: Coordinator,
                                 WeatherCoordinatorProtocol,
-                                StateStorageAccassible,
-                                WeatherServiceAccassible {
+                                StateStorageAccessible,
+                                WeatherServiceAccessible {
     
     private let vcTitle: String
     

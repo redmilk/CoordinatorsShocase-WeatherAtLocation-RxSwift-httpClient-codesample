@@ -81,7 +81,8 @@ class Coordinator: NSObject, CoordinatorProtocol {
     func didNavigate(_ navigationController: UINavigationController,
                       to viewController: UIViewController,
                       animated: Bool) {
-        Logger.log("Navigated to", entity: viewController, symbol: "[STACK]")
+        Logger.log("Navigated to", entity: viewController, symbol: "🛼 [STACK]")
+        currentController = viewController
     }
     
     /// Navigation events for UITabBarController
@@ -90,14 +91,14 @@ class Coordinator: NSObject, CoordinatorProtocol {
         guard
             let navigationController = selectedTabController as? UINavigationController,
             let topControllerInStack = navigationController.viewControllers.last else {
-                Logger.log("Tab selected with no navigation controller embedded", entity: selectedTabController, symbol: "[PURE TAB]")
+                Logger.log("Tab selected with no navigation controller embedded", entity: selectedTabController, symbol: "🛼 [PURE TAB]")
                 return
         }
-        Logger.log("Selected tab with navigation controller", entity: topControllerInStack, symbol: "[NAV TAB]")
+        Logger.log("Selected tab with navigation controller", entity: topControllerInStack, symbol: "🛼 [NAV TAB]")
     }
 }
 
-///  - note: Also we can make base coordinator as generic for returning Observable values
+///  - note: Also we can make base coordinator as generic for returning Observable values instead delegation pattern
 
 // MARK: - UINavigationControllerDelegate
 extension Coordinator: UINavigationControllerDelegate {

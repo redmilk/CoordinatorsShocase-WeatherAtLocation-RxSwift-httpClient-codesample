@@ -30,7 +30,7 @@ class WeatherSceneState {
    
     func updateWeather(_ weather: Weather) {
         searchText.accept(weather.name)
-        temperature.accept(weather.main.temp.description)
+        temperature.accept(weather.main.tempRounded.description)
         humidity.accept(weather.main.humidity.description)
         weatherIcon.accept(weather.weather?.first?.icon ?? "")
     }

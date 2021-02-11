@@ -37,22 +37,26 @@ class WeatherSceneViewModel {
             .asObservable()
             .subscribe(onNext: { [unowned self] action in
                 /// fetch current state
-                let newState = self.currentState
+                let newState = currentState
                 
                 switch action {
                 /// city search weather
                 case .getWeatherBy(let city):
-                    let weather = self.weatherService.weather(by: city)
-                    self.reduce(weather, state: newState, disposeBag: self.disposeBag)
+                    let weather = weatherService.weather(by: city)
+                    reduce(weather, state: newState, disposeBag: disposeBag)
                     
                 /// current location weather
                 case .currentLocationWeather:
-                    let weather = self.weatherService.weatherByCurrentLocation()
-                    self.reduce(weather, state: newState, disposeBag: self.disposeBag)
+                    let weather = weatherService.weatherByCurrentLocation()
+                    reduce(weather, state: newState, disposeBag: disposeBag)
+                    
+                /// current location weather
+                case .displayMap:
+                    coordinator.presentWeatherMap()
                     
                 /// cancel current action
                 case .cancelRequest:
-                    self.terminate()
+                    terminate()
                     
                 case .none:
                     break

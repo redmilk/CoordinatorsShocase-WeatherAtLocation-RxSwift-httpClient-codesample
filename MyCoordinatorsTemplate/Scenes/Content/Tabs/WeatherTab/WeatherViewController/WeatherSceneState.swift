@@ -49,9 +49,9 @@ class WeatherSceneState {
     
     static var initial: WeatherSceneState {
         let state = WeatherSceneState()
-        state.searchText.accept("Kievkdsf")
+        state.searchText.accept("Kiev")
         state.weatherIcon.accept("Initial")
-        state.temperature.accept("2")
+        state.temperature.accept("-2")
         state.humidity.accept("73")
         return state.formatted
     }

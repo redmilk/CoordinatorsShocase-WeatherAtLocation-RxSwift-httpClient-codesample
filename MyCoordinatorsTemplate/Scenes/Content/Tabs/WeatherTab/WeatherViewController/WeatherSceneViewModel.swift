@@ -18,6 +18,7 @@ class WeatherSceneViewModel {
     enum Action {
         case getWeatherBy(city: String)
         case currentLocationWeather
+        case testFailedRequest
         case cancelRequest
         case none
     }
@@ -50,9 +51,10 @@ class WeatherSceneViewModel {
                     let weather = weatherService.weatherByCurrentLocation()
                     reduce(weather, state: newState, disposeBag: disposeBag)
                     
-                /// current location weather
-                case .displayMap:
-                    coordinator.presentWeatherMap()
+                /// failed request demo
+                case .testFailedRequest:
+                    let weather = weatherService.weather(by: "Kievsdfg")
+                    reduce(weather, state: newState, disposeBag: disposeBag)
                     
                 /// cancel current action
                 case .cancelRequest:

@@ -94,7 +94,7 @@ class Coordinator: NSObject, CoordinatorProtocol {
                 Logger.log("Tab selected with no navigation controller embedded", entity: selectedTabController, symbol: "🛼 [PURE TAB]")
                 return
         }
-        Logger.log("Selected tab with navigation controller", entity: topControllerInStack, symbol: "🛼 [NAV TAB]")
+        Logger.log("Selected tab with navigation controller", entity: topControllerInStack, symbol: "🛼 [TAB]")
     }
 }
 

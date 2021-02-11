@@ -15,12 +15,12 @@ final class WeatherSceneViewController: ViewController, Instantiatable, Bindable
     @IBOutlet private weak var searchTextField: UITextField!
     @IBOutlet private weak var tempLabel: UILabel!
     @IBOutlet private weak var humidityLabel: UILabel!
-    @IBOutlet private weak var weatherIconLabel: UILabel!
+    @IBOutlet private weak var cityLabel: UILabel!
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet private weak var locationButton: UIButton!
     @IBOutlet private weak var errorLabel: UILabel!
     @IBOutlet private weak var cancelRequestButton: UIButton!
-    @IBOutlet private weak var mapButton: UIButton!
+    @IBOutlet private weak var failedRequestButton: UIButton!
     
     private let stateStorageReader: WeatherStateStorageReadable
     private(set) var viewModel: WeatherSceneViewModel
@@ -52,13 +52,17 @@ final class WeatherSceneViewController: ViewController, Instantiatable, Bindable
             .unwrap()
             .map { WeatherSceneViewModel.Action.getWeatherBy(city: $0) }
         
+        let testFailedRequest = failedRequestButton.rx.controlEvent(.touchUpInside)
+            .do(onNext: { [unowned self] _ in
+                self.searchTextField.text = "Kievsdfg"
+                self.cityLabel.text = "Kievsdfg"
+            })
+            .map { WeatherSceneViewModel.Action.testFailedRequest }
+        
         let cancelRequest = cancelRequestButton.rx.controlEvent(.touchUpInside)
             .map { WeatherSceneViewModel.Action.cancelRequest }
         
-        let mapPressed = mapButton.rx.controlEvent(.touchUpInside)
-            .map { WeatherSceneViewModel.Action.displayMap }
-        
-        Observable.merge(locationPressed, searchText, cancelRequest, mapPressed)
+        Observable.merge(locationPressed, searchText, testFailedRequest, cancelRequest)
             .bind(to: viewModel.input.action)
             .disposed(by: disposeBag)
         
@@ -84,7 +88,7 @@ final class WeatherSceneViewController: ViewController, Instantiatable, Bindable
         stateStorageReader
             .weatherViewStateRead
             .flatMap { $0.searchText.asDriver() }
-            .drive(weatherIconLabel.rx.text)
+            .drive(cityLabel.rx.text)
             .disposed(by: disposeBag)
         
         let loading = stateStorageReader
@@ -114,7 +118,7 @@ final class WeatherSceneViewController: ViewController, Instantiatable, Bindable
         
         loading
             .map { !$0 }
-            .drive(mapButton.rx.isEnabled)
+            .drive(failedRequestButton.rx.isEnabled)
             .disposed(by: disposeBag)
         
         stateStorageReader

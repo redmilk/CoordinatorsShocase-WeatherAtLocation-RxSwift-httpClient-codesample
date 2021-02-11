@@ -149,7 +149,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YkO-vW-q7Z">
                                                 <rect key="frame" x="124.5" y="0.0" width="117" height="50"/>
                                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
-                                                <state key="normal" title="Map"/>
+                                                <state key="normal" title="CheckFailedRequest"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ahD-Eg-Ldp">
                                                 <rect key="frame" x="249.5" y="0.0" width="116.5" height="50"/>
@@ -200,18 +200,56 @@
                     <connections>
                         <outlet property="activityIndicator" destination="406-xb-1BP" id="blf-Cq-M3f"/>
                         <outlet property="cancelRequestButton" destination="ahD-Eg-Ldp" id="Na7-jH-YOf"/>
+                        <outlet property="cityLabel" destination="E0p-HD-C7D" id="vRq-5z-kW9"/>
                         <outlet property="errorLabel" destination="sXC-Mp-EjJ" id="lfC-PR-E1X"/>
+                        <outlet property="failedRequestButton" destination="YkO-vW-q7Z" id="Ke3-DX-TIg"/>
                         <outlet property="humidityLabel" destination="bTN-pW-h9E" id="IjC-hE-IsC"/>
                         <outlet property="locationButton" destination="MK2-H9-BpN" id="lnE-pm-89m"/>
-                        <outlet property="mapButton" destination="YkO-vW-q7Z" id="Ke3-DX-TIg"/>
                         <outlet property="searchTextField" destination="Zcx-4n-9md" id="XRg-PY-ml1"/>
                         <outlet property="tempLabel" destination="uXk-9p-faR" id="js0-t0-d1T"/>
-                        <outlet property="weatherIconLabel" destination="E0p-HD-C7D" id="vRq-5z-kW9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vZj-Km-Fkk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1401" y="844"/>
+        </scene>
+        <!--Weather Map View Controller-->
+        <scene sceneID="rfQ-Lf-YHW">
+            <objects>
+                <viewController storyboardIdentifier="WeatherMapViewController" id="GYU-i1-28M" customClass="WeatherMapViewController" customModule="MyCoordinatorsTemplate" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="kTh-FT-UQb">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="egD-gW-w2o">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="448"/>
+                            </mapView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Cmy-LC-5N5">
+                                <rect key="frame" x="0.0" y="448" width="414" height="448"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="gZB-zA-eMv"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Cmy-LC-5N5" firstAttribute="top" secondItem="egD-gW-w2o" secondAttribute="bottom" id="8Bt-1Y-rrn"/>
+                            <constraint firstItem="gZB-zA-eMv" firstAttribute="trailing" secondItem="egD-gW-w2o" secondAttribute="trailing" id="8d9-7x-xfo"/>
+                            <constraint firstItem="egD-gW-w2o" firstAttribute="leading" secondItem="gZB-zA-eMv" secondAttribute="leading" id="QK3-7a-FQv"/>
+                            <constraint firstItem="Cmy-LC-5N5" firstAttribute="trailing" secondItem="gZB-zA-eMv" secondAttribute="trailing" id="WPI-4B-cTA"/>
+                            <constraint firstItem="egD-gW-w2o" firstAttribute="height" secondItem="kTh-FT-UQb" secondAttribute="height" multiplier="0.5" id="evf-Wf-2oJ"/>
+                            <constraint firstItem="egD-gW-w2o" firstAttribute="top" secondItem="kTh-FT-UQb" secondAttribute="top" id="jZm-jb-cBH"/>
+                            <constraint firstAttribute="bottom" secondItem="Cmy-LC-5N5" secondAttribute="bottom" id="rYg-WC-Na5"/>
+                            <constraint firstItem="Cmy-LC-5N5" firstAttribute="leading" secondItem="gZB-zA-eMv" secondAttribute="leading" id="vdY-cP-hhU"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="egD-gW-w2o" id="MhC-Q4-XXb"/>
+                        <outlet property="tableView" destination="Cmy-LC-5N5" id="pjd-Xa-sQf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="B8T-MS-WgW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2160.8695652173915" y="843.75"/>
         </scene>
     </scenes>
     <resources>

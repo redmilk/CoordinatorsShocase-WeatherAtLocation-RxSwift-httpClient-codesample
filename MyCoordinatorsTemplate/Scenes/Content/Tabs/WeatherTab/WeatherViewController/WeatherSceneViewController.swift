@@ -44,20 +44,21 @@ final class WeatherSceneViewController: ViewController, Instantiatable, Bindable
         disposeBag = DisposeBag()
         
         /// Output to VM
-        locationButton.rx.controlEvent(.touchUpInside)
+        let locationPressed = locationButton.rx.controlEvent(.touchUpInside)
             .map { WeatherSceneViewModel.Action.currentLocationWeather }
-            .bind(to: viewModel.input.action)
-            .disposed(by: disposeBag)
         
-        searchTextField.rx.controlEvent(.editingDidEndOnExit)
+        let searchText = searchTextField.rx.controlEvent(.editingDidEndOnExit)
             .map { [weak self] in self?.searchTextField.text }
             .unwrap()
             .map { WeatherSceneViewModel.Action.getWeatherBy(city: $0) }
-            .bind(to: viewModel.input.action)
-            .disposed(by: disposeBag)
         
-        cancelRequestButton.rx.controlEvent(.touchUpInside)
+        let cancelRequest = cancelRequestButton.rx.controlEvent(.touchUpInside)
             .map { WeatherSceneViewModel.Action.cancelRequest }
+        
+        let mapPressed = mapButton.rx.controlEvent(.touchUpInside)
+            .map { WeatherSceneViewModel.Action.displayMap }
+        
+        Observable.merge(locationPressed, searchText, cancelRequest, mapPressed)
             .bind(to: viewModel.input.action)
             .disposed(by: disposeBag)
         

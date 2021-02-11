@@ -9,8 +9,9 @@
 import Foundation
 
 protocol AuthSessionProtocol: class {
+    typealias UserChangesCallback = (User?) -> Void
+
     var isAuthorized: Bool { get }
-    
     func setupUser(_ user: User, onSuccess: (()->Void)?)
     func fetchUser() -> User?
     func logout(user: User, completion: (() -> Void)?)
@@ -18,9 +19,7 @@ protocol AuthSessionProtocol: class {
 }
 
 final class UserSession: AuthSessionProtocol {
-    
-    typealias UserChangesCallback = (User?) -> Void
-    
+        
     // MARK: - Public API
     var isAuthorized: Bool {
         let token = self.user?.accessToken?.token

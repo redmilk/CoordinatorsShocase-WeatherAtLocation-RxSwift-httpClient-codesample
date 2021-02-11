@@ -35,7 +35,9 @@ open class ViewController: UIViewController, UITextFieldDelegate, UITextViewDele
     open override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        /// For iOS default modal dismiss handling by dragging VC
+        /// iOS default modal dismiss handling by dragging down VC
+        /// for current coordinator end()
+        
         /// if this controller is embedded in navigation controller
         if let nc = navigationController, nc.isBeingDismissed {
             handleDefaultModalDismissing()

@@ -42,10 +42,15 @@ struct Coord: Codable {
 
 // MARK: - Main
 struct MainWeatherInfo: Codable {
-    let temp, feelsLike, tempMin, tempMax: Double
+    let feelsLike, tempMin, tempMax: Double
     let pressure, humidity: Int
     let grndLevel: Int?
     let seaLevel: Int?
+    
+    private let temp: Double
+    var tempRounded: Int {
+        return Int(ceil(temp))
+    }
     
     enum CodingKeys: String, CodingKey {
         case temp

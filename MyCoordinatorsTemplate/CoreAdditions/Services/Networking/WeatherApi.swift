@@ -93,7 +93,7 @@ final class WeatherApi: WeatherApiProtocol {
             let errorTitle: String = Utils.fetchErrorInfoTitle(error)
             self.requestRetryMessage.accept("\(symbol) \(errorTitle). Retrying \(count + 1) \(symbol)")
             return Observable<Int>
-                .timer(RxTimeInterval.seconds(2), scheduler: MainScheduler.instance)
+                .timer(RxTimeInterval.seconds(2 * max(1, count)), scheduler: MainScheduler.instance)
                 .take(1)
         }
     }
